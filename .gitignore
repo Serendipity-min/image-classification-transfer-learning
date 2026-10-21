@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+data/
+weights/
+runs/
+records/
+reports/
+offline_wheels/
