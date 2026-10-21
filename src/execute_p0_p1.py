@@ -126,20 +126,34 @@ def run_group(jobs, label, gpu_work=True):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--skip-p0', action='store_true')
+    parser.add_argument('--reuse-data', action='store_true')
     args = parser.parse_args()
     # 防止重复启动父调度器，让每一段 GPU 成本只归属一个预算账本。
     import fcntl
     lock = (ROOT / 'records/execution.lock').open('w')
     fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
     if not args.skip_p0:
-        if not run_group([['src/prepare_data.py']], 'P0_data', gpu_work=False):
-            return 2
+        if not args.reuse_data:
+            if not run_group([['src/prepare_data.py']], 'P0_data', gpu_work=False):
+                return 2
+        else:
+            assert load_json(ROOT / 'records/data_integrity.json')['datasets']
+            # 数据划分文件继续使用原文件与原 hash；仅复核改动后的执行代码。
+            import shutil
+            shutil.copyfile(ROOT / 'records/implementation_checks.json', ROOT / 'records/implementation_checks_initial.json')
         if not run_group([['src/acceptance.py', '--device', '0']], 'P0_acceptance'):
             return 2
     checks = load_json(ROOT / 'records/implementation_checks.json')
     assert checks['status'] == 'passed' and checks['provenance']['code_commit'] == provenance()['code_commit']
     runs = [r for r in load_json(ROOT / 'configs/run_matrix.json')['planned_runs'] if r['phase'] == 'P1']
-    # 顺序 profile 保持独占计时，交替 GPU，避免策略与单张物理卡固定绑定。
+    # 统计已完成配置的真实设备，在每种策略内部补齐较少使用的卡，支持续跑后的均衡。
+    method_gpu_counts = {method: [0, 0] for method in ['scratch', 'full_ft', 'linear_probe', 'adapter']}
+    for config in runs:
+        path = ROOT / 'runs' / config['run_id'] / 'summary.json'
+        if path.exists():
+            summary = load_json(path)
+            if summary['status'] == 'completed':
+                method_gpu_counts[config['method']][summary['hardware']['index']] += 1
     for index, config in enumerate(runs):
         summary_path = ROOT / 'runs' / config['run_id'] / 'summary.json'
         if summary_path.exists() and load_json(summary_path)['status'] == 'completed':
@@ -147,13 +161,16 @@ def main():
         remaining = CAP - read_ledger()['gpu_seconds']
         if remaining < 180:
             break
-        job = ['src/train.py', '--run-id', config['run_id'], '--device', str(index % 2),
+        counts = method_gpu_counts[config['method']]
+        device = (index % 2) if counts[0] == counts[1] else (0 if counts[0] < counts[1] else 1)
+        job = ['src/train.py', '--run-id', config['run_id'], '--device', str(device),
                '--max-active-seconds', str(remaining - 45)]
         if summary_path.exists() and (summary_path.parent / 'last.pt').exists():
             job.append('--resume')
         if not run_group([job], config['run_id']):
             # 技术失败保存证据并返回诊断；不在后台循环重跑消耗预算。
             break
+        method_gpu_counts[config['method']][device] += 1
     complete = all((ROOT / 'runs' / r['run_id'] / 'summary.json').exists()
                    and load_json(ROOT / 'runs' / r['run_id'] / 'summary.json')['status'] == 'completed' for r in runs)
     if complete and CAP - read_ledger()['gpu_seconds'] > 600:
