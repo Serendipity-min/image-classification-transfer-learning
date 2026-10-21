@@ -126,7 +126,12 @@ def main():
             export_result(config, summary, epochs)
         if t is not None:
             startup = summary['startup_seconds'] + summary.get('terminal_overhead_seconds', 0)
+            if epochs:
+                first = epochs[0]
+                startup += max(0.0, first['train_seconds'] + first['validation_seconds']
+                               + first['checkpoint_seconds'] - t)
             estimates.append({'configuration_id': config['configuration_id'], 'epoch_seconds': t,
+                'per_run_fixed_and_first_epoch_excess_seconds': startup,
                 'P2_gpu_hours_estimate': (45 * t + 3 * startup) / 3600,
                 'P3_gpu_hours_estimate': (250 * t + 5 * startup) / 3600,
                 'basis_profile_run_id': config['run_id']})
