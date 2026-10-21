@@ -58,6 +58,17 @@ def main():
                     'official_class_counts': counts.tolist(), 'validation_class_counts': quotas.tolist(),
                     'train_class_counts': (counts - quotas).tolist(), 'visual_pool_sample_ids': display[:20],
                     'provenance': provenance(), 'official_label_mapping': 'torchvision_no_additional_remapping'}
+        # 保留可逐样本审查的正式 train/val 身份，不把 index 当作跨官方 split 的全局 ID。
+        manifest_path = ROOT / 'records' / f'{dataset}_split_manifest.jsonl'
+        validation_set = set(validation)
+        with manifest_path.open('w', encoding='utf-8') as file:
+            for index, label in enumerate(labels):
+                file.write(json.dumps({'dataset': dataset, 'official_split': 'train',
+                    'original_index': index, 'label': int(label),
+                    'assigned_split': 'validation' if index in validation_set else 'train',
+                    'sample_id': f'{dataset}/train/{index}'}, separators=(',', ':')) + '\n')
+        manifest['sample_manifest_sha256'] = sha256(manifest_path)
+        manifest['sample_manifest_path'] = str(manifest_path.relative_to(ROOT))
         atomic_json(ROOT / 'records' / f'{dataset}_split.json', manifest)
         # P0 的独立完整性检查可读取 test 像素和标签范围，不创建 test evaluator。
         test = (CIFAR100(str(ROOT / 'data'), train=False, download=False) if dataset == 'cifar100'
