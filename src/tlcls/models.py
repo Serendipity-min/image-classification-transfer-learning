@@ -120,7 +120,10 @@ def build_model(config, device='cpu'):
         nn.init.zeros_(head.bias)
     info = {'initial_classifier_sha256': tensor_hash(head.state_dict().items()),
             'original_classes': original_classes, 'target_classes': classes,
-            'constructor_kwargs': kwargs, 'pretrained_loaded': method != 'scratch'}
+            'constructor_kwargs': kwargs, 'pretrained_loaded': method != 'scratch',
+            'classifier_initializer': {'distribution': 'torch.trunc_normal_', 'std': 0.02,
+                                        'lower_bound': -2.0, 'upper_bound': 2.0, 'bias': 0.0},
+            'pretraining_dataset': protocol['models'][key]['pretraining_dataset'] if method != 'scratch' else None}
     if method == 'adapter':
         insert_adapters(model, key, seed)
     apply_strategy(model, key, method)

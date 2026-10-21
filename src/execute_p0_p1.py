@@ -44,7 +44,9 @@ def run_group(jobs, label, gpu_work=True):
         file = path.open('a', encoding='utf-8')
         handles.append(file)
         process = subprocess.Popen([sys.executable, *args], cwd=ROOT, stdout=file, stderr=subprocess.STDOUT,
-                                   env=dict(os.environ, PYTHONUNBUFFERED='1'), start_new_session=True)
+                                   env=dict(os.environ, PYTHONUNBUFFERED='1',
+                                            TLCLS_PROCESS_STARTED_MONOTONIC=str(time.monotonic())),
+                                   start_new_session=True)
         processes.append((process, time.monotonic()))
     accounted = {}
     timed_out = False

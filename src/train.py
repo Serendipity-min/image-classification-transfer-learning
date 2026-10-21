@@ -43,10 +43,13 @@ def main():
     parser.add_argument('--max-active-seconds', type=float, required=True)
     parser.add_argument('--resume', action='store_true')
     args = parser.parse_args()
-    start = time.monotonic()
+    start = float(os.environ.get('TLCLS_PROCESS_STARTED_MONOTONIC', time.monotonic()))
     # 预留保存边界和退出开销，父进程另设总预算硬截止。
     deadline = start + max(0, args.max_active_seconds - 45)
     config = next(run for run in load_json(ROOT / 'configs/run_matrix.json')['planned_runs'] if run['run_id'] == args.run_id)
+    asset = next(a for a in load_json(ROOT / 'records/assets.json')['assets']
+                 if a['key'] == config['model_key'] + '_model.safetensors')
+    config = dict(config, checkpoint_revision=asset['revision'], checkpoint_sha256=asset['sha256'])
     assert config['phase'] == 'P1', '本执行入口当前仅获授权 P1'
     checks = load_json(ROOT / 'records/implementation_checks.json')
     assert checks['status'] == 'passed' and checks['completed_configurations'] == 16
@@ -187,6 +190,7 @@ def main():
                 'failure': summary['failure'], 'provenance': prov})
         print(json.dumps({'run_id': args.run_id, 'status': status, 'failure': summary['failure']}), flush=True)
     finally:
+        finalization_started = time.monotonic()
         torch.cuda.synchronize()
         costs['gpu_reserved_seconds'] = previous_active + time.monotonic() - start
         costs['fit_wall_seconds'] = costs['gpu_reserved_seconds']
@@ -211,6 +215,7 @@ def main():
             summary['best_val_checkpoint_sha256'] = sha256(out / 'best_val.pt')
             summary['best_val_checkpoint_bytes'] = (out / 'best_val.pt').stat().st_size
         if summary['status'] == 'completed' and config['method'] in ['linear_probe', 'adapter']:
+            delta_save_started = time.monotonic()
             selected = torch.load(out / 'best_val.pt', map_location='cpu', weights_only=False)
             module_ids = {id(module) for module in [head_of(model, config['model_key']), *adapters_of(model)]}
             delta = {}
@@ -225,9 +230,15 @@ def main():
                               'includes_adapter_buffers': True})
             summary['task_delta_bytes'] = (out / 'task_delta.pt').stat().st_size
             summary['task_delta_sha256'] = sha256(out / 'task_delta.pt')
+            costs['checkpoint_seconds'] += time.monotonic() - delta_save_started
         if (out / 'last.pt').exists():
             summary['last_checkpoint_sha256'] = sha256(out / 'last.pt')
             summary['last_checkpoint_bytes'] = (out / 'last.pt').stat().st_size
+        # 将末尾哈希、任务增量存盘等实际开销纳入累计 fit，不能在恢复或报告中丢失。
+        costs['gpu_reserved_seconds'] = previous_active + time.monotonic() - start
+        costs['fit_wall_seconds'] = costs['gpu_reserved_seconds']
+        summary['gpu_hours'] = costs['gpu_reserved_seconds'] / 3600
+        summary['terminal_overhead_seconds'] = time.monotonic() - finalization_started
         atomic_json(out / 'active_costs.json', costs)
         atomic_json(out / 'summary.json', summary)
     return 0 if summary['status'] == 'completed' else 2

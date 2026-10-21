@@ -4,6 +4,7 @@ import argparse
 import itertools
 import json
 import math
+import os
 import time
 
 import torch
@@ -21,7 +22,7 @@ def main():
     parser.add_argument('--label', required=True)
     parser.add_argument('--barrier-unix', type=float, default=0)
     args = parser.parse_args()
-    started = time.monotonic()
+    started = float(os.environ.get('TLCLS_PROCESS_STARTED_MONOTONIC', time.monotonic()))
     torch.cuda.set_device(args.device)
     setup(314159)
     device = torch.device('cuda', args.device)

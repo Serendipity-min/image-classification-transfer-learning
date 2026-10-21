@@ -4,6 +4,7 @@ import argparse
 import gc
 import json
 import math
+import os
 from pathlib import Path
 import random
 import time
@@ -44,11 +45,18 @@ def check_tail_accumulation(device):
     x, y = torch.randn(7, 3, device=device), torch.tensor([0, 1, 0, 0, 1, 1, 0], device=device)
     reference_loss = nn.functional.cross_entropy(reference(x), y)
     reference_loss.backward()
-    for start, end in [(0, 3), (3, 6), (6, 7)]:
-        (nn.functional.cross_entropy(model(x[start:end]), y[start:end], reduction='sum') / 7).backward()
-    max_error = max(float((a.grad - b.grad).abs().max()) for a, b in zip(model.parameters(), reference.parameters()))
-    assert max_error < 1e-6
-    return {'partition_sizes': [3, 3, 1], 'max_gradient_error': max_error, 'passed': True}
+    optimizer = torch.optim.SGD([{'params': list(model.parameters()), 'lr': 0.05, 'peak_lr': 0.05}])
+    scheduler = UpdateScheduler(optimizer, 1)
+    reference_optimizer = torch.optim.SGD(reference.parameters(), lr=optimizer.param_groups[0]['lr'])
+    torch.nn.utils.clip_grad_norm_(reference.parameters(), 1.0, error_if_nonfinite=True)
+    reference_optimizer.step()
+    batches = [(x[start:end], y[start:end], [f'acceptance/tail/{i}' for i in range(start, end)])
+               for start, end in [(0, 3), (3, 6), (6, 7)]]
+    update = effective_update(model, optimizer, scheduler, batches, device, bf16=False)
+    max_error = max(float((a - b).abs().max()) for a, b in zip(model.parameters(), reference.parameters()))
+    assert max_error < 1e-7 and update['samples'] == 7 and scheduler.updates == 1
+    return {'partition_sizes': [3, 3, 1], 'max_parameter_update_error': max_error,
+            'compares_production_effective_update_to_full_batch_reference': True, 'passed': True}
 
 
 def check_data_rng():
@@ -134,7 +142,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--device', type=int, default=0)
     args = parser.parse_args()
-    started = time.monotonic()
+    started = float(os.environ.get('TLCLS_PROCESS_STARTED_MONOTONIC', time.monotonic()))
     torch.cuda.set_device(args.device)
     setup(314159)
     device = torch.device('cuda', args.device)

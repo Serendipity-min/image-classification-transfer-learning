@@ -110,7 +110,7 @@ def main():
         if summary:
             export_result(config, summary, epochs)
         if t is not None:
-            startup = summary['startup_seconds']
+            startup = summary['startup_seconds'] + summary.get('terminal_overhead_seconds', 0)
             estimates.append({'configuration_id': config['configuration_id'], 'epoch_seconds': t,
                 'P2_gpu_hours_estimate': (45 * t + 3 * startup) / 3600,
                 'P3_gpu_hours_estimate': (250 * t + 5 * startup) / 3600,
