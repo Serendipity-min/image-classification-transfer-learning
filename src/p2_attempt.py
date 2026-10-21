@@ -84,7 +84,11 @@ def main():
             stop = snapshot['stop_request']
             if stop and not sent_term:
                 reason, sent_term = stop['reason'], True
-                signal_group(process.pid, signal.SIGTERM)
+                # 先通知训练主进程，在边界退出；同时杀 workers 会由 SIGCHLD 打断任意模型代码。
+                try:
+                    os.kill(process.pid, signal.SIGTERM)
+                except ProcessLookupError:
+                    pass
             if stop and time.monotonic() >= stop['drain_deadline_monotonic']:
                 signal_group(process.pid, signal.SIGKILL)
             try:

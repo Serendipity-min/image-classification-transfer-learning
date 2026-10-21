@@ -12,12 +12,37 @@ import unittest
 
 from tlcls.p2_core import (ROOT, STAGE, candidates, code_commit, execution_identity, file_hash,
                            process_alive, process_ticks, read, scientific_identity, write)
-from tlcls.p2_transaction import EpochTransaction
+from tlcls.p2_core import infrastructure_exception
+from tlcls.p2_transaction import EpochTransaction, committed_summary
 from tlcls.p2_budget import Budget
 from p2_select import choose
 
 
 class Checks(unittest.TestCase):
+    def test_frozen_assets_splits_and_actual_dependencies(self):
+        import importlib.metadata
+        for asset in read(ROOT / 'records/assets.json')['assets']:
+            path = ROOT / asset['remote']
+            self.assertEqual(path.stat().st_size, asset['size_bytes'])
+            self.assertEqual(file_hash(path), asset['sha256'])
+        data = read(ROOT / 'records/data_integrity.json')['datasets']
+        for name, value in data.items():
+            split = ROOT / 'records' / (name + '_split.json')
+            self.assertEqual(file_hash(split), value['split_sha256'])
+            manifest = read(split)
+            self.assertEqual(file_hash(ROOT / manifest['sample_manifest_path']), manifest['sample_manifest_sha256'])
+        for package, version in {'torch': '2.5.1+cu124', 'torchvision': '0.20.1+cu124',
+                                 'timm': '1.0.12', 'huggingface-hub': '0.26.2', 'safetensors': '0.4.5'}.items():
+            self.assertEqual(importlib.metadata.version(package), version)
+
+    def test_infrastructure_failure_classification(self):
+        self.assertTrue(infrastructure_exception(RuntimeError('DataLoader worker terminated')))
+        self.assertTrue(infrastructure_exception(RuntimeError('storage_exit_reserve_or_allocation_insufficient')))
+        self.assertTrue(infrastructure_exception(RuntimeError('worker interrupted'), True))
+        self.assertFalse(infrastructure_exception(AssertionError('scientific mismatch'), True))
+        self.assertFalse(infrastructure_exception(FloatingPointError('nonfinite'), True))
+        self.assertFalse(infrastructure_exception(ValueError('invalid config')))
+
     def test_matrix_and_frozen_mathematics(self):
         self.assertEqual(len(candidates()), 48)
         for name in execution_identity()['files']:
@@ -122,14 +147,23 @@ class Checks(unittest.TestCase):
                         'train': {'samples': 7, 'loss': .5, 'optimizer_updates': 1, 'last_update': {'samples': 7}},
                         'validation': {'samples': 3, 'correct': correct, 'top1_percent': 100 * correct / 3, 'loss': .5},
                         'cumulative_optimizer_updates': epoch}
-                    tx.commit(epoch, row, lambda f: f.write(b'fixture last'), lambda f: f.write(b'fixture best'), 1, epoch)
-                write(directory / 'summary.json', {'phase': 'P2', 'run_id': config['run_id'],
+                    tx.commit(epoch, row, lambda f: f.write(b'fixture last'),
+                              (lambda f: f.write(b'fixture best')) if epoch == 1 else None, 1, epoch)
+                latest, committed_rows = tx.load()
+                restored_summary = committed_summary(latest, committed_rows, read(directory / 'current.json'))
+                write(directory / 'summary.json', dict(restored_summary, **{'phase': 'P2', 'run_id': config['run_id'],
                     'status': 'completed', 'scientific_config_sha256': 'fixture', 'test_evaluator_constructed': False,
-                    'test_metrics': None, 'completed_epochs': 15})
+                    'test_metrics': None, 'completed_epochs': 15}))
                 result = p2_select.inspect_candidate(config)
                 self.assertEqual(result['selection_correct_sum'], 5)
                 self.assertEqual(result['selection_epochs'], [13, 14, 15])
                 self.assertAlmostEqual(result['selection_value'], 100 * 5 / 9)
+                self.assertEqual(restored_summary['completed_epochs'], 15)
+                self.assertEqual(restored_summary['optimizer_updates'], 15)
+                self.assertEqual(restored_summary['best_checkpoint'], latest['best'])
+                self.assertEqual(restored_summary['last_checkpoint'], latest['last'])
+                self.assertEqual(restored_summary['selected_epoch'], 1)
+                self.assertEqual(restored_summary['best_val_top1_percent'], 100)
         finally:
             p2_select.ROOT, p2_select.scientific_identity = original_root, original_identity
 
@@ -217,6 +251,32 @@ class Checks(unittest.TestCase):
                         guard.kill()
                         guard.wait()
                     log.close()
+
+    def test_guardian_sigkill_is_reconciled_once(self):
+        with tempfile.TemporaryDirectory(prefix='p2_guardian_') as folder:
+            budget = Budget(Path(folder) / 'ledger.json', 100)
+            guard, log = self.launch_guardian(budget.path, os.getpid(), 0,
+                [sys.executable, '-c', 'import time; time.sleep(60)'])
+            try:
+                deadline = time.monotonic() + 6
+                while time.monotonic() < deadline:
+                    snapshot = budget.snapshot()
+                    if snapshot['attempts'].get('0', {}).get('child_pid'):
+                        break
+                    time.sleep(.05)
+                self.assertIsNotNone(budget.snapshot()['attempts']['0']['child_pid'])
+                guard.kill()
+                guard.wait()
+                budget.reconcile_dead_guardian('0')
+                first = budget.used(budget.snapshot())
+                budget.reconcile_dead_guardian('0')
+                self.assertEqual(first, budget.used(budget.snapshot()))
+                self.assertFalse(process_alive(budget.snapshot()['attempts']['0']['child_pid']))
+            finally:
+                if guard.poll() is None:
+                    guard.kill()
+                    guard.wait()
+                log.close()
 
 
 def main():
