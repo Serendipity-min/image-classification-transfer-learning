@@ -1,0 +1,15 @@
+{
+  "old_code_commit": "74001fc68c2bfb68cd65da821c961d75a93fe32b",
+  "new_code_commit": "94b02df2ae94097602e40e88783f8c445006fa9a",
+  "changed_files": [
+    "src/execute_p0_p1.py"
+  ],
+  "training_model_data_source_unchanged": true,
+  "frozen_split_hashes_preserved": {
+    "cifar100": "5d656d616e134dcf5287c664abb31a33abd46ad04969afb8bde3695d2d2253e6",
+    "svhn": "bdd7db182d787e8e78d44780ce6ffd43bc9b9383a14002e872a83d5259210dd6"
+  },
+  "reason": "Correct parity-induced method/GPU binding by counting completed assignments within each method.",
+  "current_run_policy": "finish without interrupting child training; parent budget snapshot plus continuously monitored drain segment",
+  "P0_recheck": "repeat implementation acceptance with existing split files; preserve initial receipt"
+}

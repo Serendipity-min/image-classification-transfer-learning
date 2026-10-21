@@ -1,0 +1,63 @@
+{
+  "protocol_id": "TL-CLS-20261020-v1.0",
+  "timestamp_utc": "2026-10-21T06:34:25.691087+00:00",
+  "packages": {
+    "torch": "2.5.1+cu124",
+    "torchvision": "0.20.1+cu124",
+    "numpy": "2.1.3",
+    "scipy": "1.14.1",
+    "Pillow": "11.0.0",
+    "psutil": "6.1.0",
+    "timm": null,
+    "huggingface-hub": null,
+    "safetensors": null,
+    "PyYAML": "6.0.2",
+    "filelock": "3.16.1",
+    "fsspec": "2024.10.0",
+    "requests": "2.31.0",
+    "packaging": "23.2",
+    "tqdm": "4.66.2",
+    "typing_extensions": "4.12.2",
+    "setuptools": "69.5.1",
+    "urllib3": "2.1.0",
+    "certifi": "2024.2.2",
+    "charset-normalizer": "2.0.4",
+    "idna": "3.7"
+  },
+  "torch_cuda": "12.4",
+  "cudnn_version": 90100,
+  "devices": [
+    {
+      "index": 0,
+      "bf16_supported": true,
+      "matmul_dtype": "torch.bfloat16",
+      "matmul_finite": true,
+      "matmul_expected_value": true
+    },
+    {
+      "index": 1,
+      "bf16_supported": true,
+      "matmul_dtype": "torch.bfloat16",
+      "matmul_finite": true,
+      "matmul_expected_value": true
+    }
+  ],
+  "torchvision_ops_check": [
+    0
+  ],
+  "existing_asset_candidates": {
+    "/root/.cache/huggingface/hub": [],
+    "/root/.cache/torch/hub/checkpoints": [
+      "vgg16-397923af.pth",
+      "vgg16-397923af.pth.1b6166d1e9894417b50bfc811a0ba066.partial",
+      "vgg16-397923af.pth.1bde9c6d23e94a67871ce3f599341c47.partial"
+    ],
+    "/root/user_data": [
+      "CA_Inpaint",
+      "tl_cls_v1",
+      "MRFS"
+    ]
+  },
+  "environment_installation_authorized": false,
+  "model_acceptance": "pending_dependencies_and_assets"
+}

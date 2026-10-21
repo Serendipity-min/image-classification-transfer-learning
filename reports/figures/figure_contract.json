@@ -1,0 +1,26 @@
+{
+  "claim": "All raw three-epoch train/validation trajectories are shown for engineering review.",
+  "archetype": "quantitative grid",
+  "backend": "python",
+  "dimensions_mm": [
+    183,
+    72
+  ],
+  "panel_roles": [
+    "Training loss: update behavior",
+    "Validation loss: held-out loss behavior",
+    "Validation Top-1: held-out class accuracy"
+  ],
+  "replicate_unit": "one profile seed 314159 per configuration; not a multi-seed aggregate",
+  "uncertainty": "none; n=1, no formal inference",
+  "exclusions": [],
+  "source_rows": 48,
+  "scope": "P1 warmup epochs 1-3 of a 50-epoch scheduler; no test data and no formal method ranking",
+  "target": "engineering stage receipt, not a journal submission",
+  "exports": [
+    "PDF",
+    "SVG",
+    "PNG"
+  ],
+  "minimum_font_pt": 7
+}

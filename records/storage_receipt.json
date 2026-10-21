@@ -1,0 +1,19 @@
+{
+  "project_root": "/root/user_data/tl_cls_v1",
+  "project_file_bytes": 12208700563,
+  "by_folder_file_bytes": {
+    "data": 601618713,
+    "weights": 512868962,
+    "runs": 11071466972,
+    "records": 18471222,
+    "src": 150802,
+    "configs": 278141,
+    "offline_wheels": 3234072,
+    "reports": 414896
+  },
+  "project_environment_non_symlink_bytes": 122543596,
+  "filesystem_free_bytes": 15058498662400,
+  "tenant_confirmed_quota_bytes": null,
+  "planning_cap_gib": 100,
+  "measurement": "logical file sizes; shared filesystem free space is not tenant quota"
+}

@@ -1,0 +1,3 @@
+{"run_id": "P1-cifar100-vitb16-linear_probe-s314159", "epoch": 1, "val_top1": 86.18, "train_seconds": 44.48172415420413, "validation_seconds": 4.892383843660355, "fit_active_seconds": 54.712381824851036}
+{"run_id": "P1-cifar100-vitb16-linear_probe-s314159", "epoch": 2, "val_top1": 87.3, "train_seconds": 43.934338215738535, "validation_seconds": 4.56078015267849, "fit_active_seconds": 104.09659115597606}
+{"run_id": "P1-cifar100-vitb16-linear_probe-s314159", "epoch": 3, "val_top1": 86.18, "train_seconds": 43.6388811506331, "validation_seconds": 4.443507365882397, "fit_active_seconds": 152.62209967523813}

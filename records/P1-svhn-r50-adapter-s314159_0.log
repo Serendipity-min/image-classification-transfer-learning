@@ -1,0 +1,3 @@
+{"run_id": "P1-svhn-r50-adapter-s314159", "epoch": 1, "val_top1": 53.999453999454, "train_seconds": 113.59073119238019, "validation_seconds": 5.394133515655994, "fit_active_seconds": 124.69716079905629}
+{"run_id": "P1-svhn-r50-adapter-s314159", "epoch": 2, "val_top1": 89.47583947583948, "train_seconds": 113.2413230985403, "validation_seconds": 5.0492549277842045, "fit_active_seconds": 243.82188548147678}
+{"run_id": "P1-svhn-r50-adapter-s314159", "epoch": 3, "val_top1": 91.79634179634179, "train_seconds": 112.21705897152424, "validation_seconds": 5.039849728345871, "fit_active_seconds": 361.6280821673572}

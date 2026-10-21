@@ -1,0 +1,131 @@
+{
+  "protocol_id": "TL-CLS-20261020-v1.0",
+  "configuration_id": "svhn-vitb16-adapter",
+  "dataset": "svhn",
+  "model_key": "vitb16",
+  "model_id": "vit_base_patch16_224.augreg_in21k",
+  "method": "adapter",
+  "status": "planned",
+  "train_fraction": 1.0,
+  "split_seed": 20261020,
+  "gpu_count": 1,
+  "micro_batch_size": 32,
+  "gradient_accumulation_steps": 4,
+  "effective_batch_size": 128,
+  "autocast_dtype": "bfloat16",
+  "scheduler_horizon_epochs": 50,
+  "warmup_epochs": 5,
+  "test_during_training": false,
+  "checkpoint_revision": "bb70896cd6bffdd579c3d4f7284f39d0c4ab46c3",
+  "checkpoint_sha256": "2d31bb5597c720912f8ea5e4f1de73909a6911798d78ae5d1b9d63a955fed049",
+  "provenance_required_at": "P0",
+  "run_id": "P1-svhn-vitb16-adapter-s314159",
+  "phase": "P1",
+  "seed": 314159,
+  "epochs": 3,
+  "learning_rate": 0.0003,
+  "learning_rate_scope": "all_trainable_parameters",
+  "head_lr_multiplier": 1.0,
+  "selected_lr_ref": null,
+  "formal_run": false,
+  "tuning_candidate_index": null,
+  "provenance": {
+    "protocol_id": "TL-CLS-20261020-v1.0",
+    "protocol_sha256": "e06bba0f67f9a6aafe4bf92420fefd9f5d58ddd228529b367415827d820c7b29",
+    "code_commit": "94b02df2ae94097602e40e88783f8c445006fa9a",
+    "split_sha256": "bdd7db182d787e8e78d44780ce6ffd43bc9b9383a14002e872a83d5259210dd6",
+    "weight_sha256": "2d31bb5597c720912f8ea5e4f1de73909a6911798d78ae5d1b9d63a955fed049",
+    "dependency_lock_sha256": "ea79ba50f6d21fc587fe597a5fa9efa3f1cf7c339e52e2e8444b23ddd96a7a59"
+  },
+  "model_identity": {
+    "initial_classifier_sha256": "f218a097b00492335d7277e39e223032ce857ed07726f9748bca2b91d763c8d5",
+    "original_classes": 21843,
+    "target_classes": 10,
+    "constructor_kwargs": {
+      "num_classes": 10,
+      "drop_rate": 0.0,
+      "drop_path_rate": 0.0,
+      "attn_drop_rate": 0.0,
+      "proj_drop_rate": 0.0,
+      "global_pool": "token"
+    },
+    "pretrained_loaded": true,
+    "classifier_initializer": {
+      "distribution": "torch.trunc_normal_",
+      "std": 0.02,
+      "lower_bound": -2.0,
+      "upper_bound": 2.0,
+      "bias": 0.0
+    },
+    "pretraining_dataset": "ImageNet-21k"
+  },
+  "hardware": {
+    "index": 1,
+    "fields": [
+      "index",
+      "uuid",
+      "name",
+      "pci.bus_id",
+      "memory.total",
+      "driver_version",
+      "power.limit",
+      "temperature.gpu",
+      "clocks.sm",
+      "clocks.mem"
+    ],
+    "values": [
+      "1",
+      "GPU-c30e4ab5-1922-01a4-caba-24210a4f7feb",
+      "NVIDIA GeForce RTX 3090",
+      "00000000:3D:00.0",
+      "24576",
+      "550.127.05",
+      "350.00",
+      "51",
+      "1695",
+      "9501"
+    ],
+    "cpu_quota_vcpu": 16,
+    "memory_quota_gib": 64
+  },
+  "num_workers": 4,
+  "persistent_workers": true,
+  "normalization": {
+    "library": "timm",
+    "model_id": "vit_base_patch16_224.augreg_in21k",
+    "checkpoint_repository": "timm/vit_base_patch16_224.augreg_in21k",
+    "pretraining_dataset": "ImageNet-21k",
+    "checkpoint_revision": null,
+    "checkpoint_filename": null,
+    "checkpoint_sha256": null,
+    "provenance_required_at": "P0",
+    "feature_dimension": 768,
+    "classifier_attribute": "head",
+    "global_pool": "token",
+    "mean": [
+      0.5,
+      0.5,
+      0.5
+    ],
+    "std": [
+      0.5,
+      0.5,
+      0.5
+    ],
+    "source_config_url": "https://huggingface.co/timm/vit_base_patch16_224.augreg_in21k/blob/main/config.json",
+    "input_override": "固定224x224；不得混用augreg_in21k_ft_in1k或其他预训练来源。"
+  },
+  "deterministic_algorithms": true,
+  "tf32": false,
+  "sampler": "numpy.PCG64_per_epoch_SHA256_v1",
+  "augmentation": "canonical_json_array_utf8_SHA256_low64_PCG64",
+  "actual_launch_arguments": {
+    "run_id": "P1-svhn-vitb16-adapter-s314159",
+    "device": 1,
+    "max_active_seconds": 10915.934654057026,
+    "resume": false
+  },
+  "physical_batch_size": 32,
+  "no_feature_cache": true,
+  "no_torch_compile": true
+}

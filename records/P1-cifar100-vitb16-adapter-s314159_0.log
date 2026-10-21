@@ -1,0 +1,3 @@
+{"run_id": "P1-cifar100-vitb16-adapter-s314159", "epoch": 1, "val_top1": 82.8, "train_seconds": 101.43229093775153, "validation_seconds": 5.321276500821114, "fit_active_seconds": 112.40971228852868}
+{"run_id": "P1-cifar100-vitb16-adapter-s314159", "epoch": 2, "val_top1": 90.12, "train_seconds": 101.94316077977419, "validation_seconds": 4.921366713941097, "fit_active_seconds": 220.209543004632}
+{"run_id": "P1-cifar100-vitb16-adapter-s314159", "epoch": 3, "val_top1": 91.2, "train_seconds": 101.93791678547859, "validation_seconds": 4.9294318780303, "fit_active_seconds": 328.08432016149163}

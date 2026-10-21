@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/root/user_data/tl_cls_v1/src/execute_p0_p1.py", line 179, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/root/user_data/tl_cls_v1/src/execute_p0_p1.py", line 154, in main
+    if not run_group([job], config['run_id']):
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/user_data/tl_cls_v1/src/execute_p0_p1.py", line 92, in run_group
+    time.sleep(2)
+KeyboardInterrupt
+{"P0": "passed", "P1_completed_runs": 16, "actual_gpu_hours": 1.523377770313786, "budget_complete_basis": true}

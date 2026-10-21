@@ -1,0 +1,31 @@
+{
+  "provenance": {
+    "protocol_id": "TL-CLS-20261020-v1.0",
+    "protocol_sha256": "e06bba0f67f9a6aafe4bf92420fefd9f5d58ddd228529b367415827d820c7b29",
+    "code_commit": "94b02df2ae94097602e40e88783f8c445006fa9a",
+    "split_sha256": "bdd7db182d787e8e78d44780ce6ffd43bc9b9383a14002e872a83d5259210dd6",
+    "weight_sha256": "773525d5821de224f8f30c33377b7a795d7863e08522698200d3217d3f2a41bb",
+    "dependency_lock_sha256": "ea79ba50f6d21fc587fe597a5fa9efa3f1cf7c339e52e2e8444b23ddd96a7a59",
+    "resolved_config_sha256": "3128182a710e02b1c78894aea4d695c9e24b708929468fee8e601bd918743f40",
+    "resolved_config_path": "runs/P1-svhn-r50-linear_probe-s314159/config.attempt_1.json"
+  },
+  "groups": [
+    {
+      "name": "fc.weight",
+      "shape": [
+        10,
+        2048
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 0.003
+    },
+    {
+      "name": "fc.bias",
+      "shape": [
+        10
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.003
+    }
+  ]
+}

@@ -1,0 +1,439 @@
+{
+  "provenance": {
+    "protocol_id": "TL-CLS-20261020-v1.0",
+    "protocol_sha256": "e06bba0f67f9a6aafe4bf92420fefd9f5d58ddd228529b367415827d820c7b29",
+    "code_commit": "94b02df2ae94097602e40e88783f8c445006fa9a",
+    "split_sha256": "bdd7db182d787e8e78d44780ce6ffd43bc9b9383a14002e872a83d5259210dd6",
+    "weight_sha256": "2d31bb5597c720912f8ea5e4f1de73909a6911798d78ae5d1b9d63a955fed049",
+    "dependency_lock_sha256": "ea79ba50f6d21fc587fe597a5fa9efa3f1cf7c339e52e2e8444b23ddd96a7a59",
+    "resolved_config_sha256": "51ccd6c52453cf6cce4ec1d3ef72641bacf55852ac574a6867ec8e18d2a2be33",
+    "resolved_config_path": "runs/P1-svhn-vitb16-adapter-s314159/config.attempt_1.json"
+  },
+  "groups": [
+    {
+      "name": "blocks.0.adapter.down.weight",
+      "shape": [
+        192,
+        768
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "blocks.0.adapter.down.bias",
+      "shape": [
+        192
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "blocks.0.adapter.up.weight",
+      "shape": [
+        768,
+        192
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "blocks.0.adapter.up.bias",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "blocks.1.adapter.down.weight",
+      "shape": [
+        192,
+        768
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "blocks.1.adapter.down.bias",
+      "shape": [
+        192
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "blocks.1.adapter.up.weight",
+      "shape": [
+        768,
+        192
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "blocks.1.adapter.up.bias",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "blocks.2.adapter.down.weight",
+      "shape": [
+        192,
+        768
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "blocks.2.adapter.down.bias",
+      "shape": [
+        192
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "blocks.2.adapter.up.weight",
+      "shape": [
+        768,
+        192
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "blocks.2.adapter.up.bias",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "blocks.3.adapter.down.weight",
+      "shape": [
+        192,
+        768
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "blocks.3.adapter.down.bias",
+      "shape": [
+        192
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "blocks.3.adapter.up.weight",
+      "shape": [
+        768,
+        192
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "blocks.3.adapter.up.bias",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "blocks.4.adapter.down.weight",
+      "shape": [
+        192,
+        768
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "blocks.4.adapter.down.bias",
+      "shape": [
+        192
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "blocks.4.adapter.up.weight",
+      "shape": [
+        768,
+        192
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "blocks.4.adapter.up.bias",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "blocks.5.adapter.down.weight",
+      "shape": [
+        192,
+        768
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "blocks.5.adapter.down.bias",
+      "shape": [
+        192
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "blocks.5.adapter.up.weight",
+      "shape": [
+        768,
+        192
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "blocks.5.adapter.up.bias",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "blocks.6.adapter.down.weight",
+      "shape": [
+        192,
+        768
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "blocks.6.adapter.down.bias",
+      "shape": [
+        192
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "blocks.6.adapter.up.weight",
+      "shape": [
+        768,
+        192
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "blocks.6.adapter.up.bias",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "blocks.7.adapter.down.weight",
+      "shape": [
+        192,
+        768
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "blocks.7.adapter.down.bias",
+      "shape": [
+        192
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "blocks.7.adapter.up.weight",
+      "shape": [
+        768,
+        192
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "blocks.7.adapter.up.bias",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "blocks.8.adapter.down.weight",
+      "shape": [
+        192,
+        768
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "blocks.8.adapter.down.bias",
+      "shape": [
+        192
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "blocks.8.adapter.up.weight",
+      "shape": [
+        768,
+        192
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "blocks.8.adapter.up.bias",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "blocks.9.adapter.down.weight",
+      "shape": [
+        192,
+        768
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "blocks.9.adapter.down.bias",
+      "shape": [
+        192
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "blocks.9.adapter.up.weight",
+      "shape": [
+        768,
+        192
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "blocks.9.adapter.up.bias",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "blocks.10.adapter.down.weight",
+      "shape": [
+        192,
+        768
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "blocks.10.adapter.down.bias",
+      "shape": [
+        192
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "blocks.10.adapter.up.weight",
+      "shape": [
+        768,
+        192
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "blocks.10.adapter.up.bias",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "blocks.11.adapter.down.weight",
+      "shape": [
+        192,
+        768
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "blocks.11.adapter.down.bias",
+      "shape": [
+        192
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "blocks.11.adapter.up.weight",
+      "shape": [
+        768,
+        192
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "blocks.11.adapter.up.bias",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "head.weight",
+      "shape": [
+        10,
+        768
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "head.bias",
+      "shape": [
+        10
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    }
+  ]
+}

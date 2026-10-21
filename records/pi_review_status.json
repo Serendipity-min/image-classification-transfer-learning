@@ -1,0 +1,30 @@
+{
+  "protocol_id": "TL-CLS-20261020-v1.0",
+  "date": "2026-10-21",
+  "timezone": "Asia/Shanghai",
+  "status": "awaiting_pi_review",
+  "P0": "passed",
+  "P1": "completed_and_audited",
+  "P2": {
+    "status": "not_started",
+    "authorized": false
+  },
+  "P3": {
+    "status": "not_started",
+    "authorized": false
+  },
+  "pi_decision": null,
+  "pi_reviewer": null,
+  "decision_timestamp": null,
+  "training_code_commits": [
+    "74001fc68c2bfb68cd65da821c961d75a93fe32b",
+    "94b02df2ae94097602e40e88783f8c445006fa9a"
+  ],
+  "review_questions": [
+    "P1 engineering acceptance",
+    "P2 compute budget",
+    "tenant storage quota and archival policy",
+    "P3 separate stage decision"
+  ],
+  "approval_rule": "Repository publication is an evidence handoff; it does not authorize P2/P3."
+}

@@ -1,0 +1,344 @@
+{
+  "dataset": "cifar100",
+  "groups": [
+    {
+      "pixel_sha256": "1e81bf2085e08debc411eb93fc413eb30bae70df7974d2ba3d3e012d13669af2",
+      "samples": [
+        {
+          "sample_id": "cifar100/train/4348",
+          "assigned_split": "validation"
+        },
+        {
+          "sample_id": "cifar100/train/30931",
+          "assigned_split": "validation"
+        }
+      ]
+    },
+    {
+      "pixel_sha256": "abf613fe3e00d1795c23771228a56ffcfc0b5514f84849580ae6a00c13886727",
+      "samples": [
+        {
+          "sample_id": "cifar100/train/8393",
+          "assigned_split": "train"
+        },
+        {
+          "sample_id": "cifar100/train/36874",
+          "assigned_split": "train"
+        }
+      ]
+    },
+    {
+      "pixel_sha256": "a61862b62cbe339e2ec786b71093d4f37d59e6de792506cceed190c17686c140",
+      "samples": [
+        {
+          "sample_id": "cifar100/train/8599",
+          "assigned_split": "train"
+        },
+        {
+          "sample_id": "cifar100/train/22657",
+          "assigned_split": "train"
+        }
+      ]
+    },
+    {
+      "pixel_sha256": "c64638d9cbc5a8cb7583bda503043f758de2ff54bda75915ecb68d0599138f6a",
+      "samples": [
+        {
+          "sample_id": "cifar100/train/9012",
+          "assigned_split": "train"
+        },
+        {
+          "sample_id": "cifar100/train/31128",
+          "assigned_split": "validation"
+        }
+      ]
+    },
+    {
+      "pixel_sha256": "40f5d5f001406b27d5a2f6274cf5aadb6d8d8c98071753a762f1c0118d9b6086",
+      "samples": [
+        {
+          "sample_id": "cifar100/train/15597",
+          "assigned_split": "train"
+        },
+        {
+          "sample_id": "cifar100/test/9524",
+          "assigned_split": "test"
+        }
+      ]
+    },
+    {
+      "pixel_sha256": "e0c7dff8a721e40ef0e3ca42cc631a16db22231ce7b4a3c508e6fa6f6d9e92f4",
+      "samples": [
+        {
+          "sample_id": "cifar100/train/16646",
+          "assigned_split": "train"
+        },
+        {
+          "sample_id": "cifar100/train/31828",
+          "assigned_split": "train"
+        }
+      ]
+    },
+    {
+      "pixel_sha256": "e4f04b5752abef9d8a585afc8db5056f4bf1f857d5955e8e6602231f3a94d28f",
+      "samples": [
+        {
+          "sample_id": "cifar100/train/17688",
+          "assigned_split": "train"
+        },
+        {
+          "sample_id": "cifar100/train/41874",
+          "assigned_split": "train"
+        }
+      ]
+    },
+    {
+      "pixel_sha256": "4ac35f803780577a96710ce4ba40320d5911cce3cce941d88707275fd17539ec",
+      "samples": [
+        {
+          "sample_id": "cifar100/train/18461",
+          "assigned_split": "train"
+        },
+        {
+          "sample_id": "cifar100/train/46752",
+          "assigned_split": "train"
+        }
+      ]
+    },
+    {
+      "pixel_sha256": "016244d6b3fe062938b0571425347b3b9dee2d617ef0b00e5f149b9f443866da",
+      "samples": [
+        {
+          "sample_id": "cifar100/train/20635",
+          "assigned_split": "train"
+        },
+        {
+          "sample_id": "cifar100/train/32666",
+          "assigned_split": "train"
+        }
+      ]
+    },
+    {
+      "pixel_sha256": "406e82f832bd11c769fbf7b5abbe3279a5c164f98ac286e78db1273539dd1538",
+      "samples": [
+        {
+          "sample_id": "cifar100/train/21619",
+          "assigned_split": "train"
+        },
+        {
+          "sample_id": "cifar100/test/3932",
+          "assigned_split": "test"
+        }
+      ]
+    },
+    {
+      "pixel_sha256": "c30c5b6942a86ef72e9e91ff00572712c75f37fd480ebde24200e1c3b9b0bdff",
+      "samples": [
+        {
+          "sample_id": "cifar100/train/23947",
+          "assigned_split": "train"
+        },
+        {
+          "sample_id": "cifar100/train/33638",
+          "assigned_split": "train"
+        }
+      ]
+    },
+    {
+      "pixel_sha256": "86683e9dcf91816f764c8ae9170a91af950e0688d426aa96fd3bd17924f77676",
+      "samples": [
+        {
+          "sample_id": "cifar100/train/24083",
+          "assigned_split": "train"
+        },
+        {
+          "sample_id": "cifar100/test/1100",
+          "assigned_split": "test"
+        }
+      ]
+    },
+    {
+      "pixel_sha256": "95fd3b33dc0783cbc0ab0bf1910ff18fc3a1058a2d7b82a1171ec8c562a82cae",
+      "samples": [
+        {
+          "sample_id": "cifar100/train/25218",
+          "assigned_split": "validation"
+        },
+        {
+          "sample_id": "cifar100/train/46851",
+          "assigned_split": "train"
+        }
+      ]
+    },
+    {
+      "pixel_sha256": "0eec83be0288eb275a9bd658e2773aaa4a83a4a52c4ec43fa3c1debb38fc2d0b",
+      "samples": [
+        {
+          "sample_id": "cifar100/train/25390",
+          "assigned_split": "train"
+        },
+        {
+          "sample_id": "cifar100/test/5564",
+          "assigned_split": "test"
+        }
+      ]
+    },
+    {
+      "pixel_sha256": "111cd2e2bb96f2c0b4e1af6aa4c98e921d28e6b106775dc144614a1029f3ded7",
+      "samples": [
+        {
+          "sample_id": "cifar100/train/27737",
+          "assigned_split": "train"
+        },
+        {
+          "sample_id": "cifar100/train/47636",
+          "assigned_split": "validation"
+        }
+      ]
+    },
+    {
+      "pixel_sha256": "3b560d5a8768ea2b066c689def75eeb9dbd4573fba4cf533ca3c7ed175928da8",
+      "samples": [
+        {
+          "sample_id": "cifar100/train/28189",
+          "assigned_split": "train"
+        },
+        {
+          "sample_id": "cifar100/test/3499",
+          "assigned_split": "test"
+        }
+      ]
+    },
+    {
+      "pixel_sha256": "0f9bd357fb08ae2c6f2e6d091d838d80df2ffd8a569b9ee126fbd6158f7074d5",
+      "samples": [
+        {
+          "sample_id": "cifar100/train/28293",
+          "assigned_split": "train"
+        },
+        {
+          "sample_id": "cifar100/train/41860",
+          "assigned_split": "train"
+        }
+      ]
+    },
+    {
+      "pixel_sha256": "84306460e8985cdd3027d9a69441cbed223aa95052aa523ee91dab70a9d6f8c4",
+      "samples": [
+        {
+          "sample_id": "cifar100/train/28538",
+          "assigned_split": "train"
+        },
+        {
+          "sample_id": "cifar100/test/2615",
+          "assigned_split": "test"
+        }
+      ]
+    },
+    {
+      "pixel_sha256": "4de97c5289587a6ad5fed134739fd3f553e3ea1596a97052ecb7d1c914156b4c",
+      "samples": [
+        {
+          "sample_id": "cifar100/train/29363",
+          "assigned_split": "train"
+        },
+        {
+          "sample_id": "cifar100/test/4716",
+          "assigned_split": "test"
+        }
+      ]
+    },
+    {
+      "pixel_sha256": "83cbeea4e416612d4120da5dc66a05121612ea10315948629ae83e4cdff0152f",
+      "samples": [
+        {
+          "sample_id": "cifar100/train/30418",
+          "assigned_split": "validation"
+        },
+        {
+          "sample_id": "cifar100/train/47806",
+          "assigned_split": "train"
+        }
+      ]
+    },
+    {
+      "pixel_sha256": "e4b2e4ea055b7e0c3fd8a6100fa777cf9057883f4c5451ef11eee75ad88098be",
+      "samples": [
+        {
+          "sample_id": "cifar100/train/30697",
+          "assigned_split": "train"
+        },
+        {
+          "sample_id": "cifar100/test/2996",
+          "assigned_split": "test"
+        }
+      ]
+    },
+    {
+      "pixel_sha256": "022a8685348c8480aa02682cc229617f9c02bc225dc62dd6f00d0d4861e833b0",
+      "samples": [
+        {
+          "sample_id": "cifar100/train/31227",
+          "assigned_split": "train"
+        },
+        {
+          "sample_id": "cifar100/train/34187",
+          "assigned_split": "train"
+        }
+      ]
+    },
+    {
+      "pixel_sha256": "29fe37917777bdd51661d2cae64ea16d5266c4947110d79ead631189febb377c",
+      "samples": [
+        {
+          "sample_id": "cifar100/train/32205",
+          "assigned_split": "train"
+        },
+        {
+          "sample_id": "cifar100/test/1357",
+          "assigned_split": "test"
+        }
+      ]
+    },
+    {
+      "pixel_sha256": "4f89e9ecee0e7fd700624c138aa06cad4e497349ad93f24a52fefb7b98842882",
+      "samples": [
+        {
+          "sample_id": "cifar100/train/37654",
+          "assigned_split": "train"
+        },
+        {
+          "sample_id": "cifar100/test/6526",
+          "assigned_split": "test"
+        }
+      ]
+    },
+    {
+      "pixel_sha256": "c4159e3576ebb8dda0f97326bdd25b0501d56e3ce5ba7a14c16301f1d1966d5a",
+      "samples": [
+        {
+          "sample_id": "cifar100/test/3438",
+          "assigned_split": "test"
+        },
+        {
+          "sample_id": "cifar100/test/7715",
+          "assigned_split": "test"
+        }
+      ]
+    },
+    {
+      "pixel_sha256": "3833e945c3765a5712c4252bba6b88e4b97012142ae6b8e3e1d9a6c0a1046515",
+      "samples": [
+        {
+          "sample_id": "cifar100/test/4654",
+          "assigned_split": "test"
+        },
+        {
+          "sample_id": "cifar100/test/6709",
+          "assigned_split": "test"
+        }
+      ]
+    }
+  ],
+  "policy": "audit_only_no_samples_removed"
+}

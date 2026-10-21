@@ -1,0 +1,116 @@
+{
+  "protocol_id": "TL-CLS-20261020-v1.0",
+  "timestamp_utc": "2026-10-21T06:36:22.618052+00:00",
+  "source_package_checks": [
+    {
+      "file": "README.md",
+      "sha256": "2c81677566c9972bf66f075fdcbcf386024e45324bae0767b9490f0ea65102c6",
+      "matched": true
+    },
+    {
+      "file": "protocol.json",
+      "sha256": "e06bba0f67f9a6aafe4bf92420fefd9f5d58ddd228529b367415827d820c7b29",
+      "matched": true
+    },
+    {
+      "file": "reference/预实验原稿.docx",
+      "sha256": "41d98ea1d77176523a9e5881c4168a0aa7526f39f2ab889579b6b3c94464af89",
+      "matched": true
+    },
+    {
+      "file": "result_record.template.json",
+      "sha256": "0aff9c9af3888f62fb6d71e3f5632b8b4c87efcb6036ab35ef7167f4e5fca41e",
+      "matched": true
+    },
+    {
+      "file": "run_matrix.json",
+      "sha256": "8492ff84eacd954cd839174575d31f2c67abec090cea1966d9366d39d1dafa43",
+      "matched": true
+    },
+    {
+      "file": "实验设计与执行合同.md",
+      "sha256": "e19e65e8ea85d8a6c29266b61ad47d893cbf9b608ce3423eb0b3cbbc0c597298",
+      "matched": true
+    }
+  ],
+  "transfers": [
+    {
+      "remote_path": "/root/user_data/tl_cls_v1/configs/protocol.json",
+      "size_bytes": 31794,
+      "sha256": "e06bba0f67f9a6aafe4bf92420fefd9f5d58ddd228529b367415827d820c7b29",
+      "verified": true,
+      "local_staging_deleted": true
+    },
+    {
+      "remote_path": "/root/user_data/tl_cls_v1/configs/run_matrix.json",
+      "size_bytes": 174376,
+      "sha256": "8492ff84eacd954cd839174575d31f2c67abec090cea1966d9366d39d1dafa43",
+      "verified": true,
+      "local_staging_deleted": true
+    },
+    {
+      "remote_path": "/root/user_data/tl_cls_v1/configs/result_record.template.json",
+      "size_bytes": 8617,
+      "sha256": "0aff9c9af3888f62fb6d71e3f5632b8b4c87efcb6036ab35ef7167f4e5fca41e",
+      "verified": true,
+      "local_staging_deleted": true
+    },
+    {
+      "remote_path": "/root/user_data/tl_cls_v1/configs/execution_contract.md",
+      "size_bytes": 53122,
+      "sha256": "e19e65e8ea85d8a6c29266b61ad47d893cbf9b608ce3423eb0b3cbbc0c597298",
+      "verified": true,
+      "local_staging_deleted": true
+    },
+    {
+      "remote_path": "/root/user_data/tl_cls_v1/configs/offline_install_plan.json",
+      "size_bytes": 10232,
+      "sha256": "b7e2b471cc55cb795464322a2185666d8dfd98c1c078c37142f7b02f054779d1",
+      "verified": true,
+      "local_staging_deleted": true
+    },
+    {
+      "remote_path": "/root/user_data/tl_cls_v1/src/preflight.py",
+      "size_bytes": 3425,
+      "sha256": "cfb29f269e291d8265612c37c5333a5f6fe407d330011983096f52a607e979e6",
+      "verified": true,
+      "local_staging_deleted": true
+    },
+    {
+      "remote_path": "/root/user_data/tl_cls_v1/src/runtime_probe.py",
+      "size_bytes": 3028,
+      "sha256": "aebbe18e8fdc98d09533a0dc6424c03ca3f5acf4c9e679a91418884acca3c08c",
+      "verified": true,
+      "local_staging_deleted": true
+    },
+    {
+      "remote_path": "/root/user_data/tl_cls_v1/offline_wheels/timm-1.0.12-py3-none-any.whl",
+      "size_bytes": 2351767,
+      "sha256": "6b2770674213f10b7f193be5598ce48bd010ab21cc8af77dba6aeef58b1298a1",
+      "verified": true,
+      "local_staging_deleted": true
+    },
+    {
+      "remote_path": "/root/user_data/tl_cls_v1/offline_wheels/huggingface_hub-0.26.2-py3-none-any.whl",
+      "size_bytes": 447536,
+      "sha256": "98c2a5a8e786c7b2cb6fdeb2740893cba4d53e312572ed3d8afafda65b128c46",
+      "verified": true,
+      "local_staging_deleted": true
+    },
+    {
+      "remote_path": "/root/user_data/tl_cls_v1/offline_wheels/safetensors-0.4.5-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+      "size_bytes": 434769,
+      "sha256": "3685ce7ed036f916316b567152482b7e959dc754fcc4a8342333d222e05f407c",
+      "verified": true,
+      "local_staging_deleted": true
+    }
+  ],
+  "offline_resolver": {
+    "status": "passed",
+    "stdout": "Looking in links: /root/user_data/tl_cls_v1/offline_wheels\nProcessing ./user_data/tl_cls_v1/offline_wheels/timm-1.0.12-py3-none-any.whl\nProcessing ./user_data/tl_cls_v1/offline_wheels/huggingface_hub-0.26.2-py3-none-any.whl\nProcessing ./user_data/tl_cls_v1/offline_wheels/safetensors-0.4.5-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl\nRequirement already satisfied: torch in ./miniconda3/lib/python3.12/site-packages (from timm==1.0.12) (2.5.1+cu124)\nRequirement already satisfied: torchvision in ./miniconda3/lib/python3.12/site-packages (from timm==1.0.12) (0.20.1+cu124)\nRequirement already satisfied: pyyaml in ./miniconda3/lib/python3.12/site-packages (from timm==1.0.12) (6.0.2)\nRequirement already satisfied: filelock in ./miniconda3/lib/python3.12/site-packages (from huggingface-hub==0.26.2) (3.16.1)\nRequirement already satisfied: fsspec>=2023.5.0 in ./miniconda3/lib/python3.12/site-packages (from huggingface-hub==0.26.2) (2024.10.0)\nRequirement already satisfied: packaging>=20.9 in ./miniconda3/lib/python3.12/site-packages (from huggingface-hub==0.26.2) (23.2)\nRequirement already satisfied: requests in ./miniconda3/lib/python3.12/site-packages (from huggingface-hub==0.26.2) (2.31.0)\nRequirement already satisfied: tqdm>=4.42.1 in ./miniconda3/lib/python3.12/site-packages (from huggingface-hub==0.26.2) (4.66.2)\nRequirement already satisfied: typing-extensions>=3.7.4.3 in ./miniconda3/lib/python3.12/site-packages (from huggingface-hub==0.26.2) (4.12.2)\nRequirement already satisfied: charset-normalizer<4,>=2 in ./miniconda3/lib/python3.12/site-packages (from requests->huggingface-hub==0.26.2) (2.0.4)\nRequirement already satisfied: idna<4,>=2.5 in ./miniconda3/lib/python3.12/site-packages (from requests->huggingface-hub==0.26.2) (3.7)\nRequirement already satisfied: urllib3<3,>=1.21.1 in ./miniconda3/lib/python3.12/site-packages (from requests->huggingface-hub==0.26.2) (2.1.0)\nRequirement already satisfied: certifi>=2017.4.17 in ./miniconda3/lib/python3.12/site-packages (from requests->huggingface-hub==0.26.2) (2024.2.2)\nRequirement already satisfied: networkx in ./miniconda3/lib/python3.12/site-packages (from torch->timm==1.0.12) (3.4.2)\nRequirement already satisfied: jinja2 in ./miniconda3/lib/python3.12/site-packages (from torch->timm==1.0.12) (3.1.4)\nRequirement already satisfied: nvidia-cuda-nvrtc-cu12==12.4.127 in ./miniconda3/lib/python3.12/site-packages (from torch->timm==1.0.12) (12.4.127)\nRequirement already satisfied: nvidia-cuda-runtime-cu12==12.4.127 in ./miniconda3/lib/python3.12/site-packages (from torch->timm==1.0.12) (12.4.127)\nRequirement already satisfied: nvidia-cuda-cupti-cu12==12.4.127 in ./miniconda3/lib/python3.12/site-packages (from torch->timm==1.0.12) (12.4.127)\nRequirement already satisfied: nvidia-cudnn-cu12==9.1.0.70 in ./miniconda3/lib/python3.12/site-packages (from torch->timm==1.0.12) (9.1.0.70)\nRequirement already satisfied: nvidia-cublas-cu12==12.4.5.8 in ./miniconda3/lib/python3.12/site-packages (from torch->timm==1.0.12) (12.4.5.8)\nRequirement already satisfied: nvidia-cufft-cu12==11.2.1.3 in ./miniconda3/lib/python3.12/site-packages (from torch->timm==1.0.12) (11.2.1.3)\nRequirement already satisfied: nvidia-curand-cu12==10.3.5.147 in ./miniconda3/lib/python3.12/site-packages (from torch->timm==1.0.12) (10.3.5.147)\nRequirement already satisfied: nvidia-cusolver-cu12==11.6.1.9 in ./miniconda3/lib/python3.12/site-packages (from torch->timm==1.0.12) (11.6.1.9)\nRequirement already satisfied: nvidia-cusparse-cu12==12.3.1.170 in ./miniconda3/lib/python3.12/site-packages (from torch->timm==1.0.12) (12.3.1.170)\nRequirement already satisfied: nvidia-nccl-cu12==2.21.5 in ./miniconda3/lib/python3.12/site-packages (from torch->timm==1.0.12) (2.21.5)\nRequirement already satisfied: nvidia-nvtx-cu12==12.4.127 in ./miniconda3/lib/python3.12/site-packages (from torch->timm==1.0.12) (12.4.127)\nRequirement already satisfied: nvidia-nvjitlink-cu12==12.4.127 in ./miniconda3/lib/python3.12/site-packages (from torch->timm==1.0.12) (12.4.127)\nRequirement already satisfied: triton==3.1.0 in ./miniconda3/lib/python3.12/site-packages (from torch->timm==1.0.12) (3.1.0)\nRequirement already satisfied: setuptools in ./miniconda3/lib/python3.12/site-packages (from torch->timm==1.0.12) (69.5.1)\nRequirement already satisfied: sympy==1.13.1 in ./miniconda3/lib/python3.12/site-packages (from torch->timm==1.0.12) (1.13.1)\nRequirement already satisfied: mpmath<1.4,>=1.1.0 in ./miniconda3/lib/python3.12/site-packages (from sympy==1.13.1->torch->timm==1.0.12) (1.3.0)\nRequirement already satisfied: numpy in ./miniconda3/lib/python3.12/site-packages (from torchvision->timm==1.0.12) (2.1.3)\nRequirement already satisfied: pillow!=8.3.*,>=5.3.0 in ./miniconda3/lib/python3.12/site-packages (from torchvision->timm==1.0.12) (11.0.0)\nRequirement already satisfied: MarkupSafe>=2.0 in ./miniconda3/lib/python3.12/site-packages (from jinja2->torch->timm==1.0.12) (3.0.2)\nWould install huggingface-hub-0.26.2 safetensors-0.4.5 timm-1.0.12\n",
+    "stderr": ""
+  },
+  "installed": false,
+  "training_started": false,
+  "environment_installation_authorized": false
+}

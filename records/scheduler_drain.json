@@ -1,0 +1,7 @@
+{
+  "run_id": "P1-cifar100-vitb16-full_ft-s314159",
+  "status": "completed",
+  "parent_stopped": true,
+  "training_restarted": false,
+  "gpu_hours": 0.4511362949189627
+}

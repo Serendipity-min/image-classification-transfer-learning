@@ -1,8 +1,20 @@
 __pycache__/
 *.pyc
-data/
-weights/
-runs/
-records/
-reports/
-offline_wheels/
+# 数据、基础权重和训练 checkpoint 留在服务器；逐轮文本证据允许入库。
+/data/
+/weights/
+/offline_wheels/
+*.pt
+*.pth
+*.safetensors
+*.whl
+*.asset
+*.uploading
+
+# 连接运行时与本机配置不属于实验交付材料。
+/ops/remote_session.py
+/ops/transport.py
+.env
+.env.*
+.ssh/
+.venv/

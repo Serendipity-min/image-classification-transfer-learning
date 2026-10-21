@@ -1,0 +1,3 @@
+{"run_id": "P1-cifar100-r50-scratch-s314159", "epoch": 1, "val_top1": 14.52, "train_seconds": 74.81003324314952, "validation_seconds": 3.1366615295410156, "fit_active_seconds": 82.12944044917822}
+{"run_id": "P1-cifar100-r50-scratch-s314159", "epoch": 2, "val_top1": 18.84, "train_seconds": 74.51513054966927, "validation_seconds": 2.7539175041019917, "fit_active_seconds": 159.98491932824254}
+{"run_id": "P1-cifar100-r50-scratch-s314159", "epoch": 3, "val_top1": 23.78, "train_seconds": 73.65530667826533, "validation_seconds": 2.6234781071543694, "fit_active_seconds": 236.85430081561208}

@@ -1,0 +1,84 @@
+{
+  "protocol_id": "TL-CLS-20261020-v1.0",
+  "assets": [
+    {
+      "key": "cifar100_archive",
+      "url": "https://cave.cs.toronto.edu/kriz/cifar-100-python.tar.gz",
+      "size_bytes": 169001437,
+      "md5": "eb9058c3a382ffc7106e4002c42a8d85",
+      "remote": "data/cifar-100-python.tar.gz",
+      "sha256": "85cd44d02ba6437773c5bbd22e183051d648de2e7d6b014e1ef29b855ba677a7",
+      "remote_verified": true,
+      "staging_deleted": true,
+      "download_method": "official_http_206_parallel_ranges_merged_before_md5_sha256_verification"
+    },
+    {
+      "key": "svhn_train",
+      "url": "http://ufldl.stanford.edu/housenumbers/train_32x32.mat",
+      "size_bytes": 182040794,
+      "md5": "e26dedcc434d2e4c54c9b2d4a06d8373",
+      "remote": "data/svhn/train_32x32.mat",
+      "sha256": "435e94d69a87fde4fd4d7f3dd208dfc32cb6ae8af2240d066de1df7508d083b8",
+      "remote_verified": true,
+      "staging_deleted": true
+    },
+    {
+      "key": "svhn_test",
+      "url": "http://ufldl.stanford.edu/housenumbers/test_32x32.mat",
+      "size_bytes": 64275384,
+      "md5": "eb5a983be6a315427106f1b164d9cef3",
+      "remote": "data/svhn/test_32x32.mat",
+      "sha256": "cdce80dfb2a2c4c6160906d0bd7c68ec5a99d7ca4831afa54f09182025b6a75b",
+      "remote_verified": true,
+      "staging_deleted": true
+    },
+    {
+      "key": "r50_config.json",
+      "url": "https://huggingface.co/timm/resnet50.a1_in1k/resolve/767268603ca0cb0bfe326fa87277f19c419566ef/config.json",
+      "size_bytes": 756,
+      "sha256": "ff00d936f02c3b5f9f80a169d651ed28f9b6dc9cb1fd0464f92da4761caaac50",
+      "remote": "weights/r50/config.json",
+      "repository": "timm/resnet50.a1_in1k",
+      "revision": "767268603ca0cb0bfe326fa87277f19c419566ef",
+      "remote_verified": true,
+      "staging_deleted": true
+    },
+    {
+      "key": "r50_model.safetensors",
+      "url": "https://huggingface.co/timm/resnet50.a1_in1k/resolve/767268603ca0cb0bfe326fa87277f19c419566ef/model.safetensors",
+      "size_bytes": 102469840,
+      "sha256": "773525d5821de224f8f30c33377b7a795d7863e08522698200d3217d3f2a41bb",
+      "remote": "weights/r50/model.safetensors",
+      "repository": "timm/resnet50.a1_in1k",
+      "revision": "767268603ca0cb0bfe326fa87277f19c419566ef",
+      "remote_verified": true,
+      "staging_deleted": true
+    },
+    {
+      "key": "vitb16_config.json",
+      "url": "https://huggingface.co/timm/vit_base_patch16_224.augreg_in21k/resolve/bb70896cd6bffdd579c3d4f7284f39d0c4ab46c3/config.json",
+      "size_bytes": 580,
+      "sha256": "f6eff643617dc67341d73aad02452852d959cde3e33c18e5674e1f584df763e5",
+      "remote": "weights/vitb16/config.json",
+      "repository": "timm/vit_base_patch16_224.augreg_in21k",
+      "revision": "bb70896cd6bffdd579c3d4f7284f39d0c4ab46c3",
+      "remote_verified": true,
+      "staging_deleted": true
+    },
+    {
+      "key": "vitb16_model.safetensors",
+      "url": "https://huggingface.co/timm/vit_base_patch16_224.augreg_in21k/resolve/bb70896cd6bffdd579c3d4f7284f39d0c4ab46c3/model.safetensors",
+      "size_bytes": 410397786,
+      "sha256": "2d31bb5597c720912f8ea5e4f1de73909a6911798d78ae5d1b9d63a955fed049",
+      "remote": "weights/vitb16/model.safetensors",
+      "repository": "timm/vit_base_patch16_224.augreg_in21k",
+      "revision": "bb70896cd6bffdd579c3d4f7284f39d0c4ab46c3",
+      "remote_verified": true,
+      "staging_deleted": true
+    }
+  ],
+  "errors": [],
+  "status": "completed",
+  "server_network_requests": 0,
+  "partial_download_policy": "Retain incomplete superseded download until explicitly cleaned; all successfully uploaded full files removed from staging."
+}

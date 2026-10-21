@@ -1,0 +1,3 @@
+{"run_id": "P1-svhn-r50-linear_probe-s314159", "epoch": 1, "val_top1": 43.95304395304395, "train_seconds": 40.280171651393175, "validation_seconds": 4.045354008674622, "fit_active_seconds": 49.437270037829876}
+{"run_id": "P1-svhn-r50-linear_probe-s314159", "epoch": 2, "val_top1": 54.81845481845482, "train_seconds": 39.159074533730745, "validation_seconds": 3.6367956697940826, "fit_active_seconds": 92.5696639791131}
+{"run_id": "P1-svhn-r50-linear_probe-s314159", "epoch": 3, "val_top1": 60.346710346710346, "train_seconds": 38.886388186365366, "validation_seconds": 3.6720369681715965, "fit_active_seconds": 135.4692324437201}

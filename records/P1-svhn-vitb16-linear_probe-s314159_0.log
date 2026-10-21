@@ -1,0 +1,3 @@
+{"run_id": "P1-svhn-vitb16-linear_probe-s314159", "epoch": 1, "val_top1": 55.92410592410592, "train_seconds": 65.14028582721949, "validation_seconds": 6.889074899256229, "fit_active_seconds": 79.14523251727223}
+{"run_id": "P1-svhn-vitb16-linear_probe-s314159", "epoch": 2, "val_top1": 60.701610701610704, "train_seconds": 64.05763629823923, "validation_seconds": 6.4120996706187725, "fit_active_seconds": 150.69959192723036}
+{"run_id": "P1-svhn-vitb16-linear_probe-s314159", "epoch": 3, "val_top1": 59.13185913185913, "train_seconds": 63.950049705803394, "validation_seconds": 6.377835687249899, "fit_active_seconds": 221.45716067031026}

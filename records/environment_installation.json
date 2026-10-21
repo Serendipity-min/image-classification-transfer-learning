@@ -1,0 +1,17 @@
+{
+  "protocol_id": "TL-CLS-20261020-v1.0",
+  "authorized_by": "explicit_user_message_2026-10-21",
+  "timestamp_utc": "2026-10-21T06:38:51.500920+00:00",
+  "environment_path": "/root/miniconda3/envs/tl_cls_v1",
+  "type": "venv_system_site_packages",
+  "versions": {
+    "torch": "2.5.1+cu124",
+    "torchvision": "0.20.1+cu124",
+    "timm": "1.0.12",
+    "huggingface_hub": "0.26.2",
+    "safetensors": "0.4.5"
+  },
+  "base_unchanged": true,
+  "network_requests": 0,
+  "status": "installed_and_imports_passed"
+}

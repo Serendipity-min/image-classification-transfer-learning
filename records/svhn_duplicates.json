@@ -1,0 +1,19 @@
+{
+  "dataset": "svhn",
+  "groups": [
+    {
+      "pixel_sha256": "b413d2d1f9b28edabb88b37a5664a3e82a2bd074f1b76cb520f8c623ba287402",
+      "samples": [
+        {
+          "sample_id": "svhn/train/25235",
+          "assigned_split": "train"
+        },
+        {
+          "sample_id": "svhn/train/25236",
+          "assigned_split": "train"
+        }
+      ]
+    }
+  ],
+  "policy": "audit_only_no_samples_removed"
+}

@@ -1,0 +1,1286 @@
+{
+  "provenance": {
+    "protocol_id": "TL-CLS-20261020-v1.0",
+    "protocol_sha256": "e06bba0f67f9a6aafe4bf92420fefd9f5d58ddd228529b367415827d820c7b29",
+    "code_commit": "74001fc68c2bfb68cd65da821c961d75a93fe32b",
+    "split_sha256": "5d656d616e134dcf5287c664abb31a33abd46ad04969afb8bde3695d2d2253e6",
+    "weight_sha256": "2d31bb5597c720912f8ea5e4f1de73909a6911798d78ae5d1b9d63a955fed049",
+    "dependency_lock_sha256": "ea79ba50f6d21fc587fe597a5fa9efa3f1cf7c339e52e2e8444b23ddd96a7a59",
+    "resolved_config_sha256": "ba9b5ccc40a4d02baa53edd8c46c502dea27c895895504a87650535d93d1f7b0",
+    "resolved_config_path": "runs/P1-cifar100-vitb16-full_ft-s314159/config.attempt_1.json"
+  },
+  "groups": [
+    {
+      "name": "cls_token",
+      "shape": [
+        1,
+        1,
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "pos_embed",
+      "shape": [
+        1,
+        197,
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "patch_embed.proj.weight",
+      "shape": [
+        768,
+        3,
+        16,
+        16
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "patch_embed.proj.bias",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.0.norm1.weight",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.0.norm1.bias",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.0.attn.qkv.weight",
+      "shape": [
+        2304,
+        768
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.0.attn.qkv.bias",
+      "shape": [
+        2304
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.0.attn.proj.weight",
+      "shape": [
+        768,
+        768
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.0.attn.proj.bias",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.0.norm2.weight",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.0.norm2.bias",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.0.mlp.fc1.weight",
+      "shape": [
+        3072,
+        768
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.0.mlp.fc1.bias",
+      "shape": [
+        3072
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.0.mlp.fc2.weight",
+      "shape": [
+        768,
+        3072
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.0.mlp.fc2.bias",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.1.norm1.weight",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.1.norm1.bias",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.1.attn.qkv.weight",
+      "shape": [
+        2304,
+        768
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.1.attn.qkv.bias",
+      "shape": [
+        2304
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.1.attn.proj.weight",
+      "shape": [
+        768,
+        768
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.1.attn.proj.bias",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.1.norm2.weight",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.1.norm2.bias",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.1.mlp.fc1.weight",
+      "shape": [
+        3072,
+        768
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.1.mlp.fc1.bias",
+      "shape": [
+        3072
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.1.mlp.fc2.weight",
+      "shape": [
+        768,
+        3072
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.1.mlp.fc2.bias",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.2.norm1.weight",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.2.norm1.bias",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.2.attn.qkv.weight",
+      "shape": [
+        2304,
+        768
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.2.attn.qkv.bias",
+      "shape": [
+        2304
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.2.attn.proj.weight",
+      "shape": [
+        768,
+        768
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.2.attn.proj.bias",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.2.norm2.weight",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.2.norm2.bias",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.2.mlp.fc1.weight",
+      "shape": [
+        3072,
+        768
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.2.mlp.fc1.bias",
+      "shape": [
+        3072
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.2.mlp.fc2.weight",
+      "shape": [
+        768,
+        3072
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.2.mlp.fc2.bias",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.3.norm1.weight",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.3.norm1.bias",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.3.attn.qkv.weight",
+      "shape": [
+        2304,
+        768
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.3.attn.qkv.bias",
+      "shape": [
+        2304
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.3.attn.proj.weight",
+      "shape": [
+        768,
+        768
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.3.attn.proj.bias",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.3.norm2.weight",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.3.norm2.bias",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.3.mlp.fc1.weight",
+      "shape": [
+        3072,
+        768
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.3.mlp.fc1.bias",
+      "shape": [
+        3072
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.3.mlp.fc2.weight",
+      "shape": [
+        768,
+        3072
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.3.mlp.fc2.bias",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.4.norm1.weight",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.4.norm1.bias",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.4.attn.qkv.weight",
+      "shape": [
+        2304,
+        768
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.4.attn.qkv.bias",
+      "shape": [
+        2304
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.4.attn.proj.weight",
+      "shape": [
+        768,
+        768
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.4.attn.proj.bias",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.4.norm2.weight",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.4.norm2.bias",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.4.mlp.fc1.weight",
+      "shape": [
+        3072,
+        768
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.4.mlp.fc1.bias",
+      "shape": [
+        3072
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.4.mlp.fc2.weight",
+      "shape": [
+        768,
+        3072
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.4.mlp.fc2.bias",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.5.norm1.weight",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.5.norm1.bias",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.5.attn.qkv.weight",
+      "shape": [
+        2304,
+        768
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.5.attn.qkv.bias",
+      "shape": [
+        2304
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.5.attn.proj.weight",
+      "shape": [
+        768,
+        768
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.5.attn.proj.bias",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.5.norm2.weight",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.5.norm2.bias",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.5.mlp.fc1.weight",
+      "shape": [
+        3072,
+        768
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.5.mlp.fc1.bias",
+      "shape": [
+        3072
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.5.mlp.fc2.weight",
+      "shape": [
+        768,
+        3072
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.5.mlp.fc2.bias",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.6.norm1.weight",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.6.norm1.bias",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.6.attn.qkv.weight",
+      "shape": [
+        2304,
+        768
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.6.attn.qkv.bias",
+      "shape": [
+        2304
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.6.attn.proj.weight",
+      "shape": [
+        768,
+        768
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.6.attn.proj.bias",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.6.norm2.weight",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.6.norm2.bias",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.6.mlp.fc1.weight",
+      "shape": [
+        3072,
+        768
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.6.mlp.fc1.bias",
+      "shape": [
+        3072
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.6.mlp.fc2.weight",
+      "shape": [
+        768,
+        3072
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.6.mlp.fc2.bias",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.7.norm1.weight",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.7.norm1.bias",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.7.attn.qkv.weight",
+      "shape": [
+        2304,
+        768
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.7.attn.qkv.bias",
+      "shape": [
+        2304
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.7.attn.proj.weight",
+      "shape": [
+        768,
+        768
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.7.attn.proj.bias",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.7.norm2.weight",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.7.norm2.bias",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.7.mlp.fc1.weight",
+      "shape": [
+        3072,
+        768
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.7.mlp.fc1.bias",
+      "shape": [
+        3072
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.7.mlp.fc2.weight",
+      "shape": [
+        768,
+        3072
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.7.mlp.fc2.bias",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.8.norm1.weight",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.8.norm1.bias",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.8.attn.qkv.weight",
+      "shape": [
+        2304,
+        768
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.8.attn.qkv.bias",
+      "shape": [
+        2304
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.8.attn.proj.weight",
+      "shape": [
+        768,
+        768
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.8.attn.proj.bias",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.8.norm2.weight",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.8.norm2.bias",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.8.mlp.fc1.weight",
+      "shape": [
+        3072,
+        768
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.8.mlp.fc1.bias",
+      "shape": [
+        3072
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.8.mlp.fc2.weight",
+      "shape": [
+        768,
+        3072
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.8.mlp.fc2.bias",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.9.norm1.weight",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.9.norm1.bias",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.9.attn.qkv.weight",
+      "shape": [
+        2304,
+        768
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.9.attn.qkv.bias",
+      "shape": [
+        2304
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.9.attn.proj.weight",
+      "shape": [
+        768,
+        768
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.9.attn.proj.bias",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.9.norm2.weight",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.9.norm2.bias",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.9.mlp.fc1.weight",
+      "shape": [
+        3072,
+        768
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.9.mlp.fc1.bias",
+      "shape": [
+        3072
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.9.mlp.fc2.weight",
+      "shape": [
+        768,
+        3072
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.9.mlp.fc2.bias",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.10.norm1.weight",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.10.norm1.bias",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.10.attn.qkv.weight",
+      "shape": [
+        2304,
+        768
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.10.attn.qkv.bias",
+      "shape": [
+        2304
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.10.attn.proj.weight",
+      "shape": [
+        768,
+        768
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.10.attn.proj.bias",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.10.norm2.weight",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.10.norm2.bias",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.10.mlp.fc1.weight",
+      "shape": [
+        3072,
+        768
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.10.mlp.fc1.bias",
+      "shape": [
+        3072
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.10.mlp.fc2.weight",
+      "shape": [
+        768,
+        3072
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.10.mlp.fc2.bias",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.11.norm1.weight",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.11.norm1.bias",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.11.attn.qkv.weight",
+      "shape": [
+        2304,
+        768
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.11.attn.qkv.bias",
+      "shape": [
+        2304
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.11.attn.proj.weight",
+      "shape": [
+        768,
+        768
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.11.attn.proj.bias",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.11.norm2.weight",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.11.norm2.bias",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.11.mlp.fc1.weight",
+      "shape": [
+        3072,
+        768
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.11.mlp.fc1.bias",
+      "shape": [
+        3072
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.11.mlp.fc2.weight",
+      "shape": [
+        768,
+        3072
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "blocks.11.mlp.fc2.bias",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "norm.weight",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "norm.bias",
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 3e-05
+    },
+    {
+      "name": "head.weight",
+      "shape": [
+        100,
+        768
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 0.00030000000000000003
+    },
+    {
+      "name": "head.bias",
+      "shape": [
+        100
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.00030000000000000003
+    }
+  ]
+}

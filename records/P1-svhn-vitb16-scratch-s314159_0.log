@@ -1,0 +1,3 @@
+{"run_id": "P1-svhn-vitb16-scratch-s314159", "epoch": 1, "val_top1": 42.01474201474201, "train_seconds": 190.67614332959056, "validation_seconds": 6.688090909272432, "fit_active_seconds": 204.83535236865282}
+{"run_id": "P1-svhn-vitb16-scratch-s314159", "epoch": 2, "val_top1": 63.60906360906361, "train_seconds": 190.88772593811154, "validation_seconds": 6.311291240155697, "fit_active_seconds": 405.27067463472486}
+{"run_id": "P1-svhn-vitb16-scratch-s314159", "epoch": 3, "val_top1": 54.99590499590499, "train_seconds": 191.3179779238999, "validation_seconds": 6.347903948277235, "fit_active_seconds": 604.3801271803677}

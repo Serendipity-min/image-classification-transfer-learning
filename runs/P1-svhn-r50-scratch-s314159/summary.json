@@ -1,0 +1,108 @@
+{
+  "run_id": "P1-svhn-r50-scratch-s314159",
+  "phase": "P1",
+  "configuration_id": "svhn-r50-scratch",
+  "status": "completed",
+  "completed_epochs": 3,
+  "planned_epochs": 3,
+  "provenance": {
+    "protocol_id": "TL-CLS-20261020-v1.0",
+    "protocol_sha256": "e06bba0f67f9a6aafe4bf92420fefd9f5d58ddd228529b367415827d820c7b29",
+    "code_commit": "94b02df2ae94097602e40e88783f8c445006fa9a",
+    "split_sha256": "bdd7db182d787e8e78d44780ce6ffd43bc9b9383a14002e872a83d5259210dd6",
+    "weight_sha256": "773525d5821de224f8f30c33377b7a795d7863e08522698200d3217d3f2a41bb",
+    "dependency_lock_sha256": "ea79ba50f6d21fc587fe597a5fa9efa3f1cf7c339e52e2e8444b23ddd96a7a59",
+    "resolved_config_sha256": "5a6bc0071c32d6584dd03143eae3d15ef28d52b8b519b27e947cbf25358e831a",
+    "resolved_config_path": "runs/P1-svhn-r50-scratch-s314159/config.attempt_1.json"
+  },
+  "hardware": {
+    "index": 1,
+    "fields": [
+      "index",
+      "uuid",
+      "name",
+      "pci.bus_id",
+      "memory.total",
+      "driver_version",
+      "power.limit",
+      "temperature.gpu",
+      "clocks.sm",
+      "clocks.mem"
+    ],
+    "values": [
+      "1",
+      "GPU-c30e4ab5-1922-01a4-caba-24210a4f7feb",
+      "NVIDIA GeForce RTX 3090",
+      "00000000:3D:00.0",
+      "24576",
+      "550.127.05",
+      "350.00",
+      "26",
+      "1695",
+      "9501"
+    ],
+    "cpu_quota_vcpu": 16,
+    "memory_quota_gib": 64
+  },
+  "test_evaluator_constructed": false,
+  "test_metrics": null,
+  "precision": {
+    "autocast": "bfloat16",
+    "parameters": "float32",
+    "loss": "float32",
+    "grad_scaler": false,
+    "tf32": false,
+    "deterministic_algorithms": true
+  },
+  "parallel_peer_run_ids": [],
+  "model_identity": {
+    "initial_classifier_sha256": "4c5aa45a71f9b61c7e9c9e3ca1c70e7e73f9aff64231a0215a9388f2c87d5a89",
+    "original_classes": null,
+    "target_classes": 10,
+    "constructor_kwargs": {
+      "num_classes": 10,
+      "drop_rate": 0.0,
+      "drop_path_rate": 0.0
+    },
+    "pretrained_loaded": false,
+    "classifier_initializer": {
+      "distribution": "torch.trunc_normal_",
+      "std": 0.02,
+      "lower_bound": -2.0,
+      "upper_bound": 2.0,
+      "bias": 0.0
+    },
+    "pretraining_dataset": null
+  },
+  "parameters": {
+    "base_params": 23508032,
+    "added_params": 0,
+    "head_params": 20490,
+    "total_params": 23528522,
+    "trainable_params": 23528522,
+    "trainable_ratio": 1.0,
+    "buffer_elements": 53173
+  },
+  "startup_seconds": 4.839297711849213,
+  "best_val_top1_percent": 87.63308763308763,
+  "selected_epoch": 3,
+  "costs": {
+    "train_seconds": 327.1737149655819,
+    "validation_seconds": 12.650207553058863,
+    "checkpoint_seconds": 2.282388601452112,
+    "fit_wall_seconds": 347.8120828233659,
+    "gpu_reserved_seconds": 347.8120828233659,
+    "recomputed_training_seconds": 0.0
+  },
+  "optimizer_updates": 1548,
+  "peak_allocated_bytes": 1953588224,
+  "peak_reserved_bytes": 2952790016,
+  "gpu_hours": 0.09661446745093498,
+  "completed_utc": "2026-10-21T08:03:11.844705+00:00",
+  "cpu_rss_bytes": 3016503296,
+  "best_val_checkpoint_sha256": "d49fedbe1a3a45f5846ae2b7b517646d6dd50a90f3de8bd4932a675b7aa932db",
+  "best_val_checkpoint_bytes": 94435890,
+  "last_checkpoint_sha256": "41b50470587c113d0cd3cedc6a0d20bed1c1b18ff2af28a85a435a54c75a7dc3",
+  "last_checkpoint_bytes": 282814440,
+  "terminal_overhead_seconds": 0.8103015162050724
+}

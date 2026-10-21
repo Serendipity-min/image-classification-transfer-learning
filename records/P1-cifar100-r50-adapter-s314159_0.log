@@ -1,0 +1,3 @@
+{"run_id": "P1-cifar100-r50-adapter-s314159", "epoch": 1, "val_top1": 34.52, "train_seconds": 77.40270438045263, "validation_seconds": 3.998569890856743, "fit_active_seconds": 85.93628473207355}
+{"run_id": "P1-cifar100-r50-adapter-s314159", "epoch": 2, "val_top1": 66.7, "train_seconds": 76.85376181453466, "validation_seconds": 3.5068748220801353, "fit_active_seconds": 166.85729206725955}
+{"run_id": "P1-cifar100-r50-adapter-s314159", "epoch": 3, "val_top1": 76.0, "train_seconds": 76.68918295577168, "validation_seconds": 3.463752184063196, "fit_active_seconds": 247.56133222952485}

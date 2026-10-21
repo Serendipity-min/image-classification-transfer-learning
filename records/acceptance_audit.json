@@ -1,0 +1,35 @@
+{
+  "status": "passed",
+  "verified_evidence_files": 210,
+  "P0_configurations_passed": 16,
+  "P1_runs_completed": 16,
+  "P1_complete_epochs": 48,
+  "processed_training_samples": 2662344,
+  "optimizer_updates": 20832,
+  "paired_classifier_hashes": true,
+  "paired_epoch_sampler_hashes": true,
+  "method_gpu_counts": {
+    "adapter": {
+      "0": 2,
+      "1": 2
+    },
+    "full_ft": {
+      "1": 2,
+      "0": 2
+    },
+    "linear_probe": {
+      "0": 2,
+      "1": 2
+    },
+    "scratch": {
+      "1": 2,
+      "0": 2
+    }
+  },
+  "checkpoint_files_verified_on_server": 40,
+  "test_evaluations_executed": 0,
+  "actual_gpu_hours": 1.523377770313786,
+  "cap_gpu_hours": 4,
+  "concurrency_above_10_percent": [],
+  "scope": "P0/P1 engineering acceptance only; no formal accuracy ranking or long-run stability claim"
+}

@@ -1,0 +1,10 @@
+{
+  "epoch": 3,
+  "micro_step": 2061,
+  "optimizer_step": 1548,
+  "epoch_samples": 65931,
+  "epoch_train_seconds": 63.94751600921154,
+  "latest_loss": 1.025738542730158,
+  "fit_active_seconds": 214.6644922569394,
+  "cpu_rss_bytes": 2974334976
+}

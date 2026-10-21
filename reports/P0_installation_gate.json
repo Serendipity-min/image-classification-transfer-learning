@@ -1,0 +1,65 @@
+{
+  "protocol_id": "TL-CLS-20261020-v1.0",
+  "timestamp_utc": "2026-10-21T06:36:58.352422+00:00",
+  "project_root": "/root/user_data/tl_cls_v1",
+  "P0": "in_progress_waiting_for_explicit_environment_installation_authorization",
+  "P1": {
+    "status": "not_started",
+    "completed_runs": 0,
+    "planned_runs": 16,
+    "epochs_per_run": 3,
+    "initial_gpu_hour_cap": 4
+  },
+  "P2_P3": "not_authorized_until_measured_budget_review",
+  "verified": {
+    "source_execution_package_checksums": "6/6_matched",
+    "gpu": "2 x RTX 3090, 24576 MiB each",
+    "cpu_quota_vcpu": 16,
+    "memory_quota_gib": 64,
+    "python": "3.12.3",
+    "torch": "2.5.1+cu124",
+    "torchvision": "0.20.1+cu124",
+    "bf16_functional_probe": "passed_both_devices",
+    "torchvision_nms_functional_probe": "passed",
+    "offline_dependency_resolver_dry_run": "passed",
+    "bootstrap_files_uploaded_and_sha256_verified": 10,
+    "local_bootstrap_staging_files": "deleted_after_remote_verification"
+  },
+  "requested_authorization": {
+    "reason": "User explicitly required approval before environment installation; overrides contract routine-dependency permission.",
+    "environment_path": "/root/miniconda3/envs/tl_cls_v1",
+    "type": "python_venv_with_system_site_packages",
+    "reuse_base_torch_torchvision_cuda": true,
+    "new_packages": [
+      "timm==1.0.12",
+      "huggingface-hub==0.26.2",
+      "safetensors==0.4.5"
+    ],
+    "installation_source": "/root/user_data/tl_cls_v1/offline_wheels",
+    "pip_network_access": false,
+    "base_environment_modifications": false,
+    "wheel_total_bytes": 3234072
+  },
+  "remaining_P0": [
+    "Create project environment after approval; install and validate exact wheels.",
+    "Download official datasets and pinned model files via E:/Server_file; verify remote files before cleanup.",
+    "Implement training, isolated test entrypoint, integrity manifests, model strategies and required acceptance checks.",
+    "Freeze code commit, dependencies, split hashes and exact weight provenance before P1."
+  ],
+  "not_yet_verified": {
+    "tenant_storage_quota_bytes": null,
+    "code_commit": null,
+    "dataset_hashes": null,
+    "weight_local_hashes": null,
+    "model_freeze_resume_acceptance": null,
+    "long_training_gpu_hours": null
+  },
+  "training_results": null,
+  "evidence": [
+    "records/server_preflight.json",
+    "records/runtime_probe.json",
+    "records/installed_versions.txt",
+    "records/offline_install_plan.json",
+    "records/bootstrap_transfer.json"
+  ]
+}

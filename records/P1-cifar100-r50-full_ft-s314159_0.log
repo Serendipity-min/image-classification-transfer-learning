@@ -1,0 +1,3 @@
+{"run_id": "P1-cifar100-r50-full_ft-s314159", "epoch": 1, "val_top1": 6.84, "train_seconds": 75.35761986300349, "validation_seconds": 2.914376065135002, "fit_active_seconds": 82.62356937304139}
+{"run_id": "P1-cifar100-r50-full_ft-s314159", "epoch": 2, "val_top1": 31.32, "train_seconds": 74.63870323821902, "validation_seconds": 2.5896037109196186, "fit_active_seconds": 160.6560096591711}
+{"run_id": "P1-cifar100-r50-full_ft-s314159", "epoch": 3, "val_top1": 51.2, "train_seconds": 74.58732271194458, "validation_seconds": 2.5793919526040554, "fit_active_seconds": 238.40420020371675}

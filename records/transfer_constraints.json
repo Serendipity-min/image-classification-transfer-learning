@@ -1,0 +1,10 @@
+{
+  "timestamp_utc": "2026-10-21T07:42:55.325243+00:00",
+  "user_clarification": "10GB 门槛针对待上传文件量，checkpoint 可以保留服务器。",
+  "checkpoint_retention_on_server_authorized": true,
+  "server_total_storage_limit_gb": null,
+  "planning_cap_gib_per_contract": 100,
+  "current_data_weight_upload_bytes": 928186577,
+  "largest_current_uploaded_file_bytes": 410397786,
+  "all_current_files_also_below_original_1GB_gate": true
+}

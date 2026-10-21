@@ -1,0 +1,3 @@
+{"run_id": "P1-svhn-r50-full_ft-s314159", "epoch": 1, "val_top1": 20.91182091182091, "train_seconds": 110.09473215788603, "validation_seconds": 4.300844922661781, "fit_active_seconds": 119.80782720819116}
+{"run_id": "P1-svhn-r50-full_ft-s314159", "epoch": 2, "val_top1": 28.00982800982801, "train_seconds": 108.4838250130415, "validation_seconds": 3.7243687622249126, "fit_active_seconds": 232.5881657972932}
+{"run_id": "P1-svhn-r50-full_ft-s314159", "epoch": 3, "val_top1": 54.24515424515425, "train_seconds": 108.07595800980926, "validation_seconds": 3.6737504564225674, "fit_active_seconds": 344.94338330999017}

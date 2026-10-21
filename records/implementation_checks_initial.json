@@ -1,0 +1,808 @@
+{
+  "status": "passed",
+  "provenance": {
+    "protocol_id": "TL-CLS-20261020-v1.0",
+    "protocol_sha256": "e06bba0f67f9a6aafe4bf92420fefd9f5d58ddd228529b367415827d820c7b29",
+    "code_commit": "74001fc68c2bfb68cd65da821c961d75a93fe32b",
+    "split_sha256": null,
+    "weight_sha256": null,
+    "dependency_lock_sha256": "ea79ba50f6d21fc587fe597a5fa9efa3f1cf7c339e52e2e8444b23ddd96a7a59"
+  },
+  "checks": [
+    {
+      "run_id": "P1-cifar100-r50-adapter-s314159",
+      "status": "passed",
+      "counts": {
+        "base_params": 23508032,
+        "added_params": 10097536,
+        "head_params": 204900,
+        "total_params": 33810468,
+        "trainable_params": 10302436,
+        "trainable_ratio": 0.3047114284250665,
+        "buffer_elements": 90965
+      },
+      "model_identity": {
+        "initial_classifier_sha256": "2942eea61a7db2005fbecf6242c035ae6db6db0c1792f43e38973a9d702bc6a4",
+        "original_classes": 1000,
+        "target_classes": 100,
+        "constructor_kwargs": {
+          "num_classes": 100,
+          "drop_rate": 0.0,
+          "drop_path_rate": 0.0
+        },
+        "pretrained_loaded": true,
+        "classifier_initializer": {
+          "distribution": "torch.trunc_normal_",
+          "std": 0.02,
+          "lower_bound": -2.0,
+          "upper_bound": 2.0,
+          "bias": 0.0
+        },
+        "pretraining_dataset": "ImageNet-1k"
+      },
+      "original_bn_modules": 53,
+      "original_bn_mode": "eval",
+      "adapter_bn_count": 32,
+      "frozen_tensors_checked": 318,
+      "optimizer_parameter_id_whitelist_exact": true,
+      "initial_identity_max_abs_error": 0.0,
+      "adapter_gradient_updates": [
+        {
+          "update": 1,
+          "first_down_gradient_finite": true,
+          "first_down_gradient_l2": 0.0
+        },
+        {
+          "update": 2,
+          "first_down_gradient_finite": true,
+          "first_down_gradient_l2": 2.633981353028503e-07
+        },
+        {
+          "update": 3,
+          "first_down_gradient_finite": true,
+          "first_down_gradient_l2": 4.4000864818372065e-07
+        }
+      ],
+      "updates": 3,
+      "test_access": false
+    },
+    {
+      "run_id": "P1-cifar100-r50-full_ft-s314159",
+      "status": "passed",
+      "counts": {
+        "base_params": 23508032,
+        "added_params": 0,
+        "head_params": 204900,
+        "total_params": 23712932,
+        "trainable_params": 23712932,
+        "trainable_ratio": 1.0,
+        "buffer_elements": 53173
+      },
+      "model_identity": {
+        "initial_classifier_sha256": "2942eea61a7db2005fbecf6242c035ae6db6db0c1792f43e38973a9d702bc6a4",
+        "original_classes": 1000,
+        "target_classes": 100,
+        "constructor_kwargs": {
+          "num_classes": 100,
+          "drop_rate": 0.0,
+          "drop_path_rate": 0.0
+        },
+        "pretrained_loaded": true,
+        "classifier_initializer": {
+          "distribution": "torch.trunc_normal_",
+          "std": 0.02,
+          "lower_bound": -2.0,
+          "upper_bound": 2.0,
+          "bias": 0.0
+        },
+        "pretraining_dataset": "ImageNet-1k"
+      },
+      "original_bn_modules": 53,
+      "original_bn_mode": "train",
+      "adapter_bn_count": 0,
+      "frozen_tensors_checked": 0,
+      "optimizer_parameter_id_whitelist_exact": true,
+      "initial_identity_max_abs_error": null,
+      "adapter_gradient_updates": [],
+      "updates": 3,
+      "test_access": false
+    },
+    {
+      "run_id": "P1-cifar100-r50-linear_probe-s314159",
+      "status": "passed",
+      "counts": {
+        "base_params": 23508032,
+        "added_params": 0,
+        "head_params": 204900,
+        "total_params": 23712932,
+        "trainable_params": 204900,
+        "trainable_ratio": 0.008640854703248,
+        "buffer_elements": 53173
+      },
+      "model_identity": {
+        "initial_classifier_sha256": "2942eea61a7db2005fbecf6242c035ae6db6db0c1792f43e38973a9d702bc6a4",
+        "original_classes": 1000,
+        "target_classes": 100,
+        "constructor_kwargs": {
+          "num_classes": 100,
+          "drop_rate": 0.0,
+          "drop_path_rate": 0.0
+        },
+        "pretrained_loaded": true,
+        "classifier_initializer": {
+          "distribution": "torch.trunc_normal_",
+          "std": 0.02,
+          "lower_bound": -2.0,
+          "upper_bound": 2.0,
+          "bias": 0.0
+        },
+        "pretraining_dataset": "ImageNet-1k"
+      },
+      "original_bn_modules": 53,
+      "original_bn_mode": "eval",
+      "adapter_bn_count": 0,
+      "frozen_tensors_checked": 318,
+      "optimizer_parameter_id_whitelist_exact": true,
+      "initial_identity_max_abs_error": null,
+      "adapter_gradient_updates": [],
+      "updates": 3,
+      "test_access": false
+    },
+    {
+      "run_id": "P1-cifar100-r50-scratch-s314159",
+      "status": "passed",
+      "counts": {
+        "base_params": 23508032,
+        "added_params": 0,
+        "head_params": 204900,
+        "total_params": 23712932,
+        "trainable_params": 23712932,
+        "trainable_ratio": 1.0,
+        "buffer_elements": 53173
+      },
+      "model_identity": {
+        "initial_classifier_sha256": "2942eea61a7db2005fbecf6242c035ae6db6db0c1792f43e38973a9d702bc6a4",
+        "original_classes": null,
+        "target_classes": 100,
+        "constructor_kwargs": {
+          "num_classes": 100,
+          "drop_rate": 0.0,
+          "drop_path_rate": 0.0
+        },
+        "pretrained_loaded": false,
+        "classifier_initializer": {
+          "distribution": "torch.trunc_normal_",
+          "std": 0.02,
+          "lower_bound": -2.0,
+          "upper_bound": 2.0,
+          "bias": 0.0
+        },
+        "pretraining_dataset": null
+      },
+      "original_bn_modules": 53,
+      "original_bn_mode": "train",
+      "adapter_bn_count": 0,
+      "frozen_tensors_checked": 0,
+      "optimizer_parameter_id_whitelist_exact": true,
+      "initial_identity_max_abs_error": null,
+      "adapter_gradient_updates": [],
+      "updates": 3,
+      "test_access": false
+    },
+    {
+      "run_id": "P1-cifar100-vitb16-adapter-s314159",
+      "status": "passed",
+      "counts": {
+        "base_params": 85798656,
+        "added_params": 3550464,
+        "head_params": 76900,
+        "total_params": 89426020,
+        "trainable_params": 3627364,
+        "trainable_ratio": 0.04056273554386072,
+        "buffer_elements": 0
+      },
+      "model_identity": {
+        "initial_classifier_sha256": "7b83d04b78d3cc310ace2ecd979483717373c827fa9fbf5798476534bde2fe30",
+        "original_classes": 21843,
+        "target_classes": 100,
+        "constructor_kwargs": {
+          "num_classes": 100,
+          "drop_rate": 0.0,
+          "drop_path_rate": 0.0,
+          "attn_drop_rate": 0.0,
+          "proj_drop_rate": 0.0,
+          "global_pool": "token"
+        },
+        "pretrained_loaded": true,
+        "classifier_initializer": {
+          "distribution": "torch.trunc_normal_",
+          "std": 0.02,
+          "lower_bound": -2.0,
+          "upper_bound": 2.0,
+          "bias": 0.0
+        },
+        "pretraining_dataset": "ImageNet-21k"
+      },
+      "original_bn_modules": 0,
+      "original_bn_mode": "eval",
+      "adapter_bn_count": 0,
+      "frozen_tensors_checked": 150,
+      "optimizer_parameter_id_whitelist_exact": true,
+      "initial_identity_max_abs_error": 0.0,
+      "adapter_gradient_updates": [
+        {
+          "update": 1,
+          "first_down_gradient_finite": true,
+          "first_down_gradient_l2": 0.0
+        },
+        {
+          "update": 2,
+          "first_down_gradient_finite": true,
+          "first_down_gradient_l2": 0.00030318181961774826
+        },
+        {
+          "update": 3,
+          "first_down_gradient_finite": true,
+          "first_down_gradient_l2": 0.00034849310759454966
+        }
+      ],
+      "updates": 3,
+      "test_access": false
+    },
+    {
+      "run_id": "P1-cifar100-vitb16-full_ft-s314159",
+      "status": "passed",
+      "counts": {
+        "base_params": 85798656,
+        "added_params": 0,
+        "head_params": 76900,
+        "total_params": 85875556,
+        "trainable_params": 85875556,
+        "trainable_ratio": 1.0,
+        "buffer_elements": 0
+      },
+      "model_identity": {
+        "initial_classifier_sha256": "7b83d04b78d3cc310ace2ecd979483717373c827fa9fbf5798476534bde2fe30",
+        "original_classes": 21843,
+        "target_classes": 100,
+        "constructor_kwargs": {
+          "num_classes": 100,
+          "drop_rate": 0.0,
+          "drop_path_rate": 0.0,
+          "attn_drop_rate": 0.0,
+          "proj_drop_rate": 0.0,
+          "global_pool": "token"
+        },
+        "pretrained_loaded": true,
+        "classifier_initializer": {
+          "distribution": "torch.trunc_normal_",
+          "std": 0.02,
+          "lower_bound": -2.0,
+          "upper_bound": 2.0,
+          "bias": 0.0
+        },
+        "pretraining_dataset": "ImageNet-21k"
+      },
+      "original_bn_modules": 0,
+      "original_bn_mode": "train",
+      "adapter_bn_count": 0,
+      "frozen_tensors_checked": 0,
+      "optimizer_parameter_id_whitelist_exact": true,
+      "initial_identity_max_abs_error": null,
+      "adapter_gradient_updates": [],
+      "updates": 3,
+      "test_access": false
+    },
+    {
+      "run_id": "P1-cifar100-vitb16-linear_probe-s314159",
+      "status": "passed",
+      "counts": {
+        "base_params": 85798656,
+        "added_params": 0,
+        "head_params": 76900,
+        "total_params": 85875556,
+        "trainable_params": 76900,
+        "trainable_ratio": 0.0008954818295441371,
+        "buffer_elements": 0
+      },
+      "model_identity": {
+        "initial_classifier_sha256": "7b83d04b78d3cc310ace2ecd979483717373c827fa9fbf5798476534bde2fe30",
+        "original_classes": 21843,
+        "target_classes": 100,
+        "constructor_kwargs": {
+          "num_classes": 100,
+          "drop_rate": 0.0,
+          "drop_path_rate": 0.0,
+          "attn_drop_rate": 0.0,
+          "proj_drop_rate": 0.0,
+          "global_pool": "token"
+        },
+        "pretrained_loaded": true,
+        "classifier_initializer": {
+          "distribution": "torch.trunc_normal_",
+          "std": 0.02,
+          "lower_bound": -2.0,
+          "upper_bound": 2.0,
+          "bias": 0.0
+        },
+        "pretraining_dataset": "ImageNet-21k"
+      },
+      "original_bn_modules": 0,
+      "original_bn_mode": "eval",
+      "adapter_bn_count": 0,
+      "frozen_tensors_checked": 150,
+      "optimizer_parameter_id_whitelist_exact": true,
+      "initial_identity_max_abs_error": null,
+      "adapter_gradient_updates": [],
+      "updates": 3,
+      "test_access": false
+    },
+    {
+      "run_id": "P1-cifar100-vitb16-scratch-s314159",
+      "status": "passed",
+      "counts": {
+        "base_params": 85798656,
+        "added_params": 0,
+        "head_params": 76900,
+        "total_params": 85875556,
+        "trainable_params": 85875556,
+        "trainable_ratio": 1.0,
+        "buffer_elements": 0
+      },
+      "model_identity": {
+        "initial_classifier_sha256": "7b83d04b78d3cc310ace2ecd979483717373c827fa9fbf5798476534bde2fe30",
+        "original_classes": null,
+        "target_classes": 100,
+        "constructor_kwargs": {
+          "num_classes": 100,
+          "drop_rate": 0.0,
+          "drop_path_rate": 0.0,
+          "attn_drop_rate": 0.0,
+          "proj_drop_rate": 0.0,
+          "global_pool": "token"
+        },
+        "pretrained_loaded": false,
+        "classifier_initializer": {
+          "distribution": "torch.trunc_normal_",
+          "std": 0.02,
+          "lower_bound": -2.0,
+          "upper_bound": 2.0,
+          "bias": 0.0
+        },
+        "pretraining_dataset": null
+      },
+      "original_bn_modules": 0,
+      "original_bn_mode": "train",
+      "adapter_bn_count": 0,
+      "frozen_tensors_checked": 0,
+      "optimizer_parameter_id_whitelist_exact": true,
+      "initial_identity_max_abs_error": null,
+      "adapter_gradient_updates": [],
+      "updates": 3,
+      "test_access": false
+    },
+    {
+      "run_id": "P1-svhn-r50-adapter-s314159",
+      "status": "passed",
+      "counts": {
+        "base_params": 23508032,
+        "added_params": 10097536,
+        "head_params": 20490,
+        "total_params": 33626058,
+        "trainable_params": 10118026,
+        "trainable_ratio": 0.3008983687591332,
+        "buffer_elements": 90965
+      },
+      "model_identity": {
+        "initial_classifier_sha256": "4c5aa45a71f9b61c7e9c9e3ca1c70e7e73f9aff64231a0215a9388f2c87d5a89",
+        "original_classes": 1000,
+        "target_classes": 10,
+        "constructor_kwargs": {
+          "num_classes": 10,
+          "drop_rate": 0.0,
+          "drop_path_rate": 0.0
+        },
+        "pretrained_loaded": true,
+        "classifier_initializer": {
+          "distribution": "torch.trunc_normal_",
+          "std": 0.02,
+          "lower_bound": -2.0,
+          "upper_bound": 2.0,
+          "bias": 0.0
+        },
+        "pretraining_dataset": "ImageNet-1k"
+      },
+      "original_bn_modules": 53,
+      "original_bn_mode": "eval",
+      "adapter_bn_count": 32,
+      "frozen_tensors_checked": 318,
+      "optimizer_parameter_id_whitelist_exact": true,
+      "initial_identity_max_abs_error": 0.0,
+      "adapter_gradient_updates": [
+        {
+          "update": 1,
+          "first_down_gradient_finite": true,
+          "first_down_gradient_l2": 0.0
+        },
+        {
+          "update": 2,
+          "first_down_gradient_finite": true,
+          "first_down_gradient_l2": 3.6173017292639997e-07
+        },
+        {
+          "update": 3,
+          "first_down_gradient_finite": true,
+          "first_down_gradient_l2": 6.512848926831794e-07
+        }
+      ],
+      "updates": 3,
+      "test_access": false
+    },
+    {
+      "run_id": "P1-svhn-r50-full_ft-s314159",
+      "status": "passed",
+      "counts": {
+        "base_params": 23508032,
+        "added_params": 0,
+        "head_params": 20490,
+        "total_params": 23528522,
+        "trainable_params": 23528522,
+        "trainable_ratio": 1.0,
+        "buffer_elements": 53173
+      },
+      "model_identity": {
+        "initial_classifier_sha256": "4c5aa45a71f9b61c7e9c9e3ca1c70e7e73f9aff64231a0215a9388f2c87d5a89",
+        "original_classes": 1000,
+        "target_classes": 10,
+        "constructor_kwargs": {
+          "num_classes": 10,
+          "drop_rate": 0.0,
+          "drop_path_rate": 0.0
+        },
+        "pretrained_loaded": true,
+        "classifier_initializer": {
+          "distribution": "torch.trunc_normal_",
+          "std": 0.02,
+          "lower_bound": -2.0,
+          "upper_bound": 2.0,
+          "bias": 0.0
+        },
+        "pretraining_dataset": "ImageNet-1k"
+      },
+      "original_bn_modules": 53,
+      "original_bn_mode": "train",
+      "adapter_bn_count": 0,
+      "frozen_tensors_checked": 0,
+      "optimizer_parameter_id_whitelist_exact": true,
+      "initial_identity_max_abs_error": null,
+      "adapter_gradient_updates": [],
+      "updates": 3,
+      "test_access": false
+    },
+    {
+      "run_id": "P1-svhn-r50-linear_probe-s314159",
+      "status": "passed",
+      "counts": {
+        "base_params": 23508032,
+        "added_params": 0,
+        "head_params": 20490,
+        "total_params": 23528522,
+        "trainable_params": 20490,
+        "trainable_ratio": 0.0008708579314926794,
+        "buffer_elements": 53173
+      },
+      "model_identity": {
+        "initial_classifier_sha256": "4c5aa45a71f9b61c7e9c9e3ca1c70e7e73f9aff64231a0215a9388f2c87d5a89",
+        "original_classes": 1000,
+        "target_classes": 10,
+        "constructor_kwargs": {
+          "num_classes": 10,
+          "drop_rate": 0.0,
+          "drop_path_rate": 0.0
+        },
+        "pretrained_loaded": true,
+        "classifier_initializer": {
+          "distribution": "torch.trunc_normal_",
+          "std": 0.02,
+          "lower_bound": -2.0,
+          "upper_bound": 2.0,
+          "bias": 0.0
+        },
+        "pretraining_dataset": "ImageNet-1k"
+      },
+      "original_bn_modules": 53,
+      "original_bn_mode": "eval",
+      "adapter_bn_count": 0,
+      "frozen_tensors_checked": 318,
+      "optimizer_parameter_id_whitelist_exact": true,
+      "initial_identity_max_abs_error": null,
+      "adapter_gradient_updates": [],
+      "updates": 3,
+      "test_access": false
+    },
+    {
+      "run_id": "P1-svhn-r50-scratch-s314159",
+      "status": "passed",
+      "counts": {
+        "base_params": 23508032,
+        "added_params": 0,
+        "head_params": 20490,
+        "total_params": 23528522,
+        "trainable_params": 23528522,
+        "trainable_ratio": 1.0,
+        "buffer_elements": 53173
+      },
+      "model_identity": {
+        "initial_classifier_sha256": "4c5aa45a71f9b61c7e9c9e3ca1c70e7e73f9aff64231a0215a9388f2c87d5a89",
+        "original_classes": null,
+        "target_classes": 10,
+        "constructor_kwargs": {
+          "num_classes": 10,
+          "drop_rate": 0.0,
+          "drop_path_rate": 0.0
+        },
+        "pretrained_loaded": false,
+        "classifier_initializer": {
+          "distribution": "torch.trunc_normal_",
+          "std": 0.02,
+          "lower_bound": -2.0,
+          "upper_bound": 2.0,
+          "bias": 0.0
+        },
+        "pretraining_dataset": null
+      },
+      "original_bn_modules": 53,
+      "original_bn_mode": "train",
+      "adapter_bn_count": 0,
+      "frozen_tensors_checked": 0,
+      "optimizer_parameter_id_whitelist_exact": true,
+      "initial_identity_max_abs_error": null,
+      "adapter_gradient_updates": [],
+      "updates": 3,
+      "test_access": false
+    },
+    {
+      "run_id": "P1-svhn-vitb16-adapter-s314159",
+      "status": "passed",
+      "counts": {
+        "base_params": 85798656,
+        "added_params": 3550464,
+        "head_params": 7690,
+        "total_params": 89356810,
+        "trainable_params": 3558154,
+        "trainable_ratio": 0.03981961755349145,
+        "buffer_elements": 0
+      },
+      "model_identity": {
+        "initial_classifier_sha256": "f218a097b00492335d7277e39e223032ce857ed07726f9748bca2b91d763c8d5",
+        "original_classes": 21843,
+        "target_classes": 10,
+        "constructor_kwargs": {
+          "num_classes": 10,
+          "drop_rate": 0.0,
+          "drop_path_rate": 0.0,
+          "attn_drop_rate": 0.0,
+          "proj_drop_rate": 0.0,
+          "global_pool": "token"
+        },
+        "pretrained_loaded": true,
+        "classifier_initializer": {
+          "distribution": "torch.trunc_normal_",
+          "std": 0.02,
+          "lower_bound": -2.0,
+          "upper_bound": 2.0,
+          "bias": 0.0
+        },
+        "pretraining_dataset": "ImageNet-21k"
+      },
+      "original_bn_modules": 0,
+      "original_bn_mode": "eval",
+      "adapter_bn_count": 0,
+      "frozen_tensors_checked": 150,
+      "optimizer_parameter_id_whitelist_exact": true,
+      "initial_identity_max_abs_error": 0.0,
+      "adapter_gradient_updates": [
+        {
+          "update": 1,
+          "first_down_gradient_finite": true,
+          "first_down_gradient_l2": 0.0
+        },
+        {
+          "update": 2,
+          "first_down_gradient_finite": true,
+          "first_down_gradient_l2": 5.539709673030302e-05
+        },
+        {
+          "update": 3,
+          "first_down_gradient_finite": true,
+          "first_down_gradient_l2": 0.00011999361595371738
+        }
+      ],
+      "updates": 3,
+      "test_access": false
+    },
+    {
+      "run_id": "P1-svhn-vitb16-full_ft-s314159",
+      "status": "passed",
+      "counts": {
+        "base_params": 85798656,
+        "added_params": 0,
+        "head_params": 7690,
+        "total_params": 85806346,
+        "trainable_params": 85806346,
+        "trainable_ratio": 1.0,
+        "buffer_elements": 0
+      },
+      "model_identity": {
+        "initial_classifier_sha256": "f218a097b00492335d7277e39e223032ce857ed07726f9748bca2b91d763c8d5",
+        "original_classes": 21843,
+        "target_classes": 10,
+        "constructor_kwargs": {
+          "num_classes": 10,
+          "drop_rate": 0.0,
+          "drop_path_rate": 0.0,
+          "attn_drop_rate": 0.0,
+          "proj_drop_rate": 0.0,
+          "global_pool": "token"
+        },
+        "pretrained_loaded": true,
+        "classifier_initializer": {
+          "distribution": "torch.trunc_normal_",
+          "std": 0.02,
+          "lower_bound": -2.0,
+          "upper_bound": 2.0,
+          "bias": 0.0
+        },
+        "pretraining_dataset": "ImageNet-21k"
+      },
+      "original_bn_modules": 0,
+      "original_bn_mode": "train",
+      "adapter_bn_count": 0,
+      "frozen_tensors_checked": 0,
+      "optimizer_parameter_id_whitelist_exact": true,
+      "initial_identity_max_abs_error": null,
+      "adapter_gradient_updates": [],
+      "updates": 3,
+      "test_access": false
+    },
+    {
+      "run_id": "P1-svhn-vitb16-linear_probe-s314159",
+      "status": "passed",
+      "counts": {
+        "base_params": 85798656,
+        "added_params": 0,
+        "head_params": 7690,
+        "total_params": 85806346,
+        "trainable_params": 7690,
+        "trainable_ratio": 8.962041105910745e-05,
+        "buffer_elements": 0
+      },
+      "model_identity": {
+        "initial_classifier_sha256": "f218a097b00492335d7277e39e223032ce857ed07726f9748bca2b91d763c8d5",
+        "original_classes": 21843,
+        "target_classes": 10,
+        "constructor_kwargs": {
+          "num_classes": 10,
+          "drop_rate": 0.0,
+          "drop_path_rate": 0.0,
+          "attn_drop_rate": 0.0,
+          "proj_drop_rate": 0.0,
+          "global_pool": "token"
+        },
+        "pretrained_loaded": true,
+        "classifier_initializer": {
+          "distribution": "torch.trunc_normal_",
+          "std": 0.02,
+          "lower_bound": -2.0,
+          "upper_bound": 2.0,
+          "bias": 0.0
+        },
+        "pretraining_dataset": "ImageNet-21k"
+      },
+      "original_bn_modules": 0,
+      "original_bn_mode": "eval",
+      "adapter_bn_count": 0,
+      "frozen_tensors_checked": 150,
+      "optimizer_parameter_id_whitelist_exact": true,
+      "initial_identity_max_abs_error": null,
+      "adapter_gradient_updates": [],
+      "updates": 3,
+      "test_access": false
+    },
+    {
+      "run_id": "P1-svhn-vitb16-scratch-s314159",
+      "status": "passed",
+      "counts": {
+        "base_params": 85798656,
+        "added_params": 0,
+        "head_params": 7690,
+        "total_params": 85806346,
+        "trainable_params": 85806346,
+        "trainable_ratio": 1.0,
+        "buffer_elements": 0
+      },
+      "model_identity": {
+        "initial_classifier_sha256": "f218a097b00492335d7277e39e223032ce857ed07726f9748bca2b91d763c8d5",
+        "original_classes": null,
+        "target_classes": 10,
+        "constructor_kwargs": {
+          "num_classes": 10,
+          "drop_rate": 0.0,
+          "drop_path_rate": 0.0,
+          "attn_drop_rate": 0.0,
+          "proj_drop_rate": 0.0,
+          "global_pool": "token"
+        },
+        "pretrained_loaded": false,
+        "classifier_initializer": {
+          "distribution": "torch.trunc_normal_",
+          "std": 0.02,
+          "lower_bound": -2.0,
+          "upper_bound": 2.0,
+          "bias": 0.0
+        },
+        "pretraining_dataset": null
+      },
+      "original_bn_modules": 0,
+      "original_bn_mode": "train",
+      "adapter_bn_count": 0,
+      "frozen_tensors_checked": 0,
+      "optimizer_parameter_id_whitelist_exact": true,
+      "initial_identity_max_abs_error": null,
+      "adapter_gradient_updates": [],
+      "updates": 3,
+      "test_access": false
+    }
+  ],
+  "failures": [],
+  "deterministic_algorithms": true,
+  "precision": "bf16_autocast_fp32_loss_parameters",
+  "tail_accumulation": {
+    "partition_sizes": [
+      3,
+      3,
+      1
+    ],
+    "max_parameter_update_error": 0.0,
+    "compares_production_effective_update_to_full_batch_reference": true,
+    "passed": true
+  },
+  "data_rng": {
+    "cifar100": {
+      "stateless_augmentation": true,
+      "persistent_workers_match_main_process": true,
+      "sampler_epoch_reconstruction": true,
+      "epoch2_order_sha256": "5649c0887500c59b283c2f3a1ca428882c57c7d03a6a2cb27bb96d1fe47b7559",
+      "training_horizontal_flip_probability": 0.5
+    },
+    "svhn": {
+      "stateless_augmentation": true,
+      "persistent_workers_match_main_process": true,
+      "sampler_epoch_reconstruction": true,
+      "epoch2_order_sha256": "0c0875e8a30072b366681d14ebeedab7e4d4e70275c171f18e0b185b3dd124e3",
+      "training_horizontal_flip_probability": 0.0
+    }
+  },
+  "gpu_reserved_seconds": 39.11102732270956,
+  "resume": {
+    "r50": {
+      "eval_logit_max_abs_error": 0.0,
+      "continued_model_state_bitwise_equal": true,
+      "continued_optimizer_state_bitwise_equal": true,
+      "checkpoint_bytes": 216085922,
+      "temporary_acceptance_checkpoint_removed": true
+    },
+    "vitb16": {
+      "eval_logit_max_abs_error": 0.0,
+      "continued_model_state_bitwise_equal": true,
+      "continued_optimizer_state_bitwise_equal": true,
+      "checkpoint_bytes": 386027378,
+      "temporary_acceptance_checkpoint_removed": true
+    }
+  },
+  "completed_configurations": 16,
+  "head_initialization_paired": true,
+  "gpu_hours": 0.010864174490173658,
+  "peak_allocated_bytes": 1790026752,
+  "peak_reserved_bytes": 2030043136
+}

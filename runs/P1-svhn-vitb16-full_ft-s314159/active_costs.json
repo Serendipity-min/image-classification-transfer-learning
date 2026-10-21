@@ -1,0 +1,8 @@
+{
+  "train_seconds": 572.7011708393693,
+  "validation_seconds": 19.433934696018696,
+  "checkpoint_seconds": 7.076418958604336,
+  "fit_wall_seconds": 608.1005809791386,
+  "gpu_reserved_seconds": 608.1005809791386,
+  "recomputed_training_seconds": 0.0
+}

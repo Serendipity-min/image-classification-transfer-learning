@@ -1,0 +1,9 @@
+{
+  "changed_files_between_training_commits": [
+    "src/execute_p0_p1.py"
+  ],
+  "training_model_data_implementation_unchanged": true,
+  "old_commit": "74001fc68c2bfb68cd65da821c961d75a93fe32b",
+  "new_commit": "94b02df2ae94097602e40e88783f8c445006fa9a",
+  "git_status_porcelain": ""
+}

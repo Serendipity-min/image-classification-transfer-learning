@@ -1,0 +1,60 @@
+{
+  "generated_utc": "2026-10-21T08:37:16.040086+00:00",
+  "billing_context": {
+    "timestamp_utc": "2026-10-21T07:59:28.424646+00:00",
+    "source": "explicit_user_reply",
+    "server_type": "school_server",
+    "billing_applicable": false,
+    "price_per_hour": null,
+    "currency": null,
+    "monetary_budget_status": "not_applicable_no_pricing",
+    "required_budget_units": [
+      "GPU-hours",
+      "two-GPU wall time",
+      "storage"
+    ]
+  },
+  "transfer_constraints": {
+    "timestamp_utc": "2026-10-21T07:42:55.325243+00:00",
+    "user_clarification": "10GB 门槛针对待上传文件量，checkpoint 可以保留服务器。",
+    "checkpoint_retention_on_server_authorized": true,
+    "server_total_storage_limit_gb": null,
+    "planning_cap_gib_per_contract": 100,
+    "current_data_weight_upload_bytes": 928186577,
+    "largest_current_uploaded_file_bytes": 410397786,
+    "all_current_files_also_below_original_1GB_gate": true
+  },
+  "original_report_sha256": "7fba1ee1f62a6db95201f7345a06d95c668eaab5d7b840701d8816dde30e7e3c",
+  "original_budget_sha256": "e0a8a2ed08405a5d293c015f209ee076d450123a1b2a21391b8382b3d3f74dd1",
+  "checkpoint_count_verified": 40,
+  "storage": {
+    "project_root": "/root/user_data/tl_cls_v1",
+    "project_file_bytes": 12208700563,
+    "by_folder_file_bytes": {
+      "data": 601618713,
+      "weights": 512868962,
+      "runs": 11071466972,
+      "records": 18471222,
+      "src": 150802,
+      "configs": 278141,
+      "offline_wheels": 3234072,
+      "reports": 414896
+    },
+    "project_environment_non_symlink_bytes": 122543596,
+    "filesystem_free_bytes": 15058498662400,
+    "tenant_confirmed_quota_bytes": null,
+    "planning_cap_gib": 100,
+    "measurement": "logical file sizes; shared filesystem free space is not tenant quota"
+  },
+  "budget_proposal": {
+    "P2_P3_training_gpu_hours": 140.58491120949026,
+    "centralized_best_plus_last_test_estimate_gpu_hours": 0.5840373855987564,
+    "evaluation_estimation_basis": "P1 epoch2/3 validation time scaled by official test/validation sample counts, 80 best + 80 last; no test model evaluation executed",
+    "bounded_diagnostics_reserve_gpu_hours": 2.0,
+    "inference_benchmark_reserve_gpu_hours": 0.5,
+    "training_evaluation_diagnostics_inference_with_25_percent_margin_gpu_hours": 179.58618574386125,
+    "P3_budget_prefix_weights_and_evaluations": "not frozen; separate cost/storage review after P2",
+    "monetary_cost": "not applicable: school server without pricing",
+    "authorization_status": "proposal only; P2/P3 not started"
+  }
+}

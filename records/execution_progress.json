@@ -1,0 +1,10 @@
+{
+  "label": "P1_benchmark_concurrent",
+  "phase": "P1",
+  "gpu_seconds_completed": 5387.097210217267,
+  "gpu_seconds_active_segment": 97.06276291236281,
+  "remaining_gpu_seconds": 8915.84002687037,
+  "pids": [],
+  "gpu_snapshot": "0, GPU-d31413f8-8fb0-73e3-8520-a3cf170ec652, 10, 0, 33, 63.30, 480\n1, GPU-c30e4ab5-1922-01a4-caba-24210a4f7feb, 10, 0, 30, 110.11, 765",
+  "updated_utc": "2026-10-21T08:36:31.984877+00:00"
+}

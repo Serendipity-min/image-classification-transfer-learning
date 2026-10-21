@@ -1,0 +1,895 @@
+{
+  "provenance": {
+    "protocol_id": "TL-CLS-20261020-v1.0",
+    "protocol_sha256": "e06bba0f67f9a6aafe4bf92420fefd9f5d58ddd228529b367415827d820c7b29",
+    "code_commit": "94b02df2ae94097602e40e88783f8c445006fa9a",
+    "split_sha256": "bdd7db182d787e8e78d44780ce6ffd43bc9b9383a14002e872a83d5259210dd6",
+    "weight_sha256": "773525d5821de224f8f30c33377b7a795d7863e08522698200d3217d3f2a41bb",
+    "dependency_lock_sha256": "ea79ba50f6d21fc587fe597a5fa9efa3f1cf7c339e52e2e8444b23ddd96a7a59",
+    "resolved_config_sha256": "b64dad576937de5bfe456711d484b5d41b88b4af6ad3d364e3e7e387a79f5d53",
+    "resolved_config_path": "runs/P1-svhn-r50-adapter-s314159/config.attempt_1.json"
+  },
+  "groups": [
+    {
+      "name": "layer1.0.adapter.down.weight",
+      "shape": [
+        64,
+        256,
+        1,
+        1
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer1.0.adapter.bn1.weight",
+      "shape": [
+        64
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer1.0.adapter.bn1.bias",
+      "shape": [
+        64
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer1.0.adapter.up.weight",
+      "shape": [
+        256,
+        64,
+        1,
+        1
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer1.0.adapter.bn2.weight",
+      "shape": [
+        256
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer1.0.adapter.bn2.bias",
+      "shape": [
+        256
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer1.1.adapter.down.weight",
+      "shape": [
+        64,
+        256,
+        1,
+        1
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer1.1.adapter.bn1.weight",
+      "shape": [
+        64
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer1.1.adapter.bn1.bias",
+      "shape": [
+        64
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer1.1.adapter.up.weight",
+      "shape": [
+        256,
+        64,
+        1,
+        1
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer1.1.adapter.bn2.weight",
+      "shape": [
+        256
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer1.1.adapter.bn2.bias",
+      "shape": [
+        256
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer1.2.adapter.down.weight",
+      "shape": [
+        64,
+        256,
+        1,
+        1
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer1.2.adapter.bn1.weight",
+      "shape": [
+        64
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer1.2.adapter.bn1.bias",
+      "shape": [
+        64
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer1.2.adapter.up.weight",
+      "shape": [
+        256,
+        64,
+        1,
+        1
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer1.2.adapter.bn2.weight",
+      "shape": [
+        256
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer1.2.adapter.bn2.bias",
+      "shape": [
+        256
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer2.0.adapter.down.weight",
+      "shape": [
+        128,
+        512,
+        1,
+        1
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer2.0.adapter.bn1.weight",
+      "shape": [
+        128
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer2.0.adapter.bn1.bias",
+      "shape": [
+        128
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer2.0.adapter.up.weight",
+      "shape": [
+        512,
+        128,
+        1,
+        1
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer2.0.adapter.bn2.weight",
+      "shape": [
+        512
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer2.0.adapter.bn2.bias",
+      "shape": [
+        512
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer2.1.adapter.down.weight",
+      "shape": [
+        128,
+        512,
+        1,
+        1
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer2.1.adapter.bn1.weight",
+      "shape": [
+        128
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer2.1.adapter.bn1.bias",
+      "shape": [
+        128
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer2.1.adapter.up.weight",
+      "shape": [
+        512,
+        128,
+        1,
+        1
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer2.1.adapter.bn2.weight",
+      "shape": [
+        512
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer2.1.adapter.bn2.bias",
+      "shape": [
+        512
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer2.2.adapter.down.weight",
+      "shape": [
+        128,
+        512,
+        1,
+        1
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer2.2.adapter.bn1.weight",
+      "shape": [
+        128
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer2.2.adapter.bn1.bias",
+      "shape": [
+        128
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer2.2.adapter.up.weight",
+      "shape": [
+        512,
+        128,
+        1,
+        1
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer2.2.adapter.bn2.weight",
+      "shape": [
+        512
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer2.2.adapter.bn2.bias",
+      "shape": [
+        512
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer2.3.adapter.down.weight",
+      "shape": [
+        128,
+        512,
+        1,
+        1
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer2.3.adapter.bn1.weight",
+      "shape": [
+        128
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer2.3.adapter.bn1.bias",
+      "shape": [
+        128
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer2.3.adapter.up.weight",
+      "shape": [
+        512,
+        128,
+        1,
+        1
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer2.3.adapter.bn2.weight",
+      "shape": [
+        512
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer2.3.adapter.bn2.bias",
+      "shape": [
+        512
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer3.0.adapter.down.weight",
+      "shape": [
+        256,
+        1024,
+        1,
+        1
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer3.0.adapter.bn1.weight",
+      "shape": [
+        256
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer3.0.adapter.bn1.bias",
+      "shape": [
+        256
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer3.0.adapter.up.weight",
+      "shape": [
+        1024,
+        256,
+        1,
+        1
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer3.0.adapter.bn2.weight",
+      "shape": [
+        1024
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer3.0.adapter.bn2.bias",
+      "shape": [
+        1024
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer3.1.adapter.down.weight",
+      "shape": [
+        256,
+        1024,
+        1,
+        1
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer3.1.adapter.bn1.weight",
+      "shape": [
+        256
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer3.1.adapter.bn1.bias",
+      "shape": [
+        256
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer3.1.adapter.up.weight",
+      "shape": [
+        1024,
+        256,
+        1,
+        1
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer3.1.adapter.bn2.weight",
+      "shape": [
+        1024
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer3.1.adapter.bn2.bias",
+      "shape": [
+        1024
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer3.2.adapter.down.weight",
+      "shape": [
+        256,
+        1024,
+        1,
+        1
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer3.2.adapter.bn1.weight",
+      "shape": [
+        256
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer3.2.adapter.bn1.bias",
+      "shape": [
+        256
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer3.2.adapter.up.weight",
+      "shape": [
+        1024,
+        256,
+        1,
+        1
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer3.2.adapter.bn2.weight",
+      "shape": [
+        1024
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer3.2.adapter.bn2.bias",
+      "shape": [
+        1024
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer3.3.adapter.down.weight",
+      "shape": [
+        256,
+        1024,
+        1,
+        1
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer3.3.adapter.bn1.weight",
+      "shape": [
+        256
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer3.3.adapter.bn1.bias",
+      "shape": [
+        256
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer3.3.adapter.up.weight",
+      "shape": [
+        1024,
+        256,
+        1,
+        1
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer3.3.adapter.bn2.weight",
+      "shape": [
+        1024
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer3.3.adapter.bn2.bias",
+      "shape": [
+        1024
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer3.4.adapter.down.weight",
+      "shape": [
+        256,
+        1024,
+        1,
+        1
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer3.4.adapter.bn1.weight",
+      "shape": [
+        256
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer3.4.adapter.bn1.bias",
+      "shape": [
+        256
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer3.4.adapter.up.weight",
+      "shape": [
+        1024,
+        256,
+        1,
+        1
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer3.4.adapter.bn2.weight",
+      "shape": [
+        1024
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer3.4.adapter.bn2.bias",
+      "shape": [
+        1024
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer3.5.adapter.down.weight",
+      "shape": [
+        256,
+        1024,
+        1,
+        1
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer3.5.adapter.bn1.weight",
+      "shape": [
+        256
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer3.5.adapter.bn1.bias",
+      "shape": [
+        256
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer3.5.adapter.up.weight",
+      "shape": [
+        1024,
+        256,
+        1,
+        1
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer3.5.adapter.bn2.weight",
+      "shape": [
+        1024
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer3.5.adapter.bn2.bias",
+      "shape": [
+        1024
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer4.0.adapter.down.weight",
+      "shape": [
+        512,
+        2048,
+        1,
+        1
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer4.0.adapter.bn1.weight",
+      "shape": [
+        512
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer4.0.adapter.bn1.bias",
+      "shape": [
+        512
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer4.0.adapter.up.weight",
+      "shape": [
+        2048,
+        512,
+        1,
+        1
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer4.0.adapter.bn2.weight",
+      "shape": [
+        2048
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer4.0.adapter.bn2.bias",
+      "shape": [
+        2048
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer4.1.adapter.down.weight",
+      "shape": [
+        512,
+        2048,
+        1,
+        1
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer4.1.adapter.bn1.weight",
+      "shape": [
+        512
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer4.1.adapter.bn1.bias",
+      "shape": [
+        512
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer4.1.adapter.up.weight",
+      "shape": [
+        2048,
+        512,
+        1,
+        1
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer4.1.adapter.bn2.weight",
+      "shape": [
+        2048
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer4.1.adapter.bn2.bias",
+      "shape": [
+        2048
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer4.2.adapter.down.weight",
+      "shape": [
+        512,
+        2048,
+        1,
+        1
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer4.2.adapter.bn1.weight",
+      "shape": [
+        512
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer4.2.adapter.bn1.bias",
+      "shape": [
+        512
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer4.2.adapter.up.weight",
+      "shape": [
+        2048,
+        512,
+        1,
+        1
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer4.2.adapter.bn2.weight",
+      "shape": [
+        2048
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "layer4.2.adapter.bn2.bias",
+      "shape": [
+        2048
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "fc.weight",
+      "shape": [
+        10,
+        2048
+      ],
+      "weight_decay": 0.0001,
+      "peak_lr": 0.0003
+    },
+    {
+      "name": "fc.bias",
+      "shape": [
+        10
+      ],
+      "weight_decay": 0.0,
+      "peak_lr": 0.0003
+    }
+  ]
+}
