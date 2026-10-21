@@ -1,0 +1,130 @@
+"""双卡共享的 P2 成本账本；独立 attempt 守护进程持续记账并执行统一退出期限。"""
+
+from contextlib import contextmanager
+import fcntl
+import os
+from pathlib import Path
+import shutil
+import time
+
+from .p2_core import CAP_SECONDS, EXIT_RESERVE_SECONDS, ROOT, STAGE, process_alive, read, write
+
+
+class Budget:
+    def __init__(self, path=None, cap=CAP_SECONDS):
+        self.path = Path(path or STAGE / 'gpu_ledger.json')
+        self.cap = cap
+        self.path.parent.mkdir(parents=True, exist_ok=True)
+
+    @contextmanager
+    def edit(self):
+        # 每次锁内重新读取，不能将各 GPU 的旧快照相互覆盖。
+        with self.path.with_suffix('.lock').open('a') as lock:
+            fcntl.flock(lock, fcntl.LOCK_EX)
+            value = read(self.path) if self.path.exists() else {
+                'schema': 1, 'phase': 'P2', 'cap_gpu_seconds': self.cap, 'attempts': {},
+                'stop_request': None, 'events': [], 'P3_authorized': False,
+                'centralized_test_authorized': False}
+            assert value['cap_gpu_seconds'] == self.cap
+            try:
+                yield value
+            finally:
+                value['updated_monotonic'] = time.monotonic()
+                value['gpu_seconds_finalized'] = sum(a.get('charged_gpu_seconds', 0) for a in value['attempts'].values()
+                                                       if a['status'] == 'finalized')
+                write(self.path, value)
+
+    def snapshot(self):
+        with self.edit() as value:
+            return dict(value, attempts={k: dict(v) for k, v in value['attempts'].items()})
+
+    @staticmethod
+    def used(value, now=None):
+        now = time.monotonic() if now is None else now
+        return sum(a['charged_gpu_seconds'] if a['status'] == 'finalized' else
+                   max(0, now - a['started_monotonic']) for a in value['attempts'].values())
+
+    def run_seconds(self, run_id):
+        value = self.snapshot()
+        now = time.monotonic()
+        return sum(a['charged_gpu_seconds'] if a['status'] == 'finalized' else
+                   max(0, now - a['started_monotonic']) for a in value['attempts'].values() if a['run_id'] == run_id)
+
+    def register(self, attempt_id, run_id, device, kind, owner_pid, owner_ticks):
+        with self.edit() as value:
+            assert not value['stop_request'], '阶段停止请求尚未解除'
+            assert attempt_id not in value['attempts']
+            assert self.used(value) + EXIT_RESERVE_SECONDS < self.cap
+            assert all(a['status'] == 'finalized' or a['device'] != device for a in value['attempts'].values())
+            value['attempts'][attempt_id] = {'attempt_id': attempt_id, 'run_id': run_id, 'device': device,
+                'kind': kind, 'owner_pid': owner_pid, 'owner_start_ticks': owner_ticks,
+                'guardian_pid': os.getpid(), 'status': 'running', 'started_monotonic': time.monotonic(),
+                'started_unix': time.time(), 'child_pid': None, 'child_pgid': None,
+                'main_process_peak_rss_bytes_sampled': 0, 'process_tree_peak_rss_bytes_sampled': 0,
+                'samples': 0}
+
+    def update(self, attempt_id, **fields):
+        with self.edit() as value:
+            value['attempts'][attempt_id].update(fields)
+
+    def finalize(self, attempt_id, returncode, reason, ended_monotonic):
+        with self.edit() as value:
+            item = value['attempts'][attempt_id]
+            # 幂等结算：重复监督/恢复不能再次增加同一 attempt 的时间。
+            if item['status'] != 'finalized':
+                item.update(status='finalized', returncode=returncode, termination_reason=reason,
+                            ended_monotonic=ended_monotonic,
+                            charged_gpu_seconds=max(0, ended_monotonic - item['started_monotonic']))
+
+    def stop(self, reason, grace=20):
+        with self.edit() as value:
+            if value['stop_request'] is None:
+                value['stop_request'] = {'reason': reason, 'requested_monotonic': time.monotonic(),
+                                         'drain_deadline_monotonic': time.monotonic() + grace}
+                value['events'].append(dict(value['stop_request']))
+            return value['stop_request']
+
+    def clear_technical_stop(self):
+        with self.edit() as value:
+            assert all(a['status'] == 'finalized' for a in value['attempts'].values())
+            assert value['stop_request']['reason'] in ['owner_process_terminated', 'operator_technical_stop']
+            value['events'].append({'reason': 'technical_resume_same_cap', 'monotonic': time.monotonic()})
+            value['stop_request'] = None
+
+
+class Storage:
+    def __init__(self, allocation_bytes=60 * 2**30, environment=None):
+        self.allocation = min(allocation_bytes, 100 * 2**30)
+        self.environment = Path(environment or '/root/miniconda3/envs/tl_cls_v1')
+
+    @staticmethod
+    def size(path):
+        seen, total = set(), 0
+        for item in Path(path).rglob('*'):
+            if item.is_symlink() or not item.is_file():
+                continue
+            stat = item.stat()
+            key = (stat.st_dev, stat.st_ino)
+            if key not in seen:
+                seen.add(key)
+                total += stat.st_size
+        return total
+
+    def snapshot(self):
+        project = self.size(ROOT)
+        environment = self.size(self.environment) if self.environment.exists() else 0
+        physical = shutil.disk_usage(ROOT).free
+        used = project + environment
+        return {'project_bytes': project, 'environment_non_symlink_bytes': environment,
+                'combined_bytes': used, 'confirmed_allocation_bytes': self.allocation,
+                'filesystem_free_bytes': physical, 'allocation_remaining_bytes': self.allocation - used,
+                'warning_54_gib': used >= 54 * 2**30, 'reserve_bytes': 5 * 2**30,
+                'measurement': 'logical file bytes, symlinks excluded, hardlinks deduplicated within each root',
+                'allocation_source': 'explicit_user_confirmation_2026-10-21'}
+
+    def require(self, next_write_bytes=0):
+        value = self.snapshot()
+        needed = value['reserve_bytes'] + next_write_bytes
+        if min(value['filesystem_free_bytes'], value['allocation_remaining_bytes']) < needed:
+            raise RuntimeError('storage_exit_reserve_or_allocation_insufficient')
+        return value
