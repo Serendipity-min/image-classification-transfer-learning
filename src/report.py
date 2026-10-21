@@ -172,6 +172,33 @@ def main():
                     'P3_three_additional_slice_weights_upper_bound_gib': additional_slice_upper_gib if complete_budget_basis else None,
                     'dataset_weight_disk_bytes': sum(a['size_bytes'] for a in load_json(ROOT / 'records/assets.json')['assets']),
                     'storage_plan_must_include_extracted_data_and_25_percent_margin': True}}
+    if complete_budget_basis:
+        by_configuration = {item['configuration_id']: item for item in estimates}
+        schedules = {}
+        # 按实测外推时长优先排长任务，再分配到累计负载较低的卡，避免固定方法绑定物理 GPU。
+        for phase in ['P2', 'P3']:
+            future = [r for r in load_json(ROOT / 'configs/run_matrix.json')['planned_runs'] if r['phase'] == phase]
+            def duration(run):
+                item = by_configuration[run['configuration_id']]
+                return run['epochs'] * item['epoch_seconds'] + item['per_run_fixed_and_first_epoch_excess_seconds']
+            loads = [0.0, 0.0]
+            assignments = []
+            for run in sorted(future, key=lambda r: (-duration(r), r['run_id'])):
+                device = 0 if loads[0] <= loads[1] else 1
+                seconds = duration(run)
+                assignments.append({'run_id': run['run_id'], 'proposed_physical_gpu_index': device,
+                                    'start_after_seconds_estimate': loads[device], 'duration_seconds_estimate': seconds})
+                loads[device] += seconds
+            factor = max([1.0] + [item['slowdown_ratio'] for item in concurrency])
+            schedules[phase] = {'assignments': assignments, 'single_gpu_baseline_load_hours': [value / 3600 for value in loads],
+                                'two_gpu_wall_hours_before_contention': max(loads) / 3600,
+                                'conservative_measured_contention_scenario_factor': factor,
+                                'two_gpu_wall_hours_with_contention_scenario': max(loads) * factor / 3600,
+                                'assignment_status': 'proposal_not_frozen'}
+        budget['two_gpu_schedule_proposal'] = schedules
+        budget['contention_investigation_required_before_freeze'] = any(item['above_10_percent'] for item in concurrency)
+        budget['two_gpu_wall_hours_with_25_percent_margin'] = 1.25 * sum(
+            schedules[phase]['two_gpu_wall_hours_with_contention_scenario'] for phase in ['P2', 'P3'])
     report['concurrency'] = concurrency
     if report['budget_ledger']:
         for item in report['P1']:
