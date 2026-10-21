@@ -33,6 +33,10 @@ class TestData(Dataset):
 
 
 def main():
+    # P2 明确保持测试关闭；在构造任何 TestData 或加载 test checkpoint 之前拒绝。
+    stage_decision = ROOT / 'records/p2/authorization.json'
+    if stage_decision.exists() and not load_json(stage_decision)['centralized_test_authorized']:
+        raise PermissionError('P2 stage: centralized test remains closed')
     parser = argparse.ArgumentParser()
     parser.add_argument('--manifest', required=True)
     parser.add_argument('--device', type=int, required=True)
