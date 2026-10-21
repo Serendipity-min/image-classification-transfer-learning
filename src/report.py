@@ -145,6 +145,11 @@ def main():
                         + (item['summary'] or {}).get('last_checkpoint_bytes', 0)) * 5 for item in report['P1']) / 2**30
                         if complete_budget_basis else None}}
     report['concurrency'] = concurrency
+    if report['budget_ledger']:
+        for item in report['P1']:
+            entry = next((entry for entry in reversed(report['budget_ledger']['entries'])
+                          if entry['label'] == item['run_id']), None)
+            item['parent_monitor'] = entry
     report['P1_completed_runs'] = sum(item['status'] == 'completed' for item in report['P1'])
     report['P1_status'] = 'completed' if report['P1_completed_runs'] == 16 else 'incomplete'
     report['next_budget'] = budget

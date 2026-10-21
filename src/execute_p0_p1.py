@@ -10,6 +10,8 @@ import subprocess
 import sys
 import time
 
+import psutil
+
 from tlcls.common import ROOT, atomic_json, load_json, provenance
 
 
@@ -22,7 +24,8 @@ def read_ledger():
     if LEDGER.exists():
         return load_json(LEDGER)
     return {'protocol_id': 'TL-CLS-20261020-v1.0', 'cap_gpu_seconds': CAP,
-            'entries': [], 'gpu_seconds': 0.0, 'status': 'running', 'P2_P3_authorized': False}
+            'provenance': provenance(), 'entries': [], 'gpu_seconds': 0.0,
+            'status': 'running', 'P2_P3_authorized': False}
 
 
 def gpu_snapshot():
@@ -50,6 +53,8 @@ def run_group(jobs, label, gpu_work=True):
         processes.append((process, time.monotonic()))
     accounted = {}
     timed_out = False
+    external_peaks = {}
+    cpu_rss_peaks = {}
     try:
         while True:
             now = time.monotonic()
@@ -63,12 +68,24 @@ def run_group(jobs, label, gpu_work=True):
                     if process.poll() is None:
                         os.killpg(process.pid, signal.SIGTERM)
                 break
+            snapshot = gpu_snapshot() if gpu_work else None
+            if snapshot:
+                for line in snapshot.splitlines():
+                    fields = [field.strip() for field in line.split(',')]
+                    if len(fields) >= 3 and fields[2].isdigit():
+                        external_peaks[fields[0]] = max(external_peaks.get(fields[0], 0), int(fields[2]))
+            for process, _ in processes:
+                try:
+                    cpu_rss_peaks[str(process.pid)] = max(cpu_rss_peaks.get(str(process.pid), 0),
+                                                          psutil.Process(process.pid).memory_info().rss)
+                except psutil.Error:
+                    pass
             atomic_json(ROOT / 'records/execution_progress.json',
                         {'label': label, 'phase': 'P0' if label.startswith('P0') else 'P1',
                          'gpu_seconds_completed': ledger['gpu_seconds'], 'gpu_seconds_active_segment': used,
                          'remaining_gpu_seconds': CAP - ledger['gpu_seconds'] - used,
                          'pids': [process.pid for process, _ in processes if process.poll() is None],
-                         'gpu_snapshot': gpu_snapshot() if gpu_work else None,
+                         'gpu_snapshot': snapshot,
                          'updated_utc': datetime.datetime.now(datetime.timezone.utc).isoformat()})
             if all(process.poll() is not None for process, _ in processes):
                 break
@@ -86,11 +103,21 @@ def run_group(jobs, label, gpu_work=True):
                                   'process_count': len(jobs), 'wall_seconds': now - started,
                                   'returncodes': [p.returncode for p, _ in processes],
                                   'hard_budget_stop': timed_out,
+                                  'external_gpu_peak_memory_mib_sampled_2s': external_peaks,
+                                  'cpu_main_process_peak_rss_bytes_sampled_2s': cpu_rss_peaks,
                                   'timestamp_utc': datetime.datetime.now(datetime.timezone.utc).isoformat()})
         ledger['gpu_seconds'] += gpu_seconds
         ledger['gpu_hours'] = ledger['gpu_seconds'] / 3600
         ledger['status'] = 'budget_exhausted' if timed_out else 'running'
         atomic_json(LEDGER, ledger)
+        if timed_out and label.startswith('P1-'):
+            summary_path = ROOT / 'runs' / label / 'summary.json'
+            if summary_path.exists():
+                summary = load_json(summary_path)
+                summary['status'] = 'infrastructure_interrupted'
+                summary['failure'] = {'reason': 'parent_4_gpu_hour_hard_budget_stop',
+                                      'checkpoint_resume_boundary': 'last_completed_saved_epoch'}
+                atomic_json(summary_path, summary)
         for file in handles:
             file.close()
     return not timed_out and all(p.returncode == 0 for p, _ in processes)
