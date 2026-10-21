@@ -97,8 +97,12 @@ def main():
                         augmentation='canonical_json_array_utf8_SHA256_low64_PCG64',
                         actual_launch_arguments=vars(args), physical_batch_size=32,
                         effective_batch_size=128, no_feature_cache=True, no_torch_compile=True)
+        attempt = 1 + len(list(out.glob('config.attempt_*.json')))
+        config_path = out / f'config.attempt_{attempt}.json'
+        atomic_json(config_path, resolved)
         atomic_json(out / 'config.json', resolved)
-        prov['resolved_config_sha256'] = sha256(out / 'config.json')
+        prov['resolved_config_sha256'] = sha256(config_path)
+        prov['resolved_config_path'] = str(config_path.relative_to(ROOT))
         atomic_json(out / 'parameter_groups.json', {'provenance': prov, 'groups': groups})
         summary.update(model_identity=identity, parameters=parameter_counts(model, config['model_key']),
                        startup_seconds=time.monotonic() - start)
@@ -184,6 +188,8 @@ def main():
         summary.update(status=status, failure={'type': type(exc).__name__, 'reason': str(exc),
                        'epoch': completed_epoch + 1, 'optimizer_step': scheduler.updates if scheduler else None,
                        'last_finite_checkpoint': str(out / 'last.pt') if (out / 'last.pt').exists() else None})
+        if hasattr(exc, 'diagnostics'):
+            summary['failure']['diagnostics'] = exc.diagnostics
         if status == 'numerical_failure' and model is not None:
             atomic_torch_save(out / 'failure_state.pt', {'model': model.state_dict(),
                 'optimizer': optimizer.state_dict(), 'scheduler': scheduler.state_dict(),

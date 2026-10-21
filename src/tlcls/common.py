@@ -131,8 +131,16 @@ def atomic_torch_save(path, value):
 
 
 def finite_or_raise(tensor, location):
-    if not bool(torch.isfinite(tensor).all().item()):
-        raise FloatingPointError(location)
+    mask = torch.isfinite(tensor)
+    if not bool(mask.all().item()):
+        values = tensor.detach()[mask]
+        error = FloatingPointError(location)
+        # 异常时只统计有限子集，不对坏 logits 执行 argmax 伪造准确率。
+        error.diagnostics = {'location': location, 'shape': list(tensor.shape), 'dtype': str(tensor.dtype),
+                             'non_finite_elements': int((~mask).sum()),
+                             'finite_min': float(values.min()) if values.numel() else None,
+                             'finite_max': float(values.max()) if values.numel() else None}
+        raise error
 
 
 def sync_time():

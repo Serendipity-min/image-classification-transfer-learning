@@ -54,6 +54,19 @@ def finite_parameters_and_optimizer(parameters, optimizer):
 
 
 def effective_update(model, optimizer, scheduler, batches, device, bf16=True):
+    try:
+        return _effective_update(model, optimizer, scheduler, batches, device, bf16)
+    except FloatingPointError as exc:
+        diagnostic = getattr(exc, 'diagnostics', {})
+        diagnostic.update(sample_ids=[identifier for batch in batches for identifier in batch[2]],
+                          lr_by_group=[group['lr'] for group in optimizer.param_groups],
+                          optimizer_step=scheduler.updates, precision='bf16' if bf16 else 'fp32',
+                          autocast_enabled=bf16, scaler_scale=None, skipped_updates=0)
+        exc.diagnostics = diagnostic
+        raise
+
+
+def _effective_update(model, optimizer, scheduler, batches, device, bf16):
     optimizer.zero_grad(set_to_none=True)
     samples = sum(len(batch[1]) for batch in batches)
     assert samples > 0
@@ -111,7 +124,12 @@ def train_epoch(model, optimizer, scheduler, dataloader, sampler, config, epoch,
             raise TimeoutError('gpu_budget_stop_at_accumulation_boundary')
         window.append(batch)
         if len(window) == 4 or micro_step + 1 == len(dataloader):
-            latest = effective_update(model, optimizer, scheduler, window, device)
+            try:
+                latest = effective_update(model, optimizer, scheduler, window, device)
+            except FloatingPointError as exc:
+                exc.diagnostics = dict(getattr(exc, 'diagnostics', {}), epoch=epoch + 1,
+                                       micro_step=micro_step + 1)
+                raise
             samples += latest['samples']
             loss_sum += latest['loss_sum']
             correct += latest['correct']
