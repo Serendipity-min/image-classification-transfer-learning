@@ -122,6 +122,7 @@ def check_resume(config, device, batches):
     assert actual == expected
     assert actual_optimizer == expected_optimizer
     assert torch.equal(torch.get_rng_state(), expected_rng['torch'])
+    assert torch.equal(torch.cuda.get_rng_state(device), expected_rng['cuda'])
     size = target.stat().st_size
     target.unlink()
     return {'eval_logit_max_abs_error': max_error, 'continued_model_state_bitwise_equal': True,
@@ -150,6 +151,7 @@ def main():
     for config in runs:
         try:
             model, info = build_model(config, device)
+            assert all(module.p == 0 for module in model.modules() if isinstance(module, nn.Dropout))
             counts = parameter_counts(model, config['model_key'])
             c = protocol['datasets'][config['dataset']]['num_classes']
             expected = protocol['expected_parameter_counts'][f"{config['model_key']}_C{c}"]

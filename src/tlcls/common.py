@@ -66,8 +66,10 @@ def setup(seed, deterministic=True):
 
 
 def rng_state():
+    # 单任务仅使用已绑定的这一张卡，不为收集未使用 RNG 而初始化第二张 GPU。
     return {'python': random.getstate(), 'numpy': np.random.get_state(),
-            'torch': torch.get_rng_state(), 'cuda': torch.cuda.get_rng_state_all()}
+            'torch': torch.get_rng_state(), 'cuda': torch.cuda.get_rng_state(torch.cuda.current_device()),
+            'cuda_rng_scope': 'current_bound_device_only'}
 
 
 def restore_rng(state):
@@ -75,7 +77,7 @@ def restore_rng(state):
     random.setstate(state['python'])
     np.random.set_state(state['numpy'])
     torch.set_rng_state(state['torch'])
-    torch.cuda.set_rng_state_all(state['cuda'])
+    torch.cuda.set_rng_state(state['cuda'], torch.cuda.current_device())
 
 
 @contextlib.contextmanager
