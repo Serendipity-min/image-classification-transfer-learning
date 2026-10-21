@@ -2,18 +2,24 @@
   "protocol_id": "TL-CLS-20261020-v1.0",
   "date": "2026-10-21",
   "timezone": "Asia/Shanghai",
-  "status": "awaiting_pi_review",
+  "status": "P2_authorized_running_P3_pending",
   "P0": "passed",
   "P1": "completed_and_audited",
   "P2": {
-    "status": "not_started",
-    "authorized": false
+    "status": "running_after_launch_acceptance",
+    "authorized": true
   },
   "P3": {
     "status": "not_started",
     "authorized": false
   },
-  "pi_decision": null,
+  "pi_decision": {
+    "source": "explicit_user_stage_instruction_2026-10-21",
+    "accepted_P0_P1_commit": "b485177a393b8532e07d1504a64629ad54043d2b",
+    "authorized_next_phase": "P2",
+    "hard_cap_gpu_hours": 30,
+    "execution_commit": "6c0a215798a4de319e7c6c55f0bb1b351bf082e0"
+  },
   "pi_reviewer": null,
   "decision_timestamp": null,
   "training_code_commits": [
@@ -26,5 +32,5 @@
     "tenant storage quota and archival policy",
     "P3 separate stage decision"
   ],
-  "approval_rule": "Repository publication is an evidence handoff; it does not authorize P2/P3."
+  "approval_rule": "Explicit user decision authorizes P2 only; P3 and centralized test remain closed."
 }
