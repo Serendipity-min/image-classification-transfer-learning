@@ -39,13 +39,21 @@ def main():
     while time.time() < args.barrier_unix:
         time.sleep(min(0.2, args.barrier_unix - time.time()))
     tick = sync_time()
+    data_wait_seconds = 0.0
+    update_seconds = 0.0
     for _ in range(6):
-        effective_update(model, optimizer, scheduler, [next(stream) for _ in range(4)], device)
+        begin = time.monotonic()
+        batches = [next(stream) for _ in range(4)]
+        data_wait_seconds += time.monotonic() - begin
+        begin = sync_time()
+        effective_update(model, optimizer, scheduler, batches, device)
+        update_seconds += sync_time() - begin
     seconds = sync_time() - tick
     output = {'run_id': args.run_id, 'label': args.label, 'device': args.device,
               'provenance': provenance(config['dataset'], config['model_key']),
               'measured_effective_updates': 6, 'measured_samples': 768,
               'seconds': seconds, 'images_per_second': 768 / seconds,
+              'data_wait_seconds': data_wait_seconds, 'model_update_seconds': update_seconds,
               'gpu_reserved_seconds': time.monotonic() - started,
               'workers': 4, 'uses_real_training_data': True,
               'status': 'completed', 'formal_run': False}

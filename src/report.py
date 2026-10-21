@@ -21,11 +21,18 @@ def export_result(config, summary, epochs):
                   completed_utc=summary.get('completed_utc'))
     p = summary.get('provenance', {})
     identity = summary.get('model_identity', {})
+    installed = load_json(ROOT / 'records/environment_installation.json')['versions']
+    assets = load_json(ROOT / 'records/assets.json')['assets']
+    weight = next(a for a in assets if a['key'] == config['model_key'] + '_model.safetensors')
+    archives = [a for a in assets if a['key'].startswith('svhn_')] if config['dataset'] == 'svhn' else [next(a for a in assets if a['key'] == 'cifar100_archive')]
     result['provenance'].update(code_commit_sha=p.get('code_commit'),
         resolved_config_sha256=p.get('resolved_config_sha256'), dependency_lock_sha256=p.get('dependency_lock_sha256'),
         model_id=config['model_id'], weight_sha256=p.get('weight_sha256'), split_manifest_sha256=p.get('split_sha256'),
         initial_classifier_sha256=identity.get('initial_classifier_sha256'),
-        checkpoint_includes_buffers=(summary.get('best_val_checkpoint_bytes') is not None))
+        checkpoint_includes_buffers=(summary.get('best_val_checkpoint_bytes') is not None),
+        python_version='3.12.3', torch_version=installed['torch'], torchvision_version=installed['torchvision'],
+        timm_version=installed['timm'], weight_revision=weight['revision'], weight_filename='model.safetensors',
+        dataset_archive_sha256={a['key']: a['sha256'] for a in archives})
     params = summary.get('parameters', {})
     result['parameters_and_storage'].update(total_parameters=params.get('total_params'),
         trainable_parameters=params.get('trainable_params'), trainable_fraction=params.get('trainable_ratio'),
@@ -33,7 +40,9 @@ def export_result(config, summary, epochs):
         base_parameters_excluding_classifier_and_adapters=params.get('base_params'),
         added_adapter_parameters=params.get('added_params'), classifier_parameters=params.get('head_params'),
         buffers_numel=params.get('buffer_elements'), self_contained_inference_checkpoint_bytes=summary.get('best_val_checkpoint_bytes'),
-        resumable_training_checkpoint_bytes=summary.get('last_checkpoint_bytes'), task_delta_bytes=summary.get('task_delta_bytes'))
+        resumable_training_checkpoint_bytes=summary.get('last_checkpoint_bytes'), task_delta_bytes=summary.get('task_delta_bytes'),
+        trainable_backbone_parameters=params.get('base_params') if config['method'] in ['scratch', 'full_ft'] else 0,
+        frozen_backbone_parameters=params.get('base_params') if config['method'] in ['linear_probe', 'adapter'] else 0)
     costs = summary.get('costs', {})
     result['timing'].update(source='measured', gpu_count=1, train_seconds=costs.get('train_seconds'),
         validation_seconds=costs.get('validation_seconds'), checkpoint_seconds=costs.get('checkpoint_seconds'),
@@ -62,6 +71,12 @@ def export_result(config, summary, epochs):
     result['failure'].update(occurred=summary['status'] not in ['running', 'completed'],
         reason=summary.get('failure', {}).get('reason'))
     result['notes'] = ['P1 profile only; not part of formal five-seed statistics.', 'No test evaluator or test accuracy.']
+    hardware = summary.get('hardware', {})
+    fields = dict(zip(hardware.get('fields', []), hardware.get('values', [])))
+    result['hardware'].update(gpu_uuid=fields.get('uuid'), gpu_model=fields.get('name'),
+        pci_bus_id=fields.get('pci.bus_id'), driver_version=fields.get('driver_version'),
+        power_limit_w=float(fields['power.limit']) if fields.get('power.limit') else None,
+        cpu_quota_vcpu=16, memory_quota_bytes=64 * 2**30, concurrent_run_count=1)
     result['evidence_files'] = ['config.json', 'summary.json', 'epochs.jsonl', 'parameter_groups.json']
     atomic_json(ROOT / 'runs' / config['run_id'] / 'result_record.json', result)
 
@@ -126,6 +141,10 @@ def main():
     complete_budget_basis = len(estimates) == 16
     p2 = sum(row['P2_gpu_hours_estimate'] for row in estimates)
     p3 = sum(row['P3_gpu_hours_estimate'] for row in estimates)
+    profile_checkpoint_gib = sum(sum((item['summary'] or {}).get(key, 0) for key in
+        ['best_val_checkpoint_bytes', 'last_checkpoint_bytes', 'task_delta_bytes']) for item in report['P1']) / 2**30
+    additional_slice_upper_gib = sum((item['summary'] or {}).get('best_val_checkpoint_bytes', 0)
+                                    for item in report['P1']) * 5 * 3 / 2**30
     budget = {'measurement_kind': 'estimated_from_measured_P1', 'basis_configurations': len(estimates),
               'required_configurations': 16, 'complete_basis': complete_budget_basis,
               'per_configuration': estimates, 'P2_gpu_hours': p2 if complete_budget_basis else None,
@@ -141,9 +160,13 @@ def main():
               'storage_estimate': {'policy': 'best_val + last + metadata per run; shared data/weights once',
                     'P2_archive_policy': 'retain raw logs and selected model identities, delete optimizer only after stage review',
                     'P3_time_slices': 'not_budgeted_until_P2_timing_freeze',
-                    'P3_best_last_estimated_gib': sum(((item['summary'] or {}).get('best_val_checkpoint_bytes', 0)
-                        + (item['summary'] or {}).get('last_checkpoint_bytes', 0)) * 5 for item in report['P1']) / 2**30
-                        if complete_budget_basis else None}}
+                    'P1_measured_checkpoint_gib': profile_checkpoint_gib,
+                    'P2_full_retention_checkpoint_gib': 3 * profile_checkpoint_gib if complete_budget_basis else None,
+                    'P3_best_last_delta_estimated_gib': 5 * profile_checkpoint_gib if complete_budget_basis else None,
+                    'P1_P2_P3_full_retention_checkpoint_gib': 9 * profile_checkpoint_gib if complete_budget_basis else None,
+                    'P3_three_additional_slice_weights_upper_bound_gib': additional_slice_upper_gib if complete_budget_basis else None,
+                    'dataset_weight_disk_bytes': sum(a['size_bytes'] for a in load_json(ROOT / 'records/assets.json')['assets']),
+                    'storage_plan_must_include_extracted_data_and_25_percent_margin': True}}
     report['concurrency'] = concurrency
     if report['budget_ledger']:
         for item in report['P1']:
