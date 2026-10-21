@@ -25,6 +25,7 @@ def main():
         'cost_calibration': optional(STAGE / 'cost_calibration.json'),
         'stage_status': optional(STAGE / 'stage_status.json'), 'candidates': [],
         'P3_authorized': False, 'centralized_test_authorized': False, 'billing_applicable': False}
+    report['technical_revisions'] = optional(STAGE / 'technical_revisions.json')
     table, curves, inventory = [], [], []
     by_configuration = {}
     for config in runs:
@@ -70,6 +71,9 @@ def main():
         for path in sorted((directory / 'checkpoints').glob('*.pt')):
             inventory.append({'path': str(path.relative_to(ROOT)), 'size_bytes': path.stat().st_size,
                               'sha256': file_hash(path), 'phase': 'P2'})
+    for path in sorted((ROOT / 'technical_revisions').rglob('*.pt')):
+        inventory.append({'path': str(path.relative_to(ROOT)), 'size_bytes': path.stat().st_size,
+                          'sha256': file_hash(path), 'phase': 'P2_technical_revision_not_selection_eligible'})
     # P1 的 40 份已验收模型继续保留，并与旧清单重新核对，不复写旧收据。
     p1 = read(ROOT / 'records/checkpoint_inventory.json')
     for item in p1['files']:

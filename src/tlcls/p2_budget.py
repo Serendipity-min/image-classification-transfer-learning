@@ -5,9 +5,10 @@ import fcntl
 import os
 from pathlib import Path
 import shutil
+import signal
 import time
 
-from .p2_core import CAP_SECONDS, EXIT_RESERVE_SECONDS, ROOT, STAGE, process_alive, read, write
+from .p2_core import CAP_SECONDS, EXIT_RESERVE_SECONDS, ROOT, STAGE, code_commit, process_alive, process_ticks, read, write
 
 
 class Budget:
@@ -58,7 +59,9 @@ class Budget:
             assert all(a['status'] == 'finalized' or a['device'] != device for a in value['attempts'].values())
             value['attempts'][attempt_id] = {'attempt_id': attempt_id, 'run_id': run_id, 'device': device,
                 'kind': kind, 'owner_pid': owner_pid, 'owner_start_ticks': owner_ticks,
-                'guardian_pid': os.getpid(), 'status': 'running', 'started_monotonic': time.monotonic(),
+                'execution_commit': code_commit(),
+                'guardian_pid': os.getpid(), 'guardian_start_ticks': process_ticks(os.getpid()),
+                'status': 'running', 'started_monotonic': time.monotonic(),
                 'started_unix': time.time(), 'child_pid': None, 'child_pgid': None,
                 'main_process_peak_rss_bytes_sampled': 0, 'process_tree_peak_rss_bytes_sampled': 0,
                 'samples': 0}
@@ -90,6 +93,23 @@ class Budget:
             assert value['stop_request']['reason'] in ['owner_process_terminated', 'operator_technical_stop']
             value['events'].append({'reason': 'technical_resume_same_cap', 'monotonic': time.monotonic()})
             value['stop_request'] = None
+
+    def reconcile_dead_guardian(self, attempt_id):
+        item = self.snapshot()['attempts'][attempt_id]
+        if item['status'] == 'finalized':
+            return
+        assert not process_alive(item['guardian_pid'], item.get('guardian_start_ticks'))
+        if item.get('child_pgid'):
+            try:
+                os.killpg(item['child_pgid'], signal.SIGKILL)
+            except ProcessLookupError:
+                pass
+        deadline = time.monotonic() + 2
+        while item.get('child_pid') and process_alive(item['child_pid']) and time.monotonic() < deadline:
+            time.sleep(.05)
+        assert not item.get('child_pid') or not process_alive(item['child_pid'])
+        # 记录至实际确认退出的采样时刻，保守包含最后一次监督间隔，不遗漏失联片段。
+        self.finalize(attempt_id, -signal.SIGKILL, 'dead_guardian_reconciled_until_exit_observed', time.monotonic())
 
 
 class Storage:

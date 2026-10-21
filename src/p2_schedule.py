@@ -190,6 +190,7 @@ def main():
                 if task['guardian'].poll() is None:
                     continue
                 task['log'].close()
+                budget.reconcile_dead_guardian(task['attempt_id'])
                 item = read(ROOT / 'runs' / task['run_id'] / 'summary.json') if (ROOT / 'runs' / task['run_id'] / 'summary.json').exists() else {}
                 if item.get('status') == 'running' or not item:
                     # SIGKILL 不依赖子 finally；父账本已结算，保留最后事务作为恢复边界。

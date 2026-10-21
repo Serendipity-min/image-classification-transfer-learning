@@ -23,7 +23,8 @@ from tlcls.models import (adapters_of, apply_strategy, build_model, head_of, mak
 from tlcls.p2_budget import Budget, Storage
 from tlcls.p2_core import (EXIT_RESERVE_SECONDS, ROOT, STAGE, candidates, code_commit,
                            file_hash, read, require_authorization, scientific_identity, write)
-from tlcls.p2_transaction import EpochTransaction
+from tlcls.p2_core import infrastructure_exception
+from tlcls.p2_transaction import EpochTransaction, committed_summary
 
 
 class StageInterruption(RuntimeError):
@@ -122,6 +123,8 @@ def main():
         'test_evaluator_constructed': False, 'test_metrics': None,
         'scheduler_horizon_epochs': 50, 'warmup_epochs': 5,
         'physical_gpu_index': args.device, 'parallel_peer_run_ids': []}
+    if current:
+        summary.update(committed_summary(current, rows, read(directory / 'current.json')))
     write(directory / 'summary.json', summary)
     model = optimizer = scheduler = None
     start = time.monotonic()
@@ -242,9 +245,12 @@ def main():
     except torch.cuda.OutOfMemoryError as exc:
         summary.update(status='oom', failure={'reason': str(exc), 'attempt_id': attempt_id})
     except Exception as exc:
-        summary.update(status='invalid_protocol', failure={'type': type(exc).__name__, 'reason': str(exc),
+        infrastructure = infrastructure_exception(exc, stopped or bool(budget.snapshot()['stop_request']))
+        summary.update(status='infrastructure_interrupted' if infrastructure else 'invalid_protocol',
+                       failure={'type': type(exc).__name__, 'reason': str(exc),
                        'attempt_id': attempt_id})
-        raise
+        if not infrastructure:
+            raise
     finally:
         # 终值不能误标成峰值；真实采样峰值及被 SIGKILL 的成本以独立父账本为准。
         summary.update(cpu_rss_final_bytes=psutil.Process().memory_info().rss,

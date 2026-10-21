@@ -2,6 +2,7 @@
 
 from collections import defaultdict
 import hashlib
+import errno
 import json
 import math
 import os
@@ -150,3 +151,14 @@ def process_ticks(pid):
 
 def monotonic():
     return time.monotonic()
+
+
+def infrastructure_exception(exc, stop_requested=False):
+    # 不能把科学身份断言或非有限值伪装成基础设施中断。
+    if isinstance(exc, (AssertionError, FloatingPointError)):
+        return False
+    if isinstance(exc, OSError) and exc.errno in [errno.ENOSPC, errno.EDQUOT, errno.EIO, errno.EINTR]:
+        return True
+    if isinstance(exc, RuntimeError):
+        return stop_requested or 'DataLoader worker' in str(exc) or 'storage_exit_reserve' in str(exc)
+    return False

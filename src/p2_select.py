@@ -61,6 +61,9 @@ def inspect_candidate(config):
         assert 0 <= row['validation']['correct'] <= nv
         assert math.isclose(row['validation']['top1_percent'], 100 * row['validation']['correct'] / nv)
     last = rows[12:15]
+    best = max(rows, key=lambda row: (row['validation']['top1_percent'], -row['epoch']))
+    assert current['best_epoch'] == summary['selected_epoch'] == best['epoch']
+    assert summary['best_val_top1_percent'] == best['validation']['top1_percent']
     correct = sum(r['validation']['correct'] for r in last)
     item.update(eligible=True, completed_epochs=15, selection_epochs=[13, 14, 15],
         validation_top1_values=[r['validation']['top1_percent'] for r in last],

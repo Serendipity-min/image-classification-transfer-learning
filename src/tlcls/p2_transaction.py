@@ -9,6 +9,15 @@ import uuid
 from .p2_core import atomic_bytes, canonical, file_hash, fsync_directory, read, write
 
 
+def committed_summary(current, rows, reference):
+    """终轮提交后即使 summary 丢失，也能仅由完整提交恢复全部终结字段。"""
+    assert current and rows and len(rows) == current['completed_epoch']
+    return {'completed_epochs': current['completed_epoch'], 'selected_epoch': current['best_epoch'],
+            'best_val_top1_percent': max(r['validation']['top1_percent'] for r in rows),
+            'optimizer_updates': rows[-1]['cumulative_optimizer_updates'], 'commit': reference,
+            'best_checkpoint': current['best'], 'last_checkpoint': current['last']}
+
+
 class EpochTransaction:
     def __init__(self, directory, scientific_sha):
         self.root = Path(directory)
@@ -73,6 +82,7 @@ class EpochTransaction:
         previous, rows = self.load(rebuild=False, verify_artifacts=False)
         assert epoch == (previous['completed_epoch'] + 1 if previous else 1)
         assert row['epoch'] == epoch
+        assert best_epoch == (epoch if best_writer else previous['best_epoch']), 'best 代次与选模轮次不一致'
         started = time.monotonic()
         last = self.artifact('last', epoch, last_writer)
         fault('after_last')
