@@ -54,6 +54,34 @@ def main():
     batches = [(torch.randn(2, 3, 224, 224, generator=generator), torch.tensor([i, i + 1]),
                 [f'P2_acceptance/synthetic/{2*i}', f'P2_acceptance/synthetic/{2*i+1}']) for i in range(3)]
     results = {}
+    # 真实中断前缀只读恢复，验证新运维代码可继续原状态；不把诊断更新写回正式 run。
+    for run_id in ['P2-svhn-r50-scratch-lr1-s123', 'P2-svhn-r50-full_ft-lr1-s123']:
+        config = next(c for c in candidates() if c['run_id'] == run_id)
+        identity = scientific_identity(config)
+        tx = EpochTransaction(ROOT / 'runs' / run_id, identity['scientific_config_sha256'])
+        commit, rows = tx.load(rebuild=False)
+        payload = torch.load(tx.path(commit['last']['path']), map_location='cpu', weights_only=False)
+        hashes, optimizers = [], []
+        for _ in range(2):
+            restored, _ = build_model(config, device)
+            optimizer, _ = make_optimizer(restored, config)
+            scheduler = UpdateScheduler(optimizer, math.ceil(65931 / 128))
+            restore_checkpoint(tx, commit, restored, optimizer, scheduler, config, identity['scientific_config_sha256'])
+            assert tensor_hash(restored.state_dict().items()) == tensor_hash(payload['model'].items())
+            assert same(payload['optimizer'], optimizer.state_dict())
+            assert scheduler.updates == len(rows) * 516
+            effective_update(restored, optimizer, scheduler, [batches[0]], device)
+            hashes.append(tensor_hash(restored.state_dict().items()))
+            optimizers.append(cpu_tree(optimizer.state_dict()))
+            del restored, optimizer
+        assert hashes[0] == hashes[1] and same(optimizers[0], optimizers[1])
+        results[run_id] = {'restored_completed_epochs': len(rows),
+            'checkpoint_source_commit': payload['execution_commit'],
+            'scientific_config_sha256': identity['scientific_config_sha256'],
+            'restored_full_state_and_optimizer_equal': True, 'repeat_next_update_bitwise_equal': True,
+            'production_checkpoint_modified': False}
+        del payload, optimizers
+        torch.cuda.empty_cache()
     for key in ['r50', 'vitb16']:
         config = next(c for c in candidates() if c['dataset'] == 'svhn' and c['model_key'] == key and
                       c['method'] == 'adapter' and c['tuning_candidate_index'] == 2)

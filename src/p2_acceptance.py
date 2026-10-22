@@ -13,12 +13,78 @@ import unittest
 from tlcls.p2_core import (ROOT, STAGE, candidates, code_commit, execution_identity, file_hash,
                            process_alive, process_ticks, read, scientific_identity, write)
 from tlcls.p2_core import infrastructure_exception
+from tlcls.p2_core import operational_compatibility, scientific_implementation_basis
 from tlcls.p2_transaction import EpochTransaction, committed_summary
 from tlcls.p2_budget import Budget
 from p2_select import choose
 
 
 class Checks(unittest.TestCase):
+    def test_storage_disappearing_entry_and_fail_closed_errors(self):
+        from types import SimpleNamespace
+        from unittest.mock import patch
+        import stat
+        import tlcls.p2_budget as module
+        class Entry:
+            def __init__(self, result): self.result = result
+            def lstat(self):
+                if isinstance(self.result, Exception): raise self.result
+                return self.result
+        metadata = SimpleNamespace(st_mode=stat.S_IFREG, st_dev=1, st_ino=7, st_size=123)
+        link = SimpleNamespace(st_mode=stat.S_IFLNK, st_dev=1, st_ino=8, st_size=100)
+        fake = SimpleNamespace(is_dir=lambda: True, rglob=lambda _: iter([
+            Entry(FileNotFoundError()), Entry(metadata), Entry(metadata), Entry(link)]))
+        with patch.object(module, 'Path', return_value=fake):
+            self.assertEqual(module.Storage.size('fixture'), 123)
+        for error in [PermissionError('fixture'), OSError(5, 'fixture I/O')]:
+            fake.rglob = lambda _, error=error: iter([Entry(error)])
+            with patch.object(module, 'Path', return_value=fake), self.assertRaises(type(error)):
+                module.Storage.size('fixture')
+
+    def test_storage_during_atomic_rename_and_retirement(self):
+        import threading
+        from tlcls.p2_core import atomic_bytes
+        from tlcls.p2_budget import Storage
+        errors = []
+        with tempfile.TemporaryDirectory(prefix='p2_storage_race_') as folder:
+            directory = Path(folder)
+            def writer():
+                try:
+                    for index in range(200):
+                        atomic_bytes(directory / 'ledger.json', b'x' * 1024)
+                        transient = directory / ('retired_' + str(index))
+                        transient.write_bytes(b'y' * 2048)
+                        transient.unlink()
+                except Exception as error: errors.append(error)
+            thread = threading.Thread(target=writer)
+            thread.start()
+            for _ in range(200): self.assertGreaterEqual(Storage.size(directory), 0)
+            thread.join(timeout=10)
+            self.assertFalse(thread.is_alive())
+            self.assertEqual(errors, [])
+            self.assertEqual(Storage.size(directory), 1024)
+
+    def test_operational_compatibility_rejects_science_changes(self):
+        current = execution_identity()
+        for name in ['src/tlcls/engine.py', 'src/tlcls/models.py', 'src/tlcls/p2_transaction.py', 'src/p2_select.py']:
+            altered = deepcopy(current)
+            altered['files'][name] = '0' * 64
+            with self.assertRaises(AssertionError): operational_compatibility(altered)
+        self.assertEqual(operational_compatibility()['scientific_implementation_basis'], scientific_implementation_basis())
+
+    def test_existing_science_identities_and_frozen_plan(self):
+        plan = read(STAGE / 'candidate_plan.json')
+        self.assertEqual(plan['execution_identity'], scientific_implementation_basis())
+        existing = 0
+        for item in plan['runs']:
+            config = item['config']
+            self.assertEqual(item['scientific_identity'], scientific_identity(config))
+            path = ROOT / 'runs' / config['run_id'] / 'scientific.json'
+            if path.exists():
+                self.assertEqual(read(path), scientific_identity(config))
+                existing += 1
+        self.assertEqual(existing, 19)
+
     def test_frozen_assets_splits_and_actual_dependencies(self):
         import importlib.metadata
         for asset in read(ROOT / 'records/assets.json')['assets']:

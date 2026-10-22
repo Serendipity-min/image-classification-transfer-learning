@@ -24,6 +24,7 @@ from tlcls.p2_budget import Budget, Storage
 from tlcls.p2_core import (EXIT_RESERVE_SECONDS, ROOT, STAGE, candidates, code_commit,
                            file_hash, read, require_authorization, scientific_identity, write)
 from tlcls.p2_core import infrastructure_exception
+from tlcls.p2_core import execution_identity, operational_compatibility
 from tlcls.p2_transaction import EpochTransaction, committed_summary
 
 
@@ -118,7 +119,9 @@ def main():
     summary = {'run_id': args.run_id, 'phase': 'P2', 'configuration_id': config['configuration_id'],
         'planned_epochs': 15, 'completed_epochs': current['completed_epoch'] if current else 0,
         'status': 'running', 'scientific_config_sha256': scientific_sha,
-        'execution_commit': code_commit(), 'implementation': identity['scientific_config']['implementation'],
+        'execution_commit': code_commit(), 'implementation': execution_identity(),
+        'scientific_implementation_basis': identity['scientific_config']['implementation'],
+        'operational_compatibility': operational_compatibility(),
         'attempt_ids': [a['attempt_id'] for a in budget.snapshot()['attempts'].values() if a['run_id'] == args.run_id],
         'test_evaluator_constructed': False, 'test_metrics': None,
         'scheduler_horizon_epochs': 50, 'warmup_epochs': 5,
@@ -182,6 +185,8 @@ def main():
                 'scientific_config': identity['scientific_config'], 'completed_epoch': completed,
                 'best_epoch': best_epoch, 'best_value': best_value, 'checkpoint_boundary': 'completed_epoch',
                 'execution_commit': code_commit(), 'includes_all_buffers': True}
+            payload['runtime_execution_identity'] = execution_identity()
+            payload['operational_compatibility'] = operational_compatibility()
             row = {'epoch': completed, 'status': 'completed', 'attempt_id': attempt_id,
                 'scientific_config_sha256': scientific_sha, 'train': training, 'validation': validation,
                 'train_seconds': train_seconds, 'validation_seconds': validation_seconds,
@@ -191,6 +196,8 @@ def main():
                 'lr_by_group_next_update': [g['lr'] for g in optimizer.param_groups],
                 'parallel_peer_run_ids': peers, 'physical_gpu_index': args.device,
                 'cumulative_parent_gpu_seconds_before_commit': budget.run_seconds(args.run_id)}
+            row['runtime_execution_commit'] = code_commit()
+            row['runtime_execution_identity_sha256'] = execution_identity()['scope_sha256']
             best_payload = {'model': model.state_dict(), 'config': config, 'epoch': completed,
                 'validation': validation, 'scientific_config_sha256': scientific_sha,
                 'execution_commit': code_commit(), 'includes_all_buffers': True}
