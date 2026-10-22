@@ -37,7 +37,7 @@ def main():
         '## 工程与科学身份', '',
         'seed=123；每候选 15 个完整 epoch；调度 horizon=50、warmup=5；micro-batch=32、累积=4、有效 batch=128。'
         'BF16 autocast、FP32 参数/loss、TF32 关闭；初始化、冻结权重、数据 split、增强和优化规则沿用原协议。', '',
-        '真实 CPU/GPU 入口验收与执行 commit、文件 SHA 和授权 SHA 绑定。14 项 CPU 检查通过；真实 GPU 检查的恢复 logits 差为 0，'
+        f'真实 CPU/GPU 入口验收与执行 commit、文件 SHA 和授权 SHA 绑定。{read("records/p2/cpu_acceptance.json")["tests_run"]} 项 CPU 检查通过；真实 GPU 检查的恢复 logits 差为 0，'
         '继续更新后完整模型及 optimizer 逐位相同，改变 LR 的恢复被拒绝。四份更新/数据/模型/随机流数学源码与已接受 P1 版本逐字相同。', '',
         '[组合验收](../records/p2/acceptance.json) · [CPU 验收](../records/p2/cpu_acceptance.json) · '
         '[GPU 验收](../records/p2/gpu_acceptance.json) · [独立交付复核](../records/p2/delivery_audit.json)', '',
@@ -73,6 +73,9 @@ def main():
         '初版执行代码 `092bcfb` 的两个未完成前缀因终轮摘要恢复和协调退出分类修正而归档；'
         '旧代码、验收、日志、模型身份及实际费用保留。修正后 `6c0a215` 重新验收并全新执行同一登记候选。'
         '该技术重跑不以得分改善为目的，旧前缀不参与选择。', '',
+        '另有存储统计原子重命名竞态中断，已在 `d66193b` 修复。17 个完成项保持原身份，两个中断前缀按显式运维兼容映射恢复；'
+        '真实运行代码身份与冻结科学基线分开保存，不能把旧摘要的执行 commit 改为新 commit。'
+        '具体原因、全部备份 SHA 和恢复验收见 [存储事故恢复记录](../records/p2/storage_race_recovery.json)。', '',
         '[共享 GPU 台账](../records/p2/gpu_ledger.json) · [逐 attempt 表](P2_attempts.csv) · '
         '[技术修订](../records/p2/technical_revisions.json) · [全阶段校准](../records/p2/cost_calibration.json)', '',
         '## 存储与服务器模型', '',
