@@ -20,6 +20,14 @@ from tlcls.p3_core import operational_compatibility
 
 
 def launch(run_id, device, kind, resume=False):
+    # 在占用账本之前再次核对物理卡；外部新增进程不属于本项目，拒绝抢占或终止它们。
+    expected_gpu = read(STAGE / 'entry_preflight.json')['gpu_devices'][device]['uuid']
+    physical_gpu = subprocess.check_output(['nvidia-smi', '-i', str(device), '--query-gpu=uuid',
+                                            '--format=csv,noheader'], text=True).strip()
+    assert physical_gpu == expected_gpu, 'physical GPU identity changed'
+    jobs = subprocess.check_output(['nvidia-smi', '--query-compute-apps=gpu_uuid,pid',
+                                   '--format=csv,noheader'], text=True).strip().splitlines()
+    assert not any(line.split(',')[0].strip() == expected_gpu for line in jobs), 'target GPU occupied by another process'
     attempt = uuid.uuid4().hex
     (STAGE / 'logs').mkdir(exist_ok=True)
     log = (STAGE / 'logs' / (attempt + '.log')).open('ab')
@@ -95,7 +103,9 @@ def forecast(runs, state, estimates, budget):
         remaining += (50 - epochs) * estimates[run['configuration_id']]
         if epochs == 0:
             remaining += base[run['configuration_id']]['startup_terminal_first_epoch_excess_seconds']
-    reserved = require_authorization(False)['test_compute_reserve_gpu_seconds'] + 2.5 * 3600
+    proposal = read(ROOT / 'reports/P3_proposal.json')
+    reserved = (require_authorization(False)['test_compute_reserve_gpu_seconds'] + 2.5 * 3600
+                + proposal['P3_extra_prefix_save_gpu_hours_upper_scenario'] * 3600)
     used = budget.used(budget.snapshot())
     value = {'actual_gpu_seconds_including_active': used, 'remaining_estimated_gpu_seconds': remaining,
         'projected_total_gpu_hours': (used + remaining) / 3600, 'cap_gpu_hours': 160,
