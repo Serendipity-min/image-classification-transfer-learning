@@ -1,0 +1,9 @@
+{
+  "id": "tlcls-p3-30min",
+  "status": "ACTIVE",
+  "rrule": "FREQ=MINUTELY;INTERVAL=30",
+  "readback_verified": true,
+  "checked_unix": 1792658118.5567296,
+  "normal_runs_quiet": true,
+  "server_fallback_independent_of_desktop": true
+}
