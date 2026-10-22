@@ -10,6 +10,7 @@ from pathlib import Path
 import subprocess
 import time
 import uuid
+from functools import lru_cache
 
 
 ROOT = Path(os.environ.get('TLCLS_ROOT', '/root/user_data/tl_cls_v1')).resolve()
@@ -17,6 +18,10 @@ STAGE = ROOT / 'records/p2'
 CAP_SECONDS = 30 * 3600
 EXIT_RESERVE_SECONDS = 60
 PIPELINE = ['src/tlcls/' + n + '.py' for n in ['common', 'data', 'models', 'engine']]
+SCIENTIFIC_BASE_COMMIT = '6c0a215798a4de319e7c6c55f0bb1b351bf082e0'
+# 仅此轮已审查的运维修订可兼容既有科学身份；更新数学、事务和选择器均不在允许集合中。
+OPERATIONAL_FILES = {'src/tlcls/p2_core.py', 'src/tlcls/p2_budget.py', 'src/p2_train.py',
+                     'src/p2_schedule.py', 'src/p2_acceptance.py', 'src/p2_gpu_acceptance.py'}
 
 
 def canonical(value):
@@ -78,6 +83,28 @@ def execution_identity():
             'mathematical_pipeline_sha256': value_hash({n: files[n] for n in PIPELINE})}
 
 
+@lru_cache(maxsize=1)
+def scientific_implementation_basis():
+    """科学 hash 沿用已验收 6c0；真实新源码身份另记，不修改历史摘要或 checkpoint。"""
+    files = {}
+    for name in execution_identity()['files']:
+        payload = subprocess.check_output(['git', '-C', str(ROOT), 'show', SCIENTIFIC_BASE_COMMIT + ':' + name])
+        files[name] = hashlib.sha256(payload).hexdigest()
+    return {'files': files, 'scope_sha256': value_hash(files),
+            'mathematical_pipeline_sha256': value_hash({n: files[n] for n in PIPELINE})}
+
+
+def operational_compatibility(current=None):
+    current = current or execution_identity()
+    basis = scientific_implementation_basis()
+    assert current['files'].keys() == basis['files'].keys(), '执行文件集合改变，拒绝兼容迁移'
+    changed = sorted(name for name in current['files'] if current['files'][name] != basis['files'][name])
+    assert set(changed) <= OPERATIONAL_FILES, '未审查的数学或事务源码变化，拒绝沿用科学身份'
+    return {'scientific_base_commit': SCIENTIFIC_BASE_COMMIT,
+            'scientific_implementation_basis': basis, 'actual_execution_identity': current,
+            'changed_operational_files': changed, 'historical_receipts_rewritten': False}
+
+
 def candidates():
     matrix = read(ROOT / 'configs/run_matrix.json')
     runs = [r for r in matrix['planned_runs'] if r['phase'] == 'P2']
@@ -119,7 +146,7 @@ def scientific_identity(config, implementation=None):
         'dependency_lock_sha256': file_hash(ROOT / 'records/dependencies.lock'),
         'weight_sha256': asset['sha256'], 'weight_revision': asset['revision'],
         'optimization': protocol['optimization'], 'precision': protocol['precision_and_determinism'],
-        'implementation': implementation or execution_identity()}
+        'implementation': implementation or operational_compatibility()['scientific_implementation_basis']}
     return {'scientific_config': identity, 'scientific_config_sha256': value_hash(identity)}
 
 
@@ -134,6 +161,7 @@ def require_authorization(require_acceptance=True):
         assert receipt['status'] == 'passed' and receipt['execution_commit'] == code_commit()
         assert receipt['execution_identity'] == execution_identity()
         assert receipt['authorization_sha256'] == file_hash(STAGE / 'authorization.json')
+        assert receipt['operational_compatibility'] == operational_compatibility()
     return authorization
 
 

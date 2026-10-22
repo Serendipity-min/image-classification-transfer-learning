@@ -16,6 +16,7 @@ from tlcls.p2_budget import Budget, Storage
 from tlcls.p2_core import (CAP_SECONDS, EXIT_RESERVE_SECONDS, ROOT, STAGE, candidates, code_commit,
                            execution_identity, file_hash, process_alive, process_ticks, read,
                            require_authorization, scientific_identity, write)
+from tlcls.p2_core import operational_compatibility
 
 
 def launch(run_id, device, kind, resume=False):
@@ -45,8 +46,10 @@ def ensure_plan(runs):
     path = STAGE / 'candidate_plan.json'
     if path.exists():
         value = read(path)
-        assert value['execution_identity'] == execution_identity()
+        # 原设备分配和科学候选计划不可改写成新 commit；仅允许显式运维兼容的原身份。
+        assert value['execution_identity'] in [execution_identity(), operational_compatibility()['scientific_implementation_basis']]
         assert [r['config'] for r in value['runs']] == runs
+        assert all(item['scientific_identity'] == scientific_identity(item['config']) for item in value['runs'])
         return value
     estimates = baseline()
     assignments, loads = {}, [0.0, 0.0]
@@ -178,6 +181,9 @@ def main():
             'gpu_receipt_sha256': file_hash(STAGE / 'gpu_acceptance.json'),
             'legacy_P0_receipt_sha256': file_hash(ROOT / 'records/implementation_checks.json'),
             'all_GPU_acceptance_charged_to_P2': True})
+        receipt = read(STAGE / 'acceptance.json')
+        receipt['operational_compatibility'] = operational_compatibility()
+        write(STAGE / 'acceptance.json', receipt)
         return 0
     runs = candidates()
     plan = ensure_plan(runs)
@@ -245,7 +251,8 @@ def main():
                         r['run_id'] not in [a['run_id'] for a in active.values()]]
                     if not ready:
                         waiting = [r for r in waiting if r['run_id'] in priority]
-                    waiting.sort(key=lambda r: (r['run_id'] not in priority,
+                    # 已有完整提交的中断候选先恢复，避免继续发新任务而搁置已保存前缀。
+                    waiting.sort(key=lambda r: (state[r['run_id']]['status'] != 'infrastructure_interrupted', r['run_id'] not in priority,
                         -15 * estimates[r['configuration_id']], r['run_id']))
                     if waiting:
                         r = waiting[0]

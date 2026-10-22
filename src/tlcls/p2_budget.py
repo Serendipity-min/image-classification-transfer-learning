@@ -6,6 +6,7 @@ import os
 from pathlib import Path
 import shutil
 import signal
+import stat as file_stat
 import time
 
 from .p2_core import CAP_SECONDS, EXIT_RESERVE_SECONDS, ROOT, STAGE, code_commit, process_alive, process_ticks, read, write
@@ -120,14 +121,22 @@ class Storage:
     @staticmethod
     def size(path):
         seen, total = set(), 0
-        for item in Path(path).rglob('*'):
-            if item.is_symlink() or not item.is_file():
+        directory = Path(path)
+        if not directory.is_dir():
+            raise FileNotFoundError('存储统计根目录不存在')
+        for item in directory.rglob('*'):
+            try:
+                # 一个 lstat 同时取得类型和大小，避免 is_file 与 stat 之间的原子重命名竞态。
+                metadata = item.lstat()
+            except FileNotFoundError:
+                # 临时 JSON 发布、已提交旧代次回收会正常移除目录项；只忽略 ENOENT。
                 continue
-            stat = item.stat()
-            key = (stat.st_dev, stat.st_ino)
+            if not file_stat.S_ISREG(metadata.st_mode):
+                continue
+            key = (metadata.st_dev, metadata.st_ino)
             if key not in seen:
                 seen.add(key)
-                total += stat.st_size
+                total += metadata.st_size
         return total
 
     def snapshot(self):
