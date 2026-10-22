@@ -33,25 +33,14 @@ class TestData(Dataset):
 
 
 def main():
-    # P2 明确保持测试关闭；在构造任何 TestData 或加载 test checkpoint 之前拒绝。
-    stage_decision = ROOT / 'records/p2/authorization.json'
-    if stage_decision.exists() and not load_json(stage_decision)['centralized_test_authorized']:
-        raise PermissionError('P2 stage: centralized test remains closed')
+    # 缺少独立签名授权即拒绝；必须先过门再构造 TestData 或触碰 CUDA。
+    from tlcls.p3_evaluation import require_test_authorization
     parser = argparse.ArgumentParser()
     parser.add_argument('--manifest', required=True)
     parser.add_argument('--device', type=int, required=True)
     args = parser.parse_args()
     manifest_path = Path(args.manifest).resolve()
-    assert manifest_path.is_relative_to(ROOT.resolve())
-    seal = load_json(ROOT / 'records/P3_sealed.json')
-    assert seal['evaluation_manifest_sha256'] == sha256(manifest_path)
-    formal_ids = {r['run_id'] for r in load_json(ROOT / 'configs/run_matrix.json')['planned_runs'] if r['phase'] == 'P3'}
-    assert set(seal['run_ids']) == formal_ids and len(formal_ids) == 80
-    assert seal['selected_hparams_sha256'] == sha256(ROOT / 'selected_hparams.json')
-    for run_id in formal_ids:
-        status = load_json(ROOT / 'runs' / run_id / 'summary.json')['status']
-        assert status not in ['planned', 'running']
-    manifest = load_json(manifest_path)
+    manifest = require_test_authorization(manifest_path)
     torch.cuda.set_device(args.device)
     setup(0)
     device = torch.device('cuda', args.device)
@@ -83,10 +72,12 @@ def main():
         recalls = np.divide(tp, confusion.sum(1), out=np.zeros(classes), where=confusion.sum(1) != 0)
         f1 = np.divide(2 * tp, confusion.sum(0) + confusion.sum(1), out=np.zeros(classes),
                        where=(confusion.sum(0) + confusion.sum(1)) != 0)
-        name = item['run_id'] + '_' + item['evaluation_role']
+        name = item['evaluation_id']  # run、角色、预算点和 checkpoint 共同确定，切片不会覆盖彼此。
         output = ROOT / 'runs' / item['run_id'] / (name + '_predictions.npz')
         np.savez_compressed(output, sample_id=np.asarray(ids), labels=labels.numpy(), prediction=prediction.numpy(), logits=logits.numpy())
         atomic_json(output.with_suffix('.json'), {'run_id': item['run_id'], 'evaluation_role': item['evaluation_role'],
+            'evaluation_id': item['evaluation_id'], 'budget_fraction': item.get('budget_fraction'),
+            'budget_seconds': item.get('budget_seconds'), 'inference_cache_key': item['inference_cache_key'],
             'checkpoint_sha256': item['checkpoint_sha256'], 'predictions_sha256': sha256(output),
             'n': len(labels), 'top1_percent': float((prediction == labels).float().mean()) * 100,
             'macro_f1': float(f1.mean()), 'balanced_accuracy': float(recalls.mean()),

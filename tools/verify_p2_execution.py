@@ -31,7 +31,7 @@ def main():
         assert child['status'] == 'passed' and child['execution_commit'] == receipt['execution_commit']
         assert child['execution_identity'] == receipt['execution_identity']
     for relative, expected in receipt['execution_identity']['files'].items():
-        assert digest(ROOT / relative) == expected, relative
+        # 后续 P3 可以修复评价门禁；P2 回执只与当时真实 Git 字节核验。
         archived = subprocess.check_output(['git', 'show', receipt['execution_commit'] + ':' + relative], cwd=ROOT)
         assert hashlib.sha256(archived).hexdigest() == expected, relative
     print(json.dumps({'status': 'passed', 'execution_commit': receipt['execution_commit'],
