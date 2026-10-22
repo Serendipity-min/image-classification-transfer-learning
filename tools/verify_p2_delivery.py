@@ -5,6 +5,7 @@ from collections import defaultdict
 import hashlib
 import json
 import math
+import subprocess
 from pathlib import Path
 
 
@@ -33,7 +34,12 @@ def main():
     for item in manifest['files']:
         path = (root / item['path']).resolve()
         assert path.is_relative_to(root)
-        assert path.stat().st_size == item['size_bytes'] and digest(path) == item['sha256'], item['path']
+        # P3 允许新增门禁，但不能改写 P2 的历史身份；旧源码证据从当时 Git 对象核验。
+        if item['path'].startswith('src/'):
+            payload = subprocess.check_output(['git', 'show', manifest['execution_commit'] + ':' + item['path']], cwd=root)
+            assert len(payload) == item['size_bytes'] and hashlib.sha256(payload).hexdigest() == item['sha256']
+        else:
+            assert path.stat().st_size == item['size_bytes'] and digest(path) == item['sha256'], item['path']
     acceptance = read('records/p2/acceptance.json')
     authorization = read('records/p2/authorization.json')
     assert acceptance['status'] == 'passed'
@@ -49,7 +55,8 @@ def main():
         assert child['status'] == 'passed' and child['execution_identity'] == acceptance['execution_identity']
         assert child['execution_commit'] == acceptance['execution_commit']
     for file, sha in acceptance['execution_identity']['files'].items():
-        assert digest(root / file) == sha, file
+        payload = subprocess.check_output(['git', 'show', acceptance['execution_commit'] + ':' + file], cwd=root)
+        assert hashlib.sha256(payload).hexdigest() == sha, file
     compatibility = acceptance.get('operational_compatibility')
     science_basis = compatibility['scientific_implementation_basis'] if compatibility else acceptance['execution_identity']
     runtime_receipts = {acceptance['execution_commit']: acceptance}

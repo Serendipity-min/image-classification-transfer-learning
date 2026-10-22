@@ -1,0 +1,19 @@
+{
+  "schema": "P3_branch_protection_v1",
+  "branch": "codex/p3-execution",
+  "execution_commit": "7247c66175f385e990d61580f1a7ef4f9ef7bf26",
+  "github_platform_protected": false,
+  "github_api_http_status": 403,
+  "github_api_reason": "private repository platform protection requires upgraded plan",
+  "local_push_guard": {
+    "installed": true,
+    "sha256": "913d87ae9c8da25ef82806edb83316b712daaefcf793e16fcf63085d0fec871c",
+    "normal_evidence_push_allowed": true,
+    "delete_rejected": true,
+    "source_change_and_non_fast_forward_rejected": true
+  },
+  "server_execution_pinned_by_commit_and_all_source_sha256": true,
+  "equivalent_protection_approval": "pending_user_decision",
+  "P3_B_authorized": false,
+  "limitation": "local hook does not prevent pushes from another clone or GitHub administrator"
+}

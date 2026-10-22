@@ -1,0 +1,22 @@
+test_50_epochs_best_rng_sampler_metadata_and_nonrollback (__main__.Checks.test_50_epochs_best_rng_sampler_metadata_and_nonrollback) ... ok
+test_80_fresh_50_epoch_five_seed_inputs (__main__.Checks.test_80_fresh_50_epoch_five_seed_inputs) ... ok
+test_evaluation_id_roles_budget_and_cache (__main__.Checks.test_evaluation_id_roles_budget_and_cache) ... ok
+test_every_commit_boundary_and_prefix_crash (__main__.Checks.test_every_commit_boundary_and_prefix_crash) ... ok
+test_fail_closed_missing_corrupt_version_signature_and_seal (__main__.Checks.test_fail_closed_missing_corrupt_version_signature_and_seal) ... ok
+test_frozen_assets_splits_and_actual_dependencies (__main__.Checks.test_frozen_assets_splits_and_actual_dependencies) ... ok
+test_full_save_crossing_threshold_cannot_backdate (__main__.Checks.test_full_save_crossing_threshold_cannot_backdate) ... ok
+test_guardian_sigkill_is_reconciled_once (__main__.Checks.test_guardian_sigkill_is_reconciled_once) ... ok
+test_infrastructure_failure_classification (__main__.Checks.test_infrastructure_failure_classification) ... ok
+test_parallel_ledger_adds_time_once (__main__.Checks.test_parallel_ledger_adds_time_once) ... ok
+test_parent_sigterm_and_sigkill_cleanup_and_reconcile (__main__.Checks.test_parent_sigterm_and_sigkill_cleanup_and_reconcile) ... ok
+test_prefix_model_hash_immutable_under_best_last_GC (__main__.Checks.test_prefix_model_hash_immutable_under_best_last_GC) ... ok
+test_shared_cap_uses_one_drain_deadline (__main__.Checks.test_shared_cap_uses_one_drain_deadline) ... ok
+test_signed_synthetic_seal_identity_and_manifest (__main__.Checks.test_signed_synthetic_seal_identity_and_manifest) ... ok
+test_storage_200GiB_warning_and_safe_exit (__main__.Checks.test_storage_200GiB_warning_and_safe_exit) ... ok
+test_storage_disappearing_entry_and_fail_closed_errors (__main__.Checks.test_storage_disappearing_entry_and_fail_closed_errors) ... ok
+test_storage_during_atomic_rename_and_retirement (__main__.Checks.test_storage_during_atomic_rename_and_retirement) ... ok
+
+----------------------------------------------------------------------
+Ran 17 tests in 10.897s
+
+OK

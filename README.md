@@ -1,15 +1,15 @@
-# 图像分类迁移学习：P2 完成与 PI 审核
+# 图像分类迁移学习：P3 正式训练
 
-协议 `TL-CLS-20261020-v1.0`，更新日期 2026-10-22（北京时间）。
+协议 `TL-CLS-20261020-v1.0`，2026-10-22。P2 48/48 已验收；P3-A 17 项 CPU 与两卡 GPU 恢复验收通过，P3-B 按 80 runs（含 5 seeds）、每 run 50 epochs 的注册矩阵执行，集中测试保持关闭。仓库由用户改为公开，P3 分支已启用 GitHub 平台保护。
 
-**P2 已完成并通过工程与选参验收：48/48 候选、720 个完整 epoch、16 组所选 LR；实际 22.1117 / 30 GPU-hours。P3 与集中测试保持关闭。**
+- [P3 启动验收回执](reports/P3_启动验收回执.md)、[本阶段合同](docs/P3_有条件执行合同.md)。
+- [80-run 解析配置](records/p3/run_manifest.json)、[六项门禁收据](records/p3/acceptance.json)、[真实资源](records/p3/entry_preflight.json)、[分支保护](records/p3/branch_protection.json)。
+- [冻结时间预算](records/p3/time_budget_frozen.json)、[P3 GPU 台账](records/p3/gpu_ledger.json)。运行中账本以服务器实时值为准，GitHub 是注明时点的快照。
+- P3 执行源码固定 `7247c66175f385e990d61580f1a7ef4f9ef7bf26`，源码 SHA 与实际验收绑定；后续证据提交不冒充训练源码提交。
+- 服务器路径固定 `/root/user_data/tl_cls_v1`。160 GPU-hours 独立封顶，200 GiB 人工分配保障，175 GiB 预警及退出空间保护。每30分钟检查一次，正常保持安静。
+- P3-B 完成须独立封存并停止；P3-C、官方测试预测和测试图等待另行明确授权。
 
-- [5 页阶段汇报 PDF](reports/P2_阶段汇报.pdf)、[中文分析汇报](reports/P2_结果汇报.md)、[完整验收回执](reports/P2_验收回执.md)。
-- [16 组全部曲线](reports/P2_figures/)、[三档 LR 比较](reports/P2_LR_comparison.csv)、[48 候选结果](reports/P2_candidate_results.csv)、[选参 JSON](selected_hparams.json)。
-- [P3 提案](docs/P3_阶段审核提案.md)：全包情景约 156.83 GPU-hours、182.80 GiB；建议单独审核 160 GPU-hours、至少 200 GiB。尚未授权。
-- [独立交付复核](records/p2/delivery_audit.json)、[GPU 台账](records/p2/gpu_ledger.json)、[存储采样台账](reports/P2_storage_ledger.csv)、[checkpoint SHA 清单](records/p2/checkpoint_inventory.json)。
-
-17 个候选保留 `6c0a215` 原运行身份，31 个候选以 `d66193b` 完成或恢复。全部实际费用、两次工程事故与修复均留痕。模型继续保存在服务器，本地与 GitHub 仅回收代码、配置、日志、曲线和回执。
+P2 历史报告：[阶段 PDF](reports/P2_阶段汇报.pdf)、[结果分析](reports/P2_结果汇报.md)、[完整验收](reports/P2_验收回执.md)、[冻结 LR](selected_hparams.json)。P2 运行代码与历史回执仍绑定原 `6c0a215` / `d66193b`，未重写；全部模型留服务器。
 
 ## P2 当前入口
 
