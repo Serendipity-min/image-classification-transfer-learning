@@ -1,0 +1,10 @@
+Nature Figure Rendered Collision Audit
+pdf: P2_cifar100_r50_linear_probe.pdf
+pages: 1
+visible text boxes: 40
+stroke paths: 184
+
+
+summary: 0 fail, 0 warn, 0 contained fill overlays, 0 contained image overlays
+verdict: PASS
+note: contained overlays can be intentional; WARN findings need final-size visual review

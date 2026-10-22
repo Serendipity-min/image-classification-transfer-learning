@@ -1,0 +1,10 @@
+{
+  "status": "passed",
+  "P3_proposal_recalculated": true,
+  "initial_17_complete_candidate_summary_and_epochs_unchanged": true,
+  "P3_training_gpu_hours": 121.33284707482804,
+  "P3_all_in_scenario_with_margin_gpu_hours": 156.83102103737588,
+  "P3_storage_scenario_gib": 182.7954264683649,
+  "P3_authorized": false,
+  "centralized_test_authorized": false
+}

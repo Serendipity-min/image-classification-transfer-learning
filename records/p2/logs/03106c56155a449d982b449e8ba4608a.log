@@ -1,0 +1,3 @@
+P2-svhn-r50-full_ft-lr1-s123 epoch=1 validation=19.287469
+P2-svhn-r50-full_ft-lr1-s123 epoch=2 validation=20.966421
+P2-svhn-r50-full_ft-lr1-s123 epoch=3 validation=25.975976

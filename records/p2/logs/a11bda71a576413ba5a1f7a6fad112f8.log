@@ -1,0 +1,15 @@
+P2-cifar100-vitb16-linear_probe-lr2-s123 epoch=1 validation=85.520000
+P2-cifar100-vitb16-linear_probe-lr2-s123 epoch=2 validation=86.280000
+P2-cifar100-vitb16-linear_probe-lr2-s123 epoch=3 validation=85.800000
+P2-cifar100-vitb16-linear_probe-lr2-s123 epoch=4 validation=86.180000
+P2-cifar100-vitb16-linear_probe-lr2-s123 epoch=5 validation=84.280000
+P2-cifar100-vitb16-linear_probe-lr2-s123 epoch=6 validation=85.920000
+P2-cifar100-vitb16-linear_probe-lr2-s123 epoch=7 validation=85.940000
+P2-cifar100-vitb16-linear_probe-lr2-s123 epoch=8 validation=85.520000
+P2-cifar100-vitb16-linear_probe-lr2-s123 epoch=9 validation=85.520000
+P2-cifar100-vitb16-linear_probe-lr2-s123 epoch=10 validation=85.660000
+P2-cifar100-vitb16-linear_probe-lr2-s123 epoch=11 validation=85.480000
+P2-cifar100-vitb16-linear_probe-lr2-s123 epoch=12 validation=86.160000
+P2-cifar100-vitb16-linear_probe-lr2-s123 epoch=13 validation=85.460000
+P2-cifar100-vitb16-linear_probe-lr2-s123 epoch=14 validation=86.220000
+P2-cifar100-vitb16-linear_probe-lr2-s123 epoch=15 validation=86.360000

@@ -1,0 +1,15 @@
+P2-cifar100-r50-full_ft-lr1-s123 epoch=1 validation=1.760000
+P2-cifar100-r50-full_ft-lr1-s123 epoch=2 validation=10.180000
+P2-cifar100-r50-full_ft-lr1-s123 epoch=3 validation=25.180000
+P2-cifar100-r50-full_ft-lr1-s123 epoch=4 validation=38.880000
+P2-cifar100-r50-full_ft-lr1-s123 epoch=5 validation=49.120000
+P2-cifar100-r50-full_ft-lr1-s123 epoch=6 validation=59.140000
+P2-cifar100-r50-full_ft-lr1-s123 epoch=7 validation=64.200000
+P2-cifar100-r50-full_ft-lr1-s123 epoch=8 validation=67.160000
+P2-cifar100-r50-full_ft-lr1-s123 epoch=9 validation=69.240000
+P2-cifar100-r50-full_ft-lr1-s123 epoch=10 validation=71.220000
+P2-cifar100-r50-full_ft-lr1-s123 epoch=11 validation=72.460000
+P2-cifar100-r50-full_ft-lr1-s123 epoch=12 validation=73.600000
+P2-cifar100-r50-full_ft-lr1-s123 epoch=13 validation=74.960000
+P2-cifar100-r50-full_ft-lr1-s123 epoch=14 validation=75.240000
+P2-cifar100-r50-full_ft-lr1-s123 epoch=15 validation=76.120000

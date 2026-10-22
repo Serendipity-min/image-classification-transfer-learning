@@ -1,0 +1,162 @@
+[
+  {
+    "figure": "P2_cifar100_r50_adapter",
+    "audit": "audit_pdf_text.py",
+    "exit_code": 0
+  },
+  {
+    "figure": "P2_cifar100_r50_adapter",
+    "audit": "audit_figure_collisions.py",
+    "exit_code": 0
+  },
+  {
+    "figure": "P2_cifar100_r50_full_ft",
+    "audit": "audit_pdf_text.py",
+    "exit_code": 0
+  },
+  {
+    "figure": "P2_cifar100_r50_full_ft",
+    "audit": "audit_figure_collisions.py",
+    "exit_code": 0
+  },
+  {
+    "figure": "P2_cifar100_r50_linear_probe",
+    "audit": "audit_pdf_text.py",
+    "exit_code": 0
+  },
+  {
+    "figure": "P2_cifar100_r50_linear_probe",
+    "audit": "audit_figure_collisions.py",
+    "exit_code": 0
+  },
+  {
+    "figure": "P2_cifar100_r50_scratch",
+    "audit": "audit_pdf_text.py",
+    "exit_code": 0
+  },
+  {
+    "figure": "P2_cifar100_r50_scratch",
+    "audit": "audit_figure_collisions.py",
+    "exit_code": 0
+  },
+  {
+    "figure": "P2_cifar100_vitb16_adapter",
+    "audit": "audit_pdf_text.py",
+    "exit_code": 0
+  },
+  {
+    "figure": "P2_cifar100_vitb16_adapter",
+    "audit": "audit_figure_collisions.py",
+    "exit_code": 0
+  },
+  {
+    "figure": "P2_cifar100_vitb16_full_ft",
+    "audit": "audit_pdf_text.py",
+    "exit_code": 0
+  },
+  {
+    "figure": "P2_cifar100_vitb16_full_ft",
+    "audit": "audit_figure_collisions.py",
+    "exit_code": 0
+  },
+  {
+    "figure": "P2_cifar100_vitb16_linear_probe",
+    "audit": "audit_pdf_text.py",
+    "exit_code": 0
+  },
+  {
+    "figure": "P2_cifar100_vitb16_linear_probe",
+    "audit": "audit_figure_collisions.py",
+    "exit_code": 0
+  },
+  {
+    "figure": "P2_cifar100_vitb16_scratch",
+    "audit": "audit_pdf_text.py",
+    "exit_code": 0
+  },
+  {
+    "figure": "P2_cifar100_vitb16_scratch",
+    "audit": "audit_figure_collisions.py",
+    "exit_code": 0
+  },
+  {
+    "figure": "P2_svhn_r50_adapter",
+    "audit": "audit_pdf_text.py",
+    "exit_code": 0
+  },
+  {
+    "figure": "P2_svhn_r50_adapter",
+    "audit": "audit_figure_collisions.py",
+    "exit_code": 0
+  },
+  {
+    "figure": "P2_svhn_r50_full_ft",
+    "audit": "audit_pdf_text.py",
+    "exit_code": 0
+  },
+  {
+    "figure": "P2_svhn_r50_full_ft",
+    "audit": "audit_figure_collisions.py",
+    "exit_code": 0
+  },
+  {
+    "figure": "P2_svhn_r50_linear_probe",
+    "audit": "audit_pdf_text.py",
+    "exit_code": 0
+  },
+  {
+    "figure": "P2_svhn_r50_linear_probe",
+    "audit": "audit_figure_collisions.py",
+    "exit_code": 0
+  },
+  {
+    "figure": "P2_svhn_r50_scratch",
+    "audit": "audit_pdf_text.py",
+    "exit_code": 0
+  },
+  {
+    "figure": "P2_svhn_r50_scratch",
+    "audit": "audit_figure_collisions.py",
+    "exit_code": 0
+  },
+  {
+    "figure": "P2_svhn_vitb16_adapter",
+    "audit": "audit_pdf_text.py",
+    "exit_code": 0
+  },
+  {
+    "figure": "P2_svhn_vitb16_adapter",
+    "audit": "audit_figure_collisions.py",
+    "exit_code": 0
+  },
+  {
+    "figure": "P2_svhn_vitb16_full_ft",
+    "audit": "audit_pdf_text.py",
+    "exit_code": 0
+  },
+  {
+    "figure": "P2_svhn_vitb16_full_ft",
+    "audit": "audit_figure_collisions.py",
+    "exit_code": 0
+  },
+  {
+    "figure": "P2_svhn_vitb16_linear_probe",
+    "audit": "audit_pdf_text.py",
+    "exit_code": 0
+  },
+  {
+    "figure": "P2_svhn_vitb16_linear_probe",
+    "audit": "audit_figure_collisions.py",
+    "exit_code": 0
+  },
+  {
+    "figure": "P2_svhn_vitb16_scratch",
+    "audit": "audit_pdf_text.py",
+    "exit_code": 0
+  },
+  {
+    "figure": "P2_svhn_vitb16_scratch",
+    "audit": "audit_figure_collisions.py",
+    "exit_code": 0
+  }
+]

@@ -1,0 +1,29 @@
+{
+  "status": "passed",
+  "figures": 16,
+  "panels_visually_reviewed": 48,
+  "raw_source_epoch_rows": 720,
+  "collision_audits": [
+    "P2_cifar100_r50_adapter.collision-audit.json",
+    "P2_cifar100_r50_full_ft.collision-audit.json",
+    "P2_cifar100_r50_linear_probe.collision-audit.json",
+    "P2_cifar100_r50_scratch.collision-audit.json",
+    "P2_cifar100_vitb16_adapter.collision-audit.json",
+    "P2_cifar100_vitb16_full_ft.collision-audit.json",
+    "P2_cifar100_vitb16_linear_probe.collision-audit.json",
+    "P2_cifar100_vitb16_scratch.collision-audit.json",
+    "P2_svhn_r50_adapter.collision-audit.json",
+    "P2_svhn_r50_full_ft.collision-audit.json",
+    "P2_svhn_r50_linear_probe.collision-audit.json",
+    "P2_svhn_r50_scratch.collision-audit.json",
+    "P2_svhn_vitb16_adapter.collision-audit.json",
+    "P2_svhn_vitb16_full_ft.collision-audit.json",
+    "P2_svhn_vitb16_linear_probe.collision-audit.json",
+    "P2_svhn_vitb16_scratch.collision-audit.json"
+  ],
+  "visual_review": "All panels and full figures reviewed; no clipped text, ambiguous legends or unreported smoothing.",
+  "source_preflight_warnings_reviewed": [
+    "PNG preview with editable PDF/SVG is appropriate for stage review; no TIFF submission required",
+    "one seed per LR, no seed/fold aggregation; epochs are correlated and do not justify a confidence interval"
+  ]
+}

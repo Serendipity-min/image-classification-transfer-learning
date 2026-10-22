@@ -1,0 +1,15 @@
+P2-cifar100-r50-linear_probe-lr2-s123 epoch=1 validation=56.840000
+P2-cifar100-r50-linear_probe-lr2-s123 epoch=2 validation=64.640000
+P2-cifar100-r50-linear_probe-lr2-s123 epoch=3 validation=68.640000
+P2-cifar100-r50-linear_probe-lr2-s123 epoch=4 validation=70.700000
+P2-cifar100-r50-linear_probe-lr2-s123 epoch=5 validation=71.540000
+P2-cifar100-r50-linear_probe-lr2-s123 epoch=6 validation=72.520000
+P2-cifar100-r50-linear_probe-lr2-s123 epoch=7 validation=73.000000
+P2-cifar100-r50-linear_probe-lr2-s123 epoch=8 validation=73.800000
+P2-cifar100-r50-linear_probe-lr2-s123 epoch=9 validation=73.880000
+P2-cifar100-r50-linear_probe-lr2-s123 epoch=10 validation=73.880000
+P2-cifar100-r50-linear_probe-lr2-s123 epoch=11 validation=74.100000
+P2-cifar100-r50-linear_probe-lr2-s123 epoch=12 validation=74.260000
+P2-cifar100-r50-linear_probe-lr2-s123 epoch=13 validation=74.080000
+P2-cifar100-r50-linear_probe-lr2-s123 epoch=14 validation=74.120000
+P2-cifar100-r50-linear_probe-lr2-s123 epoch=15 validation=73.840000

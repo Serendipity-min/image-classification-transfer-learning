@@ -1,0 +1,15 @@
+P2-svhn-r50-linear_probe-lr2-s123 epoch=1 validation=44.266994
+P2-svhn-r50-linear_probe-lr2-s123 epoch=2 validation=55.692056
+P2-svhn-r50-linear_probe-lr2-s123 epoch=3 validation=60.455910
+P2-svhn-r50-linear_probe-lr2-s123 epoch=4 validation=62.844663
+P2-svhn-r50-linear_probe-lr2-s123 epoch=5 validation=64.878515
+P2-svhn-r50-linear_probe-lr2-s123 epoch=6 validation=66.025116
+P2-svhn-r50-linear_probe-lr2-s123 epoch=7 validation=67.199017
+P2-svhn-r50-linear_probe-lr2-s123 epoch=8 validation=67.376467
+P2-svhn-r50-linear_probe-lr2-s123 epoch=9 validation=67.158067
+P2-svhn-r50-linear_probe-lr2-s123 epoch=10 validation=67.745018
+P2-svhn-r50-linear_probe-lr2-s123 epoch=11 validation=68.168168
+P2-svhn-r50-linear_probe-lr2-s123 epoch=12 validation=67.936118
+P2-svhn-r50-linear_probe-lr2-s123 epoch=13 validation=68.236418
+P2-svhn-r50-linear_probe-lr2-s123 epoch=14 validation=68.454818
+P2-svhn-r50-linear_probe-lr2-s123 epoch=15 validation=68.550369

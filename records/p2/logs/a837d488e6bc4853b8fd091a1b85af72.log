@@ -1,0 +1,67 @@
+P2-cifar100-r50-full_ft-lr2-s123 epoch=1 validation=6.500000
+P2-cifar100-r50-full_ft-lr2-s123 epoch=2 validation=33.620000
+P2-cifar100-r50-full_ft-lr2-s123 epoch=3 validation=51.400000
+Traceback (most recent call last):
+  File "/root/user_data/tl_cls_v1/src/tlcls/engine.py", line 81, in _effective_update
+    logits = model(images)
+             ^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/envs/tl_cls_v1/lib/python3.12/site-packages/timm/models/resnet.py", line 636, in forward
+    x = self.forward_features(x)
+        ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/envs/tl_cls_v1/lib/python3.12/site-packages/timm/models/resnet.py", line 624, in forward_features
+    x = self.layer2(x)
+        ^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.12/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+            ^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/envs/tl_cls_v1/lib/python3.12/site-packages/timm/models/resnet.py", line 231, in forward
+    x = self.act3(x)
+        ^^^^^^^^^
+  File "/root/miniconda3/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1918, in __getattr__
+    def __getattr__(self, name: str) -> Any:
+
+  File "/root/miniconda3/lib/python3.12/site-packages/torch/utils/data/_utils/signal_handling.py", line 73, in handler
+    _error_if_any_worker_fails()
+RuntimeError: DataLoader worker (pid 12587) is killed by signal: Terminated. 
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/user_data/tl_cls_v1/src/p2_train.py", line 260, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/root/user_data/tl_cls_v1/src/p2_train.py", line 166, in main
+    training = train_epoch(model, optimizer, scheduler, timed_loader, sampler, config, epoch,
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/user_data/tl_cls_v1/src/tlcls/engine.py", line 128, in train_epoch
+    latest = effective_update(model, optimizer, scheduler, window, device)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/user_data/tl_cls_v1/src/tlcls/engine.py", line 58, in effective_update
+    return _effective_update(model, optimizer, scheduler, batches, device, bf16)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/user_data/tl_cls_v1/src/tlcls/engine.py", line 80, in _effective_update
+    with torch.autocast('cuda', dtype=torch.bfloat16, enabled=bf16):
+  File "/root/miniconda3/lib/python3.12/site-packages/torch/amp/autocast_mode.py", line 358, in __exit__
+    def __exit__(self, exc_type: Any, exc_val: Any, exc_tb: Any):  # type: ignore[override]
+
+  File "/root/miniconda3/lib/python3.12/site-packages/torch/utils/data/_utils/signal_handling.py", line 73, in handler
+    _error_if_any_worker_fails()
+RuntimeError: DataLoader worker (pid 12669) is killed by signal: Terminated. 

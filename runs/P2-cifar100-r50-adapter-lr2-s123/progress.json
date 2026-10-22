@@ -1,0 +1,1 @@
+{"attempt_id":"0c48df1d0a484518861cefa3db108ca2","cpu_rss_current_bytes":3059089408,"cumulative_parent_gpu_seconds":1239.8529836758971,"epoch":15,"epoch_samples":45000,"epoch_train_seconds":77.50752808526158,"latest_loss":0.07645986922499207,"micro_step":1407,"optimizer_step":5280,"scientific_config_sha256":"44b3934c5e206ca1954f2fe5656fea606bf02304758c41f054c3f22ba78b9660"}

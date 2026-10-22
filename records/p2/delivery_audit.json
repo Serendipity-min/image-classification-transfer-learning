@@ -1,0 +1,23 @@
+{
+  "status": "passed",
+  "stage_acceptance": "passed",
+  "execution_commit": "d66193bc3265954094e0badebfcd3279deb69e5a",
+  "manifest_files_verified": 2133,
+  "candidate_counts": {
+    "completed": 48,
+    "epochs": 720,
+    "samples": 39935160,
+    "updates": 312480,
+    "numerical_failure": 0
+  },
+  "configurations_selected": 16,
+  "paired_sampler_groups": 30,
+  "actual_P2_gpu_hours_all_attempts": 22.111704001447393,
+  "attempts": 56,
+  "combined_project_environment_gib": 44.17609513550997,
+  "P1_checkpoints_reverified_server": 40,
+  "P2_checkpoint_index_entries": 128,
+  "checkpoint_bytes_rehashed_at_server": true,
+  "P3_authorized": false,
+  "centralized_test_authorized": false
+}

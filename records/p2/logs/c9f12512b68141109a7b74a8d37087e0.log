@@ -1,0 +1,15 @@
+P2-svhn-r50-adapter-lr2-s123 epoch=1 validation=55.091455
+P2-svhn-r50-adapter-lr2-s123 epoch=2 validation=89.803440
+P2-svhn-r50-adapter-lr2-s123 epoch=3 validation=92.533443
+P2-svhn-r50-adapter-lr2-s123 epoch=4 validation=93.502594
+P2-svhn-r50-adapter-lr2-s123 epoch=5 validation=94.048594
+P2-svhn-r50-adapter-lr2-s123 epoch=6 validation=94.621895
+P2-svhn-r50-adapter-lr2-s123 epoch=7 validation=94.430794
+P2-svhn-r50-adapter-lr2-s123 epoch=8 validation=94.280644
+P2-svhn-r50-adapter-lr2-s123 epoch=9 validation=94.266994
+P2-svhn-r50-adapter-lr2-s123 epoch=10 validation=94.471744
+P2-svhn-r50-adapter-lr2-s123 epoch=11 validation=94.362544
+P2-svhn-r50-adapter-lr2-s123 epoch=12 validation=94.362544
+P2-svhn-r50-adapter-lr2-s123 epoch=13 validation=94.635545
+P2-svhn-r50-adapter-lr2-s123 epoch=14 validation=94.826645
+P2-svhn-r50-adapter-lr2-s123 epoch=15 validation=94.703795

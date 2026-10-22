@@ -1,0 +1,15 @@
+P2-cifar100-vitb16-adapter-lr3-s123 epoch=1 validation=88.620000
+P2-cifar100-vitb16-adapter-lr3-s123 epoch=2 validation=90.120000
+P2-cifar100-vitb16-adapter-lr3-s123 epoch=3 validation=90.740000
+P2-cifar100-vitb16-adapter-lr3-s123 epoch=4 validation=90.580000
+P2-cifar100-vitb16-adapter-lr3-s123 epoch=5 validation=88.940000
+P2-cifar100-vitb16-adapter-lr3-s123 epoch=6 validation=90.080000
+P2-cifar100-vitb16-adapter-lr3-s123 epoch=7 validation=89.520000
+P2-cifar100-vitb16-adapter-lr3-s123 epoch=8 validation=91.460000
+P2-cifar100-vitb16-adapter-lr3-s123 epoch=9 validation=90.640000
+P2-cifar100-vitb16-adapter-lr3-s123 epoch=10 validation=91.480000
+P2-cifar100-vitb16-adapter-lr3-s123 epoch=11 validation=91.520000
+P2-cifar100-vitb16-adapter-lr3-s123 epoch=12 validation=90.940000
+P2-cifar100-vitb16-adapter-lr3-s123 epoch=13 validation=91.280000
+P2-cifar100-vitb16-adapter-lr3-s123 epoch=14 validation=91.760000
+P2-cifar100-vitb16-adapter-lr3-s123 epoch=15 validation=91.240000

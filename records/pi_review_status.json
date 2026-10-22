@@ -2,13 +2,17 @@
   "protocol_id": "TL-CLS-20261020-v1.0",
   "date": "2026-10-22",
   "timezone": "Asia/Shanghai",
-  "status": "P2_recovered_running_P3_pending",
+  "status": "P2_completed_verified_awaiting_P3_PI_review",
   "P0": "passed",
   "P1": "completed_and_audited",
   "P2": {
-    "status": "resumed_after_storage_race_acceptance",
+    "status": "completed_and_audited",
     "authorized": true,
-    "completed_at_interruption": 17
+    "completed_at_interruption": 17,
+    "completed_candidates": 48,
+    "completed_epochs": 720,
+    "actual_gpu_hours": 22.111704001447393,
+    "selected_configurations": 16
   },
   "P3": {
     "status": "not_started",
@@ -28,10 +32,18 @@
     "94b02df2ae94097602e40e88783f8c445006fa9a"
   ],
   "review_questions": [
-    "P1 engineering acceptance",
-    "P2 compute budget",
-    "tenant storage quota and archival policy",
-    "P3 separate stage decision"
+    "P2 engineering and selection evidence",
+    "P3 independent 160 GPU-hours proposal",
+    "P3 project/environment allocation at least 200 GiB or explicit retention alternative",
+    "freeze common budget B and accept P3/evaluation entry before activation"
   ],
-  "approval_rule": "Explicit user decision authorizes P2 only; P3 and centralized test remain closed."
+  "approval_rule": "Explicit user decision authorizes P2 only; P3 and centralized test remain closed.",
+  "centralized_test": {
+    "status": "not_started",
+    "authorized": false
+  },
+  "P2_execution_code_commits": [
+    "6c0a215798a4de319e7c6c55f0bb1b351bf082e0",
+    "d66193bc3265954094e0badebfcd3279deb69e5a"
+  ]
 }

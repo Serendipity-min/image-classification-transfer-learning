@@ -1,10 +1,15 @@
-# 图像分类迁移学习：P2 单阶段执行
+# 图像分类迁移学习：P2 完成与 PI 审核
 
 协议 `TL-CLS-20261020-v1.0`，更新日期 2026-10-22（北京时间）。
 
-**当前状态：P2 在完成 17/48 后因存储统计竞态中断；已修复并通过 18 项 CPU 与真实 GPU 恢复验收，从两份中断前缀继续。P3 与集中测试保持关闭。**
+**P2 已完成并通过工程与选参验收：48/48 候选、720 个完整 epoch、16 组所选 LR；实际 22.1117 / 30 GPU-hours。P3 与集中测试保持关闭。**
 
-[2026-10-22 中断原因、恢复验收及剩余预算](reports/P2_中断与恢复回执.md)。当前恢复执行提交为 `d66193b`；历史 `6c0a215` 运行及收据保留。每 30 分钟后台检查，完整阶段验收待 48 候选终态后进行。
+- [5 页阶段汇报 PDF](reports/P2_阶段汇报.pdf)、[中文分析汇报](reports/P2_结果汇报.md)、[完整验收回执](reports/P2_验收回执.md)。
+- [16 组全部曲线](reports/P2_figures/)、[三档 LR 比较](reports/P2_LR_comparison.csv)、[48 候选结果](reports/P2_candidate_results.csv)、[选参 JSON](selected_hparams.json)。
+- [P3 提案](docs/P3_阶段审核提案.md)：全包情景约 156.83 GPU-hours、182.80 GiB；建议单独审核 160 GPU-hours、至少 200 GiB。尚未授权。
+- [独立交付复核](records/p2/delivery_audit.json)、[GPU 台账](records/p2/gpu_ledger.json)、[存储采样台账](reports/P2_storage_ledger.csv)、[checkpoint SHA 清单](records/p2/checkpoint_inventory.json)。
+
+17 个候选保留 `6c0a215` 原运行身份，31 个候选以 `d66193b` 完成或恢复。全部实际费用、两次工程事故与修复均留痕。模型继续保存在服务器，本地与 GitHub 仅回收代码、配置、日志、曲线和回执。
 
 ## P2 当前入口
 
@@ -24,7 +29,7 @@
 4. [预算补充](reports/acceptance_addendum.json)、[分配置预算及两卡排程提案](records/budget_plan.json)。
 5. [PI 决定模板](docs/PI_审核决定模板.md)、[机器可读阶段状态](records/pi_review_status.json)。
 
-## 本轮完成情况
+## 已接受的 P0/P1 工程数据（历史）
 
 | 项目 | 实测结果 |
 |---|---|

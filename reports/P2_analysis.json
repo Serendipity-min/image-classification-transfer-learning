@@ -1,0 +1,261 @@
+{
+  "selection_rule": "mean validation Top-1 epochs13-15, exact ties smaller LR",
+  "seed": 123,
+  "test_evaluation_performed": false,
+  "selected_LR_comparisons": [
+    {
+      "configuration_id": "cifar100-r50-scratch",
+      "learning_rates": [
+        0.0003,
+        0.001,
+        0.003
+      ],
+      "mean_val_top1_epochs13_15": [
+        58.85333333333333,
+        65.21333333333334,
+        66.06666666666666
+      ],
+      "selected_learning_rate": 0.003,
+      "selected_run_id": "P2-cifar100-r50-scratch-lr3-s123"
+    },
+    {
+      "configuration_id": "cifar100-r50-full_ft",
+      "learning_rates": [
+        1e-05,
+        3e-05,
+        0.0001
+      ],
+      "mean_val_top1_epochs13_15": [
+        75.44,
+        81.56,
+        83.99333333333334
+      ],
+      "selected_learning_rate": 0.0001,
+      "selected_run_id": "P2-cifar100-r50-full_ft-lr3-s123"
+    },
+    {
+      "configuration_id": "cifar100-r50-linear_probe",
+      "learning_rates": [
+        0.001,
+        0.003,
+        0.01
+      ],
+      "mean_val_top1_epochs13_15": [
+        73.19333333333333,
+        74.01333333333334,
+        72.6
+      ],
+      "selected_learning_rate": 0.003,
+      "selected_run_id": "P2-cifar100-r50-linear_probe-lr2-s123"
+    },
+    {
+      "configuration_id": "cifar100-r50-adapter",
+      "learning_rates": [
+        0.0001,
+        0.0003,
+        0.001
+      ],
+      "mean_val_top1_epochs13_15": [
+        82.65333333333334,
+        82.36,
+        82.21333333333334
+      ],
+      "selected_learning_rate": 0.0001,
+      "selected_run_id": "P2-cifar100-r50-adapter-lr1-s123"
+    },
+    {
+      "configuration_id": "cifar100-vitb16-scratch",
+      "learning_rates": [
+        0.0003,
+        0.001,
+        0.003
+      ],
+      "mean_val_top1_epochs13_15": [
+        39.75333333333333,
+        6.24,
+        5.653333333333333
+      ],
+      "selected_learning_rate": 0.0003,
+      "selected_run_id": "P2-cifar100-vitb16-scratch-lr1-s123"
+    },
+    {
+      "configuration_id": "cifar100-vitb16-full_ft",
+      "learning_rates": [
+        1e-05,
+        3e-05,
+        0.0001
+      ],
+      "mean_val_top1_epochs13_15": [
+        92.14,
+        89.84,
+        85.03333333333333
+      ],
+      "selected_learning_rate": 1e-05,
+      "selected_run_id": "P2-cifar100-vitb16-full_ft-lr1-s123"
+    },
+    {
+      "configuration_id": "cifar100-vitb16-linear_probe",
+      "learning_rates": [
+        0.001,
+        0.003,
+        0.01
+      ],
+      "mean_val_top1_epochs13_15": [
+        87.30666666666667,
+        86.01333333333334,
+        85.8
+      ],
+      "selected_learning_rate": 0.001,
+      "selected_run_id": "P2-cifar100-vitb16-linear_probe-lr1-s123"
+    },
+    {
+      "configuration_id": "cifar100-vitb16-adapter",
+      "learning_rates": [
+        0.0001,
+        0.0003,
+        0.001
+      ],
+      "mean_val_top1_epochs13_15": [
+        92.72,
+        91.96666666666667,
+        91.42666666666666
+      ],
+      "selected_learning_rate": 0.0001,
+      "selected_run_id": "P2-cifar100-vitb16-adapter-lr1-s123"
+    },
+    {
+      "configuration_id": "svhn-r50-scratch",
+      "learning_rates": [
+        0.0003,
+        0.001,
+        0.003
+      ],
+      "mean_val_top1_epochs13_15": [
+        95.25434525434525,
+        95.37264537264537,
+        95.24524524524524
+      ],
+      "selected_learning_rate": 0.001,
+      "selected_run_id": "P2-svhn-r50-scratch-lr2-s123"
+    },
+    {
+      "configuration_id": "svhn-r50-full_ft",
+      "learning_rates": [
+        1e-05,
+        3e-05,
+        0.0001
+      ],
+      "mean_val_top1_epochs13_15": [
+        89.31658931658932,
+        93.89389389389389,
+        94.97224497224497
+      ],
+      "selected_learning_rate": 0.0001,
+      "selected_run_id": "P2-svhn-r50-full_ft-lr3-s123"
+    },
+    {
+      "configuration_id": "svhn-r50-linear_probe",
+      "learning_rates": [
+        0.001,
+        0.003,
+        0.01
+      ],
+      "mean_val_top1_epochs13_15": [
+        66.70761670761671,
+        68.41386841386841,
+        67.97251797251798
+      ],
+      "selected_learning_rate": 0.003,
+      "selected_run_id": "P2-svhn-r50-linear_probe-lr2-s123"
+    },
+    {
+      "configuration_id": "svhn-r50-adapter",
+      "learning_rates": [
+        0.0001,
+        0.0003,
+        0.001
+      ],
+      "mean_val_top1_epochs13_15": [
+        94.08044408044408,
+        94.72199472199472,
+        95.03139503139504
+      ],
+      "selected_learning_rate": 0.001,
+      "selected_run_id": "P2-svhn-r50-adapter-lr3-s123"
+    },
+    {
+      "configuration_id": "svhn-vitb16-scratch",
+      "learning_rates": [
+        0.0003,
+        0.001,
+        0.003
+      ],
+      "mean_val_top1_epochs13_15": [
+        83.51533351533351,
+        31.11293111293111,
+        18.91891891891892
+      ],
+      "selected_learning_rate": 0.0003,
+      "selected_run_id": "P2-svhn-vitb16-scratch-lr1-s123"
+    },
+    {
+      "configuration_id": "svhn-vitb16-full_ft",
+      "learning_rates": [
+        1e-05,
+        3e-05,
+        0.0001
+      ],
+      "mean_val_top1_epochs13_15": [
+        96.44644644644644,
+        96.46464646464646,
+        96.15524615524616
+      ],
+      "selected_learning_rate": 3e-05,
+      "selected_run_id": "P2-svhn-vitb16-full_ft-lr2-s123"
+    },
+    {
+      "configuration_id": "svhn-vitb16-linear_probe",
+      "learning_rates": [
+        0.001,
+        0.003,
+        0.01
+      ],
+      "mean_val_top1_epochs13_15": [
+        63.38611338611339,
+        59.928109928109926,
+        53.662753662753666
+      ],
+      "selected_learning_rate": 0.001,
+      "selected_run_id": "P2-svhn-vitb16-linear_probe-lr1-s123"
+    },
+    {
+      "configuration_id": "svhn-vitb16-adapter",
+      "learning_rates": [
+        0.0001,
+        0.0003,
+        0.001
+      ],
+      "mean_val_top1_epochs13_15": [
+        96.3053963053963,
+        96.18254618254618,
+        96.1006461006461
+      ],
+      "selected_learning_rate": 0.0001,
+      "selected_run_id": "P2-svhn-vitb16-adapter-lr1-s123"
+    }
+  ],
+  "selected_grid_position_counts": {
+    "1": 8,
+    "3": 4,
+    "2": 4
+  },
+  "actual_gpu_hours_by_kind": {
+    "candidate": 22.087895403527142,
+    "gpu_acceptance": 0.02380859792025553
+  },
+  "candidate_execution_commit_counts": {
+    "d66193bc3265954094e0badebfcd3279deb69e5a": 31,
+    "6c0a215798a4de319e7c6c55f0bb1b351bf082e0": 17
+  },
+  "results_are_descriptive_validation_only": true
+}

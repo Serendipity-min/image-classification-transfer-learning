@@ -1,0 +1,1 @@
+{"groups":[{"name":"head.weight","peak_lr":0.003,"shape":[10,768],"weight_decay":0.0001},{"name":"head.bias","peak_lr":0.003,"shape":[10],"weight_decay":0.0}],"scientific_config_sha256":"cbbd25d53df0271f3f0fdde3980e4767dc634d701b76d335ee8370c94439c5cc"}

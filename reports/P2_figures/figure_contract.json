@@ -1,0 +1,36 @@
+{
+  "claim": "All registered LR trajectories remain visible, with the pre-registered selection window.",
+  "archetype": "quantitative grid",
+  "backend": "python",
+  "dimensions_mm": [
+    183,
+    72
+  ],
+  "panel_roles": [
+    "Train loss: update behavior",
+    "Validation loss: held-out loss behavior",
+    "Validation Top-1: held-out accuracy and LR selection window"
+  ],
+  "replicate_unit": "one seed 123 per LR; epochs are correlated observations, not replicates",
+  "uncertainty": "none; no seed CI, no tests, no method ranking",
+  "scope": "P2 15 epochs of a 50-epoch scheduler; five warmup epochs; validation only",
+  "selection": "mean validation Top-1 epochs 13-15; exact ties smaller numeric LR",
+  "source_mapping": {
+    "epoch": "x",
+    "train.loss": "panel a",
+    "validation.loss": "panel b",
+    "validation.top1_percent": "panel c",
+    "learning_rate": "series"
+  },
+  "exclusions": [],
+  "smoothing": false,
+  "transformation": "none",
+  "reuse": "style only; all P2 grouping and eligibility logic reads current raw receipts",
+  "target": "stage review, not a journal submission",
+  "minimum_font_pt": 7,
+  "exports": [
+    "PDF",
+    "SVG",
+    "PNG"
+  ]
+}

@@ -1,0 +1,23 @@
+test_corrupt_checkpoint_is_rejected (__main__.Checks.test_corrupt_checkpoint_is_rejected) ... ok
+test_every_transaction_boundary_and_log_repair (__main__.Checks.test_every_transaction_boundary_and_log_repair) ... ok
+test_existing_science_identities_and_frozen_plan (__main__.Checks.test_existing_science_identities_and_frozen_plan) ... ok
+test_frozen_assets_splits_and_actual_dependencies (__main__.Checks.test_frozen_assets_splits_and_actual_dependencies) ... ok
+test_guardian_sigkill_is_reconciled_once (__main__.Checks.test_guardian_sigkill_is_reconciled_once) ... ok
+test_infrastructure_failure_classification (__main__.Checks.test_infrastructure_failure_classification) ... ok
+test_matrix_and_frozen_mathematics (__main__.Checks.test_matrix_and_frozen_mathematics) ... ok
+test_operational_compatibility_rejects_science_changes (__main__.Checks.test_operational_compatibility_rejects_science_changes) ... ok
+test_parallel_ledger_adds_time_once (__main__.Checks.test_parallel_ledger_adds_time_once) ... ok
+test_parent_sigterm_and_sigkill_cleanup_and_reconcile (__main__.Checks.test_parent_sigterm_and_sigkill_cleanup_and_reconcile) ... ok
+test_scientific_identity_changes (__main__.Checks.test_scientific_identity_changes) ... ok
+test_selector_exact_tie_failure_and_incomplete (__main__.Checks.test_selector_exact_tie_failure_and_incomplete) ... ok
+test_selector_reads_epochs_13_to_15_not_peak (__main__.Checks.test_selector_reads_epochs_13_to_15_not_peak) ... ok
+test_shared_cap_uses_one_drain_deadline (__main__.Checks.test_shared_cap_uses_one_drain_deadline) ... ok
+test_storage_disappearing_entry_and_fail_closed_errors (__main__.Checks.test_storage_disappearing_entry_and_fail_closed_errors) ... ok
+test_storage_during_atomic_rename_and_retirement (__main__.Checks.test_storage_during_atomic_rename_and_retirement) ... ok
+test_storage_enforces_confirmed_allocation_and_exit_reserve (__main__.Checks.test_storage_enforces_confirmed_allocation_and_exit_reserve) ... ok
+test_test_entry_closed_before_dataset_creation (__main__.Checks.test_test_entry_closed_before_dataset_creation) ... ok
+
+----------------------------------------------------------------------
+Ran 18 tests in 10.648s
+
+OK

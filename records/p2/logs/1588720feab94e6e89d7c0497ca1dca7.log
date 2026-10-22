@@ -1,0 +1,21 @@
+P2-svhn-vitb16-adapter-lr2-s123 epoch=1 validation=91.113841
+Exception ignored in: <function _MultiProcessingDataLoaderIter.__del__ at 0x7f12697554e0>
+Traceback (most recent call last):
+  File "/root/miniconda3/lib/python3.12/site-packages/torch/utils/data/dataloader.py", line 1604, in __del__
+    self._shutdown_workers()
+  File "/root/miniconda3/lib/python3.12/site-packages/torch/utils/data/dataloader.py", line 1568, in _shutdown_workers
+    w.join(timeout=_utils.MP_STATUS_CHECK_INTERVAL)
+  File "/root/miniconda3/lib/python3.12/multiprocessing/process.py", line 149, in join
+    res = self._popen.wait(timeout)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.12/multiprocessing/popen_fork.py", line 40, in wait
+    if not wait([self.sentinel], timeout):
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.12/multiprocessing/connection.py", line 1128, in wait
+    with _WaitSelector() as selector:
+  File "/root/miniconda3/lib/python3.12/selectors.py", line 202, in __exit__
+    def __exit__(self, *args):
+
+  File "/root/miniconda3/lib/python3.12/site-packages/torch/utils/data/_utils/signal_handling.py", line 73, in handler
+    _error_if_any_worker_fails()
+RuntimeError: DataLoader worker (pid 12704) is killed by signal: Terminated. 

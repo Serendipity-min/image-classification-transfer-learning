@@ -1,0 +1,36 @@
+{
+  "status": "passed",
+  "page_count": 5,
+  "pages": [
+    {
+      "page": 1,
+      "text_characters": 882,
+      "min_font_pt": 8.0,
+      "out_of_page_spans": 0
+    },
+    {
+      "page": 2,
+      "text_characters": 1102,
+      "min_font_pt": 8.0,
+      "out_of_page_spans": 0
+    },
+    {
+      "page": 3,
+      "text_characters": 1192,
+      "min_font_pt": 8.0,
+      "out_of_page_spans": 0
+    },
+    {
+      "page": 4,
+      "text_characters": 990,
+      "min_font_pt": 8.0,
+      "out_of_page_spans": 0
+    },
+    {
+      "page": 5,
+      "text_characters": 1075,
+      "min_font_pt": 8.0,
+      "out_of_page_spans": 0
+    }
+  ]
+}

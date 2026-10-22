@@ -1,0 +1,6 @@
+P2-svhn-r50-scratch-lr1-s123 epoch=1 validation=24.802075
+P2-svhn-r50-scratch-lr1-s123 epoch=2 validation=50.614251
+P2-svhn-r50-scratch-lr1-s123 epoch=3 validation=84.821185
+P2-svhn-r50-scratch-lr1-s123 epoch=4 validation=90.212940
+P2-svhn-r50-scratch-lr1-s123 epoch=5 validation=91.031941
+P2-svhn-r50-scratch-lr1-s123 epoch=6 validation=91.796342

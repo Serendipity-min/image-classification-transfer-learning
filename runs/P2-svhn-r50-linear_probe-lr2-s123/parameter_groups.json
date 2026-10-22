@@ -1,0 +1,1 @@
+{"groups":[{"name":"fc.weight","peak_lr":0.003,"shape":[10,2048],"weight_decay":0.0001},{"name":"fc.bias","peak_lr":0.003,"shape":[10],"weight_decay":0.0}],"scientific_config_sha256":"bffb98b470ff48f0c9f40d7408d4c88d67debeff73b8518decf8cac0a76c8e39"}
