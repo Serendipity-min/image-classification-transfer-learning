@@ -6,13 +6,14 @@ import os
 import shutil
 import subprocess
 from tlcls.p3_core import (ARCHIVE, CAP_SECONDS, ROOT, STAGE, PIPELINE, candidates, code_commit,
-    execution_identity, file_hash, read, value_hash, write)
+    execution_identity, file_hash, read, value_hash, write, canonical)
 from tlcls.p3_budget import Storage
 
 
 def immutable(path, value):
     if path.exists():
-        assert read(path) == value, '已冻结文件不允许覆盖: ' + path.name
+        # JSON 对象会把 GPU 编号键转成字符串；按规范 JSON 字节比较，避免相同冻结清单重入误拒绝。
+        assert canonical(read(path)) == canonical(value), '已冻结文件不允许覆盖: ' + path.name
     else:
         write(path, value)
 
