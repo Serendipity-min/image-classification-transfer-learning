@@ -78,7 +78,7 @@ def main():
                 ledger.stop('owner_process_terminated', grace)
             if local_stop:
                 ledger.stop('operator_technical_stop', grace)
-            if ledger.used(snapshot) >= ledger.cap - EXIT_RESERVE_SECONDS:
+            if ledger.used(snapshot) >= ledger.spending_limit - EXIT_RESERVE_SECONDS:
                 ledger.stop('shared_gpu_budget_hard_stop', grace)
             snapshot = ledger.snapshot()
             stop = snapshot['stop_request']

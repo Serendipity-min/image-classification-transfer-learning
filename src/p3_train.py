@@ -163,7 +163,7 @@ def main():
             if stopped or snapshot['stop_request']:
                 raise StageInterruption('shared_stop_before_epoch')
             estimated = read(STAGE / 'admission_estimates.json')['epoch_seconds'][config['configuration_id']]
-            if budget.used(snapshot) + EXIT_RESERVE_SECONDS + estimated * (len(peers) + 1) * 1.15 > budget.cap:
+            if budget.used(snapshot) + EXIT_RESERVE_SECONDS + estimated * (len(peers) + 1) * 1.15 > budget.spending_limit:
                 raise StageInterruption('budget_cannot_cover_next_complete_epoch_and_exit')
             storage_snapshot = storage.require(4 * 2**30)
             write(STAGE / 'storage_latest.json', storage_snapshot)

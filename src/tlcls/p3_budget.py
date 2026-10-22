@@ -16,6 +16,9 @@ class Budget:
     def __init__(self, path=None, cap=CAP_SECONDS):
         self.path = Path(path or STAGE / 'gpu_ledger.json')
         self.cap = cap
+        # 测试预留不是训练额度；独立台账仍显示完整 160h，上限内额外保留尚未获准的测试栏位。
+        reserved = read(STAGE / 'authorization.json')['test_compute_reserve_gpu_seconds'] if path is None else 0
+        self.spending_limit = self.cap - reserved
         self.path.parent.mkdir(parents=True, exist_ok=True)
 
     @contextmanager
@@ -25,9 +28,11 @@ class Budget:
             fcntl.flock(lock, fcntl.LOCK_EX)
             value = read(self.path) if self.path.exists() else {
                 'schema': 1, 'phase': 'P3', 'cap_gpu_seconds': self.cap, 'attempts': {},
+                'boot_id': Path('/proc/sys/kernel/random/boot_id').read_text().strip(),
                 'stop_request': None, 'events': [], 'P3_authorized': True,
                 'centralized_test_authorized': False}
             assert value['cap_gpu_seconds'] == self.cap
+            assert value['boot_id'] == Path('/proc/sys/kernel/random/boot_id').read_text().strip(), '系统重启后单调时钟身份改变，须人工核算未结算占用'
             try:
                 yield value
             finally:
@@ -56,7 +61,7 @@ class Budget:
         with self.edit() as value:
             assert not value['stop_request'], '阶段停止请求尚未解除'
             assert attempt_id not in value['attempts']
-            assert self.used(value) + EXIT_RESERVE_SECONDS < self.cap
+            assert self.used(value) + EXIT_RESERVE_SECONDS < self.spending_limit
             assert all(a['status'] == 'finalized' or a['device'] != device for a in value['attempts'].values())
             value['attempts'][attempt_id] = {'attempt_id': attempt_id, 'run_id': run_id, 'device': device,
                 'kind': kind, 'owner_pid': owner_pid, 'owner_start_ticks': owner_ticks,

@@ -304,6 +304,42 @@ class Checks(unittest.TestCase):
         self.assertNotEqual(completed.returncode,0)
         self.assertIn('centralized test remains closed',completed.stderr)
 
+    def test_signed_synthetic_seal_identity_and_manifest(self):
+        import hashlib,hmac
+        from unittest.mock import patch
+        import tlcls.p3_evaluation as gate
+        from tlcls.p3_core import canonical
+        with tempfile.TemporaryDirectory() as folder:
+            root=Path(folder); runs=[{'run_id':'synthetic-'+str(i)} for i in range(80)]
+            write(root/'records/p3/run_manifest.json',{'runs':runs})
+            summaries={}
+            for r in runs:
+                p=root/'runs'/r['run_id']/'summary.json'
+                write(p,{'status':'completed'}); summaries[r['run_id']]=file_hash(p)
+            write(root/'selected_hparams.json',{'synthetic':True})
+            manifest=root/'manifest.json'
+            write(manifest,{'schema':'P3_evaluation_manifest_v1','evaluations':[]})
+            seal={'schema':'P3_seal_v1','status':'sealed','evaluation_manifest_sha256':file_hash(manifest),
+                'selected_hparams_sha256':file_hash(root/'selected_hparams.json'),
+                'execution_identity_sha256':'fixture-code','execution_commit':'fixture-commit',
+                'run_ids':[r['run_id'] for r in runs],'summary_sha256':summaries}
+            seal_path=root/'records/P3_sealed.json';write(seal_path,seal)
+            auth={'schema':'P3_C_authorization_v1','centralized_test_authorized':True,'separate_user_approval':True,
+                'seal_sha256':file_hash(seal_path),'evaluation_manifest_sha256':file_hash(manifest),
+                'selected_hparams_sha256':file_hash(root/'selected_hparams.json'),
+                'execution_identity_sha256':'fixture-code'}
+            secret=os.urandom(32).hex()
+            auth['signature_hmac_sha256']=hmac.new(secret.encode(),canonical(auth),hashlib.sha256).hexdigest()
+            write(root/'records/p3/test_authorization.json',auth)
+            with patch.dict(os.environ,{'TLCLS_TEST_APPROVAL_HMAC_KEY':secret}), \
+                 patch.object(gate,'execution_identity',return_value={'scope_sha256':'fixture-code'}), \
+                 patch.object(gate,'code_commit',return_value='fixture-commit'):
+                self.assertEqual(gate.require_test_authorization(manifest,root)['evaluations'],[])
+                with patch.object(gate,'execution_identity',return_value={'scope_sha256':'other-code'}):
+                    with self.assertRaises(PermissionError):gate.require_test_authorization(manifest,root)
+                manifest.write_bytes(b'{}')
+                with self.assertRaises(PermissionError):gate.require_test_authorization(manifest,root)
+
     def test_evaluation_id_roles_budget_and_cache(self):
         from tlcls.p3_evaluation import evaluation_id, cache_key
         base={'run_id':'synthetic','evaluation_role':'budget_prefix','budget_fraction':.25,

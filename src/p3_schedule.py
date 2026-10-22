@@ -253,16 +253,22 @@ def main():
                         r = waiting[0]
                         snapshot = budget.snapshot()
                         needed = 1.15 * estimates[r['configuration_id']] * (len(active) + 1) + EXIT_RESERVE_SECONDS
-                        if budget.used(snapshot) + needed >= budget.cap:
+                        if budget.used(snapshot) + needed >= budget.spending_limit:
                             hold = 'insufficient_budget_for_next_legal_epoch_boundary'
                             break
                         active[device] = launch(r['run_id'], device, 'candidate',
                             resume=(ROOT / 'runs' / r['run_id'] / 'scientific.json').exists())
             # 进程内安全监督持续执行；桌面端只按 30 分钟轮询。
             time.sleep(3)
+    except BaseException as error:
+        # 保留最初异常类别和 traceback，不能让 finally 的通用退出原因掩盖根因。
+        import traceback
+        hold = 'scheduler_exception:' + type(error).__name__
+        write(STAGE / 'scheduler_failure.json', {'reason': hold, 'traceback': traceback.format_exc(),
+            'execution_commit': code_commit(), 'unix': time.time(), 'automatic_restart_performed': False})
     finally:
         if active:
-            request = budget.stop('operator_technical_stop')
+            request = budget.stop(hold or 'operator_technical_stop')
             # 所有守护进程共享同一个期限；不逐个等待完整 grace，避免两卡超预算。
             while active and time.monotonic() < request['drain_deadline_monotonic'] + 3:
                 for device, task in list(active.items()):

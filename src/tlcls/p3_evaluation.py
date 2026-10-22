@@ -3,7 +3,7 @@ import hashlib
 import hmac
 import os
 from pathlib import Path
-from .p3_core import ROOT, STAGE, canonical, file_hash, read, value_hash
+from .p3_core import ROOT, STAGE, canonical, file_hash, read, value_hash, execution_identity, code_commit
 
 
 def evaluation_id(item):
@@ -37,6 +37,8 @@ def require_test_authorization(manifest_path, root=None):
         assert auth['evaluation_manifest_sha256'] == seal['evaluation_manifest_sha256'] == file_hash(path)
         assert auth['selected_hparams_sha256'] == seal['selected_hparams_sha256'] == file_hash(root / 'selected_hparams.json')
         assert auth['execution_identity_sha256'] == seal['execution_identity_sha256']
+        assert seal['execution_identity_sha256'] == execution_identity()['scope_sha256']
+        assert seal['execution_commit'] == code_commit()
         runs = read(root / 'records/p3/run_manifest.json')['runs']
         formal_ids = {r['run_id'] for r in runs}
         assert len(runs) == len(formal_ids) == 80 and set(seal['run_ids']) == formal_ids
