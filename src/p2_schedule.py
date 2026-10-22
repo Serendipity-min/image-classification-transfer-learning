@@ -251,7 +251,8 @@ def main():
                         r['run_id'] not in [a['run_id'] for a in active.values()]]
                     if not ready:
                         waiting = [r for r in waiting if r['run_id'] in priority]
-                    waiting.sort(key=lambda r: (r['run_id'] not in priority,
+                    # 已有完整提交的中断候选先恢复，避免继续发新任务而搁置已保存前缀。
+                    waiting.sort(key=lambda r: (state[r['run_id']]['status'] != 'infrastructure_interrupted', r['run_id'] not in priority,
                         -15 * estimates[r['configuration_id']], r['run_id']))
                     if waiting:
                         r = waiting[0]
