@@ -1,0 +1,15 @@
+P2-svhn-vitb16-scratch-lr1-s123 epoch=1 validation=46.000546
+P2-svhn-vitb16-scratch-lr1-s123 epoch=2 validation=65.820366
+P2-svhn-vitb16-scratch-lr1-s123 epoch=3 validation=74.829375
+P2-svhn-vitb16-scratch-lr1-s123 epoch=4 validation=75.894076
+P2-svhn-vitb16-scratch-lr1-s123 epoch=5 validation=79.797980
+P2-svhn-vitb16-scratch-lr1-s123 epoch=6 validation=80.753481
+P2-svhn-vitb16-scratch-lr1-s123 epoch=7 validation=82.541633
+P2-svhn-vitb16-scratch-lr1-s123 epoch=8 validation=80.398580
+P2-svhn-vitb16-scratch-lr1-s123 epoch=9 validation=82.227682
+P2-svhn-vitb16-scratch-lr1-s123 epoch=10 validation=81.517882
+P2-svhn-vitb16-scratch-lr1-s123 epoch=11 validation=78.897079
+P2-svhn-vitb16-scratch-lr1-s123 epoch=12 validation=83.428883
+P2-svhn-vitb16-scratch-lr1-s123 epoch=13 validation=83.756484
+P2-svhn-vitb16-scratch-lr1-s123 epoch=14 validation=83.415233
+P2-svhn-vitb16-scratch-lr1-s123 epoch=15 validation=83.374283

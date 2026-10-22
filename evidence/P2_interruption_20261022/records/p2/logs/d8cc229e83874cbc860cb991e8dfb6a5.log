@@ -1,0 +1,15 @@
+P2-svhn-vitb16-adapter-lr3-s123 epoch=1 validation=93.352443
+P2-svhn-vitb16-adapter-lr3-s123 epoch=2 validation=94.717445
+P2-svhn-vitb16-adapter-lr3-s123 epoch=3 validation=95.031395
+P2-svhn-vitb16-adapter-lr3-s123 epoch=4 validation=95.522796
+P2-svhn-vitb16-adapter-lr3-s123 epoch=5 validation=95.918646
+P2-svhn-vitb16-adapter-lr3-s123 epoch=6 validation=95.413595
+P2-svhn-vitb16-adapter-lr3-s123 epoch=7 validation=96.300846
+P2-svhn-vitb16-adapter-lr3-s123 epoch=8 validation=96.027846
+P2-svhn-vitb16-adapter-lr3-s123 epoch=9 validation=96.041496
+P2-svhn-vitb16-adapter-lr3-s123 epoch=10 validation=96.218946
+P2-svhn-vitb16-adapter-lr3-s123 epoch=11 validation=96.123396
+P2-svhn-vitb16-adapter-lr3-s123 epoch=12 validation=96.177996
+P2-svhn-vitb16-adapter-lr3-s123 epoch=13 validation=96.150696
+P2-svhn-vitb16-adapter-lr3-s123 epoch=14 validation=95.877696
+P2-svhn-vitb16-adapter-lr3-s123 epoch=15 validation=96.273546

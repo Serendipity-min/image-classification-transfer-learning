@@ -1,0 +1,15 @@
+P2-cifar100-vitb16-full_ft-lr2-s123 epoch=1 validation=87.900000
+P2-cifar100-vitb16-full_ft-lr2-s123 epoch=2 validation=89.640000
+P2-cifar100-vitb16-full_ft-lr2-s123 epoch=3 validation=90.920000
+P2-cifar100-vitb16-full_ft-lr2-s123 epoch=4 validation=90.760000
+P2-cifar100-vitb16-full_ft-lr2-s123 epoch=5 validation=90.140000
+P2-cifar100-vitb16-full_ft-lr2-s123 epoch=6 validation=90.400000
+P2-cifar100-vitb16-full_ft-lr2-s123 epoch=7 validation=89.680000
+P2-cifar100-vitb16-full_ft-lr2-s123 epoch=8 validation=89.860000
+P2-cifar100-vitb16-full_ft-lr2-s123 epoch=9 validation=89.620000
+P2-cifar100-vitb16-full_ft-lr2-s123 epoch=10 validation=90.100000
+P2-cifar100-vitb16-full_ft-lr2-s123 epoch=11 validation=90.320000
+P2-cifar100-vitb16-full_ft-lr2-s123 epoch=12 validation=90.120000
+P2-cifar100-vitb16-full_ft-lr2-s123 epoch=13 validation=89.660000
+P2-cifar100-vitb16-full_ft-lr2-s123 epoch=14 validation=89.900000
+P2-cifar100-vitb16-full_ft-lr2-s123 epoch=15 validation=89.960000

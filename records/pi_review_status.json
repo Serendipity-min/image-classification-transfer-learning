@@ -1,13 +1,14 @@
 {
   "protocol_id": "TL-CLS-20261020-v1.0",
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "timezone": "Asia/Shanghai",
-  "status": "P2_authorized_running_P3_pending",
+  "status": "P2_recovered_running_P3_pending",
   "P0": "passed",
   "P1": "completed_and_audited",
   "P2": {
-    "status": "running_after_launch_acceptance",
-    "authorized": true
+    "status": "resumed_after_storage_race_acceptance",
+    "authorized": true,
+    "completed_at_interruption": 17
   },
   "P3": {
     "status": "not_started",
@@ -18,7 +19,7 @@
     "accepted_P0_P1_commit": "b485177a393b8532e07d1504a64629ad54043d2b",
     "authorized_next_phase": "P2",
     "hard_cap_gpu_hours": 30,
-    "execution_commit": "6c0a215798a4de319e7c6c55f0bb1b351bf082e0"
+    "execution_commit": "d66193bc3265954094e0badebfcd3279deb69e5a"
   },
   "pi_reviewer": null,
   "decision_timestamp": null,

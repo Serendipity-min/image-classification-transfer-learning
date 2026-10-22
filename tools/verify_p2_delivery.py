@@ -20,6 +20,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--root', type=Path, default=Path(__file__).resolve().parents[1])
     parser.add_argument('--output', type=Path)
+    parser.add_argument('--allow-incomplete', action='store_true')
     args = parser.parse_args()
     root = args.root.resolve()
 
@@ -27,7 +28,8 @@ def main():
         return json.loads((root / relative).read_text(encoding='utf-8'))
 
     manifest = read('records/p2/evidence_manifest.json')
-    assert manifest['candidates_terminal'] and manifest['all_configurations_selected']
+    if not args.allow_incomplete:
+        assert manifest['candidates_terminal'] and manifest['all_configurations_selected']
     for item in manifest['files']:
         path = (root / item['path']).resolve()
         assert path.is_relative_to(root)
@@ -48,22 +50,36 @@ def main():
         assert child['execution_commit'] == acceptance['execution_commit']
     for file, sha in acceptance['execution_identity']['files'].items():
         assert digest(root / file) == sha, file
+    compatibility = acceptance.get('operational_compatibility')
+    science_basis = compatibility['scientific_implementation_basis'] if compatibility else acceptance['execution_identity']
+    runtime_receipts = {acceptance['execution_commit']: acceptance}
+    for path in (root / 'records/p2/acceptance_history').glob('*/acceptance.json'):
+        prior = json.loads(path.read_text(encoding='utf-8'))
+        assert prior['status'] == 'passed'
+        runtime_receipts[prior['execution_commit']] = prior
     matrix = read('configs/run_matrix.json')
     runs = [r for r in matrix['planned_runs'] if r['phase'] == 'P2']
     assert len(runs) == len({r['run_id'] for r in runs}) == 48
     selected = read('selected_hparams.json')
-    assert selected['all_configurations_selected'] and len(selected['configurations']) == 16
+    assert len(selected['configurations']) == 16
+    if not args.allow_incomplete:
+        assert selected['all_configurations_selected']
     assert not selected['P3_authorized'] and not selected['centralized_test_authorized']
     groups, orders, heads = defaultdict(list), defaultdict(set), defaultdict(set)
     counts = defaultdict(int)
     for config in runs:
         name = 'runs/' + config['run_id'] + '/'
+        if not (root / name / 'summary.json').exists():
+            assert args.allow_incomplete
+            counts['planned'] += 1
+            groups[config['configuration_id']].append((None, config['learning_rate'], config['run_id']))
+            continue
         assert read(name + 'config.json') == config
         science = read(name + 'scientific.json')
         sha = hashlib.sha256(canonical(science['scientific_config'])).hexdigest()
         assert sha == science['scientific_config_sha256']
         identity = science['scientific_config']
-        assert identity['implementation'] == acceptance['execution_identity']
+        assert identity['implementation'] == science_basis
         asset = next(a for a in read('records/assets.json')['assets'] if a['key'] == config['model_key'] + '_model.safetensors')
         assert identity['weight_sha256'] == asset['sha256'] and identity['weight_revision'] == asset['revision']
         for key, value in identity['configuration'].items():
@@ -77,18 +93,26 @@ def main():
         assert (config['micro_batch_size'], config['gradient_accumulation_steps'], config['effective_batch_size']) == (32, 4, 128)
         assert config['autocast_dtype'] == 'bfloat16' and not config['test_during_training']
         summary = read(name + 'summary.json')
-        assert summary['execution_commit'] == acceptance['execution_commit']
+        # 历史完成项保持原 commit；恢复项使用真实新 commit，不把原收据改写为新源码。
+        assert summary['execution_commit'] in runtime_receipts
+        runtime = runtime_receipts[summary['execution_commit']]['execution_identity']
+        assert summary['implementation'] == runtime
         assert summary['scientific_config_sha256'] == sha
         assert not summary['test_evaluator_constructed'] and summary['test_metrics'] is None
         status = summary['status']
-        assert status in ['completed', 'numerical_failure'], (config['run_id'], status)
+        allowed = ['completed', 'numerical_failure'] + (['infrastructure_interrupted'] if args.allow_incomplete else [])
+        assert status in allowed, (config['run_id'], status)
         counts[status] += 1
         # 数值失败现场只核对身份和保留状态，不将其部分轮次加入完整候选均值。
         if status == 'numerical_failure':
             assert summary['failure'] and summary['failure_state']
             groups[config['configuration_id']].append((None, config['learning_rate'], config['run_id']))
             continue
-        assert summary['completed_epochs'] == 15
+        completed_epochs = summary['completed_epochs']
+        assert completed_epochs == 15 if status == 'completed' else 0 <= completed_epochs < 15
+        if completed_epochs == 0:
+            groups[config['configuration_id']].append((None, config['learning_rate'], config['run_id']))
+            continue
         reference = read(name + 'current.json')
         commits = []
         while reference:
@@ -101,14 +125,17 @@ def main():
         commits.reverse()
         rows = [c['epoch_row'] for c in commits]
         log = [json.loads(line) for line in (root / name / 'epochs.jsonl').read_text(encoding='utf-8').splitlines()]
-        assert rows == log and [r['epoch'] for r in rows] == list(range(1, 16))
-        assert [c['completed_epoch'] for c in commits] == list(range(1, 16))
+        assert rows == log and [r['epoch'] for r in rows] == list(range(1, completed_epochs + 1))
+        assert [c['completed_epoch'] for c in commits] == list(range(1, completed_epochs + 1))
         clocks = [c['cumulative_gpu_seconds_at_commit'] for c in commits]
         assert all(b >= a for a, b in zip(clocks, clocks[1:]))
         split = read('records/' + config['dataset'] + '_split.json')
         n, nv = len(split['train_indices']), len(split['validation_indices'])
         for row in rows:
             epoch = row['epoch']
+            if 'runtime_execution_commit' in row:
+                actual_runtime = runtime_receipts[row['runtime_execution_commit']]['execution_identity']
+                assert row['runtime_execution_identity_sha256'] == actual_runtime['scope_sha256']
             assert row['status'] == 'completed' and row['scientific_config_sha256'] == sha
             assert row['train']['samples'] == n and row['validation']['samples'] == nv
             assert row['train']['optimizer_updates'] == math.ceil(n / 128)
@@ -126,6 +153,10 @@ def main():
         assert summary['best_val_top1_percent'] == best['validation']['top1_percent']
         assert commits[-1]['best'] == summary['best_checkpoint']
         assert commits[-1]['last'] == summary['last_checkpoint']
+        if status != 'completed':
+            # 未完成的有效前缀照常核验，但不能把其均值当成完整候选成绩。
+            groups[config['configuration_id']].append((None, config['learning_rate'], config['run_id']))
+            continue
         correct = sum(r['validation']['correct'] for r in rows[12:15])
         selection = selected['configurations'][config['configuration_id']]
         candidate = next(c for c in selection['candidates'] if c['run_id'] == config['run_id'])
@@ -136,6 +167,11 @@ def main():
     assert all(len(values) == 1 for values in heads.values()), 'paired_classifier_initialization_mismatch'
     for name, group in groups.items():
         assert len(group) == 3
+        if selected['configurations'][name]['status'] == 'incomplete':
+            assert args.allow_incomplete
+            assert selected['configurations'][name]['selected_from_run_id'] is None
+            assert selected['configurations'][name]['learning_rate'] is None
+            continue
         eligible = [v for v in group if v[0] is not None]
         winner = min(eligible, key=lambda v: (-v[0], v[1]))
         assert selected['configurations'][name]['selected_from_run_id'] == winner[2]
@@ -164,6 +200,8 @@ def main():
     index = {item['path']: item for item in inventory['P2_files']}
     assert len(index) == len(inventory['P2_files'])
     for config in runs:
+        if not (root / 'runs' / config['run_id'] / 'summary.json').exists():
+            continue
         summary = read('runs/' + config['run_id'] + '/summary.json')
         for role in ['best_checkpoint', 'last_checkpoint', 'task_delta', 'failure_state']:
             if role not in summary:
@@ -173,16 +211,20 @@ def main():
             assert item['sha256'] == descriptor['sha256'] and item['size_bytes'] == descriptor['size_bytes']
     proposal = read('reports/P3_proposal.json')
     assert not proposal['P3_authorized'] and not proposal['centralized_test_authorized']
-    assert len(proposal['resolved_runs']) == 80 and proposal['basis_configurations'] == 16
+    chosen_count = sum(c['status'] == 'selected' for c in selected['configurations'].values())
+    assert len(proposal['resolved_runs']) == 80 and proposal['basis_configurations'] == chosen_count
     assert not proposal['common_time_slices_frozen']
     for run in proposal['resolved_runs']:
         choice = selected['configurations'][run['configuration_id']]
         assert run['learning_rate'] == choice['learning_rate'] and run['selected_P2_run_id'] == choice['selected_from_run_id']
         assert run['selected_hparams_sha256'] == report['selected_hparams_sha256']
         assert run['status'] == 'draft_not_authorized' and run['epochs'] == 50
-    result = {'status': 'passed', 'execution_commit': manifest['execution_commit'],
+    complete = manifest['candidates_terminal'] and selected['all_configurations_selected']
+    result = {'status': 'passed' if complete else 'passed_for_available_evidence',
+        'stage_acceptance': 'passed' if complete else 'incomplete_not_passed',
+        'execution_commit': manifest['execution_commit'],
         'manifest_files_verified': len(manifest['files']), 'candidate_counts': dict(counts),
-        'configurations_selected': len(groups), 'paired_sampler_groups': len(orders),
+        'configurations_selected': chosen_count, 'paired_sampler_groups': len(orders),
         'actual_P2_gpu_hours_all_attempts': seconds / 3600, 'attempts': len(attempts),
         'combined_project_environment_gib': storage['combined_bytes'] / 2**30,
         'P1_checkpoints_reverified_server': 40, 'P2_checkpoint_index_entries': len(index),

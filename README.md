@@ -1,16 +1,18 @@
 # 图像分类迁移学习：P2 单阶段执行
 
-协议 `TL-CLS-20261020-v1.0`，更新日期 2026-10-21（北京时间）。
+协议 `TL-CLS-20261020-v1.0`，更新日期 2026-10-22（北京时间）。
 
-**当前状态：用户已接受 `b485177` 的 P0/P1 验收，授权 P2；启动检查通过，48 个候选正在执行。P3 与集中测试保持关闭。**
+**当前状态：P2 在完成 17/48 后因存储统计竞态中断；已修复并通过 18 项 CPU 与真实 GPU 恢复验收，从两份中断前缀继续。P3 与集中测试保持关闭。**
+
+[2026-10-22 中断原因、恢复验收及剩余预算](reports/P2_中断与恢复回执.md)。当前恢复执行提交为 `d66193b`；历史 `6c0a215` 运行及收据保留。每 30 分钟后台检查，完整阶段验收待 48 候选终态后进行。
 
 ## P2 当前入口
 
 - [启动验收与技术修订回执](docs/P2_启动验收回执.md)、[执行计划](docs/P2_执行与验收计划.md)、[PI 补充审查](docs/P2_阶段启动审查与Codex执行补充_v1.md)。
-- [真实启动验收](records/p2/acceptance.json)、[14 项 CPU 检查](records/p2/cpu_acceptance.json)、[GPU 事务恢复检查](records/p2/gpu_acceptance.json)。
+- [真实启动验收](records/p2/acceptance.json)、[18 项 CPU 检查](records/p2/cpu_acceptance.json)、[GPU 事务恢复检查](records/p2/gpu_acceptance.json)。
 - [P2 授权及资源记录](records/p2/authorization.json)、[技术修订留痕](records/p2/technical_revisions.json)。
 
-实际执行提交为 `6c0a215798a4de319e7c6c55f0bb1b351bf082e0`，位于 `codex/p2-execution` 分支。运行代码只在 `/root/user_data/tl_cls_v1` 部署，独立预算硬封顶 30 GPU-hours，涵盖验收、失败、技术重跑、恢复和退出。用户确认原项目及环境至少 60 GiB 分配；54 GiB 预警，至少保留 5 GiB 退出写入余量。
+初始执行提交为 `6c0a215798a4de319e7c6c55f0bb1b351bf082e0`，恢复执行提交为 `d66193bc3265954094e0badebfcd3279deb69e5a`，位于 `codex/p2-execution` 分支。运行代码只在 `/root/user_data/tl_cls_v1` 部署，独立预算硬封顶 30 GPU-hours，涵盖验收、失败、技术重跑、恢复和退出。用户确认原项目及环境至少 60 GiB 分配；54 GiB 预警，至少保留 5 GiB 退出写入余量。
 
 原矩阵为 48 个候选，seed123，每次 15 轮，50 轮调度、5 轮 warmup。按第 13–15 轮验证 Top-1 均值选 LR，并列小 LR。完整第 2–3 轮校准、超过 10% 的慢化调查以及预算/存储保护均已启用。完成全部候选及 P3 提案后停止，不自动升级 P3。
 

@@ -1,0 +1,25 @@
+{
+  "status": "passed_for_available_evidence",
+  "stage_acceptance": "incomplete_not_passed",
+  "execution_commit": "6c0a215798a4de319e7c6c55f0bb1b351bf082e0",
+  "manifest_files_verified": 843,
+  "candidate_counts": {
+    "planned": 29,
+    "completed": 17,
+    "epochs": 264,
+    "samples": 15208029,
+    "updates": 119004,
+    "infrastructure_interrupted": 2,
+    "numerical_failure": 0
+  },
+  "configurations_selected": 5,
+  "paired_sampler_groups": 30,
+  "actual_P2_gpu_hours_all_attempts": 11.928969189370465,
+  "attempts": 23,
+  "combined_project_environment_gib": 31.426943296566606,
+  "P1_checkpoints_reverified_server": 40,
+  "P2_checkpoint_index_entries": 46,
+  "checkpoint_bytes_rehashed_at_server": true,
+  "P3_authorized": false,
+  "centralized_test_authorized": false
+}

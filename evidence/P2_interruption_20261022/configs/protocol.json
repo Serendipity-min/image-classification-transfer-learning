@@ -1,0 +1,888 @@
+{
+  "schema_version": "1.0",
+  "protocol_id": "TL-CLS-20261020-v1.0",
+  "title": "资源受限场景下图像分类迁移学习策略实验规格",
+  "artifact_kind": "experiment_specification",
+  "execution_status": "not_executed",
+  "scope_note": "本文件描述待执行实验，不含服务器实测、训练结果或已完成声明。原始文档结果只作为历史观察，不是验收阈值。",
+  "roles": {
+    "overall_review_and_direction": "Xuan",
+    "experimental_design_and_result_analysis": "ChatGPT",
+    "implementation_execution_and_evidence": "Codex"
+  },
+  "software": {
+    "python": {
+      "version": "3.12.3",
+      "evidence": "user_supplied_requires_P0_verification"
+    },
+    "torch": {
+      "version": "2.5.1+cu124",
+      "policy": "reuse_existing_then_verify"
+    },
+    "torchvision": {
+      "version": "0.20.1+cu124",
+      "policy": "reuse_existing_then_verify"
+    },
+    "timm": {
+      "candidate_version": "1.0.12",
+      "locked_version": null,
+      "required_at": "P0_after_model_construction_and_checkpoint_loading"
+    },
+    "dependency_lock_sha256": null,
+    "code_commit_sha": null,
+    "lock_requirement": "P0记录完整实际依赖；不得将timm候选版本或用户提供配置当作已验收运行环境。",
+    "global_stack_upgrade": false
+  },
+  "hardware_policy": {
+    "source": "user_supplied_requires_P0_verification",
+    "gpu_model": "NVIDIA GeForce RTX 3090",
+    "gpu_count": 2,
+    "vram_mib_per_gpu": 24576,
+    "gpu_per_run": 1,
+    "max_concurrent_training_runs": 2,
+    "distributed_training": false,
+    "cpu_quota_vcpu": 16,
+    "memory_quota_gib": 64,
+    "dataloader_workers_per_run": 4,
+    "pin_memory": true,
+    "persistent_workers": true,
+    "omp_num_threads": 1,
+    "mkl_num_threads": 1,
+    "physical_gpu_identity_required": [
+      "uuid",
+      "pci_bus_id",
+      "visible_device_mapping"
+    ],
+    "assignment_policy": "在两张GPU之间平衡方法和训练种子；记录并行同伴任务及CPU争用。",
+    "storage_quota_gib": null,
+    "storage_quota_requirement": "P0核对租户实际额度，不把df中的宿主共享14TB作为本项目可用配额。",
+    "suggested_project_storage_planning_cap_gib": 100
+  },
+  "seeds": {
+    "split_seed": 20261020,
+    "training_seeds": [
+      17,
+      42,
+      2026,
+      3407,
+      65537
+    ],
+    "tuning_seed": 123,
+    "profile_seed": 314159,
+    "policy": "所有方法共享固定分层划分；训练随机性与划分随机性分离。调参/测速种子不计入正式五种子。",
+    "rng_pairing": "Independent model/head/adapter and data RNG streams; same dataset/model/training_seed methods share sampler order and augmentation draws; save and restore all relevant RNG states.",
+    "augmentation_rng_derivation": {
+      "method": "sha256_canonical_utf8_tuple_low64_bits",
+      "fields": [
+        "training_seed",
+        "epoch",
+        "dataset_official_split_sample_id",
+        "augmentation_view_id"
+      ],
+      "python_hash_disallowed": true,
+      "worker_rng_independent": true
+    }
+  },
+  "datasets": {
+    "cifar100": {
+      "loader": "torchvision.datasets.CIFAR100",
+      "target": "fine_label",
+      "num_classes": 100,
+      "official_train_n": 50000,
+      "train_n": 45000,
+      "validation_n": 5000,
+      "test_n": 10000,
+      "train_per_class": 450,
+      "validation_per_class": 50,
+      "test_per_class": 100,
+      "split_method": "fixed_stratified_without_replacement",
+      "train_fraction": 1.0,
+      "training_horizontal_flip_probability": 0.5,
+      "official_url": "https://www.cs.toronto.edu/~kriz/cifar.html",
+      "official_archive_md5": "eb9058c3a382ffc7106e4002c42a8d85",
+      "archive_sha256": null,
+      "split_manifest_sha256": null,
+      "required_at": "P0"
+    },
+    "svhn": {
+      "loader": "torchvision.datasets.SVHN",
+      "format": "cropped_32x32",
+      "num_classes": 10,
+      "official_train_n": 73257,
+      "train_n": 65931,
+      "validation_n": 7326,
+      "test_n": 26032,
+      "split_method": "fixed_stratified_without_replacement_preserve_natural_class_proportions",
+      "stratified_allocation": "各类验证配额先取floor(7326*class_count/73257)，剩余名额按小数余数降序分配，余数相同按class_id升序；类内固定RNG打乱，保存最终索引。",
+      "train_fraction": 1.0,
+      "use_extra": false,
+      "training_horizontal_flip_probability": 0.0,
+      "label_rule": "TorchVision已将原始标签10映射至0；不再减1或重复映射。",
+      "official_url": "http://ufldl.stanford.edu/housenumbers/",
+      "loader_source_url": "https://docs.pytorch.org/vision/0.20/_modules/torchvision/datasets/svhn.html",
+      "official_train_md5": "e26dedcc434d2e4c54c9b2d4a06d8373",
+      "official_test_md5": "eb5a983be6a315427106f1b164d9cef3",
+      "archive_sha256": null,
+      "split_manifest_sha256": null,
+      "required_at": "P0"
+    }
+  },
+  "data_integrity": {
+    "split_intersection_must_be_empty": true,
+    "split_manifest_contains": [
+      "dataset",
+      "official_split",
+      "original_index",
+      "label",
+      "assigned_split"
+    ],
+    "test_usage": "P0可检查文件完整性、标签范围和样本计数；P1/P2/P3训练或选模不访问测试表现。完成P3后按冻结规则集中评价。",
+    "normalization_statistics_from_test": false,
+    "grouped_duplicates": "对原始像素精确重复进行审计；发现跨划分重复只登记证据，不静默更改官方测试集。近重复筛查不是本轮硬性门槛。",
+    "split_id_namespace": "dataset/official_split/original_index；只对同一官方train内的train/val索引做不相交断言，另核验官方test来源。"
+  },
+  "models": {
+    "r50": {
+      "library": "timm",
+      "model_id": "resnet50.a1_in1k",
+      "checkpoint_repository": "timm/resnet50.a1_in1k",
+      "pretraining_dataset": "ImageNet-1k",
+      "checkpoint_revision": null,
+      "checkpoint_filename": null,
+      "checkpoint_sha256": null,
+      "provenance_required_at": "P0",
+      "feature_dimension": 2048,
+      "classifier_attribute": "fc",
+      "mean": [
+        0.485,
+        0.456,
+        0.406
+      ],
+      "std": [
+        0.229,
+        0.224,
+        0.225
+      ],
+      "source_config_url": "https://huggingface.co/timm/resnet50.a1_in1k/blob/main/config.json",
+      "input_override": "显式将官方默认test288覆盖为本协议224；不得替换成TorchVision默认ResNet50权重。"
+    },
+    "vitb16": {
+      "library": "timm",
+      "model_id": "vit_base_patch16_224.augreg_in21k",
+      "checkpoint_repository": "timm/vit_base_patch16_224.augreg_in21k",
+      "pretraining_dataset": "ImageNet-21k",
+      "checkpoint_revision": null,
+      "checkpoint_filename": null,
+      "checkpoint_sha256": null,
+      "provenance_required_at": "P0",
+      "feature_dimension": 768,
+      "classifier_attribute": "head",
+      "global_pool": "token",
+      "mean": [
+        0.5,
+        0.5,
+        0.5
+      ],
+      "std": [
+        0.5,
+        0.5,
+        0.5
+      ],
+      "source_config_url": "https://huggingface.co/timm/vit_base_patch16_224.augreg_in21k/blob/main/config.json",
+      "input_override": "固定224x224；不得混用augreg_in21k_ft_in1k或其他预训练来源。"
+    }
+  },
+  "transforms": {
+    "train": [
+      {
+        "op": "Resize",
+        "size": 256,
+        "interpolation": "bicubic",
+        "antialias": true
+      },
+      {
+        "op": "RandomCrop",
+        "size": 224
+      },
+      {
+        "op": "RandomHorizontalFlip",
+        "p": "dataset_specific"
+      },
+      {
+        "op": "ToTensor"
+      },
+      {
+        "op": "Normalize",
+        "mean_std_ref": "models[model_key]"
+      }
+    ],
+    "validation_and_test": [
+      {
+        "op": "Resize",
+        "size": 256,
+        "interpolation": "bicubic",
+        "antialias": true
+      },
+      {
+        "op": "CenterCrop",
+        "size": 224
+      },
+      {
+        "op": "ToTensor"
+      },
+      {
+        "op": "Normalize",
+        "mean_std_ref": "models[model_key]"
+      }
+    ],
+    "input_channels": 3,
+    "input_size": [
+      224,
+      224
+    ],
+    "shared_within_backbone": true,
+    "scratch_normalization": "与同骨干迁移策略相同",
+    "feature_caching_in_core": false,
+    "frozen_configuration_policy": "正式配置冻结后不改变上述增强定义；训练随机增强仍按固定配置逐样本执行。"
+  },
+  "methods": {
+    "scratch": {
+      "pretrained": false,
+      "trainable_modules": [
+        "all"
+      ],
+      "backbone_mode": "train",
+      "adapter_present": false,
+      "initial_learning_rates": [
+        0.0003,
+        0.001,
+        0.003
+      ],
+      "head_lr_multiplier": 1.0
+    },
+    "full_ft": {
+      "pretrained": true,
+      "trainable_modules": [
+        "all"
+      ],
+      "backbone_mode": "train",
+      "adapter_present": false,
+      "initial_backbone_learning_rates": [
+        1e-05,
+        3e-05,
+        0.0001
+      ],
+      "head_lr_multiplier": 10.0
+    },
+    "linear_probe": {
+      "pretrained": true,
+      "trainable_modules": [
+        "classifier_only"
+      ],
+      "backbone_mode": "eval",
+      "backbone_bn_running_statistics": "frozen",
+      "adapter_present": false,
+      "initial_learning_rates": [
+        0.001,
+        0.003,
+        0.01
+      ],
+      "head_lr_multiplier": 1.0,
+      "classifier": "Linear(feature_dimension,num_classes,bias=True)",
+      "extra_batchnorm": false,
+      "backbone_no_grad_allowed": true
+    },
+    "adapter": {
+      "pretrained": true,
+      "trainable_modules": [
+        "adapters",
+        "classifier_only"
+      ],
+      "backbone_mode": "eval",
+      "backbone_bn_running_statistics": "frozen",
+      "new_adapter_bn_mode": "train",
+      "initial_learning_rates": [
+        0.0001,
+        0.0003,
+        0.001
+      ],
+      "head_lr_multiplier": 1.0,
+      "whole_backbone_no_grad_allowed": false,
+      "autograd_note": "冻结参数仍须保留中间激活梯度路径，保证前层Adapter能通过后续冻结block收到梯度。",
+      "vitb16": {
+        "placement": "after_each_complete_transformer_block",
+        "block_count": 12,
+        "residual": "z_out = z_block + up(GELU(down(z_block)))",
+        "input_dimension": 768,
+        "bottleneck_dimension": 192,
+        "bottleneck_ratio": 0.25,
+        "linear_bias": true,
+        "down_weight_initialization": "kaiming_uniform",
+        "down_bias_initialization": "zeros",
+        "up_weight_initialization": "zeros",
+        "up_bias_initialization": "zeros",
+        "extra_layernorm": false,
+        "down_kaiming_a": "sqrt(5)",
+        "down_kaiming_mode": "fan_in",
+        "down_kaiming_nonlinearity": "leaky_relu",
+        "adapter_dropout": 0.0,
+        "residual_scale": 1.0,
+        "trainable_residual_scale": false
+      },
+      "r50": {
+        "placement": "after_each_complete_bottleneck_block",
+        "stage_block_counts": [
+          3,
+          4,
+          6,
+          3
+        ],
+        "stage_output_channels": [
+          256,
+          512,
+          1024,
+          2048
+        ],
+        "bottleneck_ratio": 0.25,
+        "branch": [
+          "Conv1x1(c,c/4,bias=False)",
+          "BatchNorm2d(c/4)",
+          "ReLU",
+          "Conv1x1(c/4,c,bias=False)",
+          "BatchNorm2d(c)"
+        ],
+        "residual": "z_out = z_block + adapter_branch(z_block)",
+        "conv_weights_all_zero": false,
+        "conv_initialization": "kaiming_normal",
+        "first_bn_gamma": 1.0,
+        "first_bn_beta": 0.0,
+        "last_bn_gamma": 0.0,
+        "last_bn_beta": 0.0,
+        "bn_running_mean_initial": 0.0,
+        "bn_running_var_initial": 1.0,
+        "conv_kaiming_mode": "fan_out",
+        "conv_kaiming_nonlinearity": "relu",
+        "bn_epsilon": 1e-05,
+        "bn_momentum": 0.1,
+        "bn_track_running_stats": true
+      },
+      "initial_identity_tolerance": {
+        "rtol": 1e-05,
+        "atol": 1e-06,
+        "precision": "fp32"
+      }
+    }
+  },
+  "classifier_initialization": {
+    "type": "Linear(feature_dimension,num_classes,bias=True)",
+    "weight": {
+      "distribution": "truncated_normal",
+      "std": 0.02
+    },
+    "bias": "zeros",
+    "rng_stream": "independent_classifier_rng",
+    "matching_rule": "同dataset、backbone及seed的四策略具有相同初始classifier tensor；不得因先插Adapter消耗RNG而改变head。",
+    "initial_classifier_sha256_required": true
+  },
+  "optimization": {
+    "optimizer": "AdamW",
+    "betas": [
+      0.9,
+      0.999
+    ],
+    "epsilon": 1e-08,
+    "weight_decay": 0.0001,
+    "decay_rule": "仅对可训练的矩阵或更高维weight张量衰减；bias、normalization参数和模型no_weight_decay白名单排除。记录完整参数组。",
+    "loss": "CrossEntropyLoss",
+    "label_smoothing": 0.0,
+    "max_gradient_norm": 1.0,
+    "gradient_clipping_scope": "trainable_parameters_after_full_effective_batch_accumulation",
+    "micro_batch_size": 32,
+    "gradient_accumulation_steps": 4,
+    "effective_batch_size": 128,
+    "evaluation_batch_size": 128,
+    "drop_last": false,
+    "incomplete_accumulation_policy": "最后不足128个样本的一组按实际样本数归一化loss和梯度，并执行一次optimizer update；不能固定除4导致尾组欠权重。",
+    "scheduler": {
+      "type": "linear_warmup_then_cosine",
+      "horizon_epochs": 50,
+      "warmup_epochs": 5,
+      "warmup_start_multiplier": 0.01,
+      "minimum_lr_multiplier": 0.01,
+      "update_unit": "optimizer_step",
+      "horizon_steps": "50*ceil(train_n/effective_batch_size)",
+      "warmup_steps": "5*ceil(train_n/effective_batch_size)",
+      "tuning_policy": "15epoch pilot使用同一50epoch scheduler horizon的前缀，禁止把cosine压缩到15epoch。",
+      "profile_policy": "使用同一50epoch scheduler horizon的前3epoch。"
+    }
+  },
+  "precision_and_determinism": {
+    "autocast_enabled": true,
+    "autocast_dtype": "bfloat16",
+    "parameter_dtype": "float32",
+    "loss_dtype": "float32",
+    "grad_scaler_enabled": false,
+    "tf32_matmul": false,
+    "tf32_cudnn": false,
+    "cudnn_benchmark": false,
+    "torch_compile": false,
+    "activation_checkpointing": false,
+    "bf16_support_required_at": "P0",
+    "seed_all_rngs": [
+      "python",
+      "numpy",
+      "torch_cpu",
+      "torch_cuda",
+      "dataloader_generator",
+      "dataloader_workers"
+    ],
+    "deterministic_algorithms_policy": "P0登记实际可用性与设置；正式阶段保持一致，不能把seed固定宣称为跨环境bitwise复现保证。",
+    "automatic_precision_fallback": false
+  },
+  "phases": {
+    "P0": {
+      "purpose": "环境、权重、数据、实现和证据链验收",
+      "formal_training": false,
+      "required_checks": [
+        "software_imports_and_versions",
+        "model_construction",
+        "checkpoint_source_and_hash",
+        "dataset_hash_and_split",
+        "head_only_freeze",
+        "parameter_and_buffer_delta",
+        "adapter_initial_identity",
+        "adapter_backward_gradient_path",
+        "finite_loss_and_gradients",
+        "checkpoint_resume",
+        "gpu_identity_and_quota"
+      ],
+      "accepted_evidence_required": true
+    },
+    "P1": {
+      "purpose": "全16配置测速与稳定性profile",
+      "configuration_count": 16,
+      "run_count": 16,
+      "seed": 314159,
+      "epochs_per_run": 3,
+      "total_epochs": 48,
+      "allowed_data_splits": [
+        "train",
+        "validation"
+      ],
+      "test_evaluation": false,
+      "reference_lr": "每方法候选列表中间值，full_ft指backbone LR且head乘10。",
+      "recommended_gpu_hour_cap": 4.0,
+      "cap_is_measured_result": false,
+      "timing_policy": "先单卡独占测所有配置；配对复测典型组合的双卡并发慢化，附加microbenchmark单列消耗，不生成额外正式run。"
+    },
+    "P2": {
+      "purpose": "独立seed123有限学习率搜索",
+      "configuration_count": 16,
+      "candidates_per_configuration": 3,
+      "run_count": 48,
+      "epochs_per_run": 15,
+      "total_epochs": 720,
+      "seed": 123,
+      "allowed_data_splits": [
+        "train",
+        "validation"
+      ],
+      "test_evaluation": false,
+      "validation_frequency_epochs": 1,
+      "selector": {
+        "metric": "mean_validation_top1",
+        "epochs": [
+          13,
+          14,
+          15
+        ],
+        "direction": "maximize",
+        "tie_break": "smaller_candidate_learning_rate",
+        "eligibility": "必须完整完成15epoch，13-15epoch指标有限且无失败；不完整候选不填充缺失epoch。",
+        "all_candidates_failed": "标记configuration_blocked；保留失败证据并进入诊断，不自动选择LR。"
+      },
+      "selected_lr_output": "selected_hparams.json",
+      "gpu_hour_budget": null,
+      "budget_required_at": "before_P2_launch"
+    },
+    "P3": {
+      "purpose": "完整五种子核心比较",
+      "configuration_count": 16,
+      "seeds": [
+        17,
+        42,
+        2026,
+        3407,
+        65537
+      ],
+      "run_count": 80,
+      "epochs_per_run": 50,
+      "total_epochs": 4000,
+      "validation_frequency_epochs": 1,
+      "start_from_tuning_checkpoint": false,
+      "initial_learning_rate_source": "P2 selected_hparams.json matching dataset/model/method",
+      "checkpoint_selector": {
+        "metric": "validation_top1",
+        "direction": "maximize",
+        "tie_break": "earliest_epoch"
+      },
+      "test_policy": "完成全部P3训练/失败处置且模型、预算、种子和选择规则冻结后集中测试预选checkpoint；测试不反哺本协议选模或LR。结果驱动后续扩展需登记独立协议并标明探索性。",
+      "gpu_hour_budget": null,
+      "budget_required_at": "before_P2_launch_with_recheck_before_P3",
+      "centralized_test_deduplication": "按run_id与checkpoint_sha256去重评价。整程最优与多个时间切片选择同一checkpoint时仅计算一次测试预测；144为训练run数，不包含独立评价进程。"
+    }
+  },
+  "cost_plan": {
+    "profile_runs": 16,
+    "tuning_runs": 48,
+    "core_runs": 80,
+    "total_planned_runs": 144,
+    "profile_epochs": 48,
+    "tuning_epochs": 720,
+    "core_epochs": 4000,
+    "total_planned_training_epochs": 4768,
+    "configuration_count": 16,
+    "t_i_definition": "P1估计每配置完整fit epoch秒数，包含训练、每epoch验证及协议规定的checkpoint保存开销；不包含启动和事后集中测试。",
+    "epoch_component_gpu_hours_formula": "sum_i((3 + 3*15 + 5*50)*t_i)/3600",
+    "complete_gpu_hours_formula": "(sum_i((3 + 3*15 + 5*50)*t_i) + sum_run(startup_seconds) + centralized_test_seconds + separately_logged_diagnostics_and_benchmarks_seconds)/3600",
+    "avoid_double_counting": "若t_i已含validation/checkpoint，不再次添加；训练warmup5epoch已在各phase epoch数中。额外性能warmup或复测仅单列一次。",
+    "stage_specific_refinement": "P1/P2收到实际时间后以各阶段实测分量替换估计，不能同时累加估计和实测。",
+    "P1_recommended_cap_gpu_hours": 4.0,
+    "total_gpu_hour_budget": null,
+    "P2_gpu_hour_budget": null,
+    "P3_gpu_hour_budget": null,
+    "budget_required_at": "before_P2_launch",
+    "budget_review_inputs": [
+      "P1 measured fit epoch seconds",
+      "parallel slowdown measurements",
+      "startup overhead",
+      "centralized test plan",
+      "checkpoint policy",
+      "documented retry allowance"
+    ],
+    "failure_cost_included": true,
+    "wall_clock_lower_bound_formula": "gpu_hours/2 for ideal balanced two-run concurrency; not an actual measured completion time",
+    "historical_document_times_are_forecasts": false,
+    "dynamic_cap_recommendation": "P1后按实际profile分别计算P2/P3预测成本，将含启动、规定验证/存盘与集中测试的预测总成本乘1.25并向上取整作为建议硬上限；25%为统一预算余量，不能再以重试费重复计入。实际预算值仍须在P2前冻结。",
+    "cap_enforcement": "每次调度前检查阶段剩余GPU-hours；预计不足以完成下一个规定检查点区间则不启动该区间，保存已有证据，status设为blocked并记录reason=budget_exhausted。并发任务使用同一消耗台账，不按墙钟减半记成本。",
+    "scope": "downstream_adaptation_only; upstream_pretraining_of_released_weights_is_sunk_cost_and_excluded"
+  },
+  "common_time_slices": {
+    "source": "prefixes_of_the_same_50_epoch_P3_training_trajectory",
+    "grouping_keys": [
+      "dataset",
+      "model_key"
+    ],
+    "fractions": [
+      0.25,
+      0.5,
+      1.0
+    ],
+    "group_base_budget_formula": "B_dataset_model = min_method(P1_predicted_50_epoch_fit_wall_seconds)",
+    "freeze_at": "after_P2_before_P3",
+    "group_budget_seconds": null,
+    "required_at": "before_P3",
+    "fit_clock_includes": [
+      "run_startup_and_local_weight_loading",
+      "training",
+      "validation",
+      "checkpoint_serialization_and_commit"
+    ],
+    "fit_clock_excludes": [
+      "one_time_download_and_environment_setup",
+      "posthoc_centralized_test"
+    ],
+    "availability_rule": "只可选checkpoint_commit_fit_elapsed_seconds <= time_slice_budget_seconds的checkpoint。",
+    "selector_within_available_prefix": "maximum_validation_top1_then_earliest_epoch",
+    "checkpoint_unavailable": "report_not_available_under_budget_without_extrapolation",
+    "independent_short_budget_optimum_claim": false,
+    "note": "共同预算只是长程训练轨迹的可用前缀，学习率仍按50epoch计划；不代表为每个时间预算重新调优。"
+  },
+  "failure_policy": {
+    "terminal_failure_triggers": [
+      "non_finite_logits",
+      "non_finite_loss",
+      "non_finite_parameters",
+      "non_finite_gradients",
+      "out_of_memory",
+      "data_integrity_violation",
+      "checkpoint_corruption",
+      "non_finite_optimizer_state"
+    ],
+    "record_and_stop_affected_run": true,
+    "overwrite_best_finite_checkpoint_on_failure": false,
+    "silent_hyperparameter_changes": false,
+    "final_accuracy_for_non_finite_checkpoint": null,
+    "valid_prior_checkpoint_policy": "按原冻结验证规则可以单列崩溃前有效checkpoint的test值，但run保留原失败状态，不纳入完整50epoch的5对主比较。",
+    "denominator_per_configuration": 5,
+    "missing_seed_fabrication_or_zero_imputation": false,
+    "reported_statistics": [
+      "completed_seed_count_out_of_5",
+      "failed_seed_count_out_of_5",
+      "finite_checkpoint_available_count",
+      "conditional_metric_mean_and_std_with_explicit_denominator"
+    ],
+    "applies_to": "canonical_v1_BF16_core_and_profile_tuning",
+    "legacy_fp16_exception": {
+      "grad_scaler_enabled": true,
+      "isolated_overflow_gradients": "allow_scaler_skip_if_logits_loss_and_parameters_finite",
+      "maximum_consecutive_skipped_optimizer_updates": 20,
+      "stop_status_after_limit": "stalled",
+      "hard_failures": [
+        "non_finite_logits",
+        "non_finite_loss",
+        "non_finite_parameters",
+        "non_finite_optimizer_state"
+      ],
+      "unscale_before_clip": true
+    },
+    "finite_gradient_check_timing": "after_full_accumulation_before_optimizer_step"
+  },
+  "result_requirements": {
+    "per_run": [
+      "resolved_config",
+      "code_commit_sha",
+      "dependency_lock_sha256",
+      "dataset_split_manifest_sha256",
+      "initial_checkpoint_sha256",
+      "classifier_initial_sha256",
+      "parameter_groups",
+      "trainable_parameter_names",
+      "epoch_metrics",
+      "checkpoint_manifest",
+      "test_predictions_for_selected_checkpoint",
+      "timing_breakdown",
+      "memory_metrics",
+      "failure_record_if_any"
+    ],
+    "primary_metric": "test_top1_of_validation_selected_checkpoint",
+    "secondary_metrics": [
+      "macro_f1",
+      "trainable_parameter_count",
+      "total_parameter_count",
+      "task_delta_bytes",
+      "self_contained_inference_checkpoint_bytes",
+      "fit_wall_seconds",
+      "gpu_hours",
+      "peak_allocated_bytes",
+      "peak_reserved_bytes",
+      "inference_latency_and_throughput",
+      "completion_rate"
+    ],
+    "seed_aggregation": "五个预注册训练种子；报告均值、样本标准差及成对差值，明确失败和有效分母。",
+    "test_maximum_over_epochs": false,
+    "old_document_accuracy_as_acceptance_threshold": false
+  },
+  "extensions": [
+    {
+      "extension_id": "E1-data10pct",
+      "status": "planned_not_in_core",
+      "dataset": "cifar100",
+      "train_n": 4500,
+      "train_per_class": 45,
+      "train_fraction_of_core_train": 0.1,
+      "validation_n": 5000,
+      "test_n": 10000,
+      "models": [
+        "r50",
+        "vitb16"
+      ],
+      "methods": [
+        "scratch",
+        "full_ft",
+        "linear_probe",
+        "adapter"
+      ],
+      "seeds": [
+        17,
+        42,
+        2026,
+        3407,
+        65537
+      ],
+      "additional_formal_runs": 40,
+      "pilot_and_diagnostic_costs_included_in_run_count": false,
+      "subset_policy": "在主训练45000内按固定种子分层取45/类，嵌套于主训练集，验证和测试不变。",
+      "hyperparameter_policy": "reuse frozen core per-configuration hyperparameters first; any later low-data retuning is separately named",
+      "interpretation": "At fixed50epochs fewer samples also reduce optimizer updates, so the effect is not purely data diversity at matched steps.",
+      "development_label_budget_including_validation": 9500,
+      "low_data_label_scope": "10% of core training subset only, not a90% reduction of all development labels; 5000validation labels remain."
+    },
+    {
+      "extension_id": "E2-vit-in1k",
+      "status": "planned_not_in_core",
+      "model_id": "vit_base_patch16_224.augreg_in1k",
+      "datasets": [
+        "svhn",
+        "cifar100"
+      ],
+      "methods": [
+        "full_ft",
+        "linear_probe",
+        "adapter"
+      ],
+      "seeds": [
+        17,
+        42,
+        2026,
+        3407,
+        65537
+      ],
+      "additional_formal_runs": 30,
+      "checkpoint_revision": null,
+      "checkpoint_sha256": null,
+      "pilot_and_diagnostic_costs_included_in_run_count": false,
+      "scratch_reuse": "同架构Scratch可复用，不假装它属于另一种预训练来源。",
+      "causal_scope": "同架构预训练来源控制仍非只改变训练数据量的完美因果实验；预训练配方差异须记录。",
+      "additional_tuning_runs": 18,
+      "tuning_epochs_per_run": 15
+    }
+  ],
+  "sources": [
+    {
+      "id": "S-torch",
+      "url": "https://pytorch.org/get-started/previous-versions/",
+      "supports": "torch2.5.1/torchvision0.20.1/cu124 official pairing"
+    },
+    {
+      "id": "S-r50",
+      "url": "https://huggingface.co/timm/resnet50.a1_in1k",
+      "supports": "model identity and ImageNet1k provenance"
+    },
+    {
+      "id": "S-vit21k",
+      "url": "https://huggingface.co/timm/vit_base_patch16_224.augreg_in21k",
+      "supports": "model identity and ImageNet21k provenance"
+    },
+    {
+      "id": "S-vit1k",
+      "url": "https://huggingface.co/timm/vit_base_patch16_224.augreg_in1k",
+      "supports": "extension model provenance"
+    },
+    {
+      "id": "S-svhn",
+      "url": "https://docs.pytorch.org/vision/0.20/_modules/torchvision/datasets/svhn.html",
+      "supports": "SVHN labels, MD5 and extra split"
+    },
+    {
+      "id": "S-cifar",
+      "url": "https://www.cs.toronto.edu/~kriz/cifar.html",
+      "supports": "CIFAR100 sizes and archive MD5"
+    }
+  ],
+  "model_regularization": {
+    "dropout_rate": 0.0,
+    "attention_dropout_rate": 0.0,
+    "drop_path_rate": 0.0,
+    "extra_head_batchnorm": false,
+    "mixup": false,
+    "cutmix": false,
+    "randaugment": false,
+    "random_erasing": false,
+    "test_time_augmentation": false
+  },
+  "status_enum": [
+    "planned",
+    "running",
+    "completed",
+    "numerical_failure",
+    "stalled",
+    "oom",
+    "infrastructure_interrupted",
+    "invalid_protocol",
+    "blocked",
+    "cancelled"
+  ],
+  "statistical_analysis": {
+    "primary_comparisons": [
+      {
+        "dataset": "cifar100",
+        "model_key": "vitb16",
+        "method_a": "linear_probe",
+        "method_b": "full_ft"
+      },
+      {
+        "dataset": "svhn",
+        "model_key": "r50",
+        "method_a": "adapter",
+        "method_b": "full_ft"
+      }
+    ],
+    "formal_comparison_eligibility": "both methods have all 5 preregistered seeds completed, finite and protocol-valid; recovered_failure checkpoints excluded",
+    "paired_ci_95": {
+      "n": 5,
+      "df": 4,
+      "t_critical": 2.7764451051977987
+    },
+    "incomplete_comparison": "mark incomplete; descriptive shared-success m pairs only; exploratory CI uses df=m-1 if m>=2; no formal superiority or noninferiority declaration",
+    "superiority_test": "two-sided paired t-test; Holm adjustment over two preregistered primary comparisons; family_alpha=0.05",
+    "noninferiority": {
+      "scope": "cifar100/vitb16/linear_probe_vs_full_ft_only",
+      "margin_percentage_points": 0.5,
+      "rule": "eligible full-five-seed paired two-sided95CI lower bound > -0.5",
+      "other_groups": "exploratory_only"
+    },
+    "training_variance_not_iid_images": true
+  },
+  "checkpoint_policy": {
+    "full_model": "model.state_dict() includes parameters and BN running_mean/running_var/num_batches_tracked",
+    "task_delta": "head and all adapter state_dict including buffers; bind base model by sha256",
+    "resume_states": [
+      "optimizer",
+      "scheduler",
+      "epoch",
+      "optimizer_step",
+      "sampler_order_or_reconstruction_state",
+      "python_numpy_torch_cuda_rng"
+    ],
+    "resume_order": "construct/load model optimizer scheduler; reapply requires_grad and strategy train/eval states; restore RNG last before next batch",
+    "routine_resume_boundary": "last_completed_saved_epoch",
+    "interrupted_epoch": "replay from saved boundary with stateless per-sample augmentation and count recomputation cost",
+    "evaluation_reload_check": "saved and reloaded eval logits equal within fixed FP32 tolerance",
+    "fit_clock_resume": "sum active executing segments; no reset; calendar downtime separately reported",
+    "atomic_save": true
+  },
+  "expected_parameter_counts": {
+    "r50_C10": {
+      "backbone_excluding_head": 23508032,
+      "head": 20490,
+      "scratch_fullft_total": 23528522,
+      "linear_probe_trainable": 20490,
+      "adapter_added": 10097536,
+      "adapter_total": 33626058,
+      "adapter_trainable": 10118026,
+      "adapter_trainable_ratio": 0.3008983687591332
+    },
+    "r50_C100": {
+      "backbone_excluding_head": 23508032,
+      "head": 204900,
+      "scratch_fullft_total": 23712932,
+      "linear_probe_trainable": 204900,
+      "adapter_added": 10097536,
+      "adapter_total": 33810468,
+      "adapter_trainable": 10302436,
+      "adapter_trainable_ratio": 0.3047114284250665
+    },
+    "vitb16_C10": {
+      "backbone_excluding_head": 85798656,
+      "head": 7690,
+      "scratch_fullft_total": 85806346,
+      "linear_probe_trainable": 7690,
+      "adapter_added": 3550464,
+      "adapter_total": 89356810,
+      "adapter_trainable": 3558154,
+      "adapter_trainable_ratio": 0.03981961755349145
+    },
+    "vitb16_C100": {
+      "backbone_excluding_head": 85798656,
+      "head": 76900,
+      "scratch_fullft_total": 85875556,
+      "linear_probe_trainable": 76900,
+      "adapter_added": 3550464,
+      "adapter_total": 89426020,
+      "adapter_trainable": 3627364,
+      "adapter_trainable_ratio": 0.04056273554386072
+    }
+  },
+  "expected_parameter_counts_note": "Arithmetic expectations derived from the specified architecture, not instantiated-model measurements. P0 must verify."
+}

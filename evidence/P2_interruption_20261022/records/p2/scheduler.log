@@ -1,0 +1,22 @@
+{'cifar100-r50-adapter': 'incomplete', 'cifar100-r50-full_ft': 'incomplete', 'cifar100-r50-linear_probe': 'incomplete', 'cifar100-r50-scratch': 'incomplete', 'cifar100-vitb16-adapter': 'incomplete', 'cifar100-vitb16-full_ft': 'incomplete', 'cifar100-vitb16-linear_probe': 'incomplete', 'cifar100-vitb16-scratch': 'incomplete', 'svhn-r50-adapter': 'incomplete', 'svhn-r50-full_ft': 'incomplete', 'svhn-r50-linear_probe': 'incomplete', 'svhn-r50-scratch': 'incomplete', 'svhn-vitb16-adapter': 'incomplete', 'svhn-vitb16-full_ft': 'incomplete', 'svhn-vitb16-linear_probe': 'incomplete', 'svhn-vitb16-scratch': 'incomplete'}
+{'P2_completed': 0, 'GPU_hours': 0.14818110143144925, 'P3_started': False}
+Traceback (most recent call last):
+  File "/root/user_data/tl_cls_v1/src/p2_schedule.py", line 279, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/root/user_data/tl_cls_v1/src/p2_schedule.py", line 217, in main
+    resources = storage.require(3 * 2**30)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/user_data/tl_cls_v1/src/tlcls/p2_budget.py", line 146, in require
+    value = self.snapshot()
+            ^^^^^^^^^^^^^^^
+  File "/root/user_data/tl_cls_v1/src/tlcls/p2_budget.py", line 134, in snapshot
+    project = self.size(ROOT)
+              ^^^^^^^^^^^^^^^
+  File "/root/user_data/tl_cls_v1/src/tlcls/p2_budget.py", line 126, in size
+    stat = item.stat()
+           ^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.12/pathlib.py", line 840, in stat
+    return os.stat(self, follow_symlinks=follow_symlinks)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/root/user_data/tl_cls_v1/records/p2/gpu_ledger.json.d8c4dcde956c4470a0d0a6e84faddb25.tmp'

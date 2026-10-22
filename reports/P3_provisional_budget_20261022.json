@@ -1,0 +1,122 @@
+{
+  "status": "provisional_until_P2_complete",
+  "P3_authorized": false,
+  "centralized_test_authorized": false,
+  "selected_configurations": 5,
+  "required_selected_configurations": 16,
+  "resolved_P3_LR_runs": 25,
+  "unresolved_P3_LR_runs": 55,
+  "timing_basis": {
+    "cifar100-r50-adapter": {
+      "epoch_seconds": 88.88080897182228,
+      "P2_observation_count": 0,
+      "basis": "P1_times_1.10_planning_scenario",
+      "five_seed_50_epoch_training_gpu_hours": 6.180822536473474
+    },
+    "cifar100-r50-full_ft": {
+      "epoch_seconds": 78.03893011249602,
+      "P2_observation_count": 2,
+      "basis": "P2_full_epoch_2_3_median",
+      "five_seed_50_epoch_training_gpu_hours": 5.427099338321326
+    },
+    "cifar100-r50-linear_probe": {
+      "epoch_seconds": 32.58237754758448,
+      "P2_observation_count": 0,
+      "basis": "P1_times_1.10_planning_scenario",
+      "five_seed_50_epoch_training_gpu_hours": 2.270353542806374
+    },
+    "cifar100-r50-scratch": {
+      "epoch_seconds": 85.08498648498208,
+      "P2_observation_count": 0,
+      "basis": "P1_times_1.10_planning_scenario",
+      "five_seed_50_epoch_training_gpu_hours": 5.916600761200405
+    },
+    "cifar100-vitb16-adapter": {
+      "epoch_seconds": 118.60743794795127,
+      "P2_observation_count": 0,
+      "basis": "P1_times_1.10_planning_scenario",
+      "five_seed_50_epoch_training_gpu_hours": 8.245921344742076
+    },
+    "cifar100-vitb16-full_ft": {
+      "epoch_seconds": 139.9763568788767,
+      "P2_observation_count": 6,
+      "basis": "P2_full_epoch_2_3_median",
+      "five_seed_50_epoch_training_gpu_hours": 9.733064119253928
+    },
+    "cifar100-vitb16-linear_probe": {
+      "epoch_seconds": 53.837521946057684,
+      "P2_observation_count": 0,
+      "basis": "P1_times_1.10_planning_scenario",
+      "five_seed_50_epoch_training_gpu_hours": 3.7489923014822937
+    },
+    "cifar100-vitb16-scratch": {
+      "epoch_seconds": 141.1295155212283,
+      "P2_observation_count": 6,
+      "basis": "P2_full_epoch_2_3_median",
+      "five_seed_50_epoch_training_gpu_hours": 9.810926866107103
+    },
+    "svhn-r50-adapter": {
+      "epoch_seconds": 118.24677712284029,
+      "P2_observation_count": 2,
+      "basis": "P2_full_epoch_2_3_median",
+      "five_seed_50_epoch_training_gpu_hours": 8.221584491260971
+    },
+    "svhn-r50-full_ft": {
+      "epoch_seconds": 113.51742622815073,
+      "P2_observation_count": 2,
+      "basis": "P2_full_epoch_2_3_median",
+      "five_seed_50_epoch_training_gpu_hours": 7.894371211955634
+    },
+    "svhn-r50-linear_probe": {
+      "epoch_seconds": 47.29361724480987,
+      "P2_observation_count": 0,
+      "basis": "P1_times_1.10_planning_scenario",
+      "five_seed_50_epoch_training_gpu_hours": 3.2939001433551316
+    },
+    "svhn-r50-scratch": {
+      "epoch_seconds": 115.70730443485081,
+      "P2_observation_count": 2,
+      "basis": "P2_full_epoch_2_3_median",
+      "five_seed_50_epoch_training_gpu_hours": 8.045939204978964
+    },
+    "svhn-vitb16-adapter": {
+      "epoch_seconds": 160.13914017379284,
+      "P2_observation_count": 6,
+      "basis": "P2_full_epoch_2_3_median",
+      "five_seed_50_epoch_training_gpu_hours": 11.131601087469608
+    },
+    "svhn-vitb16-full_ft": {
+      "epoch_seconds": 203.96651086769998,
+      "P2_observation_count": 6,
+      "basis": "P2_full_epoch_2_3_median",
+      "five_seed_50_epoch_training_gpu_hours": 14.177758213864744
+    },
+    "svhn-vitb16-linear_probe": {
+      "epoch_seconds": 78.25363551806659,
+      "P2_observation_count": 0,
+      "basis": "P1_times_1.10_planning_scenario",
+      "five_seed_50_epoch_training_gpu_hours": 5.4477049277215785
+    },
+    "svhn-vitb16-scratch": {
+      "epoch_seconds": 202.99039086326957,
+      "P2_observation_count": 6,
+      "basis": "P2_full_epoch_2_3_median",
+      "five_seed_50_epoch_training_gpu_hours": 14.108591664975716
+    }
+  },
+  "P3_training_only_gpu_hours_scenario": 123.65523175596933,
+  "P3_training_only_with_25_percent_margin_gpu_hours": 154.56903969496165,
+  "not_a_full_P3_budget": true,
+  "not_yet_quantified": [
+    "extra immutable budget-prefix checkpoint saves",
+    "centralized evaluation and prediction reuse",
+    "diagnostics and inference benchmark reserves",
+    "complete retention storage under PI-approved policy"
+  ],
+  "P2_remaining_training_gpu_hours_at_interruption": 10.454567968672098,
+  "P2_remaining_with_25_percent_planning_margin_gpu_hours": 13.068209960840122,
+  "P2_actual_before_resume_including_new_acceptance_gpu_hours": 11.943588462962458,
+  "P2_projected_total_scenario_gpu_hours": 25.01179842380258,
+  "P2_total_hard_cap_gpu_hours_unchanged": 30,
+  "P2_actual_billing": "not_applicable_school_server"
+}

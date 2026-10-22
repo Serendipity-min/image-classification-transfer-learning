@@ -1,0 +1,956 @@
+{
+  "measurement_kind": "estimated_from_measured_P1",
+  "basis_configurations": 16,
+  "required_configurations": 16,
+  "complete_basis": true,
+  "per_configuration": [
+    {
+      "configuration_id": "cifar100-r50-adapter",
+      "epoch_seconds": 80.80073542892933,
+      "per_run_fixed_and_first_epoch_excess_seconds": 6.151777669787407,
+      "P2_gpu_hours_estimate": 1.0151356742531061,
+      "P3_gpu_hours_estimate": 5.619706318217019,
+      "basis_profile_run_id": "P1-cifar100-r50-adapter-s314159"
+    },
+    {
+      "configuration_id": "cifar100-r50-full_ft",
+      "epoch_seconds": 77.87799802236259,
+      "per_run_fixed_and_first_epoch_excess_seconds": 5.565017966553569,
+      "P2_gpu_hours_estimate": 0.9781124902516604,
+      "P3_gpu_hours_estimate": 5.415923498728726,
+      "basis_profile_run_id": "P1-cifar100-r50-full_ft-s314159"
+    },
+    {
+      "configuration_id": "cifar100-r50-linear_probe",
+      "epoch_seconds": 29.620343225076795,
+      "per_run_fixed_and_first_epoch_excess_seconds": 5.535673441365361,
+      "P2_gpu_hours_estimate": 0.3748673515145977,
+      "P3_gpu_hours_estimate": 2.0646567148544515,
+      "basis_profile_run_id": "P1-cifar100-r50-linear_probe-s314159"
+    },
+    {
+      "configuration_id": "cifar100-r50-scratch",
+      "epoch_seconds": 77.34998771362007,
+      "per_run_fixed_and_first_epoch_excess_seconds": 5.703223815187812,
+      "P2_gpu_hours_estimate": 0.9716275329329074,
+      "P3_gpu_hours_estimate": 5.3794480687447095,
+      "basis_profile_run_id": "P1-cifar100-r50-scratch-s314159"
+    },
+    {
+      "configuration_id": "cifar100-vitb16-adapter",
+      "epoch_seconds": 107.8249435890466,
+      "per_run_fixed_and_first_epoch_excess_seconds": 6.691470816731453,
+      "P2_gpu_hours_estimate": 1.3533880205436921,
+      "P3_gpu_hours_estimate": 7.497137014262585,
+      "basis_profile_run_id": "P1-cifar100-vitb16-adapter-s314159"
+    },
+    {
+      "configuration_id": "cifar100-vitb16-full_ft",
+      "epoch_seconds": 137.33395547792315,
+      "per_run_fixed_and_first_epoch_excess_seconds": 8.988321918994188,
+      "P2_gpu_hours_estimate": 1.724164711739868,
+      "P3_gpu_hours_estimate": 9.54956402196549,
+      "basis_profile_run_id": "P1-cifar100-vitb16-full_ft-s314159"
+    },
+    {
+      "configuration_id": "cifar100-vitb16-linear_probe",
+      "epoch_seconds": 48.94320176914334,
+      "per_run_fixed_and_first_epoch_excess_seconds": 7.398359764367342,
+      "P2_gpu_hours_estimate": 0.6179553219179312,
+      "P3_gpu_hours_estimate": 3.409108955863242,
+      "basis_profile_run_id": "P1-cifar100-vitb16-linear_probe-s314159"
+    },
+    {
+      "configuration_id": "cifar100-vitb16-scratch",
+      "epoch_seconds": 136.59902325086296,
+      "per_run_fixed_and_first_epoch_excess_seconds": 7.391567535698414,
+      "P2_gpu_hours_estimate": 1.713647430248869,
+      "P3_gpu_hours_estimate": 9.496309347331731,
+      "basis_profile_run_id": "P1-cifar100-vitb16-scratch-s314159"
+    },
+    {
+      "configuration_id": "svhn-r50-adapter",
+      "epoch_seconds": 118.44880471006036,
+      "per_run_fixed_and_first_epoch_excess_seconds": 7.20197756588459,
+      "P2_gpu_hours_estimate": 1.486611706847325,
+      "P3_gpu_hours_estimate": 8.235614184817921,
+      "basis_profile_run_id": "P1-svhn-r50-adapter-s314159"
+    },
+    {
+      "configuration_id": "svhn-r50-full_ft",
+      "epoch_seconds": 112.55146668665111,
+      "per_run_fixed_and_first_epoch_excess_seconds": 8.075961200520396,
+      "P2_gpu_hours_estimate": 1.4136233012502393,
+      "P3_gpu_hours_estimate": 7.827290688240383,
+      "basis_profile_run_id": "P1-svhn-r50-full_ft-s314159"
+    },
+    {
+      "configuration_id": "svhn-r50-linear_probe",
+      "epoch_seconds": 42.994197495281696,
+      "per_run_fixed_and_first_epoch_excess_seconds": 6.92724097520113,
+      "P2_gpu_hours_estimate": 0.5432001695036888,
+      "P3_gpu_hours_estimate": 2.995329327415675,
+      "basis_profile_run_id": "P1-svhn-r50-linear_probe-s314159"
+    },
+    {
+      "configuration_id": "svhn-r50-scratch",
+      "epoch_seconds": 113.34830150194466,
+      "per_run_fixed_and_first_epoch_excess_seconds": 7.71100584231317,
+      "P2_gpu_hours_estimate": 1.423279606976236,
+      "P3_gpu_hours_estimate": 7.882119556860481,
+      "basis_profile_run_id": "P1-svhn-r50-scratch-s314159"
+    },
+    {
+      "configuration_id": "svhn-vitb16-adapter",
+      "epoch_seconds": 158.33902146108449,
+      "per_run_fixed_and_first_epoch_excess_seconds": 7.7957742884755135,
+      "P2_gpu_hours_estimate": 1.9857342468372856,
+      "P3_gpu_hours_estimate": 11.006592843531527,
+      "basis_profile_run_id": "P1-svhn-vitb16-adapter-s314159"
+    },
+    {
+      "configuration_id": "svhn-vitb16-full_ft",
+      "epoch_seconds": 199.46357543952763,
+      "per_run_fixed_and_first_epoch_excess_seconds": 9.660370597615838,
+      "P2_gpu_hours_estimate": 2.5013450018254417,
+      "P3_gpu_hours_estimate": 13.865054364686108,
+      "basis_profile_run_id": "P1-svhn-vitb16-full_ft-s314159"
+    },
+    {
+      "configuration_id": "svhn-vitb16-linear_probe",
+      "epoch_seconds": 71.1396686527878,
+      "per_run_fixed_and_first_epoch_excess_seconds": 9.66577205620706,
+      "P2_gpu_hours_estimate": 0.8973006682066867,
+      "P3_gpu_hours_estimate": 4.953679450966107,
+      "basis_profile_run_id": "P1-svhn-vitb16-linear_probe-s314159"
+    },
+    {
+      "configuration_id": "svhn-vitb16-scratch",
+      "epoch_seconds": 199.74660806916654,
+      "per_run_fixed_and_first_epoch_excess_seconds": 8.666455619037151,
+      "P2_gpu_hours_estimate": 2.5040546472137795,
+      "P3_gpu_hours_estimate": 13.883328970940784,
+      "basis_profile_run_id": "P1-svhn-vitb16-scratch-s314159"
+    }
+  ],
+  "P2_gpu_hours": 21.504047882063315,
+  "P3_gpu_hours": 119.08086332742694,
+  "P2_P3_gpu_hours_with_25_percent_margin": 175.7311390118628,
+  "ideal_two_gpu_wall_hours_lower_bound": 70.29245560474513,
+  "partial_measured_configurations_P2_P3_subtotal_gpu_hours": 140.58491120949026,
+  "centralized_evaluation_gpu_hours": null,
+  "bounded_diagnostics_gpu_hours": null,
+  "billing_price_per_gpu_hour": null,
+  "currency_cost": null,
+  "margin_is_spent_compute": false,
+  "routine_checkpoint_seconds_in_epoch_cost": true,
+  "external_model_pretraining_included": false,
+  "storage_estimate": {
+    "policy": "best_val + last + metadata per run; shared data/weights once",
+    "P2_archive_policy": "retain raw logs and selected model identities, delete optimizer only after stage review",
+    "P3_time_slices": "not_budgeted_until_P2_timing_freeze",
+    "P1_measured_checkpoint_gib": 10.310433272272348,
+    "P2_full_retention_checkpoint_gib": 30.931299816817045,
+    "P3_best_last_delta_estimated_gib": 51.55216636136174,
+    "P1_P2_P3_full_retention_checkpoint_gib": 92.79389945045114,
+    "P3_three_additional_slice_weights_upper_bound_gib": 50.50777092576027,
+    "dataset_weight_disk_bytes": 928186577,
+    "storage_plan_must_include_extracted_data_and_25_percent_margin": true
+  },
+  "two_gpu_schedule_proposal": {
+    "P2": {
+      "assignments": [
+        {
+          "run_id": "P2-svhn-vitb16-scratch-lr1-s123",
+          "proposed_physical_gpu_index": 0,
+          "start_after_seconds_estimate": 0.0,
+          "duration_seconds_estimate": 3004.8655766565353
+        },
+        {
+          "run_id": "P2-svhn-vitb16-scratch-lr2-s123",
+          "proposed_physical_gpu_index": 1,
+          "start_after_seconds_estimate": 0.0,
+          "duration_seconds_estimate": 3004.8655766565353
+        },
+        {
+          "run_id": "P2-svhn-vitb16-scratch-lr3-s123",
+          "proposed_physical_gpu_index": 0,
+          "start_after_seconds_estimate": 3004.8655766565353,
+          "duration_seconds_estimate": 3004.8655766565353
+        },
+        {
+          "run_id": "P2-svhn-vitb16-full_ft-lr1-s123",
+          "proposed_physical_gpu_index": 1,
+          "start_after_seconds_estimate": 3004.8655766565353,
+          "duration_seconds_estimate": 3001.6140021905303
+        },
+        {
+          "run_id": "P2-svhn-vitb16-full_ft-lr2-s123",
+          "proposed_physical_gpu_index": 1,
+          "start_after_seconds_estimate": 6006.479578847066,
+          "duration_seconds_estimate": 3001.6140021905303
+        },
+        {
+          "run_id": "P2-svhn-vitb16-full_ft-lr3-s123",
+          "proposed_physical_gpu_index": 0,
+          "start_after_seconds_estimate": 6009.7311533130705,
+          "duration_seconds_estimate": 3001.6140021905303
+        },
+        {
+          "run_id": "P2-svhn-vitb16-adapter-lr1-s123",
+          "proposed_physical_gpu_index": 1,
+          "start_after_seconds_estimate": 9008.093581037596,
+          "duration_seconds_estimate": 2382.881096204743
+        },
+        {
+          "run_id": "P2-svhn-vitb16-adapter-lr2-s123",
+          "proposed_physical_gpu_index": 0,
+          "start_after_seconds_estimate": 9011.3451555036,
+          "duration_seconds_estimate": 2382.881096204743
+        },
+        {
+          "run_id": "P2-svhn-vitb16-adapter-lr3-s123",
+          "proposed_physical_gpu_index": 1,
+          "start_after_seconds_estimate": 11390.974677242339,
+          "duration_seconds_estimate": 2382.881096204743
+        },
+        {
+          "run_id": "P2-cifar100-vitb16-full_ft-lr1-s123",
+          "proposed_physical_gpu_index": 0,
+          "start_after_seconds_estimate": 11394.226251708344,
+          "duration_seconds_estimate": 2068.9976540878415
+        },
+        {
+          "run_id": "P2-cifar100-vitb16-full_ft-lr2-s123",
+          "proposed_physical_gpu_index": 0,
+          "start_after_seconds_estimate": 13463.223905796185,
+          "duration_seconds_estimate": 2068.9976540878415
+        },
+        {
+          "run_id": "P2-cifar100-vitb16-full_ft-lr3-s123",
+          "proposed_physical_gpu_index": 1,
+          "start_after_seconds_estimate": 13773.855773447081,
+          "duration_seconds_estimate": 2068.9976540878415
+        },
+        {
+          "run_id": "P2-cifar100-vitb16-scratch-lr1-s123",
+          "proposed_physical_gpu_index": 0,
+          "start_after_seconds_estimate": 15532.221559884027,
+          "duration_seconds_estimate": 2056.3769162986428
+        },
+        {
+          "run_id": "P2-cifar100-vitb16-scratch-lr2-s123",
+          "proposed_physical_gpu_index": 1,
+          "start_after_seconds_estimate": 15842.853427534923,
+          "duration_seconds_estimate": 2056.3769162986428
+        },
+        {
+          "run_id": "P2-cifar100-vitb16-scratch-lr3-s123",
+          "proposed_physical_gpu_index": 0,
+          "start_after_seconds_estimate": 17588.59847618267,
+          "duration_seconds_estimate": 2056.3769162986428
+        },
+        {
+          "run_id": "P2-svhn-r50-adapter-lr1-s123",
+          "proposed_physical_gpu_index": 1,
+          "start_after_seconds_estimate": 17899.230343833566,
+          "duration_seconds_estimate": 1783.93404821679
+        },
+        {
+          "run_id": "P2-svhn-r50-adapter-lr2-s123",
+          "proposed_physical_gpu_index": 0,
+          "start_after_seconds_estimate": 19644.975392481312,
+          "duration_seconds_estimate": 1783.93404821679
+        },
+        {
+          "run_id": "P2-svhn-r50-adapter-lr3-s123",
+          "proposed_physical_gpu_index": 1,
+          "start_after_seconds_estimate": 19683.164392050356,
+          "duration_seconds_estimate": 1783.93404821679
+        },
+        {
+          "run_id": "P2-svhn-r50-scratch-lr1-s123",
+          "proposed_physical_gpu_index": 0,
+          "start_after_seconds_estimate": 21428.909440698102,
+          "duration_seconds_estimate": 1707.935528371483
+        },
+        {
+          "run_id": "P2-svhn-r50-scratch-lr2-s123",
+          "proposed_physical_gpu_index": 1,
+          "start_after_seconds_estimate": 21467.098440267146,
+          "duration_seconds_estimate": 1707.935528371483
+        },
+        {
+          "run_id": "P2-svhn-r50-scratch-lr3-s123",
+          "proposed_physical_gpu_index": 0,
+          "start_after_seconds_estimate": 23136.844969069585,
+          "duration_seconds_estimate": 1707.935528371483
+        },
+        {
+          "run_id": "P2-svhn-r50-full_ft-lr1-s123",
+          "proposed_physical_gpu_index": 1,
+          "start_after_seconds_estimate": 23175.03396863863,
+          "duration_seconds_estimate": 1696.347961500287
+        },
+        {
+          "run_id": "P2-svhn-r50-full_ft-lr2-s123",
+          "proposed_physical_gpu_index": 0,
+          "start_after_seconds_estimate": 24844.78049744107,
+          "duration_seconds_estimate": 1696.347961500287
+        },
+        {
+          "run_id": "P2-svhn-r50-full_ft-lr3-s123",
+          "proposed_physical_gpu_index": 1,
+          "start_after_seconds_estimate": 24871.381930138916,
+          "duration_seconds_estimate": 1696.347961500287
+        },
+        {
+          "run_id": "P2-cifar100-vitb16-adapter-lr1-s123",
+          "proposed_physical_gpu_index": 0,
+          "start_after_seconds_estimate": 26541.128458941355,
+          "duration_seconds_estimate": 1624.0656246524304
+        },
+        {
+          "run_id": "P2-cifar100-vitb16-adapter-lr2-s123",
+          "proposed_physical_gpu_index": 1,
+          "start_after_seconds_estimate": 26567.729891639203,
+          "duration_seconds_estimate": 1624.0656246524304
+        },
+        {
+          "run_id": "P2-cifar100-vitb16-adapter-lr3-s123",
+          "proposed_physical_gpu_index": 0,
+          "start_after_seconds_estimate": 28165.194083593786,
+          "duration_seconds_estimate": 1624.0656246524304
+        },
+        {
+          "run_id": "P2-cifar100-r50-adapter-lr1-s123",
+          "proposed_physical_gpu_index": 1,
+          "start_after_seconds_estimate": 28191.795516291633,
+          "duration_seconds_estimate": 1218.1628091037273
+        },
+        {
+          "run_id": "P2-cifar100-r50-adapter-lr2-s123",
+          "proposed_physical_gpu_index": 1,
+          "start_after_seconds_estimate": 29409.95832539536,
+          "duration_seconds_estimate": 1218.1628091037273
+        },
+        {
+          "run_id": "P2-cifar100-r50-adapter-lr3-s123",
+          "proposed_physical_gpu_index": 0,
+          "start_after_seconds_estimate": 29789.259708246216,
+          "duration_seconds_estimate": 1218.1628091037273
+        },
+        {
+          "run_id": "P2-cifar100-r50-full_ft-lr1-s123",
+          "proposed_physical_gpu_index": 1,
+          "start_after_seconds_estimate": 30628.121134499088,
+          "duration_seconds_estimate": 1173.7349883019924
+        },
+        {
+          "run_id": "P2-cifar100-r50-full_ft-lr2-s123",
+          "proposed_physical_gpu_index": 0,
+          "start_after_seconds_estimate": 31007.422517349944,
+          "duration_seconds_estimate": 1173.7349883019924
+        },
+        {
+          "run_id": "P2-cifar100-r50-full_ft-lr3-s123",
+          "proposed_physical_gpu_index": 1,
+          "start_after_seconds_estimate": 31801.85612280108,
+          "duration_seconds_estimate": 1173.7349883019924
+        },
+        {
+          "run_id": "P2-cifar100-r50-scratch-lr1-s123",
+          "proposed_physical_gpu_index": 0,
+          "start_after_seconds_estimate": 32181.157505651936,
+          "duration_seconds_estimate": 1165.9530395194888
+        },
+        {
+          "run_id": "P2-cifar100-r50-scratch-lr2-s123",
+          "proposed_physical_gpu_index": 1,
+          "start_after_seconds_estimate": 32975.59111110307,
+          "duration_seconds_estimate": 1165.9530395194888
+        },
+        {
+          "run_id": "P2-cifar100-r50-scratch-lr3-s123",
+          "proposed_physical_gpu_index": 0,
+          "start_after_seconds_estimate": 33347.110545171425,
+          "duration_seconds_estimate": 1165.9530395194888
+        },
+        {
+          "run_id": "P2-svhn-vitb16-linear_probe-lr1-s123",
+          "proposed_physical_gpu_index": 1,
+          "start_after_seconds_estimate": 34141.54415062256,
+          "duration_seconds_estimate": 1076.7608018480241
+        },
+        {
+          "run_id": "P2-svhn-vitb16-linear_probe-lr2-s123",
+          "proposed_physical_gpu_index": 0,
+          "start_after_seconds_estimate": 34513.06358469091,
+          "duration_seconds_estimate": 1076.7608018480241
+        },
+        {
+          "run_id": "P2-svhn-vitb16-linear_probe-lr3-s123",
+          "proposed_physical_gpu_index": 1,
+          "start_after_seconds_estimate": 35218.304952470586,
+          "duration_seconds_estimate": 1076.7608018480241
+        },
+        {
+          "run_id": "P2-cifar100-vitb16-linear_probe-lr1-s123",
+          "proposed_physical_gpu_index": 0,
+          "start_after_seconds_estimate": 35589.82438653894,
+          "duration_seconds_estimate": 741.5463863015175
+        },
+        {
+          "run_id": "P2-cifar100-vitb16-linear_probe-lr2-s123",
+          "proposed_physical_gpu_index": 1,
+          "start_after_seconds_estimate": 36295.06575431861,
+          "duration_seconds_estimate": 741.5463863015175
+        },
+        {
+          "run_id": "P2-cifar100-vitb16-linear_probe-lr3-s123",
+          "proposed_physical_gpu_index": 0,
+          "start_after_seconds_estimate": 36331.370772840455,
+          "duration_seconds_estimate": 741.5463863015175
+        },
+        {
+          "run_id": "P2-svhn-r50-linear_probe-lr1-s123",
+          "proposed_physical_gpu_index": 1,
+          "start_after_seconds_estimate": 37036.61214062013,
+          "duration_seconds_estimate": 651.8402034044266
+        },
+        {
+          "run_id": "P2-svhn-r50-linear_probe-lr2-s123",
+          "proposed_physical_gpu_index": 0,
+          "start_after_seconds_estimate": 37072.91715914197,
+          "duration_seconds_estimate": 651.8402034044266
+        },
+        {
+          "run_id": "P2-svhn-r50-linear_probe-lr3-s123",
+          "proposed_physical_gpu_index": 1,
+          "start_after_seconds_estimate": 37688.452344024554,
+          "duration_seconds_estimate": 651.8402034044266
+        },
+        {
+          "run_id": "P2-cifar100-r50-linear_probe-lr1-s123",
+          "proposed_physical_gpu_index": 0,
+          "start_after_seconds_estimate": 37724.7573625464,
+          "duration_seconds_estimate": 449.8408218175173
+        },
+        {
+          "run_id": "P2-cifar100-r50-linear_probe-lr2-s123",
+          "proposed_physical_gpu_index": 0,
+          "start_after_seconds_estimate": 38174.59818436392,
+          "duration_seconds_estimate": 449.8408218175173
+        },
+        {
+          "run_id": "P2-cifar100-r50-linear_probe-lr3-s123",
+          "proposed_physical_gpu_index": 1,
+          "start_after_seconds_estimate": 38340.29254742898,
+          "duration_seconds_estimate": 449.8408218175173
+        }
+      ],
+      "single_gpu_baseline_load_hours": [
+        10.729010835050397,
+        10.775037047012916
+      ],
+      "two_gpu_wall_hours_before_contention": 10.775037047012916,
+      "conservative_measured_contention_scenario_factor": 1.078775047654268,
+      "two_gpu_wall_hours_with_contention_scenario": 11.62384110386786,
+      "assignment_status": "proposal_not_frozen"
+    },
+    "P3": {
+      "assignments": [
+        {
+          "run_id": "P3-svhn-vitb16-scratch-s17",
+          "proposed_physical_gpu_index": 0,
+          "start_after_seconds_estimate": 0.0,
+          "duration_seconds_estimate": 9995.996859077364
+        },
+        {
+          "run_id": "P3-svhn-vitb16-scratch-s2026",
+          "proposed_physical_gpu_index": 1,
+          "start_after_seconds_estimate": 0.0,
+          "duration_seconds_estimate": 9995.996859077364
+        },
+        {
+          "run_id": "P3-svhn-vitb16-scratch-s3407",
+          "proposed_physical_gpu_index": 0,
+          "start_after_seconds_estimate": 9995.996859077364,
+          "duration_seconds_estimate": 9995.996859077364
+        },
+        {
+          "run_id": "P3-svhn-vitb16-scratch-s42",
+          "proposed_physical_gpu_index": 1,
+          "start_after_seconds_estimate": 9995.996859077364,
+          "duration_seconds_estimate": 9995.996859077364
+        },
+        {
+          "run_id": "P3-svhn-vitb16-scratch-s65537",
+          "proposed_physical_gpu_index": 0,
+          "start_after_seconds_estimate": 19991.99371815473,
+          "duration_seconds_estimate": 9995.996859077364
+        },
+        {
+          "run_id": "P3-svhn-vitb16-full_ft-s17",
+          "proposed_physical_gpu_index": 1,
+          "start_after_seconds_estimate": 19991.99371815473,
+          "duration_seconds_estimate": 9982.839142573997
+        },
+        {
+          "run_id": "P3-svhn-vitb16-full_ft-s2026",
+          "proposed_physical_gpu_index": 1,
+          "start_after_seconds_estimate": 29974.832860728726,
+          "duration_seconds_estimate": 9982.839142573997
+        },
+        {
+          "run_id": "P3-svhn-vitb16-full_ft-s3407",
+          "proposed_physical_gpu_index": 0,
+          "start_after_seconds_estimate": 29987.990577232093,
+          "duration_seconds_estimate": 9982.839142573997
+        },
+        {
+          "run_id": "P3-svhn-vitb16-full_ft-s42",
+          "proposed_physical_gpu_index": 1,
+          "start_after_seconds_estimate": 39957.67200330272,
+          "duration_seconds_estimate": 9982.839142573997
+        },
+        {
+          "run_id": "P3-svhn-vitb16-full_ft-s65537",
+          "proposed_physical_gpu_index": 0,
+          "start_after_seconds_estimate": 39970.82971980609,
+          "duration_seconds_estimate": 9982.839142573997
+        },
+        {
+          "run_id": "P3-svhn-vitb16-adapter-s17",
+          "proposed_physical_gpu_index": 1,
+          "start_after_seconds_estimate": 49940.51114587672,
+          "duration_seconds_estimate": 7924.7468473427
+        },
+        {
+          "run_id": "P3-svhn-vitb16-adapter-s2026",
+          "proposed_physical_gpu_index": 0,
+          "start_after_seconds_estimate": 49953.66886238009,
+          "duration_seconds_estimate": 7924.7468473427
+        },
+        {
+          "run_id": "P3-svhn-vitb16-adapter-s3407",
+          "proposed_physical_gpu_index": 1,
+          "start_after_seconds_estimate": 57865.25799321942,
+          "duration_seconds_estimate": 7924.7468473427
+        },
+        {
+          "run_id": "P3-svhn-vitb16-adapter-s42",
+          "proposed_physical_gpu_index": 0,
+          "start_after_seconds_estimate": 57878.41570972279,
+          "duration_seconds_estimate": 7924.7468473427
+        },
+        {
+          "run_id": "P3-svhn-vitb16-adapter-s65537",
+          "proposed_physical_gpu_index": 1,
+          "start_after_seconds_estimate": 65790.00484056212,
+          "duration_seconds_estimate": 7924.7468473427
+        },
+        {
+          "run_id": "P3-cifar100-vitb16-full_ft-s17",
+          "proposed_physical_gpu_index": 0,
+          "start_after_seconds_estimate": 65803.16255706549,
+          "duration_seconds_estimate": 6875.686095815152
+        },
+        {
+          "run_id": "P3-cifar100-vitb16-full_ft-s2026",
+          "proposed_physical_gpu_index": 0,
+          "start_after_seconds_estimate": 72678.84865288064,
+          "duration_seconds_estimate": 6875.686095815152
+        },
+        {
+          "run_id": "P3-cifar100-vitb16-full_ft-s3407",
+          "proposed_physical_gpu_index": 1,
+          "start_after_seconds_estimate": 73714.75168790482,
+          "duration_seconds_estimate": 6875.686095815152
+        },
+        {
+          "run_id": "P3-cifar100-vitb16-full_ft-s42",
+          "proposed_physical_gpu_index": 0,
+          "start_after_seconds_estimate": 79554.53474869579,
+          "duration_seconds_estimate": 6875.686095815152
+        },
+        {
+          "run_id": "P3-cifar100-vitb16-full_ft-s65537",
+          "proposed_physical_gpu_index": 1,
+          "start_after_seconds_estimate": 80590.43778371997,
+          "duration_seconds_estimate": 6875.686095815152
+        },
+        {
+          "run_id": "P3-cifar100-vitb16-scratch-s17",
+          "proposed_physical_gpu_index": 0,
+          "start_after_seconds_estimate": 86430.22084451094,
+          "duration_seconds_estimate": 6837.342730078846
+        },
+        {
+          "run_id": "P3-cifar100-vitb16-scratch-s2026",
+          "proposed_physical_gpu_index": 1,
+          "start_after_seconds_estimate": 87466.12387953512,
+          "duration_seconds_estimate": 6837.342730078846
+        },
+        {
+          "run_id": "P3-cifar100-vitb16-scratch-s3407",
+          "proposed_physical_gpu_index": 0,
+          "start_after_seconds_estimate": 93267.56357458979,
+          "duration_seconds_estimate": 6837.342730078846
+        },
+        {
+          "run_id": "P3-cifar100-vitb16-scratch-s42",
+          "proposed_physical_gpu_index": 1,
+          "start_after_seconds_estimate": 94303.46660961397,
+          "duration_seconds_estimate": 6837.342730078846
+        },
+        {
+          "run_id": "P3-cifar100-vitb16-scratch-s65537",
+          "proposed_physical_gpu_index": 0,
+          "start_after_seconds_estimate": 100104.90630466864,
+          "duration_seconds_estimate": 6837.342730078846
+        },
+        {
+          "run_id": "P3-svhn-r50-adapter-s17",
+          "proposed_physical_gpu_index": 1,
+          "start_after_seconds_estimate": 101140.80933969282,
+          "duration_seconds_estimate": 5929.6422130689025
+        },
+        {
+          "run_id": "P3-svhn-r50-adapter-s2026",
+          "proposed_physical_gpu_index": 0,
+          "start_after_seconds_estimate": 106942.24903474748,
+          "duration_seconds_estimate": 5929.6422130689025
+        },
+        {
+          "run_id": "P3-svhn-r50-adapter-s3407",
+          "proposed_physical_gpu_index": 1,
+          "start_after_seconds_estimate": 107070.45155276172,
+          "duration_seconds_estimate": 5929.6422130689025
+        },
+        {
+          "run_id": "P3-svhn-r50-adapter-s42",
+          "proposed_physical_gpu_index": 0,
+          "start_after_seconds_estimate": 112871.89124781638,
+          "duration_seconds_estimate": 5929.6422130689025
+        },
+        {
+          "run_id": "P3-svhn-r50-adapter-s65537",
+          "proposed_physical_gpu_index": 1,
+          "start_after_seconds_estimate": 113000.09376583062,
+          "duration_seconds_estimate": 5929.6422130689025
+        },
+        {
+          "run_id": "P3-svhn-r50-scratch-s17",
+          "proposed_physical_gpu_index": 0,
+          "start_after_seconds_estimate": 118801.53346088529,
+          "duration_seconds_estimate": 5675.126080939546
+        },
+        {
+          "run_id": "P3-svhn-r50-scratch-s2026",
+          "proposed_physical_gpu_index": 1,
+          "start_after_seconds_estimate": 118929.73597889952,
+          "duration_seconds_estimate": 5675.126080939546
+        },
+        {
+          "run_id": "P3-svhn-r50-scratch-s3407",
+          "proposed_physical_gpu_index": 0,
+          "start_after_seconds_estimate": 124476.65954182483,
+          "duration_seconds_estimate": 5675.126080939546
+        },
+        {
+          "run_id": "P3-svhn-r50-scratch-s42",
+          "proposed_physical_gpu_index": 1,
+          "start_after_seconds_estimate": 124604.86205983907,
+          "duration_seconds_estimate": 5675.126080939546
+        },
+        {
+          "run_id": "P3-svhn-r50-scratch-s65537",
+          "proposed_physical_gpu_index": 0,
+          "start_after_seconds_estimate": 130151.78562276438,
+          "duration_seconds_estimate": 5675.126080939546
+        },
+        {
+          "run_id": "P3-svhn-r50-full_ft-s17",
+          "proposed_physical_gpu_index": 1,
+          "start_after_seconds_estimate": 130279.98814077862,
+          "duration_seconds_estimate": 5635.649295533076
+        },
+        {
+          "run_id": "P3-svhn-r50-full_ft-s2026",
+          "proposed_physical_gpu_index": 0,
+          "start_after_seconds_estimate": 135826.91170370393,
+          "duration_seconds_estimate": 5635.649295533076
+        },
+        {
+          "run_id": "P3-svhn-r50-full_ft-s3407",
+          "proposed_physical_gpu_index": 1,
+          "start_after_seconds_estimate": 135915.6374363117,
+          "duration_seconds_estimate": 5635.649295533076
+        },
+        {
+          "run_id": "P3-svhn-r50-full_ft-s42",
+          "proposed_physical_gpu_index": 0,
+          "start_after_seconds_estimate": 141462.560999237,
+          "duration_seconds_estimate": 5635.649295533076
+        },
+        {
+          "run_id": "P3-svhn-r50-full_ft-s65537",
+          "proposed_physical_gpu_index": 1,
+          "start_after_seconds_estimate": 141551.28673184477,
+          "duration_seconds_estimate": 5635.649295533076
+        },
+        {
+          "run_id": "P3-cifar100-vitb16-adapter-s17",
+          "proposed_physical_gpu_index": 0,
+          "start_after_seconds_estimate": 147098.21029477008,
+          "duration_seconds_estimate": 5397.938650269061
+        },
+        {
+          "run_id": "P3-cifar100-vitb16-adapter-s2026",
+          "proposed_physical_gpu_index": 1,
+          "start_after_seconds_estimate": 147186.93602737784,
+          "duration_seconds_estimate": 5397.938650269061
+        },
+        {
+          "run_id": "P3-cifar100-vitb16-adapter-s3407",
+          "proposed_physical_gpu_index": 0,
+          "start_after_seconds_estimate": 152496.14894503914,
+          "duration_seconds_estimate": 5397.938650269061
+        },
+        {
+          "run_id": "P3-cifar100-vitb16-adapter-s42",
+          "proposed_physical_gpu_index": 1,
+          "start_after_seconds_estimate": 152584.8746776469,
+          "duration_seconds_estimate": 5397.938650269061
+        },
+        {
+          "run_id": "P3-cifar100-vitb16-adapter-s65537",
+          "proposed_physical_gpu_index": 0,
+          "start_after_seconds_estimate": 157894.0875953082,
+          "duration_seconds_estimate": 5397.938650269061
+        },
+        {
+          "run_id": "P3-cifar100-r50-adapter-s17",
+          "proposed_physical_gpu_index": 1,
+          "start_after_seconds_estimate": 157982.81332791597,
+          "duration_seconds_estimate": 4046.188549116254
+        },
+        {
+          "run_id": "P3-cifar100-r50-adapter-s2026",
+          "proposed_physical_gpu_index": 1,
+          "start_after_seconds_estimate": 162029.00187703222,
+          "duration_seconds_estimate": 4046.188549116254
+        },
+        {
+          "run_id": "P3-cifar100-r50-adapter-s3407",
+          "proposed_physical_gpu_index": 0,
+          "start_after_seconds_estimate": 163292.02624557726,
+          "duration_seconds_estimate": 4046.188549116254
+        },
+        {
+          "run_id": "P3-cifar100-r50-adapter-s42",
+          "proposed_physical_gpu_index": 1,
+          "start_after_seconds_estimate": 166075.19042614847,
+          "duration_seconds_estimate": 4046.188549116254
+        },
+        {
+          "run_id": "P3-cifar100-r50-adapter-s65537",
+          "proposed_physical_gpu_index": 0,
+          "start_after_seconds_estimate": 167338.21479469351,
+          "duration_seconds_estimate": 4046.188549116254
+        },
+        {
+          "run_id": "P3-cifar100-r50-full_ft-s17",
+          "proposed_physical_gpu_index": 1,
+          "start_after_seconds_estimate": 170121.37897526473,
+          "duration_seconds_estimate": 3899.464919084683
+        },
+        {
+          "run_id": "P3-cifar100-r50-full_ft-s2026",
+          "proposed_physical_gpu_index": 0,
+          "start_after_seconds_estimate": 171384.40334380977,
+          "duration_seconds_estimate": 3899.464919084683
+        },
+        {
+          "run_id": "P3-cifar100-r50-full_ft-s3407",
+          "proposed_physical_gpu_index": 1,
+          "start_after_seconds_estimate": 174020.8438943494,
+          "duration_seconds_estimate": 3899.464919084683
+        },
+        {
+          "run_id": "P3-cifar100-r50-full_ft-s42",
+          "proposed_physical_gpu_index": 0,
+          "start_after_seconds_estimate": 175283.86826289445,
+          "duration_seconds_estimate": 3899.464919084683
+        },
+        {
+          "run_id": "P3-cifar100-r50-full_ft-s65537",
+          "proposed_physical_gpu_index": 1,
+          "start_after_seconds_estimate": 177920.3088134341,
+          "duration_seconds_estimate": 3899.464919084683
+        },
+        {
+          "run_id": "P3-cifar100-r50-scratch-s17",
+          "proposed_physical_gpu_index": 0,
+          "start_after_seconds_estimate": 179183.33318197913,
+          "duration_seconds_estimate": 3873.202609496191
+        },
+        {
+          "run_id": "P3-cifar100-r50-scratch-s2026",
+          "proposed_physical_gpu_index": 1,
+          "start_after_seconds_estimate": 181819.77373251878,
+          "duration_seconds_estimate": 3873.202609496191
+        },
+        {
+          "run_id": "P3-cifar100-r50-scratch-s3407",
+          "proposed_physical_gpu_index": 0,
+          "start_after_seconds_estimate": 183056.53579147533,
+          "duration_seconds_estimate": 3873.202609496191
+        },
+        {
+          "run_id": "P3-cifar100-r50-scratch-s42",
+          "proposed_physical_gpu_index": 1,
+          "start_after_seconds_estimate": 185692.97634201497,
+          "duration_seconds_estimate": 3873.202609496191
+        },
+        {
+          "run_id": "P3-cifar100-r50-scratch-s65537",
+          "proposed_physical_gpu_index": 0,
+          "start_after_seconds_estimate": 186929.73840097152,
+          "duration_seconds_estimate": 3873.202609496191
+        },
+        {
+          "run_id": "P3-svhn-vitb16-linear_probe-s17",
+          "proposed_physical_gpu_index": 1,
+          "start_after_seconds_estimate": 189566.17895151116,
+          "duration_seconds_estimate": 3566.6492046955973
+        },
+        {
+          "run_id": "P3-svhn-vitb16-linear_probe-s2026",
+          "proposed_physical_gpu_index": 0,
+          "start_after_seconds_estimate": 190802.9410104677,
+          "duration_seconds_estimate": 3566.6492046955973
+        },
+        {
+          "run_id": "P3-svhn-vitb16-linear_probe-s3407",
+          "proposed_physical_gpu_index": 1,
+          "start_after_seconds_estimate": 193132.82815620676,
+          "duration_seconds_estimate": 3566.6492046955973
+        },
+        {
+          "run_id": "P3-svhn-vitb16-linear_probe-s42",
+          "proposed_physical_gpu_index": 0,
+          "start_after_seconds_estimate": 194369.5902151633,
+          "duration_seconds_estimate": 3566.6492046955973
+        },
+        {
+          "run_id": "P3-svhn-vitb16-linear_probe-s65537",
+          "proposed_physical_gpu_index": 1,
+          "start_after_seconds_estimate": 196699.47736090235,
+          "duration_seconds_estimate": 3566.6492046955973
+        },
+        {
+          "run_id": "P3-cifar100-vitb16-linear_probe-s17",
+          "proposed_physical_gpu_index": 0,
+          "start_after_seconds_estimate": 197936.2394198589,
+          "duration_seconds_estimate": 2454.5584482215345
+        },
+        {
+          "run_id": "P3-cifar100-vitb16-linear_probe-s2026",
+          "proposed_physical_gpu_index": 1,
+          "start_after_seconds_estimate": 200266.12656559795,
+          "duration_seconds_estimate": 2454.5584482215345
+        },
+        {
+          "run_id": "P3-cifar100-vitb16-linear_probe-s3407",
+          "proposed_physical_gpu_index": 0,
+          "start_after_seconds_estimate": 200390.79786808044,
+          "duration_seconds_estimate": 2454.5584482215345
+        },
+        {
+          "run_id": "P3-cifar100-vitb16-linear_probe-s42",
+          "proposed_physical_gpu_index": 1,
+          "start_after_seconds_estimate": 202720.6850138195,
+          "duration_seconds_estimate": 2454.5584482215345
+        },
+        {
+          "run_id": "P3-cifar100-vitb16-linear_probe-s65537",
+          "proposed_physical_gpu_index": 0,
+          "start_after_seconds_estimate": 202845.35631630197,
+          "duration_seconds_estimate": 2454.5584482215345
+        },
+        {
+          "run_id": "P3-svhn-r50-linear_probe-s17",
+          "proposed_physical_gpu_index": 1,
+          "start_after_seconds_estimate": 205175.24346204102,
+          "duration_seconds_estimate": 2156.637115739286
+        },
+        {
+          "run_id": "P3-svhn-r50-linear_probe-s2026",
+          "proposed_physical_gpu_index": 0,
+          "start_after_seconds_estimate": 205299.9147645235,
+          "duration_seconds_estimate": 2156.637115739286
+        },
+        {
+          "run_id": "P3-svhn-r50-linear_probe-s3407",
+          "proposed_physical_gpu_index": 1,
+          "start_after_seconds_estimate": 207331.8805777803,
+          "duration_seconds_estimate": 2156.637115739286
+        },
+        {
+          "run_id": "P3-svhn-r50-linear_probe-s42",
+          "proposed_physical_gpu_index": 0,
+          "start_after_seconds_estimate": 207456.5518802628,
+          "duration_seconds_estimate": 2156.637115739286
+        },
+        {
+          "run_id": "P3-svhn-r50-linear_probe-s65537",
+          "proposed_physical_gpu_index": 1,
+          "start_after_seconds_estimate": 209488.5176935196,
+          "duration_seconds_estimate": 2156.637115739286
+        },
+        {
+          "run_id": "P3-cifar100-r50-linear_probe-s17",
+          "proposed_physical_gpu_index": 0,
+          "start_after_seconds_estimate": 209613.18899600208,
+          "duration_seconds_estimate": 1486.552834695205
+        },
+        {
+          "run_id": "P3-cifar100-r50-linear_probe-s2026",
+          "proposed_physical_gpu_index": 0,
+          "start_after_seconds_estimate": 211099.74183069728,
+          "duration_seconds_estimate": 1486.552834695205
+        },
+        {
+          "run_id": "P3-cifar100-r50-linear_probe-s3407",
+          "proposed_physical_gpu_index": 1,
+          "start_after_seconds_estimate": 211645.15480925888,
+          "duration_seconds_estimate": 1486.552834695205
+        },
+        {
+          "run_id": "P3-cifar100-r50-linear_probe-s42",
+          "proposed_physical_gpu_index": 0,
+          "start_after_seconds_estimate": 212586.2946653925,
+          "duration_seconds_estimate": 1486.552834695205
+        },
+        {
+          "run_id": "P3-cifar100-r50-linear_probe-s65537",
+          "proposed_physical_gpu_index": 1,
+          "start_after_seconds_estimate": 213131.70764395408,
+          "duration_seconds_estimate": 1486.552834695205
+        }
+      ],
+      "single_gpu_baseline_load_hours": [
+        59.46467986113547,
+        59.61618346629147
+      ],
+      "two_gpu_wall_hours_before_contention": 59.61618346629147,
+      "conservative_measured_contention_scenario_factor": 1.078775047654268,
+      "two_gpu_wall_hours_with_contention_scenario": 64.31245115981416,
+      "assignment_status": "proposal_not_frozen"
+    }
+  },
+  "contention_investigation_required_before_freeze": false,
+  "two_gpu_wall_hours_with_25_percent_margin": 94.92036532960253
+}

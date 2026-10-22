@@ -1,0 +1,15 @@
+P2-cifar100-vitb16-scratch-lr2-s123 epoch=1 validation=14.820000
+P2-cifar100-vitb16-scratch-lr2-s123 epoch=2 validation=16.820000
+P2-cifar100-vitb16-scratch-lr2-s123 epoch=3 validation=19.040000
+P2-cifar100-vitb16-scratch-lr2-s123 epoch=4 validation=12.500000
+P2-cifar100-vitb16-scratch-lr2-s123 epoch=5 validation=9.440000
+P2-cifar100-vitb16-scratch-lr2-s123 epoch=6 validation=6.720000
+P2-cifar100-vitb16-scratch-lr2-s123 epoch=7 validation=8.560000
+P2-cifar100-vitb16-scratch-lr2-s123 epoch=8 validation=7.920000
+P2-cifar100-vitb16-scratch-lr2-s123 epoch=9 validation=7.680000
+P2-cifar100-vitb16-scratch-lr2-s123 epoch=10 validation=7.160000
+P2-cifar100-vitb16-scratch-lr2-s123 epoch=11 validation=6.540000
+P2-cifar100-vitb16-scratch-lr2-s123 epoch=12 validation=6.580000
+P2-cifar100-vitb16-scratch-lr2-s123 epoch=13 validation=6.880000
+P2-cifar100-vitb16-scratch-lr2-s123 epoch=14 validation=5.640000
+P2-cifar100-vitb16-scratch-lr2-s123 epoch=15 validation=6.200000

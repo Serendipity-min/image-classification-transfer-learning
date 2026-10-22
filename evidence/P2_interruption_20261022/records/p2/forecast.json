@@ -1,0 +1,1 @@
+{"actual_gpu_seconds_including_active":42941.12177910283,"cap_gpu_hours":30,"forecast_exceeds_cap":false,"partial_uncommitted_epoch_forecast":"conservative full epoch remains; actual ledger never double counts","projected_total_gpu_hours":22.38265735175622,"remaining_estimated_gpu_seconds":37636.444687219555}
