@@ -5,6 +5,7 @@ import json
 from pathlib import Path
 import tarfile
 import uuid
+import argparse
 from remote_session import connect
 from transport import ROOT, command
 
@@ -44,10 +45,25 @@ print(json.dumps({'archive':str(archive),'size_bytes':archive.stat().st_size,
 
 
 def main():
-    identity = uuid.uuid4().hex
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--recover-export')
+    args = parser.parse_args()
+    identity = args.recover_export or uuid.uuid4().hex
+    assert len(identity) == 32 and all(c in '0123456789abcdef' for c in identity)
     client = connect()
     try:
-        code, output, error = command(client, ['/root/miniconda3/envs/tl_cls_v1/bin/python', '-c', SCRIPT, identity], timeout=60)
+        recovery = r'''import pathlib,json,hashlib,gzip,sys
+p=pathlib.Path('/root/user_data/tl_cls_v1/records/p3_exports')/sys.argv[1];a=p/'evidence.tar.gz'
+# 恢复已完成的导出时读到 gzip EOF，确认归档完整后才计算传输 hash。
+with gzip.open(a,'rb') as f:
+ while f.read(4*1024*1024):pass
+m=json.loads((p/'snapshot/snapshot_manifest.json').read_text())
+print(json.dumps({'archive':str(a),'size_bytes':a.stat().st_size,'sha256':hashlib.sha256(a.read_bytes()).hexdigest(),
+ 'files':len(m['files']),'text_bytes':m['text_bytes']}))
+'''
+        # 约一万余个小文件在共享盘导出实测超过 60 秒；传输仍只回收不足 100MB 的文本证据。
+        code, output, error = command(client, ['/root/miniconda3/envs/tl_cls_v1/bin/python', '-c',
+                                              recovery if args.recover_export else SCRIPT, identity], timeout=180)
         assert code == 0, error
         receipt = json.loads(output)
         assert receipt['size_bytes'] < 100_000_000

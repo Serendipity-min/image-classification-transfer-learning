@@ -1,0 +1,20 @@
+{
+  "pause_time_china": "2026-10-24T20:47:04.296827+08:00",
+  "completed_runs": 54,
+  "interrupted_runs": 2,
+  "planned_runs": 24,
+  "complete_epochs": 2740,
+  "actual_GPU_hours": 104.41365689939612,
+  "remaining_training_estimate_GPU_hours": 19.46100811710426,
+  "old_forecast_with_reserves_and_margin_GPU_hours": 160.0082934644663,
+  "revised_forecast_with_reserves_and_margin_GPU_hours": 133.9048792396173,
+  "hard_cap_GPU_hours": 160,
+  "interpretation": "old formula added 25% to actual cost already known; new formula applies margin only to future training and reserves; no historical charges reduced",
+  "resume_from_epochs": {
+    "P3-cifar100-r50-full_ft-s42": 37,
+    "P3-cifar100-r50-scratch-s2026": 3
+  },
+  "resume_authorized_by_user": "2026-10-26",
+  "artificial_storage_ceiling_enforced": false,
+  "test_authorized": false
+}

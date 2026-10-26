@@ -1,0 +1,6 @@
+{
+  "previous_hook_sha256": "913d87ae9c8da25ef82806edb83316b712daaefcf793e16fcf63085d0fec871c",
+  "updated_hook_sha256": "96b2e74044ab8eeef22712891a20c742933c2a700c1026e88b105106f64e2cf2",
+  "new_frozen_execution_commit": "700a1adcba85e03896dfafa303959f8d035008aa",
+  "reason": "user explicitly authorized continued P3 using actual hardware resources; reviewed operational-only correction; platform protection retained"
+}

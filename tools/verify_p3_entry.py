@@ -31,7 +31,7 @@ def main():
         child = read(stage + filename)
         assert child['status'] == 'passed' and child['execution_commit'] == receipt['execution_commit']
         assert child['execution_identity'] == receipt['execution_identity']
-    assert read(stage + 'cpu_acceptance.json')['tests_run'] == 17
+    assert read(stage + 'cpu_acceptance.json')['tests_run'] >= 17
     for name, expected in receipt['execution_identity']['files'].items():
         assert sha(name) == expected
         blob = subprocess.check_output(['git', 'show', receipt['execution_commit'] + ':' + name], cwd=ROOT)
@@ -74,7 +74,7 @@ def main():
         assert device['continued_model_bitwise_equal'] and device['continued_optimizer_bitwise_equal']
         assert device['eval_logit_max_abs_error'] == 0 and device['all_inputs_synthetic']
     result = {'status': 'passed', 'execution_commit': receipt['execution_commit'], 'runs': 80,
-        'CPU_tests': 17, 'GPU_devices': 2, 'frozen_time_groups': 4,
+        'CPU_tests': read(stage + 'cpu_acceptance.json')['tests_run'], 'GPU_devices': 2, 'frozen_time_groups': 4,
         'github_platform_protected': True, 'centralized_test_authorized': False}
     print(json.dumps(result))
 
