@@ -24,12 +24,29 @@ from tlcls.p3_budget import Budget, Storage
 from tlcls.p3_core import (EXIT_RESERVE_SECONDS, ROOT, STAGE, candidates, code_commit,
                            file_hash, read, require_authorization, scientific_identity, write)
 from tlcls.p3_core import infrastructure_exception
-from tlcls.p3_core import execution_identity, operational_compatibility
+from tlcls.p3_core import execution_identity, operational_compatibility, compatible_execution
 from tlcls.p3_transaction import EpochTransaction, committed_summary
 
 
 class StageInterruption(RuntimeError):
     pass
+
+
+def reopen_future_prefixes(transaction, elapsed_seconds, attempt_id):
+    path = transaction.root / 'prefixes.json'
+    if not path.exists(): return
+    previous = read(path)
+    value = read(path)
+    changed = False
+    for item in value['items']:
+        # 基础设施暂停不等于轨迹最终结束：只重开尚未耗尽的预算点，截止已过的切片保持锁定。
+        if elapsed_seconds < item['budget_seconds'] and 'actual_run_stop_gpu_seconds' in item:
+            item['status'] = 'pending_candidate' if item['checkpoint'] else 'pending'
+            item['previous_interruption_stop_gpu_seconds'] = item.pop('actual_run_stop_gpu_seconds')
+            changed = True
+    if changed:
+        write(transaction.root / 'prefix_resume_history' / (attempt_id + '.json'), previous)
+        write(path, value)
 
 
 class TimedLoader:
@@ -58,8 +75,7 @@ class TimedLoader:
 
 def restore_checkpoint(transaction, commit, model, optimizer, scheduler, config, expected_sha):
     payload = torch.load(transaction.path(commit['last']['path']), map_location='cpu', weights_only=False)
-    assert payload['execution_commit'] == code_commit(), 'checkpoint 执行代码身份不一致'
-    assert payload['runtime_execution_identity'] == execution_identity(), 'checkpoint 实现文件身份不一致'
+    compatible_execution(payload['execution_commit'], payload['runtime_execution_identity'])
     assert payload['scientific_config_sha256'] == expected_sha, 'checkpoint 科学配置不一致'
     assert payload['config'] == config and payload['completed_epoch'] == commit['completed_epoch']
     peaks = [group['peak_lr'] for group in optimizer.param_groups]
@@ -106,6 +122,7 @@ def main():
     current, rows = transaction.load()
     if current:
         assert args.resume and current['completed_epoch'] <= 50
+        reopen_future_prefixes(transaction, budget.run_seconds(args.run_id), attempt_id)
     storage = Storage(authorization['confirmed_project_environment_allocation_bytes'])
     storage.require(4 * 2**30)
     stopped = False

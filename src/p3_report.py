@@ -6,7 +6,7 @@ import io
 import math
 import statistics
 from tlcls.p3_core import (ROOT, STAGE, candidates, code_commit, execution_identity,
-    file_hash, read, require_authorization, scientific_identity, write, atomic_bytes)
+    file_hash, read, require_authorization, scientific_identity, write, atomic_bytes, compatible_execution, execution_identity_at)
 from tlcls.p3_budget import Budget, Storage
 from tlcls.p3_transaction import EpochTransaction
 from tlcls.p3_evaluation import cache_key, evaluation_id
@@ -31,7 +31,7 @@ def main():
         identity = scientific_identity(config)
         if summary.get('completed_epochs', 0):
             assert summary['scientific_config_sha256'] == identity['scientific_config_sha256']
-            assert summary['execution_commit'] == code_commit() and summary['implementation'] == execution_identity()
+            compatible_execution(summary['execution_commit'], summary['implementation'])
             tx = EpochTransaction(directory, identity['scientific_config_sha256'], config)
             current, rows = tx.load(rebuild=False)
             assert len(rows) == summary['completed_epochs']
@@ -42,6 +42,9 @@ def main():
                 assert row['validation']['samples'] == val_count
                 assert row['cumulative_optimizer_updates'] == e * math.ceil(count / 128)
                 assert row['scientific_config_sha256'] == identity['scientific_config_sha256']
+                runtime = row['runtime_execution_commit']
+                assert row['runtime_execution_identity_sha256'] == execution_identity_at(runtime)['scope_sha256']
+                compatible_execution(runtime, execution_identity_at(runtime))
             if summary['status'] == 'completed':
                 assert len(rows) == 50
                 best = max(rows, key=lambda x: (x['validation']['top1_percent'], -x['epoch']))
@@ -115,7 +118,7 @@ def main():
         else: write(seal_path, seal)
     report = '# P3 阶段交接报告\n\n'
     report += f"状态：{'80 个运行终态已独立审计并封存' if all_terminal else '未完成，保持原始失败和暂停证据'}。集中测试继续关闭。\n\n"
-    report += f"运行状态：{counts}；完整 epochs：{audit['completed_epochs']}；实际 GPU 占用：{used/3600:.6f} / 160 GPU-hours。项目与环境：{audit['storage_GiB']:.3f} / 200 GiB 人工分配保障。\n\n"
+    report += f"运行状态：{counts}；完整 epochs：{audit['completed_epochs']}；实际 GPU 占用：{used/3600:.6f} / 160 GPU-hours。项目与环境：{audit['storage_GiB']:.3f} GiB；200 GiB 为历史最低保障，按用户 2026-10-26 指令不再作为存储封顶，保留物理空间退出保护。\n\n"
     report += '冻结 16 组 P2 LR，5 seeds 分母保留；每个正式 run 新初始化并使用 50 epoch horizon、5 epoch warmup。主比较及统计计划不变。现有结果仅为训练和验证证据；官方 test、测试图和发表结论均未解锁。\n\n'
     report += '|run|状态|完整轮次|最佳验证轮次|验证 Top-1|GPU-hours|\n|---|---|---:|---:|---:|---:|\n'
     for x in table:

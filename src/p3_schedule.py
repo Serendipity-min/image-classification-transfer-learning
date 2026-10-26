@@ -107,12 +107,15 @@ def forecast(runs, state, estimates, budget):
     reserved = (require_authorization(False)['test_compute_reserve_gpu_seconds'] + 2.5 * 3600
                 + proposal['P3_extra_prefix_save_gpu_hours_upper_scenario'] * 3600)
     used = budget.used(budget.snapshot())
+    protected_total = used + 1.25 * (remaining + reserved)
     value = {'actual_gpu_seconds_including_active': used, 'remaining_estimated_gpu_seconds': remaining,
         'projected_total_gpu_hours': (used + remaining) / 3600, 'cap_gpu_hours': 160,
         'partial_uncommitted_epoch_forecast': 'conservative full epoch remains; actual ledger never double counts',
         'held_test_reserve_gpu_seconds': require_authorization(False)['test_compute_reserve_gpu_seconds'],
-        'forecast_with_reserves_and_margin_gpu_hours': (used + remaining + reserved) * 1.25 / 3600,
-        'forecast_exceeds_cap': (used + remaining + reserved) * 1.25 + EXIT_RESERVE_SECONDS > CAP_SECONDS}
+        'forecast_policy': 'actual_spent_plus_125_percent_of_remaining_and_reserves',
+        'legacy_reinflated_forecast_gpu_hours': (used + remaining + reserved) * 1.25 / 3600,
+        'forecast_with_reserves_and_margin_gpu_hours': protected_total / 3600,
+        'forecast_exceeds_cap': protected_total + EXIT_RESERVE_SECONDS > CAP_SECONDS}
     write(STAGE / 'forecast.json', value)
     return value
 
@@ -184,6 +187,8 @@ def main():
                     progress_path = ROOT / 'runs' / task['run_id'] / 'progress.json'
                     item = budget.snapshot()['attempts'].get(task['attempt_id'])
                     last = progress_path.stat().st_mtime if progress_path.exists() else (item['started_unix'] if item else time.time())
+                    if item:
+                        last = max(last, item['started_unix'])  # 恢复初始化不能沿用两天前的心跳判定 stalled。
                     limit = max(600, 5 * baseline()[next(r['configuration_id'] for r in runs if r['run_id'] == task['run_id'])]['epoch_seconds'])
                     if time.time() - last > limit:
                         task['stalled'] = True
@@ -225,8 +230,6 @@ def main():
                         from tlcls.p3_core import canonical
                         log.write(canonical(dict(resources, unix=time.time())) + b'\n')
                     last_storage_log = time.monotonic()
-                if resources['warning_175_gib']:
-                    hold = 'storage_175_gib_warning_pause_dispatch'
             except RuntimeError:
                 hold = 'storage_allocation_or_exit_space_insufficient'
                 budget.stop(hold)

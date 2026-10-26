@@ -284,8 +284,52 @@ class Checks(unittest.TestCase):
         guard=module.Storage(200*2**30)
         self.assertEqual(guard.allocation,200*2**30)
         with patch.object(guard,'snapshot',return_value={'reserve_bytes':10*2**30,
-            'filesystem_free_bytes':20*2**30,'allocation_remaining_bytes':13*2**30}):
+            'filesystem_free_bytes':13*2**30,'allocation_remaining_bytes':20*2**30}):
             with self.assertRaises(RuntimeError):guard.require(4*2**30)
+
+    def test_operational_resume_keeps_existing_science_and_rejects_math(self):
+        from tlcls.p3_core import operational_compatibility, execution_identity
+        current=execution_identity()
+        for name in ['src/tlcls/engine.py','src/tlcls/p3_transaction.py','src/evaluate.py']:
+            altered=deepcopy(current);altered['files'][name]='0'*64
+            with self.assertRaises(AssertionError):operational_compatibility(altered)
+        for config in candidates():
+            path=ROOT/'runs'/config['run_id']/'scientific.json'
+            if path.exists():self.assertEqual(read(path),scientific_identity(config))
+
+    def test_resume_reopens_only_future_prefix_deadlines(self):
+        from p3_train import reopen_future_prefixes
+        with tempfile.TemporaryDirectory() as folder:
+            tx=self.fixture_transaction(folder,[10,20,30])
+            tx.commit(1,{'epoch':1},lambda f:f.write(b'full1'),lambda f:f.write(b'model1'),1,9)
+            tx.finalize_prefixes(9)
+            locked=deepcopy(tx.prefixes()['items'][0])
+            reopen_future_prefixes(tx,11,'synthetic-resume')
+            self.assertEqual(tx.prefixes()['items'][0],locked)
+            self.assertEqual(tx.prefixes()['items'][1]['status'],'pending_candidate')
+            tx.commit(2,{'epoch':2},lambda f:f.write(b'full2'),lambda f:f.write(b'model2'),2,18)
+            self.assertEqual(tx.prefixes()['items'][0],locked)
+            self.assertEqual(tx.prefixes()['items'][1]['completed_epoch'],2)
+            self.assertTrue((Path(folder)/'prefix_resume_history/synthetic-resume.json').exists())
+
+    def test_forecast_does_not_reinflate_already_spent_time(self):
+        from unittest.mock import patch
+        from types import SimpleNamespace
+        import p3_schedule as scheduler
+        previous=read(STAGE/'resume_decision.json')['pause_forecast']
+        run=candidates()[0]; name=run['configuration_id']
+        seconds=previous['remaining_estimated_gpu_seconds']/50
+        budget=SimpleNamespace(snapshot=lambda:{},used=lambda _:previous['actual_gpu_seconds_including_active'])
+        # 使用已发生的真实暂停案例；只隔离输出，避免 CPU 验收改写正式预测记录。
+        with patch.object(scheduler,'baseline',return_value={name:{'startup_terminal_first_epoch_excess_seconds':0}}), \
+             patch.object(scheduler,'write'):
+            result=scheduler.forecast([run],{run['run_id']:{'status':'planned','completed_epochs':0}},
+                                       {name:seconds},budget)
+        self.assertGreater(result['legacy_reinflated_forecast_gpu_hours'],160)
+        self.assertLess(result['forecast_with_reserves_and_margin_gpu_hours'],160)
+        self.assertFalse(result['forecast_exceeds_cap'])
+        self.assertEqual(result['actual_gpu_seconds_including_active'],previous['actual_gpu_seconds_including_active'])
+        self.assertEqual(result['cap_gpu_hours'],160)
 
     def test_fail_closed_missing_corrupt_version_signature_and_seal(self):
         from tlcls.p3_evaluation import require_test_authorization

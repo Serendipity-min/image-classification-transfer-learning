@@ -96,7 +96,13 @@ class Budget:
     def clear_technical_stop(self):
         with self.edit() as value:
             assert all(a['status'] == 'finalized' for a in value['attempts'].values())
-            assert value['stop_request']['reason'] in ['owner_process_terminated', 'operator_technical_stop']
+            reason = value['stop_request']['reason']
+            if reason == 'projected_total_with_reserves_exceeds_160_gpu_hours':
+                decision = read(STAGE / 'resume_decision.json')
+                assert decision['resume_authorized'] and decision['hard_cap_gpu_seconds'] == self.cap
+                assert decision['execution_commit'] == code_commit()
+            else:
+                assert reason in ['owner_process_terminated', 'operator_technical_stop']
             value['events'].append({'reason': 'technical_resume_same_cap', 'monotonic': time.monotonic()})
             value['stop_request'] = None
 
@@ -153,12 +159,15 @@ class Storage:
                 'combined_bytes': used, 'confirmed_allocation_bytes': self.allocation,
                 'filesystem_free_bytes': physical, 'allocation_remaining_bytes': self.allocation - used,
                 'warning_175_gib': used >= 175 * 2**30, 'reserve_bytes': 10 * 2**30,
+                'artificial_storage_ceiling_enforced': False,
+                'resource_policy': 'user_2026-10-26_physical_free_space_and_exit_reserve',
                 'measurement': 'logical file bytes, symlinks excluded, hardlinks deduplicated within each root',
                 'allocation_source': 'explicit_user_P3_contract_resource_confirmation_2026-10-22'}
 
     def require(self, next_write_bytes=0):
         value = self.snapshot()
         needed = value['reserve_bytes'] + next_write_bytes
-        if min(value['filesystem_free_bytes'], value['allocation_remaining_bytes']) < needed:
+        # 用户 2026-10-26 取消人工存储封顶；200 GiB 仍是历史保障记录，不限制真实可用盘。
+        if value['filesystem_free_bytes'] < needed:
             raise RuntimeError('storage_exit_reserve_or_allocation_insufficient')
         return value

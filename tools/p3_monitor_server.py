@@ -40,8 +40,8 @@ def check():
         reason = 'scheduler_exited_before_all_candidates_terminal'
     elif progress.get('reason'):
         reason = progress['reason']
-    elif storage['warning_175_gib']:
-        reason = 'storage_warning'
+    elif storage['filesystem_free_bytes'] < 14 * 2**30:
+        reason = 'physical_storage_exit_reserve_warning'
     value = {'checked_unix': time.time(), 'interval_seconds': 1800, 'counts': dict(counts),
         'scheduler_alive': alive, 'gpu_hours': seconds / 3600, 'cap_gpu_hours': 160,
         'forecast': progress.get('forecast'), 'storage': storage, 'actionable_reason': reason,

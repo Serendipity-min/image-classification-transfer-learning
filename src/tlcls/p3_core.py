@@ -1,6 +1,8 @@
 """P3 独立身份、授权与固定矩阵；P2 归档和预算始终只读。"""
 from collections import defaultdict
 import subprocess
+import hashlib
+from functools import lru_cache
 from .p2_core import (ROOT, PIPELINE, atomic_bytes, canonical, code_commit, file_hash,
                       fsync_directory, infrastructure_exception, monotonic, process_alive,
                       process_ticks, read, value_hash, write)
@@ -10,6 +12,9 @@ CAP_SECONDS = 160 * 3600
 EXIT_RESERVE_SECONDS = 60
 SEEDS = [17, 42, 2026, 3407, 65537]
 ARCHIVE = '987fb5a0a5f7505086e2a7bbb64d421cf7f336ad'
+SCIENCE_BASE = '7247c66175f385e990d61580f1a7ef4f9ef7bf26'
+OPERATIONAL_FILES = {'src/tlcls/p3_core.py', 'src/tlcls/p3_budget.py', 'src/p3_schedule.py',
+                     'src/p3_train.py', 'src/p3_report.py', 'src/p3_acceptance.py'}
 
 
 def execution_identity():
@@ -23,10 +28,32 @@ def execution_identity():
             'mathematical_pipeline_sha256': value_hash({n: files[n] for n in PIPELINE})}
 
 
-def operational_compatibility():
-    # P3 从新身份启动；没有默许恢复旧 P2 或跨代码提交的兼容映射。
-    return {'phase': 'P3', 'cross_commit_resume_allowed': False,
-            'actual_execution_identity': execution_identity()}
+@lru_cache(maxsize=8)
+def execution_identity_at(commit):
+    files = {name: hashlib.sha256(subprocess.check_output(
+        ['git', '-C', str(ROOT), 'show', commit + ':' + name])).hexdigest()
+        for name in execution_identity()['files']}
+    return {'files': files, 'scope_sha256': value_hash(files),
+            'mathematical_pipeline_sha256': value_hash({n: files[n] for n in PIPELINE})}
+
+
+def operational_compatibility(current=None):
+    # 本次仅允许已授权的预算、资源与恢复元数据修订；数学、事务和测试门禁仍须逐字相等。
+    current = current or execution_identity()
+    basis = execution_identity_at(SCIENCE_BASE)
+    assert current['files'].keys() == basis['files'].keys()
+    changed = sorted(n for n in basis['files'] if basis['files'][n] != current['files'][n])
+    assert set(changed) <= OPERATIONAL_FILES, '科学管线或事务变化不允许兼容恢复'
+    return {'phase': 'P3', 'scientific_base_commit': SCIENCE_BASE,
+            'scientific_implementation_basis': basis, 'changed_operational_files': changed,
+            'actual_execution_identity': current, 'historical_receipts_rewritten': False}
+
+
+def compatible_execution(commit, identity):
+    assert commit in [SCIENCE_BASE, code_commit()], '未登记的执行提交'
+    assert identity == execution_identity_at(commit), '历史执行源码与 Git 对象不符'
+    operational_compatibility(identity)
+    return identity
 
 
 def candidates():
@@ -70,7 +97,7 @@ def scientific_identity(config):
               'records/' + config['dataset'] + '_split.json']
     identity = {'configuration': {k: v for k, v in config.items() if k != 'physical_gpu_index'},
                 'inputs': {n: file_hash(ROOT / n) for n in frozen},
-                'implementation': execution_identity(), 'weight_revision': config['checkpoint_revision'],
+                'implementation': operational_compatibility()['scientific_implementation_basis'], 'weight_revision': config['checkpoint_revision'],
                 'weight_sha256': config['checkpoint_sha256']}
     return {'scientific_config': identity, 'scientific_config_sha256': value_hash(identity)}
 
