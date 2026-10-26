@@ -3,7 +3,8 @@
   "status": "ACTIVE",
   "rrule": "FREQ=MINUTELY;INTERVAL=30",
   "readback_verified": true,
-  "checked_unix": 1792658118.5567296,
+  "checked_unix": 1793003797.5389187,
   "normal_runs_quiet": true,
-  "server_fallback_independent_of_desktop": true
+  "server_fallback_independent_of_desktop": true,
+  "resume_source_commit": "700a1adcba85e03896dfafa303959f8d035008aa"
 }
