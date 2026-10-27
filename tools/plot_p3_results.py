@@ -103,7 +103,7 @@ def main():
     fig.text(.5, .045, 'Best-validation differences are descriptive; official test and confirmatory inference remain closed.', ha='center', fontsize=8)
     save(fig, 'primary_validation_differences')
     with (ROOT / 'reports/P3_primary_validation_differences.csv').open('w', encoding='utf8', newline='') as f:
-        w = csv.DictWriter(f, fieldnames=list(paired_rows[0])); w.writeheader(); w.writerows(paired_rows)
+        w = csv.DictWriter(f, fieldnames=list(paired_rows[0]), lineterminator='\n'); w.writeheader(); w.writerows(paired_rows)
 
     fig, axes = setup()
     for ax, group in zip(axes, GROUPS):

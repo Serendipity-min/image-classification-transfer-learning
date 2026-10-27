@@ -27,11 +27,11 @@ def value_hash(v):
 
 def write(p, v):
     p.parent.mkdir(parents=True, exist_ok=True)
-    p.write_text(json.dumps(v, ensure_ascii=False, indent=2, allow_nan=False) + '\n', encoding='utf8')
+    p.write_text(json.dumps(v, ensure_ascii=False, indent=2, allow_nan=False) + '\n', encoding='utf8', newline='\n')
 
 def csv_write(p, rows):
     with p.open('w', encoding='utf8', newline='') as f:
-        w = csv.DictWriter(f, fieldnames=list(rows[0])); w.writeheader(); w.writerows(rows)
+        w = csv.DictWriter(f, fieldnames=list(rows[0]), lineterminator='\n'); w.writeheader(); w.writerows(rows)
 
 def verify(snapshot):
     s = snapshot / 'records/p3'

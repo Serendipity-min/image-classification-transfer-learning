@@ -15,11 +15,11 @@ def rows(n):
     return list(csv.DictReader((ROOT / 'reports' / n).open(encoding='utf8')))
 
 def write(n, value):
-    (ROOT / n).write_text(value, encoding='utf8')
+    (ROOT / n).write_text(value, encoding='utf8', newline='\n')
 
 def csv_write(n, values):
     with (ROOT / 'reports' / n).open('w', encoding='utf8', newline='') as f:
-        w = csv.DictWriter(f, fieldnames=list(values[0])); w.writeheader(); w.writerows(values)
+        w = csv.DictWriter(f, fieldnames=list(values[0]), lineterminator='\n'); w.writeheader(); w.writerows(values)
 
 def main():
     audit = read('records/p3/delivery_audit.json')
@@ -88,6 +88,7 @@ def main():
         ('测试边界','P3_C_authorized=false，centralized_test_authorized=false；未构造测试 evaluator')]
     p += ''.join(f'|{a}|{b}|\n' for a,b in facts)
     p += '\n训练样本次数指完整提交事务的计数，**所有 attempt 的实际物理样本处理总数 UNKNOWN**：中断时未提交的半轮工作没有完整采样日志，不能把 221,862,000 冒充含失败重算的精确物理总量。GPU 台账则完整包含这些时间。四个恢复 run 的 summary `fresh_initialization=false` 表示“最后一次 attempt 从同 run checkpoint 恢复”；首次 attempt 的 `resume=false`、`resumed_generation=null` 已逐一验证，不应误读为继承 P2。\n\n'
+    p += '\n`progress.json` 是调度循环最后快照，可能仍标记 running；终态以 stage_status=P3_runs_terminal、80个completed summary、92个finalized attempt及P3 seal共同确认，未将旧进度字段当作仍在训练。\n\n'
     p += '## 五种子最佳验证结果\n\n'
     p += '下表为每个 run 从 50 轮中选择的最佳验证 Top-1 的均值 ± 样本 SD，n=5；不是标准误或置信区间。选择使用了同一验证集，成绩具有选择偏差。`last` 的五 seed 均值/SD、80个原始成绩、4,000轮 train/validation loss及准确率见随附 CSV。\n\n'
     p += '|配置|冻结 LR|最佳验证 Top-1 (%)|最后轮验证均值 (%)|累计 GPU-hours|\n|---|---:|---:|---:|---:|\n'
