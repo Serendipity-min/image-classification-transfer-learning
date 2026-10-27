@@ -1,0 +1,7 @@
+{
+  "status": "NOT_ISSUED",
+  "test_authorization_present_on_server": false,
+  "PI_runtime_key_injected": false,
+  "request_sha256": "53e27839cb65f68ca849737b8265985d203f0d14b25522aa73163a7fc46a867e",
+  "official_test_accessed": false
+}

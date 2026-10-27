@@ -1,0 +1,31 @@
+{
+  "status": "unsigned_request_NOT_AUTHORIZATION",
+  "warning": "Only PI-controlled independent signing makes the payload effective; no real signature or key is present",
+  "payload": {
+    "schema": "P3_C_authorization_v1",
+    "separate_user_approval": true,
+    "PI_independent_issuance": true,
+    "P3_C_authorized": true,
+    "centralized_test_authorized": true,
+    "approval_id": "P3C-20261027-b94ae0e5434f481d882d30dd6d70e5f4",
+    "seal_sha256": "977d8c69bef9f6a783b4f5188102e5d25f1e55497b3ed1e79791265a7d02c8c6",
+    "evaluation_manifest_sha256": "0dcfff493c6dcde0c92aa357f2e64434eaa7ab9d9e960bf45453c14893e5e663",
+    "selected_hparams_sha256": "66662cbb09bf8973530ab257b49a92617fce27a9129b0b6bbadb924d4fe7e74f",
+    "execution_identity_sha256": "14b1b7cd4b4601203dca2b0dbc7e5000ee13ee6ecb03cf0f4bd519c2bf765a09",
+    "execution_commit": "700a1adcba85e03896dfafa303959f8d035008aa",
+    "P3_B_gpu_ledger_sha256": "a9f10816b7f8d6421c48bb6149dd82b2a681821272886e07484c6d316054ca00",
+    "CPU_fault_injection_sha256": "20349b0db305de48a137453e660088225aa5f47063d08c4c96d8b86b9b48de32",
+    "execution_order_sha256": "585f47558f680e98c8d7af7aec462b044f1323697561ef4355930e5de12df4b5",
+    "supervisor_source_sha256": {
+      "tools/p3c_acceptance.py": "b9b8eb12be4b15ea386b8a59cf7e481672420a5dc9bef9182653798f1e29b754",
+      "tools/p3c_analyze.py": "d5fedc2c166347e1bf05793155fe86758c89e53b65203fb79a7d44356ab4506d",
+      "tools/p3c_runtime.py": "48b46bd36d34b1ff1dd4c3a727e6d49495f35377372159e23b3719910c474a61",
+      "tools/p3c_supervise.py": "8902595ca6f953e32e61e4e1439a1bdba0bf150c8e8b9b8ee5c64959fd506d30"
+    },
+    "subcap_gpu_seconds": 10800,
+    "total_cap_gpu_seconds": 576000,
+    "scope": "synthetic GPU acceptance then fixed400 evaluations, independent analysis; no training or retuning",
+    "contract_sha256": "445bc0a734254e3d97dce1786ddba000fd42f5f418633450839abb008bcdf9db",
+    "created_request_unix": 1793102282.0401187
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "status": "PREPARATION_COMPLETED_TEST_NO_GO",
+  "gates": {
+    "G1": "ACCEPTED_PRIOR_HASH_EVIDENCE_CURRENT_508_FILES_AND_SIZES",
+    "G2": "BLOCKED_INDEPENDENT_SIGNATURE_AND_KEY_NOT_AVAILABLE",
+    "G3": "CPU_27_PASS_GPU_NOT_RUN",
+    "G4": "DUAL_BUDGET_AND_SIGNED_APPEND_IMPLEMENTED_CPU_TESTED_PRODUCTION_NOT_STARTED",
+    "G5": "PASS_FROZEN_80_BEST_80_LAST_240_PREFIX_ORDER",
+    "G6": "PASS_SYNTHETIC_METRICS_AND_PAIRED_STATISTICS_REAL_TEST_NOT_RUN"
+  },
+  "checkpoint_rehash_waived_by_current_user": true,
+  "new_GPU_seconds": 0,
+  "P3_B_gpu_hours_unchanged": 124.61060950655697,
+  "P3_C_authorized": false,
+  "centralized_test_authorized": false,
+  "CPU_fault_injection_sha256": "20349b0db305de48a137453e660088225aa5f47063d08c4c96d8b86b9b48de32",
+  "supervisor_source_sha256": {
+    "tools/p3c_acceptance.py": "b9b8eb12be4b15ea386b8a59cf7e481672420a5dc9bef9182653798f1e29b754",
+    "tools/p3c_analyze.py": "d5fedc2c166347e1bf05793155fe86758c89e53b65203fb79a7d44356ab4506d",
+    "tools/p3c_runtime.py": "48b46bd36d34b1ff1dd4c3a727e6d49495f35377372159e23b3719910c474a61",
+    "tools/p3c_supervise.py": "8902595ca6f953e32e61e4e1439a1bdba0bf150c8e8b9b8ee5c64959fd506d30"
+  },
+  "PI_unsigned_request_sha256": "53e27839cb65f68ca849737b8265985d203f0d14b25522aa73163a7fc46a867e",
+  "official_test_predictions": 0,
+  "source_inside_seal_modified": false
+}
