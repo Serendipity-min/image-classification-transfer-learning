@@ -1,17 +1,16 @@
-> 2026-10-27 中期状态：65/80 完整，两个 ViT Linear Probe 从第3/35轮提交继续，13个未启动。新暂停为保存路径计时略超10%调查线，已调查；不是完整P3终点。详见[65-run中期结果与吞吐调查](reports/P3_65run中期结果与吞吐调查.md)。训练源码仍为700a1adc，集中测试关闭。
+# 图像分类迁移学习：P3-B 完整交付
 
-# 图像分类迁移学习：P3 恢复执行
+2026-10-27：**80/80 正式运行完成，4,000 epochs，独立验收 PASS，已封存。P3-C 与官方集中测试保持关闭。** 仓库已由用户设为公开，`codex/p3-execution` 启用 GitHub 平台保护。
 
-协议 `TL-CLS-20261020-v1.0`，2026-10-22。P2 48/48 已验收；P3-A 已验收，恢复修订的20项 CPU及真实中断 GPU恢复验收通过，P3-B 按 80 runs（含 5 seeds）、每 run 50 epochs 的注册矩阵执行，集中测试保持关闭。仓库由用户改为公开，P3 分支已启用 GitHub 平台保护。
+- [完整结果汇报与验收](reports/P3_完整结果汇报与验收.md)、[服务器逐run交接](reports/P3_阶段交接报告.md)、[独立验收JSON](records/p3/delivery_audit.json)、[P3 seal](records/P3_sealed.json)。
+- [五seed验证结果](reports/P3_validation_configurations.csv)、[80-run结果](reports/P3_validation_runs.csv)、[4,000轮曲线源数据](reports/P3_epoch_curves.csv)、[图表与可编辑源图](figures/P3)。所有准确率均为验证集，未运行官方测试。
+- 实际累计 **124.610609507 / 160 GPU-hours**；92个attempt全部结算，含4次暂停和8次GPU工程验收。P1/P2证据完整保留，全部checkpoint留在原服务器路径 `/root/user_data/tl_cls_v1`。
+- 科学基线 `7247c661`；实际逐轮执行为 `7247c661`（2,740轮）和 `700a1adc`（1,260轮）。54个原终态summary未改写，4次合法同run恢复；归档commit与训练commit分开。
+- [完整文本证据](evidence/P3_final_20261027)、[GPU台账](records/p3/gpu_ledger.json)、[checkpoint清单](records/p3/checkpoint_inventory.json)、[评价manifest草案](records/p3/evaluation_manifest.draft.json)。
+- [下一阶段预算提案](reports/P3_C_待审预算.json)：建议集中评价子预算3 GPU-hours，**待用户单独授权**；不自动启动测试、扩展实验或论文定稿。
+- 历史过程：[启动验收](reports/P3_启动验收回执.md)、[首次暂停与恢复](reports/P3_暂停原因与恢复验收.md)、[65-run中期调查](reports/P3_65run中期结果与吞吐调查.md)、[P3合同](docs/P3_有条件执行合同.md)。历史状态仅代表当时快照。
 
-- [P3 启动验收回执](reports/P3_启动验收回执.md)、[本阶段合同](docs/P3_有条件执行合同.md)。
-- [80-run 解析配置](records/p3/run_manifest.json)、[六项门禁收据](records/p3/acceptance.json)、[真实资源](records/p3/entry_preflight.json)、[分支保护](records/p3/branch_protection.json)。
-- [冻结时间预算](records/p3/time_budget_frozen.json)、[P3 GPU 台账](records/p3/gpu_ledger.json)。运行中账本以服务器实时值为准，GitHub 是注明时点的快照。
-- P3 科学基线 `7247c661`，恢复实际执行代码 `700a1adc`；54个完成 run 保留原身份，两个中断 run 从37/3轮提交恢复。详见[暂停原因与恢复验收](reports/P3_暂停原因与恢复验收.md)。
-- 服务器路径固定 `/root/user_data/tl_cls_v1`。160 GPU-hours 独立封顶；按用户2026-10-26指令取消人为存储封顶，改按真实物理可用量与退出余量保护。每30分钟检查一次，正常保持安静。
-- P3-B 完成须独立封存并停止；P3-C、官方测试预测和测试图等待另行明确授权。
-
-P2 历史报告：[阶段 PDF](reports/P2_阶段汇报.pdf)、[结果分析](reports/P2_结果汇报.md)、[完整验收](reports/P2_验收回执.md)、[冻结 LR](selected_hparams.json)。P2 运行代码与历史回执仍绑定原 `6c0a215` / `d66193b`，未重写；全部模型留服务器。
+P2历史报告：[阶段PDF](reports/P2_阶段汇报.pdf)、[结果分析](reports/P2_结果汇报.md)、[完整验收](reports/P2_验收回执.md)、[冻结LR](selected_hparams.json)。
 
 ## P2 当前入口
 

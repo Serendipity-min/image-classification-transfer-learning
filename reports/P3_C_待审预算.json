@@ -1,0 +1,62 @@
+{
+  "schema": "P3_C_review_proposal_v1",
+  "status": "pending_user_review_NOT_AUTHORIZED",
+  "P3_C_authorized": false,
+  "centralized_test_authorized": false,
+  "seal_sha256": "977d8c69bef9f6a783b4f5188102e5d25f1e55497b3ed1e79791265a7d02c8c6",
+  "evaluation_manifest_sha256": "0dcfff493c6dcde0c92aa357f2e64434eaa7ab9d9e960bf45453c14893e5e663",
+  "evaluation_roles": 400,
+  "distinct_checkpoint_prediction_keys": 400,
+  "test_sample_counts_for_cost_scaling_only": {
+    "cifar100": 10000,
+    "svhn": 26032
+  },
+  "P3_validation_seconds_median_epochs_2_to_50": {
+    "cifar100-r50-adapter": 3.6181207709014416,
+    "cifar100-r50-full_ft": 2.728735737502575,
+    "cifar100-r50-linear_probe": 2.8919318094849586,
+    "cifar100-r50-scratch": 2.7071063108742237,
+    "cifar100-vitb16-adapter": 4.884566958993673,
+    "cifar100-vitb16-full_ft": 4.523299816995859,
+    "cifar100-vitb16-linear_probe": 4.508443955332041,
+    "cifar100-vitb16-scratch": 4.5009506195783615,
+    "svhn-r50-adapter": 5.109212875366211,
+    "svhn-r50-full_ft": 4.063614744693041,
+    "svhn-r50-linear_probe": 3.67900213226676,
+    "svhn-r50-scratch": 4.0907464772462845,
+    "svhn-vitb16-adapter": 6.951617073267698,
+    "svhn-vitb16-full_ft": 6.434892304241657,
+    "svhn-vitb16-linear_probe": 6.4445763900876045,
+    "svhn-vitb16-scratch": 6.406745921820402
+  },
+  "scaled_inference_only_GPU_hours": 1.4872385077891936,
+  "with_25_percent_future_margin_GPU_hours": 1.859048134736492,
+  "original_held_test_reserve_GPU_hours": 1.4646375681192052,
+  "recommended_new_evaluation_subbudget_GPU_hours_PENDING_APPROVAL": 3.0,
+  "recommended_budget_includes": [
+    "checkpoint load and hash",
+    "inference",
+    "prediction serialization",
+    "bounded validation timing and necessary diagnostics/retries"
+  ],
+  "P3_used_GPU_hours": 124.61060950655697,
+  "P3_total_cap_GPU_hours": 160,
+  "projected_total_if_new_3h_subbudget_approved": 127.61060950655697,
+  "additional_output_storage_planning_GiB": 5,
+  "storage_is_incremental_plan_not_hardware_cap": true,
+  "checkpoint_download": false,
+  "monetary_price": "school server; no hourly price",
+  "required_before_execution": [
+    "explicit separate user approval of centralized test and subbudget",
+    "freeze exact seal and evaluation manifest SHA",
+    "external HMAC signing secret; never stored in repository",
+    "confirm unchanged 80-run identity, checkpoint hashes and evaluator identity",
+    "all evaluation attempts charged to shared P3 ledger; reserve and exit guards remain"
+  ],
+  "statistics_after_test": [
+    "paired five-seed t intervals for two preregistered contrasts",
+    "Holm correction for two preregistered superiority tests",
+    "CIFAR-100 ViT LP-minus-FT noninferiority margin -0.5 percentage points",
+    "retain all five seeds; no test-driven retuning or checkpoint substitution"
+  ]
+}

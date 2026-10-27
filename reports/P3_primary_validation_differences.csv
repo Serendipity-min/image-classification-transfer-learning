@@ -1,0 +1,11 @@
+comparison,seed,validation_difference_pp
+cifar100-vitb16-linear_probe-minus-full_ft,17,-5.280000000000001
+cifar100-vitb16-linear_probe-minus-full_ft,42,-5.420000000000002
+cifar100-vitb16-linear_probe-minus-full_ft,2026,-4.8799999999999955
+cifar100-vitb16-linear_probe-minus-full_ft,3407,-5.599999999999994
+cifar100-vitb16-linear_probe-minus-full_ft,65537,-5.400000000000006
+svhn-r50-adapter-minus-full_ft,17,0.3412503412503298
+svhn-r50-adapter-minus-full_ft,42,0.1911001911001904
+svhn-r50-adapter-minus-full_ft,2026,0.24570024570024884
+svhn-r50-adapter-minus-full_ft,3407,0.36855036855037326
+svhn-r50-adapter-minus-full_ft,65537,0.24570024570024884

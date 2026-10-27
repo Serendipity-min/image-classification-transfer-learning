@@ -1,0 +1,9 @@
+{
+  "checked_unix": 1793098765.4823272,
+  "github_platform_protected": true,
+  "branch": "codex/p3-execution",
+  "enforce_admins": true,
+  "required_linear_history": true,
+  "allow_force_pushes": false,
+  "allow_deletions": false
+}

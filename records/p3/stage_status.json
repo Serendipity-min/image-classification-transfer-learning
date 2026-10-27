@@ -1,1 +1,1 @@
-{"P3_C_authorized":false,"centralized_test_authorized":false,"execution_commit":"700a1adcba85e03896dfafa303959f8d035008aa","previous_pause_preserved_in":"records/p3/slowdown_history/1793024783","reason":null,"resumed_unix":1793064393.3913615,"status":"running_resumed"}
+{"P3_B_training_authorized":true,"P3_C_authorized":false,"centralized_test_authorized":false,"execution_commit":"700a1adcba85e03896dfafa303959f8d035008aa","gpu_hours":124.61060950655697,"reason":null,"status":"P3_runs_terminal"}

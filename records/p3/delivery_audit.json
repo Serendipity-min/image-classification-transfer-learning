@@ -1,0 +1,79 @@
+{
+  "schema": "P3_independent_delivery_audit_v1",
+  "status": "passed",
+  "snapshot_files_verified": 17121,
+  "seal_sha256": "977d8c69bef9f6a783b4f5188102e5d25f1e55497b3ed1e79791265a7d02c8c6",
+  "frozen_inputs_verified_from_P2_archive_when_not_exported": [
+    "records/p2/gpu_ledger.json"
+  ],
+  "gpu_ledger_sha256": "a9f10816b7f8d6421c48bb6149dd82b2a681821272886e07484c6d316054ca00",
+  "runs_completed": 80,
+  "configurations": 16,
+  "committed_epochs": 4000,
+  "committed_training_samples": 221862000,
+  "committed_validation_samples": 24652000,
+  "optimizer_updates": 1736000,
+  "all_attempt_physical_samples": "UNKNOWN: uncommitted interrupted work is not fully logged",
+  "GPU_hours": 124.61060950655697,
+  "attempts": 92,
+  "attempt_kind_counts": {
+    "candidate": 84,
+    "gpu_acceptance": 8
+  },
+  "attempt_termination_counts": {
+    "completed": 88,
+    "slowdown_above_10_percent_investigate_before_dispatch": 2,
+    "projected_total_with_reserves_exceeds_160_gpu_hours": 2
+  },
+  "actual_epoch_execution_commits": {
+    "7247c66175f385e990d61580f1a7ef4f9ef7bf26": 2740,
+    "700a1adcba85e03896dfafa303959f8d035008aa": 1260
+  },
+  "final_attempt_execution_commits": {
+    "7247c66175f385e990d61580f1a7ef4f9ef7bf26": 54,
+    "700a1adcba85e03896dfafa303959f8d035008aa": 26
+  },
+  "scientific_base_commit": "7247c66175f385e990d61580f1a7ef4f9ef7bf26",
+  "changed_operational_files": [
+    "src/p3_acceptance.py",
+    "src/p3_report.py",
+    "src/p3_schedule.py",
+    "src/p3_train.py",
+    "src/tlcls/p3_budget.py",
+    "src/tlcls/p3_core.py"
+  ],
+  "preserved_completed_run_hashes": {
+    "resume_decision.json": 54,
+    "slowdown_resume_decision.json": 65
+  },
+  "checkpoint_count": 508,
+  "checkpoint_bytes": 124785209292,
+  "prefixes_available": 240,
+  "evaluation_roles": 400,
+  "distinct_prediction_cache_keys": 400,
+  "matching_initial_head_groups": 20,
+  "matching_sampler_epoch_groups": 1000,
+  "fresh_initial_runs_verified_from_first_attempt": 80,
+  "resumed_at_committed_epochs": [
+    {
+      "run_id": "P3-cifar100-r50-full_ft-s42",
+      "completed_epoch": 37
+    },
+    {
+      "run_id": "P3-cifar100-r50-scratch-s2026",
+      "completed_epoch": 3
+    },
+    {
+      "run_id": "P3-cifar100-vitb16-linear_probe-s17",
+      "completed_epoch": 3
+    },
+    {
+      "run_id": "P3-cifar100-vitb16-linear_probe-s2026",
+      "completed_epoch": 35
+    }
+  ],
+  "fresh_initialization_summary_field_semantics": "last attempt only; false for four legal infrastructure resumes",
+  "P3_checkpoint_binary_hashes": "verified on server by sealed terminal audit; only inventory consistency checked locally",
+  "centralized_test_authorized": false,
+  "test_predictions_generated": false
+}
