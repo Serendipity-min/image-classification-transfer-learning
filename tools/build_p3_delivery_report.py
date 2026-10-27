@@ -130,6 +130,11 @@ def main():
     p += '- [完整原始文本归档](../evidence/P3_final_20261027/text_evidence.tar.gz)、[逐文件manifest](../evidence/P3_final_20261027/snapshot_manifest.json)、[传输收据](../evidence/P3_final_20261027/receipt.json)。17,121个文件逐一核验；P3二进制哈希由服务器独立终态审计提供，本机仅核对其封存及引用一致性。\n'
     p += '- 原始归档解压至独立目录后，在仓库运行 `python tools/verify_p3_delivery.py --snapshot <解压目录>` 可重算验收和CSV（缺省未导出的P2账本从已接受归档读取并核对冻结SHA）。图源为 `tools/plot_p3_results.py`；全部图提供PDF/SVG/PNG及对齐、字体、碰撞QA记录。\n\n'
     p += f'封存SHA-256：`{audit["seal_sha256"]}`。GPU账本SHA-256：`{audit["gpu_ledger_sha256"]}`。阶段终点是P3-B已封存；P3-C与集中测试继续关闭。\n'
+    closeout = ROOT / 'records/p3/delivery_closeout.json'
+    if closeout.exists():
+        closed = json.loads(closeout.read_text(encoding='utf8'))
+        assert closed['desktop_automation_status'] == 'PAUSED' and not closed['server_monitor_alive']
+        p += '\n交付收尾已完成：服务器低频监控已自行退出，桌面每30分钟定时任务已暂停并读回确认；未归档聊天。见 [收尾回执](../records/p3/delivery_closeout.json)。\n'
     write('reports/P3_完整结果汇报与验收.md', p)
     print(json.dumps({'report': 'reports/P3_完整结果汇报与验收.md', 'GPU_hours': used,
         'P3_C_authorized': False, 'proposed_evaluation_subbudget_GPU_hours': 3.0}))

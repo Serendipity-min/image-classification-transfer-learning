@@ -7,6 +7,7 @@
 - 实际累计 **124.610609507 / 160 GPU-hours**；92个attempt全部结算，含4次暂停和8次GPU工程验收。P1/P2证据完整保留，全部checkpoint留在原服务器路径 `/root/user_data/tl_cls_v1`。
 - 科学基线 `7247c661`；实际逐轮执行为 `7247c661`（2,740轮）和 `700a1adc`（1,260轮）。54个原终态summary未改写，4次合法同run恢复；归档commit与训练commit分开。
 - [完整文本证据](evidence/P3_final_20261027)、[GPU台账](records/p3/gpu_ledger.json)、[checkpoint清单](records/p3/checkpoint_inventory.json)、[评价manifest草案](records/p3/evaluation_manifest.draft.json)。
+- [交付收尾回执](records/p3/delivery_closeout.json)：服务器定时监控已结束，桌面30分钟定时任务已暂停；集中测试保持关闭。
 - [下一阶段预算提案](reports/P3_C_待审预算.json)：建议集中评价子预算3 GPU-hours，**待用户单独授权**；不自动启动测试、扩展实验或论文定稿。
 - 历史过程：[启动验收](reports/P3_启动验收回执.md)、[首次暂停与恢复](reports/P3_暂停原因与恢复验收.md)、[65-run中期调查](reports/P3_65run中期结果与吞吐调查.md)、[P3合同](docs/P3_有条件执行合同.md)。历史状态仅代表当时快照。
 

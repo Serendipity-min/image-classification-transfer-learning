@@ -1,0 +1,20 @@
+{
+  "schema": "P3_delivery_closeout_v1",
+  "status": "delivered_waiting_PI_review",
+  "checked_unix": 1793098884.826735,
+  "delivered_commit": "c17579f13f9b7c7371606ab0d0b1edc474bfa3b4",
+  "runs_completed": 80,
+  "all_attempts_settled": true,
+  "server_monitor_alive": false,
+  "server_monitor_was_already_stopped": true,
+  "seal_sha256": "977d8c69bef9f6a783b4f5188102e5d25f1e55497b3ed1e79791265a7d02c8c6",
+  "gpu_ledger_unchanged": true,
+  "P3_C_authorized": false,
+  "centralized_test_authorized": false,
+  "checkpoint_downloaded": false,
+  "desktop_automation_status": "PAUSED",
+  "desktop_automation_readback_verified": true,
+  "chat_archived": false,
+  "authorization_still_closed": true,
+  "official_test_prediction_files": 0
+}
