@@ -18,3 +18,5 @@ __pycache__/
 .env.*
 .ssh/
 .venv/
+# 完整测试授权保留服务器，公开仓库只交付校验回执。
+/records/p3/test_authorization.json

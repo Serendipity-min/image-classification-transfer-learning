@@ -201,9 +201,12 @@ def launch(args):
             'approval_id':approved['approval_id'],'authorization_sha256':sha(ROOT/'records/p3/test_authorization.json'),
             'CPU_fault_injection_sha256':approved['CPU_fault_injection_sha256'],
             'supervisor_source_sha256':scope(),'execution_order_sha256':approved['execution_order_sha256'],
-            'subcap_gpu_seconds':CAP,'PI_independent_issuance_asserted_in_signed_payload':True,
-            'human_identity_authentication':'not provided by shared-key HMAC; independent PI issuance remains an operational requirement',
-            'secret_logged_or_stored':False})
+            'subcap_gpu_seconds':CAP,'PI_independent_issuance_asserted_in_signed_payload':approved['PI_independent_issuance'],
+            'approval_mode':approved.get('approval_mode','independent_PI_issuance'),
+            'independent_signing_waived_by_PI':approved.get('independent_signing_waived_by_PI',False),
+            'approved_unix':approved.get('approved_unix'),
+            'human_identity_authentication':'shared-key HMAC verifies integrity; issuance follows the recorded PI approval mode',
+            'secret_logged_or_committed':False})
         shared = read(ROOT / 'records/p3/gpu_ledger.json')
         assert all(a['status'] == 'finalized' for a in shared['attempts'].values())
         own = {i for i,a in shared['attempts'].items() if a['kind'].startswith('p3c_')}

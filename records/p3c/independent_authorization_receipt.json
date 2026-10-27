@@ -1,7 +1,1 @@
-{
-  "status": "NOT_ISSUED",
-  "test_authorization_present_on_server": false,
-  "PI_runtime_key_injected": false,
-  "request_sha256": "53e27839cb65f68ca849737b8265985d203f0d14b25522aa73163a7fc46a867e",
-  "official_test_accessed": false
-}
+{"CPU_fault_injection_sha256":"a6b0599136fc21a921f3710059f3fec0160b8345beea6020d200a5633f0f92fb","PI_independent_issuance_asserted_in_signed_payload":false,"approval_id":"P3C-direct-0dc88b085fe3421b850cba7447b42809","approval_mode":"direct_user_PI_authorization","approved_unix":1793104532.2846472,"authorization_sha256":"3d9b89ccf3d5eb3709643e480ce515e756bdce25cf3559e08f0ffbf4bb9f1a44","execution_order_sha256":"585f47558f680e98c8d7af7aec462b044f1323697561ef4355930e5de12df4b5","human_identity_authentication":"shared-key HMAC verifies integrity; issuance follows the recorded PI approval mode","independent_signing_waived_by_PI":true,"secret_logged_or_committed":false,"status":"signature_and_scope_verified","subcap_gpu_seconds":10800,"supervisor_source_sha256":{"tools/p3c_acceptance.py":"b9d71bb7a2f5b967e28f217ef55d9aff18776b1cab0954715038f1b5d123a7c0","tools/p3c_analyze.py":"d5fedc2c166347e1bf05793155fe86758c89e53b65203fb79a7d44356ab4506d","tools/p3c_runtime.py":"bc96e1fbe2839732fa1f062967956ac75a1da0e594ae4281c672c0d35d777d02","tools/p3c_supervise.py":"f19d1cff4f12987cc3780d1c785597fd959dc3b7b893935bd8f0a7a70541098d"}}

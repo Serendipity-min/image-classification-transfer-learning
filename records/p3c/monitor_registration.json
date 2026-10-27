@@ -1,0 +1,15 @@
+{
+  "desktop_automation": "tlcls-p3c-30min",
+  "status": "ACTIVE",
+  "readback_verified": true,
+  "interval_minutes": 30,
+  "server_monitor": {
+    "pid": 4239,
+    "start_ticks": "3217544424",
+    "interval_seconds": 1800,
+    "started_unix": 1793104777.4250014,
+    "training_or_evaluation_restarted_by_monitor": false
+  },
+  "normal_notifications": "quiet",
+  "no_foreground_watch": true
+}

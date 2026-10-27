@@ -1,0 +1,39 @@
+{
+  "checked_unix": 1793104854.2565205,
+  "wrapper_alive": true,
+  "status": {
+    "P3_C_authorized": true,
+    "approval_id": "P3C-direct-0dc88b085fe3421b850cba7447b42809",
+    "status": "synthetic_gpu_acceptance",
+    "supervisor_source_sha256": {
+      "tools/p3c_acceptance.py": "b9d71bb7a2f5b967e28f217ef55d9aff18776b1cab0954715038f1b5d123a7c0",
+      "tools/p3c_analyze.py": "d5fedc2c166347e1bf05793155fe86758c89e53b65203fb79a7d44356ab4506d",
+      "tools/p3c_runtime.py": "bc96e1fbe2839732fa1f062967956ac75a1da0e594ae4281c672c0d35d777d02",
+      "tools/p3c_supervise.py": "f19d1cff4f12987cc3780d1c785597fd959dc3b7b893935bd8f0a7a70541098d"
+    }
+  },
+  "completed": 0,
+  "completed_by_role": {},
+  "all_P3C_attempts_settled": false,
+  "P3C_GPU_hours_including_active": 0.17871559401353201,
+  "total_P3_GPU_hours_including_active": 124.78932510057051,
+  "P3C_cap_GPU_hours": 3,
+  "total_cap_GPU_hours": 160,
+  "active_attempts": [
+    {
+      "attempt_id": "p3c-4d327ced1d814ec59cad64fade6dc4e9",
+      "device": 0,
+      "kind": "p3c_gpu_acceptance"
+    },
+    {
+      "attempt_id": "p3c-935b945464454062b281ccdfb45b197b",
+      "device": 1,
+      "kind": "p3c_gpu_acceptance"
+    }
+  ],
+  "filesystem_free_bytes": 14824435478528,
+  "forecast": null,
+  "gpu_acceptance": "NOT_RUN",
+  "independent_audit_status": null,
+  "actionable_reason": null
+}

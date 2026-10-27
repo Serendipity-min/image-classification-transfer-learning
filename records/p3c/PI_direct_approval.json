@@ -1,0 +1,1 @@
+{"P3_C_authorized":true,"approved_unix":1793104532.2821074,"evaluation_count":400,"independent_signing_waived_by_PI":true,"new_training_authorized":false,"schema":"P3C_PI_direct_approval_v1","subcap_gpu_seconds":10800,"total_cap_gpu_seconds":576000,"user_statement":"我就是PI，明确授权执行P3-C的400项集中测试。本轮取消独立签署要求，密钥配置由你安全处理；3 GPU-hours子上限和160 GPU-hours总上限不变，后台执行，完成后回收分析并推送。"}

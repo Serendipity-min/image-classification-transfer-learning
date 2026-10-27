@@ -1,0 +1,17 @@
+{
+  "schema": "P3C_startup_audit_v1",
+  "status": "PASSED_FOR_BACKGROUND_EXECUTION_NOT_FINAL",
+  "CPU_tests": 28,
+  "synthetic_GPU_devices_passed": 2,
+  "synthetic_GPU_seconds": 678.8620849698782,
+  "P3B_attempts_preserved": 92,
+  "formal_evaluation_attempts_running": 2,
+  "PI_approval_mode": "direct_user_PI_authorization",
+  "independent_issuance_claimed": false,
+  "subcap_GPU_hours": 3,
+  "total_cap_GPU_hours": 160,
+  "raw_predictions_collected": false,
+  "key_collected": false,
+  "heartbeat_status": "ACTIVE",
+  "P3C_final_delivery_passed": false
+}

@@ -1,0 +1,12 @@
+{
+  "schema": "P3C_public_subset_receipt_v1",
+  "source_transfer_verified": true,
+  "source_archive_sha256": "1628cc8aafc548025d3d24a19a75a8d17bc2040ed437afcbafe43e15bbe46eb7",
+  "published_archive_sha256": "e00ab5a7d3278a11ec938292b3d53bb8cb7e2499e42fcde4267934bdea8a04e8",
+  "published_files": 10,
+  "published_bytes": 43905,
+  "live_authorization_published": false,
+  "key_downloaded": false,
+  "raw_predictions_downloaded": false,
+  "launch_only_NOT_FINAL": true
+}

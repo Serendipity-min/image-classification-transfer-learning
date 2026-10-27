@@ -182,6 +182,16 @@ class Acceptance(unittest.TestCase):
         rt.write(self.root / 'records/p3/test_authorization.json', {'schema':'P3_C_authorization_v1'})
         with self.assertRaises(PermissionError): require_test_authorization(self.root / 'manifest.json', self.root)
 
+    def test_direct_PI_authorization_requires_explicit_waiver(self):
+        payload={'schema':'P3_C_authorization_v1','centralized_test_authorized':True,'separate_user_approval':True,
+            'PI_independent_issuance':False,'approval_mode':'direct_user_PI_authorization',
+            'independent_signing_waived_by_PI':True,'subcap_gpu_seconds':rt.CAP,'total_cap_gpu_seconds':rt.TOTAL_CAP,
+            'approval_id':'synthetic-direct','execution_order_sha256':'order','supervisor_source_sha256':{'synthetic':'sha'}}
+        def sign(v):return dict(v,signature_hmac_sha256=hmac.new(self.key,rt.canonical(v),hashlib.sha256).hexdigest())
+        rt.validate_payload(sign(payload),self.key,{'synthetic':'sha'},'order')
+        for wrong in [dict(payload,independent_signing_waived_by_PI=False),dict(payload,approval_mode='unspecified')]:
+            with self.assertRaises(PermissionError):rt.validate_payload(sign(wrong),self.key,{'synthetic':'sha'},'order')
+
     def test_metrics_on_known_cpu_logits(self):
         import torch
         logits = torch.tensor([[3.,0.],[0.,3.],[0.,3.],[3.,0.]])

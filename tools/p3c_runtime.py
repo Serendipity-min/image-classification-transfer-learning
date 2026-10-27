@@ -73,12 +73,15 @@ def checked_path(root, relative):
 
 def validate_payload(payload, key, source_files, order_sha):
     if len(key) < 32:
-        raise PermissionError('external_PI_key_required')
+        raise PermissionError('runtime_authorization_key_required')
     signed = dict(payload); signature = signed.pop('signature_hmac_sha256', '')
     if not hmac.compare_digest(signature, hmac.new(key, canonical(signed), hashlib.sha256).hexdigest()):
         raise PermissionError('invalid_signature')
+    issuance_allowed = signed['PI_independent_issuance'] is True or (
+        signed.get('approval_mode') == 'direct_user_PI_authorization'
+        and signed.get('independent_signing_waived_by_PI') is True)
     if not (signed['schema'] == 'P3_C_authorization_v1' and signed['centralized_test_authorized'] is True
-            and signed['separate_user_approval'] is True and signed['PI_independent_issuance'] is True
+            and signed['separate_user_approval'] is True and issuance_allowed
             and signed['subcap_gpu_seconds'] == CAP and signed['total_cap_gpu_seconds'] == TOTAL_CAP
             and signed['approval_id'] and signed['execution_order_sha256'] == order_sha
             and signed['supervisor_source_sha256'] == source_files):

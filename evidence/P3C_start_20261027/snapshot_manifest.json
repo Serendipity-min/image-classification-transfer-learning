@@ -1,0 +1,52 @@
+{
+  "schema": "P3C_public_startup_receipts_v1",
+  "source_snapshot_manifest_sha256": "ec73a369e6a9a60b64291727ceac89f94aebe3a7b03fd83e56d1f8a359848436",
+  "source_archive_sha256": "1628cc8aafc548025d3d24a19a75a8d17bc2040ed437afcbafe43e15bbe46eb7",
+  "files": {
+    "records/p3/gpu_ledger.json": {
+      "sha256": "73e385b3e50d3942ed97292950a6588091e24a7df815382cad103190d2495904",
+      "size_bytes": 72080
+    },
+    "records/p3c/PI_direct_approval.json": {
+      "sha256": "62f09ef3bffdaeff3a3ab5b84be4a457a70a6d3151cf1a9baa6d872e59175ad9",
+      "size_bytes": 498
+    },
+    "records/p3c/direct_PI_launch.json": {
+      "sha256": "6b69410ee8b5d80c9283308f15fdcd8882fe33143be32018be1c0cda586e3c34",
+      "size_bytes": 1079
+    },
+    "records/p3c/evaluation_ledger.json": {
+      "sha256": "bc9a95c05914ceaeade91cd97f3c1e892de85a6f4336c0daf08462050641f5ed",
+      "size_bytes": 684
+    },
+    "records/p3c/execution_order.json": {
+      "sha256": "585f47558f680e98c8d7af7aec462b044f1323697561ef4355930e5de12df4b5",
+      "size_bytes": 65436
+    },
+    "records/p3c/fault_injection.json": {
+      "sha256": "a6b0599136fc21a921f3710059f3fec0160b8345beea6020d200a5633f0f92fb",
+      "size_bytes": 579
+    },
+    "records/p3c/fault_injection.log": {
+      "sha256": "5c156dd50cb34da2106d04aedb22e81f8b8e98d94e3ec0dc3d522652246547ac",
+      "size_bytes": 3291
+    },
+    "records/p3c/gpu_acceptance.json": {
+      "sha256": "daf6749c283a2a88ca592c1d6f6393d026665c84d2fedd9a11ded35e43911139",
+      "size_bytes": 1387
+    },
+    "records/p3c/independent_authorization_receipt.json": {
+      "sha256": "4ae5cea0877ad226acebbe42a15ffba0053a95c5434d62826c0b6ba02186c15d",
+      "size_bytes": 1134
+    },
+    "records/p3c/status.json": {
+      "sha256": "82499bbd7a35aa01aa48fd8c6f5a0ce671b222964b84e0c4eff8891a3ae8930e",
+      "size_bytes": 498
+    }
+  },
+  "excluded": [
+    "records/p3/test_authorization.json"
+  ],
+  "exclusion_reason": "live authorization retained in controlled evidence; only nonsecret validation receipts published",
+  "launch_only_NOT_FINAL": true
+}
