@@ -1,0 +1,12 @@
+{
+  "archive_sha256": "6b7d691142a87b431f423052338887f1f5f617df2d33bb0364007e7da42ec891",
+  "archive_size_bytes": 1200919,
+  "verified_files": 439,
+  "server_export_id": "5014c60d1f4748eebcb2ad879fdc47ff",
+  "all_original_archive_bytes_preserved": true,
+  "raw_predictions_downloaded": false,
+  "checkpoint_downloaded": false,
+  "key_downloaded": false,
+  "live_test_authorization_published": false,
+  "storage_receipt_collected_separately": "c9c260a2b3e1e23b6104bfc2a77a40041f0d5f9f7ba0098962f261c3f1bee234"
+}

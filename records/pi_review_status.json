@@ -1,8 +1,8 @@
 {
   "protocol_id": "TL-CLS-20261020-v1.0",
-  "date": "2026-10-22",
+  "date": "2026-10-28",
   "timezone": "Asia/Shanghai",
-  "status": "P2_completed_verified_awaiting_P3_PI_review",
+  "status": "P3C_completed_audited_sealed_awaiting_PI_review",
   "P0": "passed",
   "P1": "completed_and_audited",
   "P2": {
@@ -15,35 +15,50 @@
     "selected_configurations": 16
   },
   "P3": {
-    "status": "not_started",
-    "authorized": false
+    "status": "training_and_400_test_evaluations_completed_and_audited",
+    "authorized_scope_completed": true,
+    "runs": 80,
+    "epochs": 4000,
+    "P3C_evaluations": 400,
+    "actual_gpu_hours": 126.68332954067426,
+    "cap_gpu_hours": 160,
+    "new_training_authorized": false
   },
-  "pi_decision": {
+  "pi_reviewer": null,
+  "decision_timestamp": null,
+  "review_questions": [
+    "review two preregistered official test conclusions",
+    "review exploratory efficiency and boundary results",
+    "decide separately on paper finalization or extensions"
+  ],
+  "approval_rule": "P3C frozen400 scope completed; no additional tests, training, retuning, extensions or paper finalization authorized.",
+  "centralized_test": {
+    "status": "completed_sealed",
+    "completed": 400,
+    "P3C_gpu_hours": 2.072720034117293,
+    "P3C_cap_gpu_hours": 3,
+    "additional_test_authorized": false
+  },
+  "P2_execution_code_commits": [
+    "6c0a215798a4de319e7c6c55f0bb1b351bf082e0",
+    "d66193bc3265954094e0badebfcd3279deb69e5a"
+  ],
+  "historical_P2_decision": {
     "source": "explicit_user_stage_instruction_2026-10-21",
     "accepted_P0_P1_commit": "b485177a393b8532e07d1504a64629ad54043d2b",
     "authorized_next_phase": "P2",
     "hard_cap_gpu_hours": 30,
     "execution_commit": "d66193bc3265954094e0badebfcd3279deb69e5a"
   },
-  "pi_reviewer": null,
-  "decision_timestamp": null,
-  "training_code_commits": [
+  "historical_training_code_commits": [
     "74001fc68c2bfb68cd65da821c961d75a93fe32b",
     "94b02df2ae94097602e40e88783f8c445006fa9a"
   ],
-  "review_questions": [
-    "P2 engineering and selection evidence",
-    "P3 independent 160 GPU-hours proposal",
-    "P3 project/environment allocation at least 200 GiB or explicit retention alternative",
-    "freeze common budget B and accept P3/evaluation entry before activation"
-  ],
-  "approval_rule": "Explicit user decision authorizes P2 only; P3 and centralized test remain closed.",
-  "centralized_test": {
-    "status": "not_started",
-    "authorized": false
-  },
-  "P2_execution_code_commits": [
-    "6c0a215798a4de319e7c6c55f0bb1b351bf082e0",
-    "d66193bc3265954094e0badebfcd3279deb69e5a"
-  ]
+  "pi_decision": {
+    "source": "explicit_user_PI_direct_P3C_authorization",
+    "independent_signing_waived": true,
+    "scope": "frozen400_only",
+    "scope_completed": true,
+    "further_execution_requires_new_PI_approval": true
+  }
 }

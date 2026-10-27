@@ -1,0 +1,69 @@
+{
+  "schema": "P3C_local_delivery_acceptance_v1",
+  "status": "PASS",
+  "completed": 400,
+  "by_role": {
+    "secondary_last": 80,
+    "primary_best_val": 80,
+    "budget_prefix": 240
+  },
+  "text_archive_sha256": "6b7d691142a87b431f423052338887f1f5f617df2d33bb0364007e7da42ec891",
+  "text_archive_bytes": 1200919,
+  "text_snapshot_files_verified": 439,
+  "sealed_artifact_hashes_verified": 4,
+  "confusion_count_top1_f1_balanced_recomputed_locally": 400,
+  "NLL_independently_recomputed_server_side": 400,
+  "paired_statistics_recomputed_locally": [
+    {
+      "comparison": "cifar100-vitb16-linear_probe-minus-full_ft",
+      "mean_difference_pp": -5.740000000000004,
+      "sample_SD_pp": 0.23043437243605974,
+      "CI95_low_pp": -6.026122064202537,
+      "CI95_high_pp": -5.453877935797471,
+      "paired_t_two_sided_p": 6.220424874950383e-07,
+      "Holm_adjusted_p": 1.2440849749900767e-06
+    },
+    {
+      "comparison": "svhn-r50-adapter-minus-full_ft",
+      "mean_difference_pp": 0.3011677934849445,
+      "sample_SD_pp": 0.1870028872738924,
+      "CI95_low_pp": 0.06897304079679545,
+      "CI95_high_pp": 0.5333625461730935,
+      "paired_t_two_sided_p": 0.02273418213625548,
+      "Holm_adjusted_p": 0.02273418213625548
+    }
+  ],
+  "all_five_seeds_per_configuration_role": true,
+  "frozen_dispatch_order_and_role_completion_barriers_verified": true,
+  "P3B_92_attempts_unchanged": true,
+  "chain_content_hash_links_verified_locally": 12,
+  "chain_HMAC_verified_server_side": true,
+  "CPU_acceptance_tests": 28,
+  "P3C_attempts": 4,
+  "P3C_failures": 0,
+  "P3C_technical_retries": 0,
+  "P3C_GPU_hours": 2.072720034117293,
+  "P3_total_GPU_hours": 126.68332954067426,
+  "P3C_cap_GPU_hours": 3,
+  "total_cap_GPU_hours": 160,
+  "P3C_remaining_GPU_hours": 0.9272799658827071,
+  "total_remaining_GPU_hours": 33.316670459325735,
+  "synthetic_acceptance_GPU_hours": 0.1885728013805217,
+  "formal_reservation_GPU_hours": 1.8841472327367712,
+  "role_transaction_GPU_hours": {
+    "primary_best_val": 0.3430346131873214,
+    "secondary_last": 0.36023935286638636,
+    "budget_prefix": 1.0271677539694217
+  },
+  "formal_startup_authorization_idle_exit_overhead_GPU_hours": 0.15370551271364175,
+  "peak_GPU_allocated_bytes_after_model_load": 1253766656,
+  "peak_GPU_reserved_bytes_after_model_load": 1627389952,
+  "CPU_process_RSS_peak": "not sampled by P3C guardian; ledger zeros do not mean zero usage",
+  "storage_receipt_sha256": "c9c260a2b3e1e23b6104bfc2a77a40041f0d5f9f7ba0098962f261c3f1bee234",
+  "original_predictions_and_checkpoint_downloaded": false,
+  "live_authorization_or_key_published": false,
+  "G2_independent_issuance_waived_by_explicit_PI": true,
+  "new_training_or_test_driven_selection": false,
+  "paper_finalization_authorized": false,
+  "additional_test_authorized": false
+}

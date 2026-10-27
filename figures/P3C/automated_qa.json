@@ -1,0 +1,51 @@
+[
+  {
+    "tool": "validate_figure.py",
+    "file": "plot_p3c_results.py",
+    "exit_code": 0,
+    "output": "{\n  \"source\": \"p3_source\\\\tools\\\\plot_p3c_results.py\",\n  \"backend\": \"python\",\n  \"summary\": {\n    \"ready\": true,\n    \"strict\": false,\n    \"counts\": {\n      \"PASS\": 20,\n      \"WARN\": 1,\n      \"FAIL\": 0\n    }\n  },\n  \"findings\": [\n    {\n      \"check_id\": \"SOURCE-SYNTAX\",\n      \"level\": \"PASS\",\n      \"message\": \"Python source parses successfully\",\n      \"evidence\": []\n    },\n    {\n      \"check_id\": \"FONT-FAMILY\",\n      \"level\": \"PASS\",\n      \"message\": \"A publication-safe sans-serif family is configured\",\n      \"evidence\": [\n        \"sans-serif\"\n      ]\n    },\n    {\n      \"check_id\": \"FONT-SIZE\",\n      \"level\": \"PASS\",\n      \"message\": \"All detected text sizes are at least 5 pt (minimum 7 pt)\",\n      \"evidence\": []\n    },\n    {\n      \"check_id\": \"FONT-GLYPH-FLOOR\",\n      \"level\": \"PASS\",\n      \"message\": \"No mathtext superscript/subscript expression detected\",\n      \"evidence\": []\n    },\n    {\n      \"check_id\": \"LEGEND-LABEL-CASE\",\n      \"level\": \"PASS\",\n      \"message\": \"No auditable literal legend labels detected\",\n      \"evidence\": []\n    },\n    {\n      \"check_id\": \"COLOR-MAP\",\n      \"level\": \"PASS\",\n      \"message\": \"No rainbow/jet/hsv color mapping detected\",\n      \"evidence\": []\n    },\n    {\n      \"check_id\": \"EDITABLE-TEXT\",\n      \"level\": \"PASS\",\n      \"message\": \"SVG and PDF editable-text settings are configured\",\n      \"evidence\": []\n    },\n    {\n      \"check_id\": \"EXPORT-VECTOR\",\n      \"level\": \"PASS\",\n      \"message\": \"Both SVG and PDF exports are present\",\n      \"evidence\": []\n    },\n    {\n      \"check_id\": \"EXPORT-RASTER\",\n      \"level\": \"WARN\",\n      \"message\": \"PNG preview is present but no TIFF submission raster was found\",\n      \"evidence\": []\n    },\n    {\n      \"check_id\": \"RASTER-DPI\",\n      \"level\": \"PASS\",\n      \"message\": \"A raster export of at least 600 dpi is configured\",\n      \"evidence\": [\n        \"600\"\n      ]\n    },\n    {\n      \"check_id\": \"FINAL-WIDTH\",\n      \"level\": \"PASS\",\n      \"message\": \"Detected width 180.3 mm matches a common journal column width\",\n      \"evidence\": []\n    },\n    {\n      \"check_id\": \"DATA-SAMPLING\",\n      \"level\": \"PASS\",\n      \"message\": \"No high-confidence row-sampling operation detected\",\n      \"evidence\": []\n    },\n    {\n      \"check_id\": \"DATA-EXCLUSION\",\n      \"level\": \"PASS\",\n      \"message\": \"No high-confidence missing-data exclusion detected\",\n      \"evidence\": []\n    },\n    {\n      \"check_id\": \"DEMO-DATA\",\n      \"level\": \"PASS\",\n      \"message\": \"No obvious simulated-data generator detected\",\n      \"evidence\": []\n    },\n    {\n      \"check_id\": \"LOG-GUARD\",\n      \"level\": \"PASS\",\n      \"message\": \"No logarithmic transform or axis detected\",\n      \"evidence\": []\n    },\n    {\n      \"check_id\": \"INTERP-MONOTONIC\",\n      \"level\": \"PASS\",\n      \"message\": \"No NumPy interpolation requiring an increasing x-grid detected\",\n      \"evidence\": []\n    },\n    {\n      \"check_id\": \"UNCERTAINTY-ENCODING\",\n      \"level\": \"PASS\",\n      \"message\": \"A stochastic aggregate and uncertainty encoding are both present; still verify every comparable panel\",\n      \"evidence\": [\n        \"yerr=\",\n        \".errorbar(\"\n      ]\n    },\n    {\n      \"check_id\": \"ROTATION-ANCHOR\",\n      \"level\": \"PASS\",\n      \"message\": \"Every detected rotated text call uses anchor-based placement\",\n      \"evidence\": [\n        \"line 63: rotation=...\"\n      ]\n    },\n    {\n      \"check_id\": \"ANNOTATION-WORKAROUND\",\n      \"level\": \"PASS\",\n      \"message\": \"No high-risk hard-coded label height or opaque white text mask detected\",\n      \"evidence\": []\n    },\n    {\n      \"check_id\": \"PANEL-ALIGNMENT-GATE\",\n      \"level\": \"PASS\",\n      \"message\": \"Render-time panel-alignment gate is wired into the plotting source\",\n      \"evidence\": [\n        \"require_matplotlib_panel_alignment(\"\n      ]\n    },\n    {\n      \"check_id\": \"BACKEND-EXCLUSIVE\",\n      \"level\": \"PASS\",\n      \"message\": \"No obvious cross-backend plotting reference found for python\",\n      \"evidence\": []\n    }\n  ]\n}\n",
+    "error": ""
+  },
+  {
+    "tool": "audit_pdf_text.py",
+    "file": "fixed_budget_test_prefixes.pdf",
+    "exit_code": 0,
+    "output": "{\n  \"pdf\": \"p3_source\\\\figures\\\\P3C\\\\fixed_budget_test_prefixes.pdf\",\n  \"auditable\": true,\n  \"minimum_required_pt\": 5.0,\n  \"minimum_found_pt\": 7.0,\n  \"text_run_count\": 54,\n  \"below_minimum_count\": 0,\n  \"below_minimum\": [],\n  \"warnings\": []\n}\n",
+    "error": ""
+  },
+  {
+    "tool": "audit_figure_collisions.py",
+    "file": "fixed_budget_test_prefixes.pdf",
+    "exit_code": 0,
+    "output": "Nature Figure Rendered Collision Audit\npdf: p3_source\\figures\\P3C\\fixed_budget_test_prefixes.pdf\npages: 1\nvisible text boxes: 54\nstroke paths: 296\n\n\nsummary: 0 fail, 0 warn, 0 contained fill overlays, 0 contained image overlays\nverdict: PASS\nnote: contained overlays can be intentional; WARN findings need final-size visual review\n",
+    "error": ""
+  },
+  {
+    "tool": "audit_pdf_text.py",
+    "file": "preregistered_paired_contrasts.pdf",
+    "exit_code": 0,
+    "output": "{\n  \"pdf\": \"p3_source\\\\figures\\\\P3C\\\\preregistered_paired_contrasts.pdf\",\n  \"auditable\": true,\n  \"minimum_required_pt\": 5.0,\n  \"minimum_found_pt\": 7.0,\n  \"text_run_count\": 29,\n  \"below_minimum_count\": 0,\n  \"below_minimum\": [],\n  \"warnings\": []\n}\n",
+    "error": ""
+  },
+  {
+    "tool": "audit_figure_collisions.py",
+    "file": "preregistered_paired_contrasts.pdf",
+    "exit_code": 0,
+    "output": "Nature Figure Rendered Collision Audit\npdf: p3_source\\figures\\P3C\\preregistered_paired_contrasts.pdf\npages: 1\nvisible text boxes: 29\nstroke paths: 48\n\n\nsummary: 0 fail, 0 warn, 0 contained fill overlays, 0 contained image overlays\nverdict: PASS\nnote: contained overlays can be intentional; WARN findings need final-size visual review\n",
+    "error": ""
+  },
+  {
+    "tool": "audit_pdf_text.py",
+    "file": "primary_test_results.pdf",
+    "exit_code": 0,
+    "output": "{\n  \"pdf\": \"p3_source\\\\figures\\\\P3C\\\\primary_test_results.pdf\",\n  \"auditable\": true,\n  \"minimum_required_pt\": 5.0,\n  \"minimum_found_pt\": 7.0,\n  \"text_run_count\": 49,\n  \"below_minimum_count\": 0,\n  \"below_minimum\": [],\n  \"warnings\": []\n}\n",
+    "error": ""
+  },
+  {
+    "tool": "audit_figure_collisions.py",
+    "file": "primary_test_results.pdf",
+    "exit_code": 0,
+    "output": "Nature Figure Rendered Collision Audit\npdf: p3_source\\figures\\P3C\\primary_test_results.pdf\npages: 1\nvisible text boxes: 49\nstroke paths: 216\n\n\nsummary: 0 fail, 0 warn, 0 contained fill overlays, 0 contained image overlays\nverdict: PASS\nnote: contained overlays can be intentional; WARN findings need final-size visual review\n",
+    "error": ""
+  }
+]

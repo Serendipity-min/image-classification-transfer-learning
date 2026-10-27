@@ -1,8 +1,15 @@
-> P3-C：PI已明确授权并取消独立签署，本轮28项CPU验收通过，已后台启动冻结400项评价，3/160 GPU-hours上限不变；完成后回收分析推送。详见[直接授权与启动回执](reports/P3_C_PI直接授权与后台启动.md)。历史待签署回执只代表当时状态。
+2026-10-28：**P3-C 集中测试已完成并通过交付验收，400/400（80 best + 80 last + 240 prefix），已封存等待 PI 审查。**
 
-# 图像分类迁移学习：P3-B 完整交付
+- [完整结果与验收报告](reports/P3_C_完整结果与验收.md)、[400 项指标](reports/P3_C_逐角色测试指标.csv)、[配置汇总](reports/P3_C_配置汇总.csv)、[两项预注册统计](reports/P3_C_逐种子配对统计.csv)、[结果图与 QA](figures/P3C)。
+- CIFAR-100/ViT：LP−FT = **−5.740pp**，95% CI [−6.026, −5.454]，未通过 −0.5pp 非劣规则。SVHN/R50：Adapter−FT = **+0.301pp**，95% CI [+0.069, +0.533]，Holm 校正 p=0.0227。其余比较为探索性，不作事后等效性声明。
+- 本轮 **2.072720 / 3 GPU-hours**，P3 总计 **126.683330 / 160 GPU-hours**；全部 96 个 attempt 已结算，历史 92 项未改写。本轮无训练、失败重跑或测试后选模。
+- [服务器独立数值复算](records/p3c/independent_delivery_audit.json)、[本地交付验收](records/p3c/delivery_acceptance.json)、[P3-C seal](records/p3c/P3C_sealed.json)、[原样文本证据包](evidence/P3C_final_20261028)。
+- 400 份原始预测（480,741,806 字节）及 P1/P2/P3 的 40/128/508 份 checkpoint 留服务器，未回收二进制。见[库存与存储收尾](records/p3c/storage_closeout.json)。密钥和完整有效授权不进入公开仓库。
+- PI 已明确豁免本轮独立签署，实际使用直接 PI 授权；[授权补充](docs/P3_C_PI直接授权补充_20261027.md)、[历史启动回执](reports/P3_C_PI直接授权与后台启动.md)。定时检查已暂停。论文定稿、扩展实验及额外测试仍等待单独审核，剩余额度不自动使用。
 
-2026-10-27：**80/80 正式运行完成，4,000 epochs，独立验收 PASS，已封存。P3-C 与官方集中测试保持关闭。** 仓库已由用户设为公开，`codex/p3-execution` 启用 GitHub 平台保护。
+# 历史：P3-B 完整交付
+
+2026-10-27 当时状态：**80/80 正式运行完成，4,000 epochs，独立验收 PASS，已封存；当时 P3-C 与官方集中测试关闭。** 仓库已由用户设为公开，`codex/p3-execution` 启用 GitHub 平台保护。此后 P3-C 已经 PI 明确授权并完成，见本页顶部。
 
 - [完整结果汇报与验收](reports/P3_完整结果汇报与验收.md)、[服务器逐run交接](reports/P3_阶段交接报告.md)、[独立验收JSON](records/p3/delivery_audit.json)、[P3 seal](records/P3_sealed.json)。
 - [五seed验证结果](reports/P3_validation_configurations.csv)、[80-run结果](reports/P3_validation_runs.csv)、[4,000轮曲线源数据](reports/P3_epoch_curves.csv)、[图表与可编辑源图](figures/P3)。所有准确率均为验证集，未运行官方测试。

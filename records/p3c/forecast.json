@@ -1,0 +1,1 @@
+{"actual_P3C_gpu_seconds_including_active":7457.589897803962,"forecast_exceeds_subcap":false,"forecast_gpu_seconds":7550.807918952266,"pending":1,"remaining_seconds_with_margin":33.21802114830369,"running_partial_work":"pending role conservatively counted in full; no accuracy used","subcap_gpu_seconds":10800}
