@@ -114,6 +114,30 @@ class Acceptance(unittest.TestCase):
                 with self.assertRaises(InterruptedError):publish(directory,'fixture',lambda f:np.savez_compressed(f,x=np.arange(3)),{'synthetic':True},fault)
                 self.assertEqual(completed(directory,'fixture') is not None,point=='receipt_published')
 
+    def test_forecast_uses_C1_and_only_uncommitted_epochs(self):
+        import p4_supervise
+        from unittest.mock import patch
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp);stage=root/'records/p4';stage.mkdir(parents=True)
+            jobs_fixture=[]
+            for name,kind,length in [('profile','P4C-profile',3),('tuning','P4C-tuning',15),('formal','P4C-formal',50)]:
+                jobs_fixture.append({'run_id':name,'stage':kind,'epochs':length,'dataset':'flowers102','model_key':'r50','method':'full_ft','learning_rate':.0001})
+                directory=root/'runs'/name;(directory/'timings').mkdir(parents=True)
+                write(directory/'summary.json',{'status':'running' if name=='formal' else 'completed','completed_epochs':30 if name=='formal' else length,
+                      'startup_seconds':3,'last_checkpoint':{'size_bytes':10},'best_checkpoint':{'size_bytes':5}})
+                if name!='formal':
+                    for epoch in range(length):write(directory/'timings'/f'{epoch:03d}.json',{'fit_seconds':10 if name=='profile' else 2})
+            class MeasuredBudget:
+                def snapshot(self):return {}
+                def used(self,_):return 100
+            with patch.object(p4_supervise,'ROOT',root),patch.object(p4_supervise,'STAGE',stage),patch.object(p4_supervise,'jobs',lambda:jobs_fixture),patch.object(p4_supervise,'budget',MeasuredBudget):
+                p4_supervise.C_forecast()
+            actual=read(stage/'C_admission_forecast.json')
+            self.assertEqual(actual['actual_spent_seconds'],100)
+            self.assertEqual(actual['future_training_seconds'],40)
+            self.assertEqual(actual['estimates']['flowers102-r50-full_ft']['steady_full_epoch_seconds'],2)
+            self.assertEqual(actual['estimates']['flowers102-r50-full_ft']['steady_timing_source'],'all complete C1 15-epoch candidate timings')
+
 
 if __name__=='__main__':
     import time

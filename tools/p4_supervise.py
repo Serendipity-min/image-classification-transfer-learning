@@ -146,14 +146,27 @@ def C_forecast():
         times=[read(p)['fit_seconds'] for p in sorted((directory/'timings').glob('*.json'))]
         assert len(times)==3
         key=configuration(job)['configuration_id'];steady=statistics.median(times[1:]);fixed=summary['startup_seconds']+max(0,times[0]-steady)+2
+        measured=[];fixed_measurements=[]
+        for candidate in jobs():
+            if candidate['stage']!='P4C-tuning' or f"{candidate['dataset']}-{candidate['model_key']}-{candidate['method']}"!=key:continue
+            candidate_directory=ROOT/'runs'/candidate['run_id']
+            candidate_times=[read(p)['fit_seconds'] for p in sorted((candidate_directory/'timings').glob('*.json'))]
+            if len(candidate_times)==15:
+                candidate_summary=read(candidate_directory/'summary.json')
+                measured.extend(candidate_times[1:])
+                fixed_measurements.append(candidate_summary['startup_seconds']+max(0,candidate_times[0]-statistics.median(candidate_times[1:]))+2)
+        if measured:steady=statistics.median(measured);fixed=max(fixed_measurements)
         estimates[key]={'steady_full_epoch_seconds':steady,'fixed_startup_first_epoch_exit_seconds':fixed,
-                        'checkpoint_last_bytes':summary['last_checkpoint']['size_bytes'],'checkpoint_best_bytes':summary['best_checkpoint']['size_bytes']}
+                        'checkpoint_last_bytes':summary['last_checkpoint']['size_bytes'],'checkpoint_best_bytes':summary['best_checkpoint']['size_bytes'],
+                        'steady_timing_source':'all complete C1 15-epoch candidate timings' if measured else 'C0 epochs2-3'}
         for candidate in jobs():
             candidate_key=f"{candidate['dataset']}-{candidate['model_key']}-{candidate['method']}"
             if candidate['stage'] not in ['P4C-tuning','P4C-formal'] or candidate_key!=key:continue
             path=ROOT/'runs'/candidate['run_id']/'summary.json'
-            if path.exists() and read(path)['status'] in ['completed','numerical_failure','oom']:continue
-            projected_future+=fixed+candidate['epochs']*steady
+            previous=read(path) if path.exists() else None
+            if previous and previous['status'] in ['completed','numerical_failure','oom']:continue
+            completed=previous['completed_epochs'] if previous else 0
+            projected_future+=(0 if completed else fixed)+(candidate['epochs']-completed)*steady
     # Flowers 全测试的预估另含逐角色进程启动、读模型和按验证样本规模外推。
     evaluation=sum(10*(e['fixed_startup_first_epoch_exit_seconds']+6149/1020*e['steady_full_epoch_seconds']) for e in estimates.values())
     spent=budget().used(budget().snapshot());forecast=spent+1.25*(projected_future+evaluation)+EXIT
