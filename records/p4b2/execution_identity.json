@@ -1,0 +1,39 @@
+{
+  "schema": "P4B2_execution_identity_v1",
+  "P4_source_commit": "3e4232754d450e89f96bb8dd2f124b53ffe765e3",
+  "audit_baseline_commit": "3faa771c959e04b27c72e15c97d4895ed82b3cef",
+  "protocol_frozen_sha256": "7efd16277ba8c7136c572c0de4f47a48809a71a8c22b09709ec1f16725e9d927",
+  "files": {
+    "tools/p4b2.py": "ef707664eba7b290b1a3666094a5eb9f5cb3aba48080eee2edb1ab8fd31a1fed",
+    "tools/p4b2_acceptance.py": "04d111e2920a239f3dc71e0b2f4da07906842532cdae7cf8f79038ed9e87ca56",
+    "tools/p4_train.py": "2a7b24b024b9ae63e712ec4fd13015fb3838c3d2415491fb3b9d8245f74a2f16",
+    "tools/p4_data_models.py": "ad504c004c309f3d621203bdb49ca025055ccd16b7d59aee5140a5ddfc0d7b1c",
+    "tools/p4_core.py": "b304d2f1896152a23d034feffe85eff2eaef6bf45839682efd329d830069aff0",
+    "configs/protocol.json": "e06bba0f67f9a6aafe4bf92420fefd9f5d58ddd228529b367415827d820c7b29",
+    "src/tlcls/common.py": "645b7f591018b75dbe42c146afbe5f6290f279a68bb9ed055f50d4567771f495",
+    "src/tlcls/data.py": "6cf60284381e312014ee7cd466f779086286a19070a2152e6841a273f7083d52",
+    "src/tlcls/models.py": "a9dcc0b9f9069bb15a2a6c2cb12b2e51219d511655624e45379dcaa90339d553",
+    "src/tlcls/engine.py": "345d783566bd1f906a1e5bc07d78780b70993ed22c629e7789ff4eab25a442c4",
+    "src/tlcls/p2_core.py": "f1eee551009f4be73e989bdb7c3137396c8fe7a49d702746f2a9032ad289763f",
+    "src/tlcls/p2_transaction.py": "1cad4f08dbb9253d8f315f46f963ddfc863781b124f32b4b229a3447cbdafeeb",
+    "src/tlcls/p3_core.py": "7b496ca6e4d13c23cd0ae919991a1299c72add861266f8d42f4acc415a4f86c3",
+    "src/tlcls/p3_budget.py": "9c20259317df5f4799aed4b877c91152600a67774b219f427319d99c4c8289a4"
+  },
+  "readonly_baseline": {
+    "records/p4/P4_delivery_sealed.json": "6be3a72b0606c92facddf8c1dac401b03791599842d1d608d0a31986a150e052",
+    "records/p4/P4_sealed.json": "b29348801e3833e40c4fb23e1b4df8807727406cacbb50ed4846ce127edb45d3",
+    "records/p4/gpu_ledger.json": "b4c7c705b5c4ea303ffa62a13404052f304de6a7c38608746e823117c5532d8b",
+    "records/p4/gpu_ledger.final_frozen.json": "b4c7c705b5c4ea303ffa62a13404052f304de6a7c38608746e823117c5532d8b",
+    "records/p4/C_selected_hparams.json": "6ac806ea557bc3743f6934912da52ab563b7e6dcf526c026d61c85f479f5d385",
+    "records/p4/C_evaluation_manifest.json": "c35b5b641b75bd7e9da359dba2c07af4d30b0021ea66e2d00a3da7c931346741",
+    "records/p4/C_training_sealed.json": "9d030fb6db90350855bdd4032edf636142bf23990a2afe9d3e7103d578989207",
+    "records/p4/flowers_integrity.json": "fa9f2a017eab887054e3e96f0e7c8a059f70b2052889dfc478292016dafb6d9d",
+    "records/p4/protocol_frozen.json": "d83e3e22b78a972913483b272160940554c4491152307d5bfc55e8611ecbd632",
+    "records/p3/gpu_ledger.json": "abd6712a80b62b2ad546982f526c2ea61fe2426e7304e54f573665ea291b7377",
+    "records/P3_sealed.json": "977d8c69bef9f6a783b4f5188102e5d25f1e55497b3ed1e79791265a7d02c8c6",
+    "selected_hparams.json": "66662cbb09bf8973530ab257b49a92617fce27a9129b0b6bbadb924d4fe7e74f",
+    "reports/P4/C_official_test_metrics.csv": "28301c83f46825c2afbc46e36e463ddc33f41e5c35cef9e8b01cf447a603ac41",
+    "weights/r50/model.safetensors": "773525d5821de224f8f30c33377b7a795d7863e08522698200d3217d3f2a41bb"
+  },
+  "wrapper_policy": "reuse original p4_train.main; explicitly route only registry, scope, ledger, diagnostics serialization and train/validation model factory; no old file modified"
+}

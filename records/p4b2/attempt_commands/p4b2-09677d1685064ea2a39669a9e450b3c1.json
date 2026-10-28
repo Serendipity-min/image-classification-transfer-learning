@@ -1,0 +1,1 @@
+{"attempt_id":"p4b2-09677d1685064ea2a39669a9e450b3c1","command":["/root/miniconda3/envs/tl_cls_v1/bin/python","tools/p4b2.py","worker","--run-id","P4B2-flowers102-r50-full_ft-lr1e-3-s123","--device","0"],"execution_identity_sha256":"83ec980ac209de84d9300f13acce59f83b64d2ebb3cf31f1d4a91cd178dffe70","gpu_uuid":"GPU-d31413f8-8fb0-73e3-8520-a3cf170ec652"}

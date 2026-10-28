@@ -1,3 +1,7 @@
+2026-10-28：**P4-B2 第一阶段已完成并独立验收：2/2 个 Flowers/R50/Full FT 候选，均为 seed123、15 epochs、120 次更新，合计 0.049056/0.50 GPU-hours。** [实验结果与分析](reports/P4B2/P4B2_实验结果与分析.md)、[五点 LR 验证表](reports/P4B2/P4B2_LR_validation.csv)、[30轮曲线数据](reports/P4B2/P4B2_epoch_curves.csv)、[B2 seal](records/p4b2/P4B2_sealed.json)。新增 LR=`1e-3/3e-3` 的 epochs13–15 验证均值分别为 **86.797386% / 84.444444%**；五点诊断最佳 `1e-3`，较旧三点最佳提高 **5.032680 pp**。仅为事后早期验证敏感性证据，不改写既有官方 test。遵照 PI 最新限定，只交第一阶段；论文、结果图及额外实验暂缓，全部模型和原始预测留服务器。
+
+下列为历史 P4 交付：
+
 2026-10-28：**P4实验已完成：84/84个训练及诊断run、80/80项Flowers测试，189笔attempt已结算，9.090893/20 GPU-hours。** [数据交付与验收](reports/P4/数据交付与验收.md)、[配置汇总](reports/P4/C_configuration_summary.csv)、[全部测试指标](reports/P4/C_official_test_metrics.csv)、[修正版交付seal](records/p4/P4_delivery_sealed.json)。原seal的账本字节绑定缺陷另存修正并明确披露，原件保留。按照用户最新指令仅推送数据和文本验收；论文及结果图暂缓，定时推进已暂停，原始预测和checkpoint留服务器。
 
 下列为历史P3-C交付：**400/400（80 best + 80 last + 240 prefix），已封存。**

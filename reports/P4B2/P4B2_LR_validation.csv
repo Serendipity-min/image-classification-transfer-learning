@@ -1,0 +1,6 @@
+run_id,source,backbone_LR,head_LR,status,completed_epochs,correct13,correct14,correct15,correct_sum,denominator,score_percent,GPU_hours_B2
+P4C-tuning-flowers102-r50-full_ft-lr1-s123,original_P4C1,1e-05,0.0001,completed,15,124,145,161,430,3060,14.052287581699346,
+P4C-tuning-flowers102-r50-full_ft-lr2-s123,original_P4C1,3e-05,0.00030000000000000003,completed,15,564,592,616,1772,3060,57.908496732026144,
+P4C-tuning-flowers102-r50-full_ft-lr3-s123,original_P4C1,0.0001,0.001,completed,15,824,840,838,2502,3060,81.76470588235294,
+P4B2-flowers102-r50-full_ft-lr1e-3-s123,new_P4B2,0.001,0.01,completed,15,875,892,889,2656,3060,86.79738562091504,0.024452237056361303
+P4B2-flowers102-r50-full_ft-lr3e-3-s123,new_P4B2,0.003,0.03,completed,15,868,870,846,2584,3060,84.44444444444444,0.024603868320377337

@@ -1,0 +1,35 @@
+{
+  "schema": "P4B2_first_stage_delivery_closeout_v1",
+  "status": "passed",
+  "scope": "P4B2 only; P4D deferred by direct PI instruction",
+  "terminal_readonly_check": {
+    "all_training_and_guardians_exited": true,
+    "sealed_ledger_bytes_unchanged": true,
+    "attempts_finalized": 2,
+    "GPU_hours": 0.04905610537673864
+  },
+  "audit_baseline_commit": "3faa771c959e04b27c72e15c97d4895ed82b3cef",
+  "B2_execution_source_commit": "3e4232754d450e89f96bb8dd2f124b53ffe765e3",
+  "server_project_path_unchanged": true,
+  "terminal_seal_sha256": "f55554f18b436ad7b960843e5912180f661dbf3bc700af5e605aebb4c83fea95",
+  "derived_delivery_files_sha256": {
+    "reports/P4B2/P4B2_实验结果与分析.md": "24918cd16796761afe84031aed91728de03046afcc064e744a8c942ecbc1008b",
+    "records/p4b2/desktop_acceptance.json": "82fdc4277862a0e8149e0000e5a8d0164ab67a27e4b229a1e556bcfba3f81882",
+    "tools/p4b2_verify_delivery.py": "17c1f25d4026f2cc4af8dde43994b3879e3f6e6fe82462b9fcdcdcc833f3950e"
+  },
+  "evidence_archive": {
+    "path": "evidence/P4B2_final_20261028/text_evidence.tar.gz",
+    "bytes": 157464,
+    "sha256": "55cd3ab0aad699a264c87b63ad07fab41080836894c985b19aae147b7b204804",
+    "text_files": 101
+  },
+  "server_verified_new_checkpoints": 4,
+  "checkpoint_downloads": 0,
+  "official_test_evaluations": 0,
+  "new_50epoch_formal_training_runs": 0,
+  "paper_phase_executed": false,
+  "automatic_phase_advance_enabled": false,
+  "models_and_raw_predictions_remain_on_server": true,
+  "original_ledger_and_seals_modified": false,
+  "no_new_automation_needed": "two short jobs completed and settled; existing phase automations remain paused"
+}
