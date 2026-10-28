@@ -1,0 +1,11 @@
+{
+  "schema": "P4B2_PI_scope_v1",
+  "execution_authorized": true,
+  "user_final_override": "按照我的要求，执行完第一阶段即可提交，暂时不需要你来完成论文撰写等。",
+  "scope": "only the two validation-only15epoch LR candidates",
+  "test_authorized": false,
+  "paper_phase_authorized": false,
+  "total_cap_GPU_hours": 0.5,
+  "warning_GPU_hours": 0.15,
+  "previous_budget_transfer": false
+}
