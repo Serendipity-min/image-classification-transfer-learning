@@ -1,0 +1,52 @@
+{
+  "checked_unix": 1793158367.5182767,
+  "status": {
+    "P4_GPU_seconds_including_active": 388.6269239000976,
+    "active": [
+      "P4B-anchor-cifar100-vitb16-full_ft-s123"
+    ],
+    "finished_this_stage": [
+      "P4B-anchor-cifar100-vitb16-linear_probe-s123"
+    ],
+    "pending": 2,
+    "stage": "P4B-anchor",
+    "status": "running",
+    "updated_unix": 1793158366.044326
+  },
+  "terminal_runs_by_stage": {
+    "P4B-anchor": {
+      "completed": 1,
+      "running": 1
+    }
+  },
+  "attempts": 3,
+  "active": [
+    {
+      "run_id": "P4B-anchor-cifar100-vitb16-full_ft-s123",
+      "kind": "P4B-anchor",
+      "device": 0,
+      "guardian_alive": true
+    }
+  ],
+  "P4_GPU_hours_including_active": 0.10836136182459692,
+  "cap_GPU_hours": 20,
+  "stop_request": null,
+  "all_attempts_settled": false,
+  "runner_alive": true,
+  "filesystem_free_bytes": 14818168418304,
+  "C0_forecast": null,
+  "A1_A2": {
+    "CPU_peak_RSS_bytes": 158507008,
+    "CUDA_VISIBLE_DEVICES_hidden": true,
+    "GPU_seconds": 0,
+    "calibration_rows": 240,
+    "history_modified": false,
+    "mcnemar_tests": 10,
+    "original_prediction_binaries_remain_server": true,
+    "primary_models": 80,
+    "status": "completed",
+    "wall_seconds": 11.357395730912685
+  },
+  "delivery_audit": null,
+  "actionable_reason": null
+}

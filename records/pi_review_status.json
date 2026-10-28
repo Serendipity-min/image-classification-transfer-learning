@@ -2,7 +2,7 @@
   "protocol_id": "TL-CLS-20261020-v1.0",
   "date": "2026-10-28",
   "timezone": "Asia/Shanghai",
-  "status": "P3C_completed_audited_sealed_awaiting_PI_review",
+  "status": "P4_batch_authorized_background_execution_in_progress",
   "P0": "passed",
   "P1": "completed_and_audited",
   "P2": {
@@ -27,11 +27,11 @@
   "pi_reviewer": null,
   "decision_timestamp": null,
   "review_questions": [
-    "review two preregistered official test conclusions",
-    "review exploratory efficiency and boundary results",
-    "decide separately on paper finalization or extensions"
+    "inspect P4 stage evidence at meaningful milestones",
+    "consolidate scientific review before P4-D",
+    "new PI decision only if total budget or scientific scope must change"
   ],
-  "approval_rule": "P3C frozen400 scope completed; no additional tests, training, retuning, extensions or paper finalization authorized.",
+  "approval_rule": "P4 full registered package approved once; enforce20GPUh and conditional test/rewrite gates; historical P3 results remain sealed.",
   "centralized_test": {
     "status": "completed_sealed",
     "completed": 400,
@@ -54,11 +54,27 @@
     "74001fc68c2bfb68cd65da821c961d75a93fe32b",
     "94b02df2ae94097602e40e88783f8c445006fa9a"
   ],
-  "pi_decision": {
+  "historical_P3C_decision": {
     "source": "explicit_user_PI_direct_P3C_authorization",
     "independent_signing_waived": true,
     "scope": "frozen400_only",
     "scope_completed": true,
     "further_execution_requires_new_PI_approval": true
+  },
+  "P4": {
+    "status": "running",
+    "execution_authorized": true,
+    "independent_cap_GPU_hours": 20,
+    "all_stages_batch_approved": true,
+    "P4_D_condition": "after all experimental terminal evidence and consolidated scientific review",
+    "current_execution_source_commit": "d26b5fb0d031d2d15612112585eaf56d53692675",
+    "C_test_scope": "Flowers80 only after training+selection+role manifests sealed",
+    "B_new_model_old_test": "FORBIDDEN"
+  },
+  "pi_decision": {
+    "source": "explicit_user_PI_P4_batch_adoption",
+    "repeat_per_run_approval_required": false,
+    "stage_protocol": "TL-CLS-P4-20261027-v1.0",
+    "new_budget_beyond20_authorized": false
   }
 }

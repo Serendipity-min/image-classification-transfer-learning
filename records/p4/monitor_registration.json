@@ -1,0 +1,13 @@
+{
+  "desktop_automation": "tlcls-p4-30min",
+  "status": "ACTIVE",
+  "readback_verified": true,
+  "interval_minutes": 30,
+  "kind": "heartbeat",
+  "foreground_watch": false,
+  "normal_notification": "quiet",
+  "tool_availability": "automation_update not exposed; preserved existing native heartbeat format",
+  "P4_source_commit": "d26b5fb0d031d2d15612112585eaf56d53692675",
+  "CPU_tests": 14,
+  "restored_runner_pid": 2304
+}

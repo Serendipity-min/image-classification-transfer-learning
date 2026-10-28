@@ -1,0 +1,18 @@
+test_ECE_Brier_and_bins (__main__.Acceptance.test_ECE_Brier_and_bins) ... ok
+test_Holm_family_and_missing_pairs (__main__.Acceptance.test_Holm_family_and_missing_pairs) ... ok
+test_actual_tail_update_normalization (__main__.Acceptance.test_actual_tail_update_normalization) ... ok
+test_conditional_test_gate_closed_before_seal (__main__.Acceptance.test_conditional_test_gate_closed_before_seal) ... ok
+test_duplicate_slot_and_finalization (__main__.Acceptance.test_duplicate_slot_and_finalization) ... ok
+test_epoch_commit_faults_and_resume (__main__.Acceptance.test_epoch_commit_faults_and_resume) ... ok
+test_immutable_old_evidence (__main__.Acceptance.test_immutable_old_evidence) ... ok
+test_no_test_constructor_for_training (__main__.Acceptance.test_no_test_constructor_for_training) ... ok
+test_prediction_transaction_faults (__main__.Acceptance.test_prediction_transaction_faults) ... ok
+test_registered_matrix_and_LR (__main__.Acceptance.test_registered_matrix_and_LR) ... ok
+test_scheduler_fifty_epoch_horizon (__main__.Acceptance.test_scheduler_fifty_epoch_horizon) ... ok
+test_shared_images_not_seed_pooling (__main__.Acceptance.test_shared_images_not_seed_pooling) ... ok
+test_smaller_LR_exact_tie_and_failed_exclusion (__main__.Acceptance.test_smaller_LR_exact_tie_and_failed_exclusion) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 2.555s
+
+OK

@@ -1,4 +1,6 @@
-2026-10-28：**P3-C 集中测试已完成并通过交付验收，400/400（80 best + 80 last + 240 prefix），已封存等待 PI 审查。**
+2026-10-28：**P4 已获 PI 整包授权并在独立20 GPU-hours预算内后台运行，尚未全部完成。** [启动与验收](reports/P4/启动与验收.md)、[批量授权与计划](docs/P4_批量授权与执行计划.md)、[冻结协议](records/p4/protocol_frozen.json)、[14项CPU验收](records/p4/CPU_acceptance.json)。P4独立分支 `codex/p4-followup`；旧阶段和原始二进制保留。正常运行每30分钟单次静默检查，终态总复核后按批准范围进入论文统一重写。
+
+下列为历史P3-C交付：**400/400（80 best + 80 last + 240 prefix），已封存。**
 
 - [完整结果与验收报告](reports/P3_C_完整结果与验收.md)、[400 项指标](reports/P3_C_逐角色测试指标.csv)、[配置汇总](reports/P3_C_配置汇总.csv)、[两项预注册统计](reports/P3_C_逐种子配对统计.csv)、[结果图与 QA](figures/P3C)。
 - CIFAR-100/ViT：LP−FT = **−5.740pp**，95% CI [−6.026, −5.454]，未通过 −0.5pp 非劣规则。SVHN/R50：Adapter−FT = **+0.301pp**，95% CI [+0.069, +0.533]，Holm 校正 p=0.0227。其余比较为探索性，不作事后等效性声明。

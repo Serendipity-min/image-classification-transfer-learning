@@ -1,0 +1,32 @@
+{
+  "status": "verified",
+  "files": [
+    {
+      "remote_path": "/root/user_data/tl_cls_v1/data/flowers-102/102flowers.tgz",
+      "size_bytes": 344862509,
+      "sha256": "2d01ecc807db462958cfe3d92f57a8c252b4abd240eb955770201e45f783b246",
+      "verified": true,
+      "local_staging_deleted": true,
+      "timestamp_unix": 1793158070.6809196
+    },
+    {
+      "remote_path": "/root/user_data/tl_cls_v1/data/flowers-102/imagelabels.mat",
+      "size_bytes": 502,
+      "sha256": "4903e94206bac23bf772aadf06451916df56b58fc483a62db32a97b82656651d",
+      "verified": true,
+      "local_staging_deleted": true,
+      "timestamp_unix": 1793158071.3426142
+    },
+    {
+      "remote_path": "/root/user_data/tl_cls_v1/data/flowers-102/setid.mat",
+      "size_bytes": 14989,
+      "sha256": "46b8678f91fd95d3c8f4feab80d271a6c834a1dd896fe29fd3e6ad9ce5c8dccd",
+      "verified": true,
+      "local_staging_deleted": true,
+      "timestamp_unix": 1793158071.9948525
+    }
+  ],
+  "total_bytes": 344878000,
+  "local_staging_deleted": true,
+  "server_direct_download": false
+}
