@@ -195,9 +195,10 @@ def main():
     parser=argparse.ArgumentParser();parser.add_argument('mode',choices=['launch','guardian']);parser.add_argument('--id');parser.add_argument('--kind');parser.add_argument('--device',type=int)
     parser.add_argument('--attempt');parser.add_argument('--owner',type=int);parser.add_argument('--owner-ticks');parser.add_argument('--resume',action='store_true');args=parser.parse_args()
     if args.mode=='guardian':return guardian(args)
-    require_scope()
+    _,_,identity=require_scope()
     with lock(STAGE/'launcher.lock',blocking=False):
-        assert read(STAGE/'CPU_acceptance.json')['status']=='passed'
+        cpu=read(STAGE/'CPU_acceptance.json')
+        assert cpu['status']=='passed' and cpu['source_identity_sha256']==value_hash(identity)
         assert all(a['status']=='finalized' for a in budget().snapshot()['attempts'].values()),'Unsettled P4 attempt'
         assert not subprocess.check_output(['nvidia-smi','--query-compute-apps=pid','--format=csv,noheader'],text=True).strip(),'Foreign/orphan GPU process'
         storage();cpu_env=dict(os.environ,CUDA_VISIBLE_DEVICES='',OMP_NUM_THREADS='1',MKL_NUM_THREADS='1',OPENBLAS_NUM_THREADS='1')
