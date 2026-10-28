@@ -1,0 +1,74 @@
+{
+  "source_commit": "2b19bedca2b13b6ee3d2ebd2e0b8ba244722ca6d",
+  "scope": "key claims recomputed from exact values read through GitHub connector; not a fresh audit of all 400 NPZ/model binaries",
+  "primary_contrasts": [
+    {
+      "contrast": "cifar100-vitb16-LP-minus-FT",
+      "paired_differences_pp": [
+        -5.510000000000005,
+        -5.890000000000001,
+        -6.050000000000011,
+        -5.709999999999994,
+        -5.540000000000006
+      ],
+      "mean_pp": -5.740000000000004,
+      "sd_pp": 0.23043437243605971,
+      "ci95_pp": [
+        -6.026122064202537,
+        -5.453877935797471
+      ],
+      "p_two_sided": 6.220424874950383e-07,
+      "wilcoxon_exact_p": 0.0625,
+      "p_holm": 1.2440849749900767e-06
+    },
+    {
+      "contrast": "svhn-r50-Adapter-minus-FT",
+      "paired_differences_pp": [
+        0.10755992624463317,
+        0.22664413030116748,
+        0.27274124154885726,
+        0.28810694529809666,
+        0.6107867240319678
+      ],
+      "mean_pp": 0.3011677934849445,
+      "sd_pp": 0.18700288727389242,
+      "ci95_pp": [
+        0.06897304079679545,
+        0.5333625461730935
+      ],
+      "p_two_sided": 0.02273418213625548,
+      "wilcoxon_exact_p": 0.0625,
+      "p_holm": 0.02273418213625548
+    }
+  ],
+  "LP_best_epochs_in_seed_order": [
+    3,
+    7,
+    3,
+    35,
+    3
+  ],
+  "LP_epoch3_count": 3,
+  "critical_boundary_LR_configurations_count": 4,
+  "critical_boundary_LR_configurations": [
+    "cifar100-vitb16-linear_probe",
+    "cifar100-vitb16-full_ft",
+    "svhn-r50-full_ft",
+    "svhn-r50-adapter"
+  ],
+  "B_timing_estimate": {
+    "basis": "sum of four P2 complete-epoch medians, excluding new unmeasured fixed overhead",
+    "four_config_sum_epoch_seconds": 423.1610967926681,
+    "eight_new_15epoch_gpu_hours": 3.5263424732722344,
+    "four_anchor_3epoch_gpu_hours": 0.3526342473272234,
+    "combined_25percent_margin_gpu_hours": 4.848720900749322,
+    "proposed_workstream_cap_gpu_hours": 6.0
+  },
+  "marginal_iid_binomial_SE_pp": {
+    "svhn_r50_adapter": 0.11273448748770355,
+    "cifar100_vit_adapter": 0.2449665805778412,
+    "warning": "marginal SEs are not SEs of paired accuracy differences; dependence and duplicates are not accounted for"
+  },
+  "new_training_executed": false,
+  "new_model_inference_executed": false
+}

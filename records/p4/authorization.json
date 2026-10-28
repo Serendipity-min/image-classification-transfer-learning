@@ -1,0 +1,26 @@
+{
+  "schema": "P4_explicit_PI_adoption_v1",
+  "protocol_id": "TL-CLS-P4-20261027-v1.0",
+  "approved_user_text": "请阅读E:\\图像分类迁移学习\\TLCLS_P4_设计执行包_v1\\TLCLS_P4_设计执行包_v1下的文档，签发的信息，授权执行所有的合同（不需要一次次询问我），服务器信息不变，如果需要下载数据集，请你分析先告诉我，如果需要网盘，我来提供",
+  "approved_scope": [
+    "P4-0",
+    "P4-B",
+    "P4-A1",
+    "P4-A2",
+    "P4-A3",
+    "P4-C0",
+    "P4-C1",
+    "P4-C2",
+    "P4-C3_after_sealed_gate",
+    "P4-D_after_terminal_and_consolidated_review"
+  ],
+  "approval_mode": "explicit_user_PI_batch_adoption",
+  "independent_signing_required": false,
+  "total_cap_GPU_hours": 20,
+  "conditional_flowers_test_authorized": true,
+  "new_B_old_test_predictions_authorized": false,
+  "historical_results_read_only": true,
+  "no_repeated_per_run_approval": true,
+  "root_unchanged": true,
+  "approved_unix": 1793157335.2661252
+}

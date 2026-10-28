@@ -1,0 +1,19 @@
+{
+  "schema": "P4_A_preregistered_operational_plan_v1",
+  "before_new_B_A_results": true,
+  "bootstrap_RNG_seed": 20261027,
+  "n_resamples": 10000,
+  "interval": "95percent_percentile",
+  "image_sampling": "within original classes; common indices for all five pairs",
+  "crossed_sampling": "same images plus five resampled seed pairs; independent SeedSequence children",
+  "duplicate_cluster_rule": "all same-test exact-pixel IDs in one cluster; unmatched singleton; whole-cluster resampling with row-weighted mean",
+  "train_test_exclusion_rule": "exclude every official-test ID whose existing pixel-audit group has an assigned train row; same exclusions for every method and seed; full official test primary",
+  "ECE_bins": [
+    15,
+    10,
+    30
+  ],
+  "Brier": "sum over classes, no class division",
+  "no_test_fitting": true,
+  "McNemar": "exact binomial per model pair and seed; Holm over all10"
+}

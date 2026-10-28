@@ -1,0 +1,17 @@
+{
+  "sources": [
+    {
+      "filename": "论文数据复核与下一步建议.md",
+      "sha256": "e9a791246cc6c84946aebf35332e6e1eb1d9d9d6b286d1d6b6a8ff0c34354794",
+      "bytes": 10959
+    },
+    {
+      "filename": "TLCLS_P2_P3B_P3C_完整实验总结与论文建议_20261027.md",
+      "sha256": "6c17bbca7facbdef1ec594103210084e9d12e72a0e5120a7b3cfa0b5a7905895",
+      "bytes": 45189
+    }
+  ],
+  "repository_baseline": "2b19bedca2b13b6ee3d2ebd2e0b8ba244722ca6d",
+  "reads": "GitHub connector read of P3 validation run table, P2 LR and selected resource tables, P3C primary pair table; complete previous summary and current attachment read",
+  "limits": "no new GPU work, no original NPZ/checkpoint download; recheck script uses exact source-extracted key values rather than claiming full CSV re-import"
+}

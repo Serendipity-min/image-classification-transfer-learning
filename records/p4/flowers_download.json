@@ -1,0 +1,31 @@
+{
+  "files": [
+    {
+      "file": "102flowers.tgz",
+      "bytes": 344862509,
+      "official_md5": "52808999861908f626f3c1f4e79d11fa",
+      "sha256": "2d01ecc807db462958cfe3d92f57a8c252b4abd240eb955770201e45f783b246",
+      "source": "https://www.robots.ox.ac.uk/~vgg/data/flowers/102/102flowers.tgz",
+      "local_verified": true
+    },
+    {
+      "file": "imagelabels.mat",
+      "bytes": 502,
+      "official_md5": "e0620be6f572b9609742df49c70aed4d",
+      "sha256": "4903e94206bac23bf772aadf06451916df56b58fc483a62db32a97b82656651d",
+      "source": "https://www.robots.ox.ac.uk/~vgg/data/flowers/102/imagelabels.mat",
+      "local_verified": true
+    },
+    {
+      "file": "setid.mat",
+      "bytes": 14989,
+      "official_md5": "a5357ecc9cb78c4bef273ce3793fc85c",
+      "sha256": "46b8678f91fd95d3c8f4feab80d271a6c834a1dd896fe29fd3e6ad9ce5c8dccd",
+      "source": "https://www.robots.ox.ac.uk/~vgg/data/flowers/102/setid.mat",
+      "local_verified": true
+    }
+  ],
+  "total_bytes": 344878000,
+  "server_direct_download": false,
+  "reported_to_user_before_download": true
+}

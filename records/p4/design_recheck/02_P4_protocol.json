@@ -1,0 +1,309 @@
+{
+  "protocol_id": "TL-CLS-P4-20261027-v1.0",
+  "version": "1.0",
+  "source_commit": "2b19bedca2b13b6ee3d2ebd2e0b8ba244722ca6d",
+  "status": "DESIGN_DELIVERED_NOT_EXECUTED",
+  "execution_authorized": false,
+  "budget_status": "PROPOSED_REQUIRES_PI_ADOPTION",
+  "paper_rewrite_confirmed_in_principle": true,
+  "rewrite_when": "after P4-A, P4-B and P4-C terminal delivery and consolidated scientific review",
+  "historical_results_policy": "read_only_do_not_replace_P2_P3_results_or_hypotheses",
+  "root": "/root/user_data/tl_cls_v1",
+  "environment": "/root/miniconda3/envs/tl_cls_v1",
+  "data_and_weight_reference": "records/assets.json and frozen split manifests at source_commit; reuse accepted model-byte hashes, do not rehash all 508 checkpoints merely for administrative signoff",
+  "common_training": {
+    "input": [
+      3,
+      224,
+      224
+    ],
+    "micro_batch_size": 32,
+    "gradient_accumulation_steps": 4,
+    "effective_batch_size": 128,
+    "drop_last": false,
+    "tail_policy": "normalize_by_actual_samples",
+    "optimizer": "AdamW",
+    "weight_decay": 0.0001,
+    "betas": [
+      0.9,
+      0.999
+    ],
+    "eps": 1e-08,
+    "max_gradient_norm": 1.0,
+    "precision_parameters": "float32",
+    "precision_loss": "float32",
+    "autocast": "bfloat16",
+    "tf32": false,
+    "scheduler_horizon_epochs": 50,
+    "warmup_epochs": 5,
+    "min_lr_multiplier": 0.01,
+    "warmup_start_multiplier": 0.01,
+    "full_ft_head_lr_multiplier": 10,
+    "algorithm_scope": "inherit accepted P2 mathematical pipeline and parameter-group exclusions; no topology, augmentation or initialization substitutions"
+  },
+  "budget": {
+    "units": "sum_of_reserved_GPU_hours",
+    "independent_P4_ledger": true,
+    "total_cap": 20.0,
+    "A3_plan": 0.5,
+    "B_plan": 6.0,
+    "C_plan": 11.5,
+    "shared_engineering_reserve": 2.0,
+    "A1_A2_GPU_hours": 0.0,
+    "includes": [
+      "startup",
+      "acceptance",
+      "training",
+      "validation",
+      "authorized_test",
+      "serialization",
+      "retry",
+      "recovery",
+      "failed_attempt",
+      "exit"
+    ],
+    "forecast": "actual_spent + 1.25 * future_work + required_exit_reserve; never reinflate past actuals",
+    "reallocation": "documented within approved total for registered tasks only; cannot expand scientific scope"
+  },
+  "storage": {
+    "incremental_planning_GiB": 60,
+    "physical_free_exit_guard_GiB": 10,
+    "atomic_write_guard_GiB": 4,
+    "old_200GiB_is_not_new_hard_cap": true,
+    "delete_historical_checkpoints": false,
+    "raw_models_and_predictions_remain_on_server": true
+  },
+  "A": {
+    "existing_primary_models": 80,
+    "extend_same_calibration_to_new_C_best_models": 40,
+    "contrasts": [
+      "cifar100-vitb16-linear_probe-minus-full_ft",
+      "svhn-r50-adapter-minus-full_ft"
+    ],
+    "bootstrap": {
+      "n_resamples": 10000,
+      "rng_seed": 20261027,
+      "interval": "percentile",
+      "confidence_level": 0.95,
+      "primary": "class_stratified_paired_images_with_shared_indices_across_methods_and_all_five_seeds",
+      "secondary": "crossed_resample_seed_pairs_and_paired_images",
+      "prohibited": "treat_5_times_N_predictions_as_independent",
+      "duplicate_sensitivity": "use_frozen_duplicate_ids; cluster bootstrap and fixed train-match test-exclusion subset only as exploratory; full official test stays primary"
+    },
+    "mcnemar": {
+      "exact": true,
+      "per_seed": [
+        17,
+        42,
+        2026,
+        3407,
+        65537
+      ],
+      "tests": 10,
+      "multiplicity": "Holm_over_10_exploratory_tests",
+      "replace_original_t_Holm": false
+    },
+    "calibration": {
+      "probability_from": "float64_stable_softmax_of_existing_logits",
+      "ece_primary_bins": 15,
+      "ece_sensitivity_bins": [
+        10,
+        30
+      ],
+      "ece_scheme": "equal_width_top_label",
+      "brier": "mean(sum((p-one_hot_y)^2, axis=class)); no division by number of classes",
+      "temperature_fitting_on_test": false,
+      "aggregation": "compute_each_seed_then_mean_and_sample_SD"
+    },
+    "occlusion": {
+      "source_role": "P3-primary_best_val",
+      "seed": 42,
+      "datasets": [
+        "cifar100",
+        "svhn"
+      ],
+      "samples_each_dataset": 20,
+      "models": 16,
+      "sample_model_pairs": 320,
+      "patch": 16,
+      "stride": 16,
+      "masks_per_image": 196,
+      "baseline_plus_masks": 197,
+      "total_image_forwards": 63040,
+      "input_split": "validation",
+      "sample_selection": "use actual P0 pool if present; otherwise new outcome-independent P4 SHA-based pool, never backdate",
+      "target": "ground_truth_class_shared_across_models",
+      "primary_map": "p_y_original_minus_p_y_masked",
+      "secondary_map": "raw_target_logit_difference",
+      "occlusion_value": "zero_after_normalization",
+      "new_training": false
+    }
+  },
+  "B": {
+    "anchor_runs": 4,
+    "anchor_epochs": 3,
+    "new_candidate_runs": 8,
+    "candidate_epochs": 15,
+    "seed": 123,
+    "scheduler_horizon_epochs": 50,
+    "warmup_epochs": 5,
+    "old_test_for_new_models": "FORBIDDEN",
+    "start_from": "fresh original weights or random initialization per method; never P3 checkpoint",
+    "selected_candidate_score": "sum(validation_correct_e13_e14_e15)/(3*N_val)*100; exact tie smaller LR",
+    "action_threshold_pp": 0.2,
+    "threshold_not_significance_level": true,
+    "expanded_grid_endpoints_reported": true,
+    "auto_extend_grid": false,
+    "auto_extend_to_50_epochs": false,
+    "configurations": [
+      {
+        "dataset": "cifar100",
+        "model_key": "vitb16",
+        "method": "linear_probe",
+        "anchor_lr": 0.001,
+        "new_lrs": [
+          0.0001,
+          0.0003
+        ]
+      },
+      {
+        "dataset": "cifar100",
+        "model_key": "vitb16",
+        "method": "full_ft",
+        "anchor_lr": 1e-05,
+        "new_lrs": [
+          1e-06,
+          3e-06
+        ]
+      },
+      {
+        "dataset": "svhn",
+        "model_key": "r50",
+        "method": "full_ft",
+        "anchor_lr": 0.0001,
+        "new_lrs": [
+          0.0003,
+          0.001
+        ]
+      },
+      {
+        "dataset": "svhn",
+        "model_key": "r50",
+        "method": "adapter",
+        "anchor_lr": 0.001,
+        "new_lrs": [
+          0.003,
+          0.01
+        ]
+      }
+    ]
+  },
+  "C": {
+    "dataset": "Flowers102",
+    "train_n": 1020,
+    "val_n": 1020,
+    "test_n": 6149,
+    "classes": 102,
+    "train_per_class": 10,
+    "val_per_class": 10,
+    "supervised_development_labels": 2040,
+    "splits": "official setid.mat, not resplit or swapped",
+    "data_history_review_required": true,
+    "pretraining_overlap": "UNKNOWN_DO_NOT_CLAIM_ZERO",
+    "model_ids": {
+      "r50": "resnet50.a1_in1k",
+      "vitb16": "vit_base_patch16_224.augreg_in21k"
+    },
+    "training_grids": {
+      "scratch": [
+        0.0003,
+        0.001,
+        0.003
+      ],
+      "full_ft": [
+        1e-05,
+        3e-05,
+        0.0001
+      ],
+      "linear_probe": [
+        0.001,
+        0.003,
+        0.01
+      ],
+      "adapter": [
+        0.0001,
+        0.0003,
+        0.001
+      ]
+    },
+    "profile_runs": 8,
+    "profile_epochs": 3,
+    "profile_seed": 314159,
+    "profile_subwindow_gpu_hours": 1,
+    "tuning_runs": 24,
+    "tuning_epochs": 15,
+    "tuning_seed": 123,
+    "formal_runs": 40,
+    "formal_epochs": 50,
+    "formal_seeds": [
+      17,
+      42,
+      2026,
+      3407,
+      65537
+    ],
+    "optimizer_updates_per_epoch": 8,
+    "formal_optimizer_updates_per_run": 400,
+    "last_effective_batch_samples": 124,
+    "geometry_train": "Resize(shorter edge=256,bicubic,antialias=True);RandomCrop224;HFlip0.5",
+    "geometry_eval": "Resize(shorter edge=256,bicubic,antialias=True);CenterCrop224",
+    "normalization": "same frozen per-backbone configuration as P3",
+    "test_evaluations": 80,
+    "evaluation_roles": [
+      "primary_best_val",
+      "secondary_last"
+    ],
+    "new_time_prefixes": false,
+    "test_release": "after explicit PI adoption of P4 execution scope, all 40 runs terminal, 8 LR choices frozen, checkpoint/role/analysis manifests sealed and budget checks passed; no repeated manual HMAC required",
+    "test_during_training": false,
+    "primary_question": {
+      "contrast": "flowers102-vitb16-adapter-minus-full_ft",
+      "endpoint": "official_test_Top1_of_validation_selected_best",
+      "n_pairs_required": 5,
+      "margin_pp": -0.5,
+      "criterion": "lower bound of ordinary two-sided 95% paired t interval strictly > -0.5pp",
+      "incomplete_pairs": "no_primary_noninferiority_claim",
+      "one_sided_alpha_equivalent": 0.025,
+      "primary_family_size": 1,
+      "secondary_comparisons": "descriptive_or_exploratory_not_added_to_old_P3_Holm_family"
+    },
+    "secondary_metrics": [
+      "macro_f1",
+      "balanced_accuracy",
+      "nll",
+      "sample_correct_counts",
+      "per_class_counts"
+    ],
+    "selection": "validation max Top1 then earliest epoch; tuning mean epochs13-15 then smaller LR",
+    "cannot_transfer_B_selected_LR_as_C_optimum": true
+  },
+  "autonomy": {
+    "routine_engineering_fix_and_restore": "allowed within approved protocol and total cap; log evidence and charge time",
+    "individual_numerical_failure": "terminal for that run, preserve evidence; no silent LR/precision fallback",
+    "global_stop": [
+      "scientific identity mismatch",
+      "test-boundary breach",
+      "predicted hard-cap overrun",
+      "insufficient storage reserve",
+      "unresolved orphan GPU processes"
+    ],
+    "not_authorized": [
+      "new models or datasets",
+      "extra seeds to seek significance",
+      "replace historical results",
+      "expand LR grid after outcomes",
+      "retrain P3",
+      "paper rewrite before consolidated review"
+    ]
+  }
+}
