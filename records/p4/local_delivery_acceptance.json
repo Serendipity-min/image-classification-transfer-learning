@@ -1,0 +1,49 @@
+{
+  "schema": "P4_local_delivery_v1",
+  "status": "PASSED_DATA_AND_RUNTIME_WITH_DISCLOSED_ORIGINAL_SEAL_BINDING_DEFECT",
+  "registered_training_diagnostic_runs": 84,
+  "committed_epochs": 2516,
+  "C_formal_runs": 40,
+  "C_test_roles": 80,
+  "CPU_analysis_models": 120,
+  "attempts": 189,
+  "nonzero_return_attempts": 1,
+  "nonzero_return_cause": "authorized technical forecast correction; exact-config epoch resume",
+  "numerical_failure_runs": 0,
+  "all_attempts_settled": true,
+  "same_device_reservations_do_not_overlap": true,
+  "historical_input_files_unchanged": true,
+  "four_anchor_trajectories_rechecked_against_P2": true,
+  "source_commits_in_final_run_summaries": {
+    "19ea5714243d7795f0112b2cdc52f3cd120bcfc0": 1,
+    "6a94f2c4eb56e493b4b36a26abeb472023fb9f7d": 81,
+    "d26b5fb0d031d2d15612112585eaf56d53692675": 2
+  },
+  "C_primary_recomputed": {
+    "comparison": "flowers102-vitb16-adapter-minus-full_ft",
+    "role": "primary_noninferiority",
+    "mean_difference_pp": 0.07480891201821578,
+    "sample_SD_pp": 0.16205787176260006,
+    "CI95_low_pp": -0.12641251297492712,
+    "CI95_high_pp": 0.27603033701135865
+  },
+  "original_operational_seal_raw_ledger_hash_matches": false,
+  "original_sealed_ledger_bytes_available": false,
+  "corrected_delivery_seal_required": true,
+  "P4_GPU_hours": 9.090893374625594,
+  "cap_GPU_hours": 20,
+  "remaining_GPU_hours_not_authorization": 10.909106625374406,
+  "GPU_hours_by_kind": {
+    "P4A3-inference": 0.050567789133638144,
+    "P4B-anchor": 0.3751771367475804,
+    "P4B-sensitivity": 3.638237021825173,
+    "P4C-formal": 3.792315733336533,
+    "P4C-profile": 0.08091197680785424,
+    "P4C-test": 0.40398327286665636,
+    "P4C-tuning": 0.7497004439081583
+  },
+  "text_snapshot_files_verified": 6412,
+  "text_archive_sha256": "00610d942201d9509354e896233d01533ba4d811c01f55b6f7d5e796a52a598a",
+  "binary_prediction_or_checkpoint_downloaded": false,
+  "C_last_selected_by_text_deviation_disclosed": true
+}

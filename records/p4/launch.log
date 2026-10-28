@@ -1,0 +1,9 @@
+Traceback (most recent call last):
+  File "/root/user_data/tl_cls_v1/tools/p4_supervise.py", line 239, in <module>
+    if __name__=='__main__':raise SystemExit(main())
+                                             ^^^^^^
+  File "/root/user_data/tl_cls_v1/tools/p4_supervise.py", line 217, in main
+    stage_run(stage,items)
+  File "/root/user_data/tl_cls_v1/tools/p4_supervise.py", line 88, in stage_run
+    raise RuntimeError('P4_shared_stop')
+RuntimeError: P4_shared_stop

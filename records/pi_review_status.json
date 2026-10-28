@@ -2,7 +2,7 @@
   "protocol_id": "TL-CLS-20261020-v1.0",
   "date": "2026-10-28",
   "timezone": "Asia/Shanghai",
-  "status": "P4_batch_authorized_background_execution_in_progress",
+  "status": "P4_experiments_completed_data_audited_paper_figures_deferred",
   "P0": "passed",
   "P1": "completed_and_audited",
   "P2": {
@@ -27,11 +27,9 @@
   "pi_reviewer": null,
   "decision_timestamp": null,
   "review_questions": [
-    "inspect P4 stage evidence at meaningful milestones",
-    "consolidate scientific review before P4-D",
-    "new PI decision only if total budget or scientific scope must change"
+    "review P4 data and disclosed seal correction"
   ],
-  "approval_rule": "P4 full registered package approved once; enforce20GPUh and conditional test/rewrite gates; historical P3 results remain sealed.",
+  "approval_rule": "Latest user scope: data delivery only; paper and figures deferred; no new GPU tasks. Original P4 seal raw ledger binding failed; corrected delivery seal separately preserved.",
   "centralized_test": {
     "status": "completed_sealed",
     "completed": 400,
@@ -62,19 +60,25 @@
     "further_execution_requires_new_PI_approval": true
   },
   "P4": {
-    "status": "running",
+    "status": "84_runs_and80_tests_completed_data_audited",
     "execution_authorized": true,
     "independent_cap_GPU_hours": 20,
     "all_stages_batch_approved": true,
     "P4_D_condition": "after all experimental terminal evidence and consolidated scientific review",
     "current_execution_source_commit": "6a94f2c4eb56e493b4b36a26abeb472023fb9f7d",
     "C_test_scope": "Flowers80 only after training+selection+role manifests sealed",
-    "B_new_model_old_test": "FORBIDDEN"
+    "B_new_model_old_test": "FORBIDDEN",
+    "actual_gpu_hours": 9.090893374625594,
+    "all_attempts_settled": true,
+    "paper_rewrite_authorized_now": false,
+    "figure_generation_authorized_now": false,
+    "new_GPU_execution_authorized": false
   },
   "pi_decision": {
     "source": "explicit_user_PI_P4_batch_adoption",
     "repeat_per_run_approval_required": false,
     "stage_protocol": "TL-CLS-P4-20261027-v1.0",
     "new_budget_beyond20_authorized": false
-  }
+  },
+  "latest_user_scope_override": "完成数据推送即可，暂时不需要你写论文和生成真实结果图"
 }

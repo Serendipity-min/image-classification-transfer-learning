@@ -1,4 +1,4 @@
-2026-10-28：**P4 已获 PI 整包授权并在独立20 GPU-hours预算内后台运行，尚未全部完成。** [启动与验收](reports/P4/启动与验收.md)、[批量授权与计划](docs/P4_批量授权与执行计划.md)、[冻结协议](records/p4/protocol_frozen.json)、[15项CPU验收](records/p4/CPU_acceptance.json)。P4独立分支 `codex/p4-followup`；旧阶段和原始二进制保留。正常运行每30分钟单次静默检查，终态总复核后按批准范围进入论文统一重写。
+2026-10-28：**P4实验已完成：84/84个训练及诊断run、80/80项Flowers测试，189笔attempt已结算，9.090893/20 GPU-hours。** [数据交付与验收](reports/P4/数据交付与验收.md)、[配置汇总](reports/P4/C_configuration_summary.csv)、[全部测试指标](reports/P4/C_official_test_metrics.csv)、[修正版交付seal](records/p4/P4_delivery_sealed.json)。原seal的账本字节绑定缺陷另存修正并明确披露，原件保留。按照用户最新指令仅推送数据和文本验收；论文及结果图暂缓，定时推进已暂停，原始预测和checkpoint留服务器。
 
 下列为历史P3-C交付：**400/400（80 best + 80 last + 240 prefix），已封存。**
 
