@@ -138,6 +138,13 @@ class Acceptance(unittest.TestCase):
             self.assertEqual(actual['estimates']['flowers102-r50-full_ft']['steady_full_epoch_seconds'],2)
             self.assertEqual(actual['estimates']['flowers102-r50-full_ft']['steady_timing_source'],'all complete C1 15-epoch candidate timings')
 
+    def test_isolated_C0_split_does_not_shorten_scientific_runs(self):
+        from p4_train import epoch_limit
+        self.assertEqual(epoch_limit({'stage':'P4C-profile','epochs':3},True),1)
+        self.assertEqual(epoch_limit({'stage':'P4C-profile','epochs':3},False),3)
+        self.assertEqual(epoch_limit({'stage':'P4C-formal','epochs':50},False),50)
+        with self.assertRaises(AssertionError):epoch_limit({'stage':'P4C-formal','epochs':50},True)
+
 
 if __name__=='__main__':
     import time

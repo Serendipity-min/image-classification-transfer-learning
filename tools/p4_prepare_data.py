@@ -5,6 +5,30 @@ import tarfile
 from p4_core import ROOT,STAGE,read,write,file_hash,require_scope
 
 
+def isolated_profile_epochs():
+    import os
+    import subprocess
+    import uuid
+    from p4_core import jobs,budget,process_ticks
+    for job in jobs():
+        if job['stage']!='P4C-profile':continue
+        directory=ROOT/'runs'/job['run_id'];path=directory/'summary.json'
+        if path.exists() and read(path)['completed_epochs']>=1:continue
+        attempt='p4-'+uuid.uuid4().hex;device=0 if job['model_key']=='r50' else 1
+        env=dict(os.environ,TLCLS_P4_ISOLATED_PROFILE='1');env.pop('CUDA_VISIBLE_DEVICES',None)
+        command=['/root/miniconda3/envs/tl_cls_v1/bin/python','tools/p4_supervise.py','guardian',
+            '--id',job['run_id'],'--kind','P4C-profile','--device',str(device),'--attempt',attempt,
+            '--owner',str(os.getpid()),'--owner-ticks',process_ticks(os.getpid())]
+        if (directory/'scientific.json').exists():command.append('--resume')
+        log=STAGE/'logs'/(attempt+'.log');log.parent.mkdir(parents=True,exist_ok=True)
+        with log.open('ab') as file:result=subprocess.run(command,cwd=ROOT,env=env,stdout=file,stderr=subprocess.STDOUT)
+        assert result.returncode==0 and read(path)['completed_epochs']==1
+        assert all(a['status']=='finalized' for a in budget().snapshot()['attempts'].values())
+    write(STAGE/'C0_isolated_measurement.json',{'status':'completed','registered_profiles':8,
+          'isolated_complete_epochs_each':1,'planned_remaining_parallel_epochs_each':2,
+          'new_scientific_runs_added':0,'all_profile_attempts_charged_to_C0_1h_and_P4_20h':True})
+
+
 def main():
     require_scope()
     from scipy.io import loadmat
@@ -45,6 +69,7 @@ def main():
     if path.exists():assert read(path)==result
     else:write(path,result)
     print('Flowers official integrity PASS: 1020/1020/6149, 8189 RGB decoded; no model prediction.')
+    isolated_profile_epochs()
 
 
 if __name__=='__main__':main()

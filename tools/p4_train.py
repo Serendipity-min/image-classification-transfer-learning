@@ -7,6 +7,13 @@ import time
 from p4_core import ROOT,STAGE,require_scope,jobs,configuration,budget,storage,read,write,value_hash,file_hash
 
 
+def epoch_limit(config,isolated_profile):
+    if isolated_profile:
+        assert config['stage']=='P4C-profile' and config['epochs']==3
+        return 1
+    return config['epochs']
+
+
 def main():
     parser=argparse.ArgumentParser();parser.add_argument('--run-id',required=True);parser.add_argument('--device',type=int,required=True);parser.add_argument('--resume',action='store_true');args=parser.parse_args()
     _,frozen,identity=require_scope();job=next(j for j in jobs() if j['run_id']==args.run_id);config=configuration(job)
@@ -58,7 +65,10 @@ def main():
             del payload
         summary.update(model_identity=model_info,parameters=parameter_counts(model,config['model_key']),startup_seconds=time.monotonic()-started)
         best_epoch=current['best_epoch'] if current else None;best=max([r['validation']['top1_percent'] for r in rows],default=-1)
-        for epoch in range(len(rows),config['epochs']):
+        isolated_profile=os.environ.get('TLCLS_P4_ISOLATED_PROFILE')=='1'
+        limit=epoch_limit(config,isolated_profile)
+        measurement='C0_isolated_epoch1' if isolated_profile else 'C0_planned_parallel_epochs2_3' if job['stage']=='P4C-profile' else 'registered_training'
+        for epoch in range(len(rows),limit):
             snapshot=ledger.snapshot()
             if stopped or snapshot['stop_request']:raise InterruptedError('P4_stop_before_epoch')
             storage();sampler.epoch=epoch
@@ -74,18 +84,20 @@ def main():
             selected={'model':model.state_dict(),'config':config,'scientific_config_sha256':digest,'epoch':epoch+1,'validation':validation}
             row={'epoch':epoch+1,'attempt_id':attempt,'train':training,'validation':validation,'train_seconds':train_seconds,'validation_seconds':val_seconds,
                  'sampler_order_sha256':epoch_order_hash(sampler),'cumulative_optimizer_updates':scheduler.updates,
-                 'lr_by_group_next_update':[g['lr'] for g in optimizer.param_groups]}
+                 'lr_by_group_next_update':[g['lr'] for g in optimizer.param_groups],
+                 'physical_gpu_index':args.device,'measurement_mode':measurement}
             begin=sync_time()
             current,row=transaction.commit(epoch+1,row,lambda file:torch.save(payload,file),
                 (lambda file:torch.save(selected,file)) if improved else None,best_epoch,lambda:ledger.run_seconds(args.run_id))
             checkpoint_seconds=sync_time()-begin
             write(directory/'timings'/f'epoch_{epoch+1:03d}.json',{'epoch':epoch+1,'train_seconds':train_seconds,'validation_seconds':val_seconds,
-                  'checkpoint_seconds':checkpoint_seconds,'fit_seconds':train_seconds+val_seconds+checkpoint_seconds})
+                  'checkpoint_seconds':checkpoint_seconds,'fit_seconds':train_seconds+val_seconds+checkpoint_seconds,
+                  'physical_gpu_index':args.device,'measurement_mode':measurement})
             rows.append(row);summary.update(completed_epochs=epoch+1,selected_epoch=best_epoch,best_val_top1_percent=best,
                 best_checkpoint=current['best'],last_checkpoint=current['last'],optimizer_updates=scheduler.updates)
             write(directory/'summary.json',summary)
             print(f'{args.run_id} epoch={epoch+1} committed',flush=True)
-        summary['status']='completed'
+        summary['status']='profile_isolated_epoch_committed' if isolated_profile else 'completed'
         if config['epochs']==15:
             assert [r['epoch'] for r in rows[-3:]]==[13,14,15]
             summary['selection_correct_sum']=sum(r['validation']['correct'] for r in rows[-3:])
@@ -102,7 +114,7 @@ def main():
         summary.update(peak_allocated_bytes=torch.cuda.max_memory_allocated(device),peak_reserved_bytes=torch.cuda.max_memory_reserved(device),
                        finalized_unix=time.time(),attempt_gpu_seconds_observed=ledger.run_seconds(args.run_id))
         write(directory/'summary.json',summary)
-    return 0 if summary['status']=='completed' else 75 if summary['status']=='infrastructure_interrupted' else 2
+    return 0 if summary['status'] in ['completed','profile_isolated_epoch_committed'] else 75 if summary['status']=='infrastructure_interrupted' else 2
 
 
 if __name__=='__main__':raise SystemExit(main())
