@@ -1,39 +1,40 @@
 {
-  "checked_unix": 1793158367.5182767,
+  "checked_unix": 1793158775.284794,
   "status": {
-    "P4_GPU_seconds_including_active": 388.6269239000976,
+    "P4_GPU_seconds_including_active": 794.7315741628408,
     "active": [
-      "P4B-anchor-cifar100-vitb16-full_ft-s123"
+      "P4B-anchor-svhn-r50-full_ft-s123"
     ],
     "finished_this_stage": [
-      "P4B-anchor-cifar100-vitb16-linear_probe-s123"
+      "P4B-anchor-cifar100-vitb16-linear_probe-s123",
+      "P4B-anchor-cifar100-vitb16-full_ft-s123"
     ],
-    "pending": 2,
+    "pending": 1,
     "stage": "P4B-anchor",
     "status": "running",
-    "updated_unix": 1793158366.044326
+    "updated_unix": 1793158774.1311336
   },
   "terminal_runs_by_stage": {
     "P4B-anchor": {
-      "completed": 1,
+      "completed": 2,
       "running": 1
     }
   },
-  "attempts": 3,
+  "attempts": 4,
   "active": [
     {
-      "run_id": "P4B-anchor-cifar100-vitb16-full_ft-s123",
+      "run_id": "P4B-anchor-svhn-r50-full_ft-s123",
       "kind": "P4B-anchor",
       "device": 0,
       "guardian_alive": true
     }
   ],
-  "P4_GPU_hours_including_active": 0.10836136182459692,
+  "P4_GPU_hours_including_active": 0.22107923964555892,
   "cap_GPU_hours": 20,
   "stop_request": null,
   "all_attempts_settled": false,
   "runner_alive": true,
-  "filesystem_free_bytes": 14818168418304,
+  "filesystem_free_bytes": 14817788252160,
   "C0_forecast": null,
   "A1_A2": {
     "CPU_peak_RSS_bytes": 158507008,

@@ -1,4 +1,4 @@
-2026-10-28：**P4 已获 PI 整包授权并在独立20 GPU-hours预算内后台运行，尚未全部完成。** [启动与验收](reports/P4/启动与验收.md)、[批量授权与计划](docs/P4_批量授权与执行计划.md)、[冻结协议](records/p4/protocol_frozen.json)、[14项CPU验收](records/p4/CPU_acceptance.json)。P4独立分支 `codex/p4-followup`；旧阶段和原始二进制保留。正常运行每30分钟单次静默检查，终态总复核后按批准范围进入论文统一重写。
+2026-10-28：**P4 已获 PI 整包授权并在独立20 GPU-hours预算内后台运行，尚未全部完成。** [启动与验收](reports/P4/启动与验收.md)、[批量授权与计划](docs/P4_批量授权与执行计划.md)、[冻结协议](records/p4/protocol_frozen.json)、[15项CPU验收](records/p4/CPU_acceptance.json)。P4独立分支 `codex/p4-followup`；旧阶段和原始二进制保留。正常运行每30分钟单次静默检查，终态总复核后按批准范围进入论文统一重写。
 
 下列为历史P3-C交付：**400/400（80 best + 80 last + 240 prefix），已封存。**
 

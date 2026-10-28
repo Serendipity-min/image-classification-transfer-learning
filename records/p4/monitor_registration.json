@@ -7,7 +7,8 @@
   "foreground_watch": false,
   "normal_notification": "quiet",
   "tool_availability": "automation_update not exposed; preserved existing native heartbeat format",
-  "P4_source_commit": "d26b5fb0d031d2d15612112585eaf56d53692675",
-  "CPU_tests": 14,
-  "restored_runner_pid": 2304
+  "P4_source_commit": "6a94f2c4eb56e493b4b36a26abeb472023fb9f7d",
+  "CPU_tests": 15,
+  "restored_runner_pid": 2304,
+  "parent_supervisor_source_commit": "d26b5fb0d031d2d15612112585eaf56d53692675"
 }
