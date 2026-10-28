@@ -215,7 +215,9 @@ def main():
         assert all(a['status']=='finalized' for a in budget().snapshot()['attempts'].values()),'Unsettled P4 attempt'
         assert not subprocess.check_output(['nvidia-smi','--query-compute-apps=pid','--format=csv,noheader'],text=True).strip(),'Foreign/orphan GPU process'
         storage();cpu_env=dict(os.environ,CUDA_VISIBLE_DEVICES='',OMP_NUM_THREADS='1',MKL_NUM_THREADS='1',OPENBLAS_NUM_THREADS='1')
-        with (STAGE/'A1_A2.log').open('ab') as file:analysis=subprocess.Popen([PYTHON,'tools/p4_analyze.py'],cwd=ROOT,env=cpu_env,stdout=file,stderr=subprocess.STDOUT)
+        analysis=None
+        if not (STAGE/'A1_A2_acceptance.json').exists() or read(STAGE/'A1_A2_acceptance.json')['status']!='completed':
+            with (STAGE/'A1_A2.log').open('ab') as file:analysis=subprocess.Popen([PYTHON,'tools/p4_analyze.py'],cwd=ROOT,env=cpu_env,stdout=file,stderr=subprocess.STDOUT)
         try:
             selected=read(ROOT/'selected_hparams.json')['configurations']
             for stage in ['P4B-anchor','P4B-sensitivity']:
@@ -239,7 +241,7 @@ def main():
             evaluations=C_seal()
             for role in ['primary_best_val','secondary_last']:
                 stage_run('P4C-test-'+role,[{'id':e['evaluation_id'],'kind':'P4C-test'} for e in evaluations if e['role']==role])
-            assert analysis.wait()==0
+            if analysis is not None:assert analysis.wait()==0
             subprocess.run([PYTHON,'tools/p4_audit.py'],cwd=ROOT,env=cpu_env,check=True)
             write(STAGE/'status.json',{'status':'all_registered_execution_terminal_ready_for_delivery_audit','P4_GPU_seconds':budget().used(budget().snapshot()),
                 'P4_D_requires_consolidated_review':True,'updated_unix':time.time()})
